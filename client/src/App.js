@@ -2,7 +2,9 @@ import React from "react";
 import './App.css';
 import Navbar from "./components/Navbar";
 import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
-import About from "./About";
+import About from "./components/About";
+import Games from "./components/Games";
+import Home from "./components/Home";
 
 function App() {
 
@@ -20,7 +22,9 @@ function App() {
           <Navbar ></Navbar>
       </div>
       <Routes>
+        <Route path="/" element={<Home />} />
         <Route path="about" element={<About/>}/>
+        <Route path="games" element={<Games/>}/>
       </Routes>
     </Router>  
   );
