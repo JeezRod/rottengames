@@ -1,6 +1,7 @@
 import React from 'react';
 import './nav.css'
 import Hamburger from 'hamburger-react'
+import { Link } from "react-router-dom";
 
 
 
@@ -10,9 +11,9 @@ const Navbar = () => {
     <Hamburger direction="right" />
     <nav>
         <ul>
-            <li> Home </li>
+            <Link to="/"> Home </Link>
             <li> Search </li>
-            <li> About </li>
+            <Link to="about">About </Link>
         </ul>
     </nav>
 
