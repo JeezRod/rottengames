@@ -7,9 +7,9 @@ import styled from 'styled-components'
 //Style fo NavLink
 const StyledNav = styled(NavLink)`
   display: inline-block;
-  padding: 0px 30px;
+  padding: 0px 40px;
   font-weight: 700;
-  font-size: 24px;
+  font-size: 18px;
   text-decoration: none;
   color:black;
 `;
@@ -26,7 +26,7 @@ const Navbar = () => {
         </ul>
     </nav>
 
-    <button>Login/Register</button>
+    <StyledNav to="/">Login</StyledNav>
   </header>);
 };
 
