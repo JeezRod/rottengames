@@ -7,7 +7,7 @@ import styled from 'styled-components'
 //Style fo NavLink
 const StyledNav = styled(NavLink)`
   display: inline-block;
-  padding: 0px 40px;
+  padding-left: 100px;
   font-weight: 700;
   font-size: 18px;
   text-decoration: none;
