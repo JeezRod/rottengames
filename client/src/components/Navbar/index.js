@@ -26,7 +26,7 @@ const Navbar = () => {
         </ul>
     </nav>
 
-    <StyledNav to="/">Login</StyledNav>
+    <StyledNav to="/login">Login</StyledNav>
   </header>);
 };
 
