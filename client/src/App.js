@@ -18,11 +18,12 @@ function App() {
 
   return (
     <Router>
-      <div className="App">
+      <div className="NavContainer">
           <Navbar ></Navbar>
       </div>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<App />} />
+        <Route index element={<Home />} />
         <Route path="about" element={<About/>}/>
         <Route path="games" element={<Games/>}/>
       </Routes>

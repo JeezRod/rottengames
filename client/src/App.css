@@ -11,7 +11,7 @@ html, body, #root {
   height: 100%;
 }
 
-.App {
+.NavContainer {
   text-align: center;
   height: 10%;
 }
