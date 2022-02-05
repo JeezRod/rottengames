@@ -6,6 +6,7 @@ import About from "./components/About";
 import Games from "./components/Games";
 import Home from "./components/Home";
 import Login from "./components/Login";
+import Register from "./components/Register";
 
 function App() {
 
@@ -28,6 +29,7 @@ function App() {
         <Route path="about" element={<About/>}/>
         <Route path="games" element={<Games/>}/>
         <Route path="login" element={<Login />}/>
+        <Route path="register" element={<Register />}/>
       </Routes>
     </Router>  
   );

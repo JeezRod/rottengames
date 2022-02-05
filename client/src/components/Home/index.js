@@ -1,6 +1,7 @@
 import React from "react";
 import LandingImg from "../../assets/landingImg.jpg"
 import "./Home.css"
+import {Link} from "react-router-dom"
 
 function Home() {
 
@@ -11,7 +12,9 @@ function Home() {
             <div>
               <h1>Rotten Games</h1>
               <h4>Search. Review. Assist.</h4>
-              <button>Register Now!</button>
+              <Link to="/register">
+                <button>Register Now!</button>
+              </Link>
             </div>
           </div>
       </main>
