@@ -336,4 +336,56 @@
     "reviews": [
       {}
     ]
+  },{
+    "_id": {
+      "$oid": "61ff2946873dd2792308b901"
+    },
+    "name": "Farming Simulator",
+    "averagerating": 0,
+    "imageurl": "https://www.mobygames.com/images/covers/l/305106-farming-simulator-15-xbox-360-front-cover.jpg",
+    "platform": "Xbox 360",
+    "description": "Farming Simulator 2013 keeps all the ingredients that make the staple of virtual farming, while incorporating many new machines, vehicles, crops, animals, and environments. Farming Simulator 2013 features equipment from the top 20 vehicle manufacturers. Dozens of new machines have found their way into the game, such as the notable brand Case IH, as well as some gigantic farming machines, soon to be unveiled at Gamescom Cologne.",
+    "releasedate": "November 19, 2013",
+    "reviews": [
+      {}
+    ]
+  },{
+    "_id": {
+      "$oid": "61ff2946873dd2792308b902"
+    },
+    "name": "Dawn of Fear",
+    "averagerating": 0,
+    "imageurl": "https://www.mobygames.com/images/covers/l/632243-dawn-of-fear-playstation-4-front-cover.png",
+    "platform": "PlayStation 4",
+    "description": "When Alex returns to his childhood home after a tragedy, what he finds is a world of madness and cruelty from which he does not know if he can escape. Help Alex survive by using logic to solve puzzles, manage your ammo, and avoid being dragged by the horror that permeates the house. Do you dare?",
+    "releasedate": "February 3, 2020",
+    "reviews": [
+      {}
+    ]
+  },{
+    "_id": {
+      "$oid": "61ff2946873dd2792308b903"
+    },
+    "name": "Van Helsing",
+    "averagerating": 0,
+    "imageurl": "https://m.media-amazon.com/images/I/51G6V79AZBL._AC_.jpg",
+    "platform": "Game Boy Advance",
+    "description": "Deep within the mysterious land of Transylvania, monsters that inhabit man's deepest nightmares take form. One man's destiny--and curse--is to vanquish evil and destroy the lethal and powerful Count Dracula. Descend into the murky depths of the Carpathian Mountains as legendary monster hunter Van Helsing. As Van Helsing, you'll battle Dracula, The Frankenstein Monster, The Wolf Man, and other fiendish creatures with an array of deadly weapons and special abilities.",
+    "releasedate": "May 6, 2004",
+    "reviews": [
+      {}
+    ]
+  },{
+    "_id": {
+      "$oid": "61ff2946873dd2792308b904"
+    },
+    "name": "Yu Yu Hakusho: Spirit Detective",
+    "averagerating": 0,
+    "imageurl": "https://www.mobygames.com/images/covers/l/44289-yu-yu-hakusho-ghost-files-spirit-detective-game-boy-advance-front-cover.jpg",
+    "platform": "Game Boy Advance",
+    "description": "Yu Yu Hakusho tells the story of Yusuke Urameshi, a character who battles evil in both the living and spirit worlds. In Spirit Detective, you'll guide Yusuke through various adventures taken from the animated TV series. The game chronicles the first third of the hero's 112-episode journey. As any one of six characters, you'll battle evil enemies with signature attacks and weapons. Journey through the spirit world, conquer Yusuke's enemies, and master each quest to become a true spirit detective.",
+    "releasedate": "December 2, 2003",
+    "reviews": [
+      {}
+    ]
   }]
