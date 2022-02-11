@@ -26,7 +26,7 @@ function GridView(){
 
       //No error has occured, set error to false
       setError(false)
-      
+
       } catch(e){
         //Error has occured, set error to true
         setError(true)
@@ -47,9 +47,10 @@ function GridView(){
       )
   }
 
+  //If there is an issue in loading the games show error message
   if(error){
     return (
-      <div className='Error'>
+      <div className='griderror'>
         <p>An error has occured</p>
       </div>
     )
