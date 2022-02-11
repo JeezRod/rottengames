@@ -7,21 +7,31 @@ function GridView(){
   //State for the games
   const [data, setData] = React.useState([]);
   //State for the loading state
-  const [loading, setLoading] = React.useState(false)
+  const [loading, setLoading] = React.useState(false);
+  //State for error
+  const [error, setError] = React.useState(false);
   
   React.useEffect( () => {
     //Async function to fetch all the games
     async function fetchData() {
       try{
-
+      //Set loading to true
       setLoading(true)
+      
+      //Fetching the data
       let data = await fetch("/api/games");
       let dataJson = await data.json();
+      //Set the returned data
       await setData(dataJson);
+
+      //No error has occured, set error to false
+      setError(false)
       
       } catch(e){
-        console.log("Fetch error")
+        //Error has occured, set error to true
+        setError(true)
       } finally{
+        //Loading completed, set loading to false
         setLoading(false)
       }
     }
@@ -35,6 +45,14 @@ function GridView(){
       <ReactLoading type={"spin"} color="#000" />
       </div>
       )
+  }
+
+  if(error){
+    return (
+      <div className='Error'>
+        <p>An error has occured</p>
+      </div>
+    )
   }
   
   //Else render the gridview of all the games
