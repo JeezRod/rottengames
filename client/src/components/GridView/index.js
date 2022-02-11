@@ -1,6 +1,7 @@
 import React from 'react'
 import GameCard from '../GameCard'
 import './GridView.css'
+import ReactLoading from "react-loading";
 
 function GridView(){
   //State for the games
@@ -17,7 +18,7 @@ function GridView(){
       let data = await fetch("/api/games");
       let dataJson = await data.json();
       await setData(dataJson);
-
+      
       } catch(e){
         console.log("Fetch error")
       } finally{
@@ -29,9 +30,13 @@ function GridView(){
   
   //If the games are loading show loading prompt
   if(loading){
-    return <p>Loading...</p>
+    return  (
+      <div className='loading'>
+      <ReactLoading type={"spin"} color="#000" />
+      </div>
+      )
   }
-
+  
   //Else render the gridview of all the games
   return (
     <div className='gridview'>

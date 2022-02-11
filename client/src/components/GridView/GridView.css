@@ -5,3 +5,8 @@
     grid-row-gap: 3rem;
     padding: 4% 10%;
 }
+
+.loading {
+    display: flex;
+    justify-content: center;
+}
