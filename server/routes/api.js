@@ -1,5 +1,7 @@
 const express = require("express");
 const router = express.Router();
+const fs = require("fs");
+const data = require("./sample.json")
 
 router.use(express.json());
 
@@ -17,7 +19,7 @@ router.get("/", (req, res) => {
 
 //Route to get all games in the database (/api/games)
 router.get("/games", (req, res) => {
-    res.json({message: "Get all the games"})
+    res.json(data)
 });
 
 //Route to get a specific game in the database (/api/games/:id)
