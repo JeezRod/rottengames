@@ -271,4 +271,69 @@
     "reviews": [
       {}
     ]
+  },{
+    "_id": {
+      "$oid": "61ff2946873dd2792308b95c"
+    },
+    "name": "Homie Rollerz",
+    "averagerating": 0,
+    "imageurl": "https://m.media-amazon.com/images/I/614X3HLGlGL._AC_SX385_.jpg",
+    "platform": "DS",
+    "description": "Homie Rollerz is a fast-paced, mayhem-laden kart racer where players can pick one of the 10 most popular Homies, customize their slick rides, then trick, hop, and battle through courses with settings, shortcuts, and secrets as unique as the Homies themselves. Trick Out and Roll Out: Earn respect points by doing stunts and winning races, then cash them in to trick out your car. Use the stylus to paint and mod your ride, fit your car with a better engine and exhaust system for more speed, beef up your suspension and hydraulic systems for better turning and cooler tricks when racing. Rivalries and Respect: Challenge your fellow Homies on their turf. Beat Jokawild under the big top in the Homie Circus or drag race down Venice Beach against Big Loco. To win, you’ve got to learn the hoods, find the shortcuts, earn respect, and show your Homies who owns the street. Multiplayer: Is one of your friends challenging your street cred? Show them who owns the hood with up to 8 players via Local Wireless or four players via Nintendo® Wi-Fi Connection. Homie Rollerz also supports Download Play, so you and another Homie can play a trial version using only one cart! Get to Know the Homies: Play as one of 10 slick Homies and enter the “Wizard Circuit,” a mysterious racing series through which the winner is granted a single wish by the wise and legendary Homie known as Wizard. Each character has a unique vehicle that can be upgraded in the garage for improved stats. Learn what’s motivating each of your Homies: Why is Alien Ese stuck on Earth and how can he get back home? How did Zombie become undead and will he ever return to the land of the living? [Destineer]",
+    "releasedate": "March 5, 2008",
+    "reviews": [
+      {}
+    ]
+  },{
+    "_id": {
+      "$oid": "61ff2946873dd2792308b95d"
+    },
+    "name": "Rambo: The Video Game",
+    "averagerating": 0,
+    "imageurl": "https://m.media-amazon.com/images/I/81lFbjjmQYL._AC_SL1500_.jpg",
+    "platform": "PlayStation 3",
+    "description": "RAMBO The Vidoegame puts players in Rambo’s combat boots and takes them on an action-packed adventure through the iconic action- sequences and story-arcs of FIRST BLOOD, RAMBO: FIRST BLOOD PART II & RAMBO III. The game features the original movie voice-tracks of John Rambo and Col. Samuel Trautman as well as selected music from the original Rambo Trilogy.",
+    "releasedate": "April 29, 2014",
+    "reviews": [
+      {}
+    ]
+  },{
+    "_id": {
+      "$oid": "61ff2946873dd2792308b95e"
+    },
+    "name": "Fast & Furious: Showdown",
+    "averagerating": 0,
+    "imageurl": "https://m.media-amazon.com/images/I/81lmnQOrrnL._AC_SY550_.jpg",
+    "platform": "Xbox 360",
+    "description": "Fast & Furious: Showdown takes some of the franchise’s iconic characters on a high-stakes adventure around the globe that delivers takedowns, heists, hijacks and havoc. Players can switch roles with their AI partners or team up with a friend for two-person local co-op. Completed objectives unlock new vehicle performance and customization options to make each player’s ride unique. A bonus Challenge Mode and online leaderboards let players pit their strength, speed and skills against competition from all around the world.",
+    "releasedate": "May 21, 2013",
+    "reviews": [
+      {}
+    ]
+  },{
+    "_id": {
+      "$oid": "61ff2946873dd2792308b95f"
+    },
+    "name": "Drake of the 99 Dragons",
+    "averagerating": 0,
+    "imageurl": "https://www.mobygames.com/images/covers/l/66594-drake-of-the-99-dragons-xbox-front-cover.jpg",
+    "platform": "Xbox",
+    "description": "Drake is out for revenge in a supernatural Hong Kong world. You'll join Drake in 25 intense missions, as he battles ruthless villains and female assassins with an array of firearms, short and long blade weapons, and thrown melee weapons. Use Drake's power and agility to slow down the action, fire guns in any direction, and run and backflip off of walls. When you become injured, you can feed on the souls of the dead to replenish your health.",
+    "releasedate": "November 3, 2003",
+    "reviews": [
+      {}
+    ]
+  },{
+    "_id": {
+      "$oid": "61ff2946873dd2792308b960"
+    },
+    "name": "Afro Samurai 2: Revenge of Kuma Volume One",
+    "averagerating": 0,
+    "imageurl": "https://upload.wikimedia.org/wikipedia/en/f/fb/AfroSamurai2.jpg",
+    "platform": "PlayStation 4",
+    "description": "Head out on a journey of redemption, driven by bitter-sweet revenge. The saga of Afro Samurai continues but this time follows the path of Kuma, one of Afro’s closest childhood friends.",
+    "releasedate": "September 22, 2015",
+    "reviews": [
+      {}
+    ]
   }]
