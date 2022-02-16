@@ -21,6 +21,7 @@
   "homepage": "https://gitlab.com/leduytamly/rottengames#readme",
   "dependencies": {
     "env": "^0.0.2",
-    "express": "^4.17.2"
+    "express": "^4.17.2",
+    "mongoose": "^6.2.1"
   }
 }
