@@ -1,28 +1,18 @@
-.Rating {
-    border-radius: 25px;
-    background-color:beige;
-    padding: 10px;
-    width: auto;
-    height: 10%;
-    display: flex;
-    flex-direction: row;
-}
-
-.AdminButton{
-    display: flex;
-}
-
-.UserButton{
-    display: flex;
-}
-
 .GamePage {
-    padding-left: 15%;
-    padding-right: 15%;
-    padding-top: 10%;
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top: 5%;
 }
 
 .GameInfo {
     display:flex;
-    flex-direction: column;
+}
+
+.NameStars{
+    display:flex;
+    align-items: flex-end;
+}
+
+.GameCover {
+    width: 300px;
 }

@@ -1,34 +1,27 @@
 import React from "react";
 import "./Review.css"
 import HaloInf from "./Images/HaloInf.png";
+import ReviewCard from "../ReviewCard";
 
-function Review() {
+function Review(game) {
   return (
       <div className="GamePage">
           <div className="GameInfo">
-          <img src={HaloInf} alt="HaloInfinite"></img>
-            <h1>Halo Infinite</h1>
-            <p>rating stars api</p>
-            <p>Description</p>
+            <img className="GameCover" src={HaloInf} alt="HaloInfinite"></img>
+            <div className="NameStars">
+              <h1>Halo Infinite</h1>
+              <p>rating stars api</p>
+              <button className="AdminButton">Edit page</button>
+            </div>
           </div>
+
+        <div className="Description">
+          <p>Description</p>
+        </div>
         <div className="Review">
             <h1>Reviews</h1>
 
-            <div className="Rating">
-                <p>This game is awesome!</p>
-                <button className="AdminButton">Delete</button>
-            </div>
-
-            <div className="Rating">
-                <p>This game is awesome!</p>
-                <button className="UserButton">Comment</button>
-            </div>
-
-                <button className="AdminButton">Edit page</button>
-
-                <button className="AdminButton">Remove Game</button>
-
-                <button className="UserButton">Add Review</button>
+            <ReviewCard review={{text: "Game is cool!"}}/>
 
         </div>
 
