@@ -7,6 +7,7 @@ import Games from "./components/Games";
 import Home from "./components/Home";
 import Login from "./components/Login";
 import Register from "./components/Register";
+import Review from "./components/Review";
 
 function App() {
 
@@ -30,6 +31,7 @@ function App() {
         <Route path="games" element={<Games/>}/>
         <Route path="login" element={<Login />}/>
         <Route path="register" element={<Register />}/>
+        <Route path="review" element={<Review />}/>
       </Routes>
     </Router>  
   );

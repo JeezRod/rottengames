@@ -23,6 +23,7 @@ const Navbar = () => {
             <StyledNav to="/"> Home </StyledNav>
             <StyledNav to="/games"> Search </StyledNav>
             <StyledNav to="about">About </StyledNav>
+            <StyledNav to="review">Review </StyledNav>
         </ul>
     </nav>
 
