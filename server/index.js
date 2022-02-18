@@ -3,7 +3,7 @@ const PORT = process.env.PORT || 3001;
 const conn = require("./db/conn");
 
 (async ()=> {
-    await conn().catch(err => console.log(err));
+    await conn.connect();
     app.listen(PORT, () => {
         console.log(`Server listening on ${PORT}`);
     });
