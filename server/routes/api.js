@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const Game = require("../Models/Game")
 
 router.use(express.json());
 
@@ -9,7 +8,7 @@ router.get("/", (req, res) => {
     res.json({message: "Work in progress!"})
 });
 
-// Here you c9an find an incomplete list of routes that we can use to access the database.
+// Here you can find an incomplete list of routes that we can use to access the database.
 // The routes simply return a json with a message for now, we need to make database functions
 // and call them here.
 // Note: this list is NOT exhaustive and we need add more routes as we go
