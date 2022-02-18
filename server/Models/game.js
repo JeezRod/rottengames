@@ -11,8 +11,7 @@ const gameSchema = new Schema({
     reviews: {
         user: String,
         comment: String,
-        rate: Number,
-
+        rate: Number
     }
 }, {timestamps: true});
 
