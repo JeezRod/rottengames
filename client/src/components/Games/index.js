@@ -1,9 +1,10 @@
 import React from "react";
+import GridView from "../GridView";
 
 function Games() {
   return (
       <div className="Games">
-          <h1>Game page</h1>
+          <GridView></GridView>
       </div>
       
   );
