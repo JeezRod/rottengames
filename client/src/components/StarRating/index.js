@@ -11,7 +11,7 @@ const StarRating = ({ review }) => {
       <RatingStar
         maxScore={5}
         id="123"
-        rating={3}
+        rating={review.stars}
       />
     </div>
   );
