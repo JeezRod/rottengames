@@ -1,9 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const fs = require("fs");
-const data = require("./sample.json")
-
 router.use(express.json());
+const Game = require("../Models/Game")
 
 //Sample get route (/api/)
 router.get("/", (req, res) => {
@@ -18,18 +16,21 @@ router.get("/", (req, res) => {
 //GET Routes
 
 //Route to get all games in the database (/api/games)
-router.get("/games", (req, res) => {
-    res.json(data)
+router.get("/games", async (req, res) => {
+    const result = await Game.find().limit(10);
+    res.json(result);
 });
 
 //Route to get a specific game in the database (/api/games/:id)
-router.get("/games/:gameId", (req, res) => {
+router.get("/games/:gameId", async (req, res) => {
+    const result = await Game.findById(req.params.gameId);
     //we can use req.params.gameId to send the id to the db to find its information
-    res.json({message: "Getting information for game with id: "+req.params.gameId})
+    res.json(result)
 });
 
 //Route to get all reviews for a specific game in the database (/api/games:id/reviews)
-router.get("/games/:id/reviews", (req, res) => {
+router.get("/games/:id/reviews", async (req, res) => {
+    const result = await Game.findById(req.params.gameId)
     //we can use req.params.id to send the id to the db to get all reviews related to it
     res.json({message: "Getting all reviews for game with id: "+req.params.id})
 });
