@@ -18,16 +18,15 @@ router.get("/", (req, res) => {
 
 //Route to get all games in the database (/api/games)
 router.get("/games", async (req, res) => {
-    const result = await Game.find();
-    // console.log(result);
-    // res.json({message: "Get all the games"})
+    const result = await Game.find().limit(10);
     res.json(result);
 });
 
 //Route to get a specific game in the database (/api/games/:id)
-router.get("/games/:gameId", (req, res) => {
+router.get("/games/:gameId", async (req, res) => {
+    const result = await Game.findById(req.params.gameId);
     //we can use req.params.gameId to send the id to the db to find its information
-    res.json({message: "Getting information for game with id: "+req.params.gameId})
+    res.json(result)
 });
 
 //Route to get all reviews for a specific game in the database (/api/games:id/reviews)
