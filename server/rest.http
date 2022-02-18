@@ -1,0 +1,11 @@
+### This file is to test your routes easily, download the REST Client extension
+### on VS CODE
+
+### Default values for all games
+GET http://localhost:3001/api/games
+
+### Page 1 Size 2
+GET http://localhost:3001/api/games?page=1&size=2
+
+### Page 2 Size 2
+GET http://localhost:3001/api/games?page=2&size=2

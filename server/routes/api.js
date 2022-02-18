@@ -17,7 +17,18 @@ router.get("/", (req, res) => {
 
 //Route to get all games in the database (/api/games)
 router.get("/games", async (req, res) => {
-    const result = await Game.find().limit(10);
+    let {page, size} = req.query;
+    if(!page){
+        page = 1;
+    }
+    if(!size){
+        size = 30;
+    }
+
+    const limit = parseInt(size);
+    const skip = (page - 1) * size
+
+    const result = await Game.find().limit(limit).skip(skip);
     res.json(result);
 });
 
