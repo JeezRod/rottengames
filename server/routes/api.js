@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
-
 router.use(express.json());
+const Game = require("../Models/Game")
 
 //Sample get route (/api/)
 router.get("/", (req, res) => {
