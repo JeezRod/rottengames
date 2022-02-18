@@ -30,7 +30,8 @@ router.get("/games/:gameId", async (req, res) => {
 });
 
 //Route to get all reviews for a specific game in the database (/api/games:id/reviews)
-router.get("/games/:id/reviews", (req, res) => {
+router.get("/games/:id/reviews", async (req, res) => {
+    const result = await Game.findById(req.params.gameId)
     //we can use req.params.id to send the id to the db to get all reviews related to it
     res.json({message: "Getting all reviews for game with id: "+req.params.id})
 });
