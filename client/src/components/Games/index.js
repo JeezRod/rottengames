@@ -1,6 +1,7 @@
 import React from "react";
 import GridView from "../GridView";
 import ReactPaginate from 'react-paginate';
+import "./Games.css"
 
 function Games() {
   //State for page number
@@ -11,7 +12,7 @@ function Games() {
   const [perPage, setPerPage] = React.useState(32);
 
   React.useEffect( () => {
-    //Async function to fetch all the games
+    //Async function to fetch count of all games
     async function fetchData() {
       //Fetching the data
       let data = await fetch("/api/games/count");
@@ -33,14 +34,21 @@ function Games() {
 
         <ReactPaginate
         breakLabel="..."
-        nextLabel="next >"
+        nextLabel="➜"
         onPageChange={handlePageClick}
         pageRangeDisplayed={0}
-        marginPagesDisplayed={5}
+        marginPagesDisplayed={3}
         pageCount={Math.ceil(totalGames/perPage)}
-        previousLabel="< previous"
+        previousLabel="➜"
         renderOnZeroPageCount={null}
-      />
+
+        containerClassName="paginator"
+        activeClassName="currentPage"
+        pageClassName="pages"
+        nextClassName="next"
+        previousClassName="previous"
+        breakLinkClassName="break"
+       />
       </div>
       
   );
