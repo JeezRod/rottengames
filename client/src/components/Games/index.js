@@ -26,8 +26,11 @@ function Games() {
 
   //Function to set the page everytime a new page has been clicked 
   const handlePageClick = (event) => {
+    //Scrolls the page back to the top when rerender the grid
+    window.scrollTo(0, 0)
     //Sets the page which will rerender the Gridview with the right page
     setPage(event.selected+1)
+    
   };
 
   return (
