@@ -1,3 +1,16 @@
+.MainContainer{
+    display: flex;
+}
+
+.Filter {
+    width: 10%;
+}
+
+.GridPaginator{
+    width: 90%;
+}
+
+/*Styles for Paginations*/
 .paginator{
     display:flex;
     justify-content:center;

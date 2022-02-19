@@ -1,5 +1,6 @@
 import React from "react";
 import GridView from "../GridView";
+import Filter from "../Filter"
 import ReactPaginate from 'react-paginate';
 import "./Games.css"
 
@@ -31,25 +32,30 @@ function Games() {
 
   return (
       <div className="Games">
-        <GridView page = {page}></GridView>
+        <div className="MainContainer">
+          <Filter></Filter>
+          <div className="GridPaginator">
+            <GridView page = {page}></GridView>
 
-        <ReactPaginate
-        breakLabel="..."
-        nextLabel="➜"
-        onPageChange={handlePageClick}
-        pageRangeDisplayed={0}
-        marginPagesDisplayed={3}
-        pageCount={Math.ceil(totalGames/perPage)}
-        previousLabel="➜"
-        renderOnZeroPageCount={null}
+            <ReactPaginate
+            breakLabel="..."
+            nextLabel="➜"
+            onPageChange={handlePageClick}
+            pageRangeDisplayed={0}
+            marginPagesDisplayed={3}
+            pageCount={Math.ceil(totalGames/perPage)}
+            previousLabel="➜"
+            renderOnZeroPageCount={null}
 
-        containerClassName="paginator"
-        activeClassName="currentPage"
-        pageClassName="pages"
-        nextClassName="next"
-        previousClassName="previous"
-        breakLinkClassName="break"
-       />
+            containerClassName="paginator"
+            activeClassName="currentPage"
+            pageClassName="pages"
+            nextClassName="next"
+            previousClassName="previous"
+            breakLinkClassName="break"
+          />
+        </div>
+        </div>
       </div>
       
   );

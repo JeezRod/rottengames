@@ -1,0 +1,24 @@
+.Filter{
+    padding-top:4%;
+    margin-left: 2%;
+    margin-right: 2%;
+}
+
+.searchBar{
+    height:3em;
+    width: 20em;
+    position:sticky;
+}
+
+.platformTitle{
+    margin-top: 20%
+}
+
+.make {
+    margin-top: 15%;
+    line-height: 25px;
+}
+
+.make input {
+    margin-right: 10px
+}
