@@ -4,7 +4,10 @@ import "./filter.css"
 function Filter() {
   return (
       <div className="Filter">
-          <input className="searchBar" type="text" placeholder="Search"></input>
+          <div className="searchContainer">
+            <input className="searchBar" type="text" placeholder="Search"></input>
+            <button className="searchBtn">➜</button>
+          </div>
 
           <h2 className="platformTitle">Platforms</h2>
 

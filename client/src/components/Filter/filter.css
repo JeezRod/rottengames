@@ -3,11 +3,31 @@
     margin-left: 2%;
     margin-right: 2%;
 }
+.searchContainer{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
 
 .searchBar{
     height:3em;
     width: 20em;
     position:sticky;
+}
+
+.searchBtn{
+    margin-left:2%;
+    color: black;
+    background-color:white;
+    transition:all .2s ease-in;
+}
+
+.searchBtn:hover{
+    margin-left:2%;
+    color:white;
+    background-color: black;
+    border-radius: 10%;
+    cursor: pointer;
 }
 
 .platformTitle{
