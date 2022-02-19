@@ -32,6 +32,12 @@ router.get("/games", async (req, res) => {
     res.json(result);
 });
 
+//Route to get all games in the database (/api/games)
+router.get("/games/count", async (req, res) => {
+    const result = await Game.count();
+    res.json(result);
+});
+
 //Route to get a specific game in the database (/api/games/:id)
 router.get("/games/:gameId", async (req, res) => {
     const result = await Game.findById(req.params.gameId);

@@ -9,3 +9,6 @@ GET http://localhost:3001/api/games?page=1&size=2
 
 ### Page 2 Size 2
 GET http://localhost:3001/api/games?page=2&size=2
+
+### Get the count of games 
+GET http://localhost:3001/api/games/count
