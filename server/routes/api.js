@@ -22,7 +22,7 @@ router.get("/games", async (req, res) => {
         page = 1;
     }
     if(!size){
-        size = 30;
+        size = 32;
     }
 
     const limit = parseInt(size);
