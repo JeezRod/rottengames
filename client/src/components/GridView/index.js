@@ -3,7 +3,8 @@ import GameCard from '../GameCard'
 import './GridView.css'
 import ReactLoading from "react-loading";
 
-function GridView(){
+
+function GridView(page){
   //State for the games
   const [data, setData] = React.useState([]);
   //State for the loading state
@@ -17,9 +18,8 @@ function GridView(){
       try{
       //Set loading to true
       setLoading(true)
-      
-      //Fetching the data
-      let data = await fetch("/api/games");
+      //Fetching the data for the specific page
+      let data = await fetch("/api/games?page="+page.page);
       let dataJson = await data.json();
       //Set the returned data
       await setData(dataJson);
@@ -36,7 +36,7 @@ function GridView(){
       }
     }
     fetchData();
-  },[]);
+  },[page]);
   
   //If the games are loading show loading prompt
   if(loading){
@@ -60,7 +60,7 @@ function GridView(){
   return (
     <div className='gridview'>
       {data.map(game => {
-            return <GameCard key={game._id.$oid} game={game}/>
+            return <GameCard key={game._id} game={game}/>
       })}
     </div>
   )
