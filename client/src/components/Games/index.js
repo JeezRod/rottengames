@@ -23,8 +23,9 @@ function Games() {
     fetchData();
   },[]);
 
+  //Function to set the page everytime a new page has been clicked 
   const handlePageClick = (event) => {
-    console.log(event.selected)
+    //Sets the page which will rerender the Gridview with the right page
     setPage(event.selected+1)
   };
 

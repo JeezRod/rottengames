@@ -18,7 +18,7 @@ function GridView(page){
       try{
       //Set loading to true
       setLoading(true)
-      //Fetching the data
+      //Fetching the data for the specific page
       let data = await fetch("/api/games?page="+page.page);
       let dataJson = await data.json();
       //Set the returned data
