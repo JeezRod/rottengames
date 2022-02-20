@@ -2,9 +2,10 @@ import React from 'react'
 import GameCard from '../GameCard'
 import './GridView.css'
 import ReactLoading from "react-loading";
+import { Link } from "react-router-dom"
 
 
-function GridView({ page, searchTerm }) {
+function GridView({ page, searchTerm, perPage}) {
   //State for the games
   const [data, setData] = React.useState([]);
   //State for the loading state
@@ -20,7 +21,7 @@ function GridView({ page, searchTerm }) {
         setLoading(true)
 
         //Fetching the data for the specific page
-        let data = await fetch("/api/games?page=" + page.page + "&name=" + searchTerm);
+        let data = await fetch("/api/games?page=" + page + "&name=" + searchTerm + "&size=" + perPage);
         let dataJson = await data.json();
         //Set the returned data
         await setData(dataJson);
@@ -37,7 +38,7 @@ function GridView({ page, searchTerm }) {
       }
     }
     fetchData();
-  }, [page, searchTerm]);
+  }, [page, searchTerm, perPage]);
 
   //If the games are loading show loading prompt
   if (loading) {
@@ -61,7 +62,11 @@ function GridView({ page, searchTerm }) {
   return (
     <div className='gridview'>
       {data.map(game => {
-        return <GameCard key={game._id} game={game} />
+        return (
+          <Link className="link" to={game._id}>
+            <GameCard key={game._id} game={game} />
+          </Link>
+        )
       })}
     </div>
   )

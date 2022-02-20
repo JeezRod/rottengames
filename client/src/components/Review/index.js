@@ -3,8 +3,11 @@ import "./Review.css"
 import ReviewCard from "../ReviewCard";
 import StarRating from "../StarRating";
 import {Link} from "react-router-dom"
+import { useParams } from "react-router-dom";
+
 
 function Review(game) {
+  const params = useParams();
   //State for the games
   const [data, setData] = React.useState([]);
   //State for the loading state
@@ -20,7 +23,7 @@ function Review(game) {
       setLoading(true)
       
       //Fetching the data
-      let data = await fetch("/api/games/620fe48fdcea5f127408572f");
+      let data = await fetch("/api/games/" + params.id);
       let dataJson = await data.json();
       //Set the returned data
       await setData(dataJson);
