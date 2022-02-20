@@ -12,6 +12,8 @@ function Games() {
   //State for the number of games per page
   const [perPage, setPerPage] = React.useState(32);
 
+  const [searchTerm, setSearchTerm] = React.useState('');
+
   React.useEffect( () => {
     //Async function to fetch count of all games
     async function fetchData() {
@@ -36,9 +38,9 @@ function Games() {
   return (
       <div className="Games">
         <div className="MainContainer">
-          <Filter></Filter>
+          <Filter setSearchTerm={setSearchTerm}></Filter>
           <div className="GridPaginator">
-            <GridView page = {page}></GridView>
+            <GridView page = {page} searchTerm={searchTerm}></GridView>
 
             <ReactPaginate
             breakLabel="..."

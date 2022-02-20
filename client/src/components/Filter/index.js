@@ -1,13 +1,19 @@
 import React from "react";
 import "./filter.css"
 
-function Filter() {
+function Filter({setSearchTerm}) {
+
+  function HandleSubmit(event){
+    event.preventDefault();
+    setSearchTerm(event.target.search.value);
+  }
+
   return (
       <div className="Filter">
-          <div className="searchContainer">
-            <input className="searchBar" type="text" placeholder="Search"></input>
+          <form onSubmit={HandleSubmit} className="searchContainer">
+            <input name="search" className="searchBar" type="text" placeholder="Search"></input>
             <button className="searchBtn">➜</button>
-          </div>
+          </form>
 
           <h2 className="platformTitle">Platforms</h2>
 
