@@ -63,8 +63,8 @@ function GridView({ page, searchTerm, perPage}) {
     <div className='gridview'>
       {data.map(game => {
         return (
-          <Link className="link" to={game._id}>
-            <GameCard key={game._id} game={game} />
+          <Link key={game._id} className="link" to={game._id}>
+            <GameCard game={game} />
           </Link>
         )
       })}
