@@ -17,24 +17,55 @@ router.get("/", (req, res) => {
 
 //Route to get all games in the database (/api/games)
 router.get("/games", async (req, res) => {
-    let {page, size} = req.query;
+    // get the page, size, and name from query
+    let {page, size, name} = req.query;
+
+    //Set default value for page
     if(!page){
         page = 1;
     }
+    //Set default value for games per page
     if(!size){
         size = 32;
     }
+    //Set default value for name
+    if(!name){
+        name = "";
+    }
 
+    //Computes the number to skip (page number)
     const limit = parseInt(size);
-    const skip = (page - 1) * size
+    const skip = (page - 1) * size;
 
-    const result = await Game.find().limit(limit).skip(skip);
+    //Get all games that match the filter
+    const result = await Game.find({
+        name:{'$regex' : name, 
+        '$options' : 'i'
+        }
+    })
+    .limit(limit)
+    .skip(skip);
+
     res.json(result);
 });
 
 //Route to get all games in the database (/api/games)
 router.get("/games/count", async (req, res) => {
-    const result = await Game.count();
+    //Get name from query
+    let {name} = req.query;
+    
+    //Set default value for name
+    if (!name){
+        name = "";
+    }
+
+    //Gets the count of a filtered name
+    const result = await Game.find({
+        name:{'$regex' : name, 
+        '$options' : 'i'
+        }
+    }).count();
+
     res.json(result);
 });
 

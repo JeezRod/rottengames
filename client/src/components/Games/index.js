@@ -1,5 +1,6 @@
 import React from "react";
 import GridView from "../GridView";
+import Filter from "../Filter"
 import ReactPaginate from 'react-paginate';
 import "./Games.css"
 
@@ -10,6 +11,8 @@ function Games() {
   const [totalGames, setTotalGames] = React.useState([]);
   //State for the number of games per page
   const [perPage, setPerPage] = React.useState(32);
+
+  const [searchTerm, setSearchTerm] = React.useState('');
 
   React.useEffect( () => {
     //Async function to fetch count of all games
@@ -25,31 +28,39 @@ function Games() {
 
   //Function to set the page everytime a new page has been clicked 
   const handlePageClick = (event) => {
+    //Scrolls the page back to the top when rerender the grid
+    window.scrollTo(0, 0)
     //Sets the page which will rerender the Gridview with the right page
     setPage(event.selected+1)
+    
   };
 
   return (
       <div className="Games">
-        <GridView page = {page}></GridView>
+        <div className="MainContainer">
+          <Filter setSearchTerm={setSearchTerm}></Filter>
+          <div className="GridPaginator">
+            <GridView page = {page} searchTerm={searchTerm}></GridView>
 
-        <ReactPaginate
-        breakLabel="..."
-        nextLabel="➜"
-        onPageChange={handlePageClick}
-        pageRangeDisplayed={0}
-        marginPagesDisplayed={3}
-        pageCount={Math.ceil(totalGames/perPage)}
-        previousLabel="➜"
-        renderOnZeroPageCount={null}
+            <ReactPaginate
+            breakLabel="..."
+            nextLabel="➜"
+            onPageChange={handlePageClick}
+            pageRangeDisplayed={0}
+            marginPagesDisplayed={3}
+            pageCount={Math.ceil(totalGames/perPage)}
+            previousLabel="➜"
+            renderOnZeroPageCount={null}
 
-        containerClassName="paginator"
-        activeClassName="currentPage"
-        pageClassName="pages"
-        nextClassName="next"
-        previousClassName="previous"
-        breakLinkClassName="break"
-       />
+            containerClassName="paginator"
+            activeClassName="currentPage"
+            pageClassName="pages"
+            nextClassName="next"
+            previousClassName="previous"
+            breakLinkClassName="break"
+          />
+        </div>
+        </div>
       </div>
       
   );
