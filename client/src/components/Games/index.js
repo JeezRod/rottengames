@@ -10,7 +10,7 @@ function Games() {
   //State for the total number of games
   const [totalGames, setTotalGames] = React.useState([]);
   //State for the number of games per page
-  const [perPage, setPerPage] = React.useState(32);
+  const [perPage, setPerPage] = React.useState(30);
 
   const [searchTerm, setSearchTerm] = React.useState('');
 
@@ -18,13 +18,13 @@ function Games() {
     //Async function to fetch count of all games
     async function fetchData() {
       //Fetching the data
-      let data = await fetch("/api/games/count");
+      let data = await fetch("/api/games/count?name=" + searchTerm);
       let dataJson = await data.json();
       //Set the returned data
       await setTotalGames(dataJson);
     }
     fetchData();
-  },[]);
+  },[searchTerm]);
 
   //Function to set the page everytime a new page has been clicked 
   const handlePageClick = (event) => {
@@ -40,7 +40,7 @@ function Games() {
         <div className="MainContainer">
           <Filter setSearchTerm={setSearchTerm}></Filter>
           <div className="GridPaginator">
-            <GridView page = {page} searchTerm={searchTerm}></GridView>
+            <GridView page = {page} searchTerm={searchTerm} perPage={perPage}></GridView>
 
             <ReactPaginate
             breakLabel="..."

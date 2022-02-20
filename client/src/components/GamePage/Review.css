@@ -1,0 +1,26 @@
+.GamePage {
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top: 5%;
+}
+
+.GameInfo {
+    display:flex;
+    
+}
+
+.NameStars{
+    display:flex;
+    align-items: center;
+    padding-left:2%;
+}
+
+.GameCover {
+    width: 300px;
+    border-radius: 25px;
+}
+
+.Description {
+    padding-top:2%;
+    padding-bottom:2%;
+}
