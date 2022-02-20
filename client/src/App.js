@@ -7,7 +7,7 @@ import Games from "./components/Games";
 import Home from "./components/Home";
 import Login from "./components/Login";
 import Register from "./components/Register";
-import Review from "./components/Review";
+import GamePage from "./components/GamePage";
 
 function App() {
 
@@ -31,7 +31,7 @@ function App() {
         <Route path="games" element={<Games/>}/>
         <Route path="login" element={<Login />}/>
         <Route path="register" element={<Register />}/>
-        <Route path="games/:id" element={<Review />}/>
+        <Route path="games/:id" element={<GamePage />}/>
       </Routes>
     </Router>  
   );
