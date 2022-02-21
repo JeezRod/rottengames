@@ -65,7 +65,7 @@ function Filter({setSearchTerm}) {
             <input type="checkbox" id="pc" name="pc"></input>
             <label htmlFor="pc">PC</label> <br/>
             <input type="checkbox" id="Linux" name="Linux"></input>
-            <label htmlFor="snes">Linux</label> <br/>
+            <label htmlFor="Linux">Linux</label> <br/>
           </div>
 
 
