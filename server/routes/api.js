@@ -4,6 +4,7 @@ const session = require("express-session");
 
 router.use(express.json());
 const Game = require("../Models/Game")
+const User =  require("../Models/user")
 
 const { OAuth2Client } = require('google-auth-library');
 const client = new OAuth2Client(process.env.REACT_APP_GOOGLE_CLIENT_ID);
@@ -26,17 +27,7 @@ router.post("/v1/auth/google", async (req, res) => {
     const existsAlready = users.findIndex(element => element.email === email)
     users.push(user);
     req.session.userId = user
-    console.log(req.session.userId.picture)
-    // if (req.session.isSignedIn.get()) {
-    //     var profile = client.req.session.get().getBasicProfile();
-    //     console.log('ID: ' + profile.getId());
-    //     console.log('Full Name: ' + profile.getName());
-    //     console.log('Given Name: ' + profile.getGivenName());
-    //     console.log('Family Name: ' + profile.getFamilyName());
-    //     console.log('Image URL: ' + profile.getImageUrl());
-    //     console.log('Email: ' + profile.getEmail());
-    //   }
-    //console.log(req.session.getImageUrl());  
+    //console.log(req.session.userId.picture) 
     res.status(201)
     res.json(user)
 })
@@ -102,6 +93,12 @@ router.get("/games/count", async (req, res) => {
     res.json(result);
 });
 
+router.get("/users", async (req, res) => {
+
+    const result =  await User.find({}).count();
+    console.log(result)
+    res.json(result);
+})
 //Route to get a specific game in the database (/api/games/:id)
 router.get("/games/:gameId", async (req, res) => {
     const result = await Game.findById(req.params.gameId);

@@ -34,10 +34,20 @@ function App() {
     const res = await fetch("/api/v1/auth/logout", {
      method: "DELETE",
  
- })
- const data = await res.json()
- setUserName("");
-}
+  })
+  const data = await res.json()
+  setUserName("");
+  }
+
+  async function fetchData() {
+    //Fetching the data
+    let data = await fetch("/api/users");
+    let dataJson = await data.json();
+    //Set the returned data
+    //console.log(dataJson);
+    //await setTotalUsers(dataJson);
+  }
+  fetchData();
 
 
   React.useEffect(() => {
