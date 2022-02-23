@@ -7,13 +7,13 @@ const ReviewCard = ({ review }) => {
     <div className="Rating">
       <div className="CommentCard">
         <div className="UserReview">
-        <p>{review.email}</p>
-        <p>{review.text}</p>
+          <p>{review.email}</p>
+          <p>{review.text}</p>
         </div>
-        <StarRating review={review}/>
+        <StarRating review={review} />
       </div>
-      <button className="UserButton">Comment</button>
-      <button className="AdminButton">Delete</button>
+        <button className="UserButton">Comment</button>
+        <button className="AdminButton">Delete</button>
     </div>
   )
 }
