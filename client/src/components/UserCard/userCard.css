@@ -1,0 +1,19 @@
+.userCard{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+
+    width: 100%;
+    padding: 2em;
+}
+
+.userPicture{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.userInfo{
+    display: flex;
+    flex-direction: column;
+}
