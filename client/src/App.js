@@ -8,6 +8,7 @@ import Home from "./components/Home";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import GamePage from "./components/GamePage";
+import Dashboard from "./components/Dashboard";
 
 function App() {
 
@@ -32,6 +33,7 @@ function App() {
         <Route path="login" element={<Login />}/>
         <Route path="register" element={<Register />}/>
         <Route path="games/:id" element={<GamePage />}/>
+        <Route path="dashboard" element={<Dashboard />}/>
       </Routes>
     </Router>  
   );
