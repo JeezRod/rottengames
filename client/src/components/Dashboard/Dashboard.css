@@ -1,0 +1,21 @@
+main{
+    display:flex;
+}
+
+.SidePanel{
+    display:flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    height: 90%;
+    width: 20%  ;
+}
+
+.MainPanel{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 90%;
+    width: 80%;
+}
