@@ -1,6 +1,6 @@
 import React from "react";
 import "./Dashboard.css"
-import Games from "../Games";
+import Users from "../AllUsers";
 
 function Dashboard() {
   // State to change components
@@ -14,7 +14,7 @@ function Dashboard() {
             <button>Reviews</button>
         </div>
         <div className="MainPanel">
-          <h1>Dashboard</h1>
+          <Users/>
         </div>
       </main>
   );
