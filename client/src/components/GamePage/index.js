@@ -20,8 +20,10 @@ function Review() {
       let dataJson = await data.json();
       //Set the returned data
       await setData(dataJson);
+      console.log(dataJson);
     }
     fetchData();
+    
   }, [params.id]);
 
   //Link each button to their specific pages
@@ -46,10 +48,11 @@ function Review() {
 
       <div className="Review">
         <h1>Reviews</h1>
-        <ReviewCard review={{ text: "Game is cool!" }} />
-        <ReviewCard review={{ text: "Game is awesome!" }} />
-        <ReviewCard review={{ text: "Game is insane!" }} />
-        <ReviewCard review={{ text: "Game is trash!" }} />
+        {data.reviews.map(review => {
+          return (
+            <ReviewCard review={review} />
+          )
+        })}
       </div>
 
     </div>
