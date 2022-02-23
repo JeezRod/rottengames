@@ -8,6 +8,7 @@ import Home from "./components/Home";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import GoogleLogin, { GoogleLogout } from 'react-google-login';
+import GamePage from "./components/GamePage";
 
 function App() {
 
@@ -69,10 +70,11 @@ function App() {
       <Routes>
         <Route path="/" element={<App />} />
         <Route index element={<Home />} />
-        <Route path="about" element={<About />} />
-        <Route path="games" element={<Games />} />
-        <Route path="login" element={<Login />} />
-        <Route path="register" element={<Register />} />
+        <Route path="about" element={<About/>}/>
+        <Route path="games" element={<Games/>}/>
+        <Route path="login" element={<Login />}/>
+        <Route path="register" element={<Register />}/>
+        <Route path="games/:id" element={<GamePage />}/>
       </Routes>
     </Router>
   );
