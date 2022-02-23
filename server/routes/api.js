@@ -8,8 +8,9 @@ const User =  require("../Models/user")
 
 const { OAuth2Client } = require('google-auth-library');
 const client = new OAuth2Client(process.env.REACT_APP_GOOGLE_CLIENT_ID);
+import GoogleLogin, { GoogleLogout } from 'react-google-login';
 
-const users = new Array();
+
 
 //Sample get route (/api/)
 router.get("/", (req, res) => {
@@ -23,13 +24,32 @@ router.post("/v1/auth/google", async (req, res) => {
         audience: process.env.REACT_APP_GOOGLE_CLIENT_ID
     });
     const { name, email, picture } = ticket.getPayload(); 
+    
     const user = {"name": name,"email": email,"picture": picture};
-    const existsAlready = users.findIndex(element => element.email === email)
-    users.push(user);
-    req.session.userId = user
-    //console.log(req.session.userId.picture) 
+    
+    req.session.userId = user.email
+    
+    const numUser =  await User.find({email: user.email}).count();
+    if(numUser == 0){
+        let new_user = new User({ email: user.email, name: user.name, picture: user.picture});
+        new_user.save(function (err, user) {
+        if (err) return console.error(err);
+        console.log(user.email + " saved to users collection.");
+      });
+    }
+    else{
+        console.log("user already exists");
+    } 
     res.status(201)
     res.json(user)
+})
+
+router.delete("/api/v1/auth/logout", async (req, res) => {
+    await req.session.destroy()
+    res.status(200)
+    res.json({
+    message: "Logged out successfully"
+    })
 })
 
 // Here you can find an incomplete list of routes that we can use to access the database.
@@ -95,9 +115,12 @@ router.get("/games/count", async (req, res) => {
 
 router.get("/users", async (req, res) => {
 
-    const result =  await User.find({}).count();
-    console.log(result)
+    //let {email} = req.query.email; 
+    const result =  await User.find({email: "admin2@gmail.com"});
+    //const resultJson = await result.Json()
+    //console.log(resultJson)
     res.json(result);
+
 })
 //Route to get a specific game in the database (/api/games/:id)
 router.get("/games/:gameId", async (req, res) => {
