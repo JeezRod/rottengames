@@ -6,7 +6,7 @@
 }
 
 .CommentCard{
-  background-color:beige;
+  background-color:rgb(65, 147, 255);
   border-radius: 25px;
   width:90%;
   padding: 20px;
@@ -17,4 +17,8 @@
 .AdminButton, .UserButton{
   display: flex;
   align-items: center;
+}
+
+.UserReview{
+  line-height:40px;
 }

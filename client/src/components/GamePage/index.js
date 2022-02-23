@@ -10,14 +10,15 @@ import ReactLoading from "react-loading";
 function Review() {
   const params = useParams();
   //State for the games
-  const [data, setData] = React.useState({reviews:[]});
+  const [data, setData] = React.useState({reviews:[{"rating":0, "email":""}]});
   //State for the loading state
   const [loading, setLoading] = React.useState(false);
+
+  const [rating, setRating] = React.useState();
 
   React.useEffect(() => {
     //Async function to fetch all the games
     async function fetchData() {
-      console.log("fetching")
       await setLoading(true)
       //Fetching the data
       let data = await fetch("/api/games/" + params.id);
@@ -25,10 +26,18 @@ function Review() {
       //Set the returned data
       await setData(dataJson);
       await setLoading(false)
-      console.log(data);
     }
     fetchData();
   }, [params.id]);
+
+  React.useEffect(() => {
+    (() => {
+      let ratingArray = data.reviews.map((review) => review.rating)
+      const average = (ratingArray) => ratingArray.reduce((a, b) => a + b) / ratingArray.length;
+      setRating(average(ratingArray))
+    })();
+  }, [data.reviews, rating]);
+
 
   if (loading) {
     return (
@@ -38,6 +47,8 @@ function Review() {
     )
   }
 
+  
+
   //Link each button to their specific pages
   return (
     <div className="GamePage">
@@ -46,7 +57,7 @@ function Review() {
         <img className="GameCover" src={data.imageurl} alt={data.name}></img>
         <div className="NameStars">
           <h1>{data.name}</h1>
-          <StarRating review={{ rating: 0, email:"123" }} />
+          <StarRating review={{ rating: rating, email:"123" }} />
           <Link to="">
             <button className="AdminButton">Edit page</button>
           </Link>
