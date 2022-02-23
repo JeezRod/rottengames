@@ -10,8 +10,8 @@ const StarRating = ({ review }) => {
     <div className="App">
       <RatingStar
         maxScore={5}
-        id="123"
-        rating={review.stars}
+        id={review.email}
+        rating={review.rating}
       />
     </div>
   );
