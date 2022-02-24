@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import './App.css';
 import Navbar from "./components/Navbar";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -9,11 +9,14 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import GoogleLogin, { GoogleLogout } from 'react-google-login';
 import GamePage from "./components/GamePage";
+import { useParams } from "react-router-dom";
+
 
 function App() {
 
-  const [data, setData] = React.useState(null);
+  const [data, setData] = React.useState([]);
   const [username, setUserName] = React.useState("");
+  
   const handleLogin = async googleData => {
     const res = await fetch("/api/v1/auth/google", {
       method: "POST",
@@ -24,10 +27,21 @@ function App() {
         "Content-Type": "application/json"
       }
     })
-    const data = await res.json()
-    console.log("email:"+data.email)
+    let data = await res.json()
+    console.log("email:"+ data.email)
     setUserName(data.email)
   }
+  
+  useEffect(() => {
+    async function fetchMyAPI() {
+      const res = await fetch("api/user")
+      console.log("res"+res)
+      let data = await res.json()
+      console.log("email:"+ data)
+      //setUserName(data.email)
+    }
+    fetchMyAPI()
+  }, [])
 
   const handleLogout = async response => {
   

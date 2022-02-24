@@ -21,13 +21,13 @@ app.get('*', (req, res) => {
 
 app.use(express.json());
 
-app.delete("/api/v1/auth/logout", async (req, res) => {
+/*app.delete("/api/v1/auth/logout", async (req, res) => {
     await req.session.destroy()
     res.status(200)
     res.json({
     message: "Logged out successfully"
     })
-})
+})*/
     
 
 module.exports = app;
