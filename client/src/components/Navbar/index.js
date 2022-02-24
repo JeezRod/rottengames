@@ -82,7 +82,6 @@ const Navbar = () => {
           onFailure={handleLogin}
           cookiePolicy={'single_host_origin'}
     />
-
     <GoogleLogout
           clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
           buttonText="Logout"
