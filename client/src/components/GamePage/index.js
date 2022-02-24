@@ -13,9 +13,10 @@ function Review() {
   const [data, setData] = React.useState({reviews:[{"rating":0, "email":""}]});
   //State for the loading state
   const [loading, setLoading] = React.useState(false);
-
+  //State for the average rating
   const [rating, setRating] = React.useState();
 
+  //Initially Load the game
   React.useEffect(() => {
     //Async function to fetch all the games
     async function fetchData() {
@@ -30,6 +31,7 @@ function Review() {
     fetchData();
   }, [params.id]);
 
+  //Computing the average rating
   React.useEffect(() => {
     (() => {
       let ratingArray = data.reviews.map((review) => review.rating)
@@ -38,7 +40,7 @@ function Review() {
     })();
   }, [data.reviews, rating]);
 
-
+  //Loading animation before the game loads
   if (loading) {
     return (
       <div className='loading'>
@@ -46,8 +48,6 @@ function Review() {
       </div>
     )
   }
-
-  
 
   //Link each button to their specific pages
   return (
@@ -71,11 +71,14 @@ function Review() {
 
       <div className="Review">
         <h1>Reviews</h1>
-        {data.reviews.map(review => {
-          return (
-            <ReviewCard key={review.email} review={review} />
-          )
-        })}
+        {data.reviews.length > 1
+          ?data.reviews.map(review => {
+            return (
+              <ReviewCard key={review.email} review={review} />
+            )
+          })
+          : <p>No reviews</p>  
+        }
       </div>
 
     </div>
