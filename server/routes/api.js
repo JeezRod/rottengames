@@ -75,6 +75,15 @@ router.get("/user", async (req, res) => {
   }
 })
 
+//This route gets all the user so when administration tries to see
+// them all, they can locate it. This route it is used in the dashboard
+// component
+
+router.get("/users", async(req,res)=>{
+  const result =  await User.find()
+  res.json(result)
+})
+
 // Here you can find an incomplete list of routes that we can use to access the database.
 // The routes simply return a json with a message for now, we need to make database functions
 // and call them here.
