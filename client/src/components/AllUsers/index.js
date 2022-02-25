@@ -16,8 +16,10 @@ function AllUsers() {
             try{
                 setLoading(true);
     
-                let usersData = await fetch("/api/dashboard/users"); // create all users route
+                let usersData = await fetch("/api/users");
                 let usersJson = await usersData.json();
+                console.log(usersJson) // create all users route
+
     
                 await setUsers(usersJson);
     
@@ -35,12 +37,11 @@ function AllUsers() {
 
     return (    
         <main className="allUsers">
-            <UserCard user={data}/>
-            <UserCard user={data}/>
-            <UserCard user={data}/>
-            <UserCard user={data}/>
-            <UserCard user={data}/>
-            <UserCard user={data}/>
+            {data.map( user =>{
+                return(
+                    <UserCard key={user._id} user={user}/>
+                )
+            })}
         </main>
     );
   }
