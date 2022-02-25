@@ -5,14 +5,14 @@ function UserCard({ user }) {
     return (
         <div className="userCard">
             <div className="userPicture">
-                <img src="https://lh3.googleusercontent.com/a/AATXAJypp4eOWulLbjstSeVSukoMmtf9xz5IwfVyJ9Bn=s96-c"></img>
+                <img src={user.picture}></img>
             </div>
             <div className="userInfo">
                 <p>
-                    Rodrigo Rivas
+                    {user.name}
                 </p>
                 <p>
-                    rivasal.rodrigo@gmail.com
+                    {user.email}
                 </p>
                 {user.admin
                     ? <p>
