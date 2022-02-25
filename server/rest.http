@@ -19,5 +19,5 @@ GET http://localhost:3001/api/games?page=1&size=2&name=zelda
 ### Get the count of games with filter
 GET http://localhost:3001/api/games/count?name=zelda
 
-###
-POST http://localhost:3001/api/games/620fe48fdcea5f127408572b
+### Post a review 
+POST http://localhost:3001/api/games/620fe48fdcea5f127408572b?email=email@email.com&rating=3&text=Good Game
