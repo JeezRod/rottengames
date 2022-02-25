@@ -76,20 +76,19 @@ router.get("/games/:gameId", async (req, res) => {
     res.json(result)
 });
 
-//Route to get all reviews for a specific game in the database (/api/games:id/reviews)
-router.get("/games/:id/reviews", async (req, res) => {
-    const result = await Game.findById(req.params.gameId)
-    //we can use req.params.id to send the id to the db to get all reviews related to it
-    res.json({message: "Getting all reviews for game with id: "+req.params.id})
-});
-
-//Route to get all reviews for a specific game in the database (/api/games:id/reviews/:id)
-router.get("/games/:gameId/reviews/:reviewId", (req, res) => {
-    //we can use req.params.gameId to send the id to the db to get the review with the id req.params.reviewId
-    res.json({message: "Getting review with id: "+ req.params.reviewId+" for game with id: "+req.params.gameId})
-});
 
 //POST Routes
+//This inserts an empty object for some reason
+router.post("/games/:gameId", async (req, res) =>{
+    let reviewObj = {email: "hello@email.com", rating: 5, text:"Good game"}
+
+    await Game.findOneAndUpdate(
+        {_id: req.params.gameId},
+        { $addToSet: {"reviews":reviewObj}},
+        {upsert: true, new: true, safe: true}
+    )
+    res.end("success")
+});
 
 //PUT Routes
 
