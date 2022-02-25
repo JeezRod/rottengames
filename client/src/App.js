@@ -1,17 +1,19 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import './App.css';
 import Navbar from "./components/Navbar";
-import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import About from "./components/About";
 import Games from "./components/Games";
 import Home from "./components/Home";
 import Login from "./components/Login";
 import Register from "./components/Register";
+import GoogleLogin, { GoogleLogout } from 'react-google-login';
 import GamePage from "./components/GamePage";
 import Dashboard from "./components/Dashboard";
 
-function App() {
 
+function App() {
+  
   const [data, setData] = React.useState(null);
   
   React.useEffect(() => {
@@ -23,7 +25,8 @@ function App() {
   return (
     <Router>
       <div className="NavContainer">
-          <Navbar ></Navbar>
+        <Navbar ></Navbar>
+        <br></br>
       </div>
       <Routes>
         <Route path="/" element={<App />} />
@@ -35,7 +38,7 @@ function App() {
         <Route path="games/:id" element={<GamePage />}/>
         <Route path="dashboard" element={<Dashboard />}/>
       </Routes>
-    </Router>  
+    </Router>
   );
 }
 
