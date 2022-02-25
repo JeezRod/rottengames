@@ -11,7 +11,7 @@ const ReviewCard = ({ review }) => {
           <img src="https://lh3.googleusercontent.com/a/AATXAJza_xmVChUyzU31XGCQdRUp9eHdvvSEylcADpvuyA=s96-c" alt="pfp"></img>
 
           <div className="UserReview">
-            <p><strong>{review.email}</strong></p>
+            <p><strong>{review.name}</strong></p>
             <p>{review.text}</p>
           </div>
         </div>

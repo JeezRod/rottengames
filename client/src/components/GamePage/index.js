@@ -20,6 +20,8 @@ function Review() {
   //State for the rating of a new review
   const [ratingStars, setRatingStars] = React.useState(0);
 
+  const [newComment, setNewComment] = React.useState(false);
+
   //Initially Load the game
   React.useEffect(() => {
     //Async function to fetch all the games
@@ -33,7 +35,8 @@ function Review() {
       await setLoading(false)
     }
     fetchData();
-  }, [params.id]);
+    setNewComment(false)
+  }, [params.id, newComment]);
 
   //Computing the average rating
   React.useEffect(() => {
@@ -63,11 +66,31 @@ function Review() {
     )
   }
 
-  function HandleSubmit(event) {
+  async function HandleSubmit(event) {
     event.preventDefault();
-    console.log(event.target.reviewText.value);
-    console.log("rating starts: "+ratingStars)
-    console.log("rating: "+rating)
+
+    let user = await fetch("/api/user")
+    let userJson = await user.json()
+
+    const url = ("/api/games/" + params.id)
+
+    let text = event.target.reviewText.value 
+    let name = userJson.name
+
+
+    console.log(userJson)
+
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text, name , ratingStars })
+    };
+    fetch(url, requestOptions)
+        .then(response => console.log('Submitted successfully'))
+        .catch(error => console.log('Form submit error', error))
+
+  setNewComment(true)
+        
   }
 
   //Link each button to their specific pages

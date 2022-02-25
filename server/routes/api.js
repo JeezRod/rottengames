@@ -161,16 +161,13 @@ router.get("/games/:gameId/reviews/:reviewId", (req, res) => {
 //POST Routes
 //This inserts an empty object for some reason
 router.post("/games/:gameId", async (req, res) =>{
-    //Getting the email, rating, text, and name from the query
-    let {email, rating, text, name} = req.query;
-    //Creating the review object
-    let reviewObj = {email: email, rating: rating, text:text}
+
     //Adding the review object to the reviews array in the database(if same object, does nothing)
     await Game.updateOne(
         {_id: req.params.gameId},
         { $addToSet: {
             reviews: {
-                $each: [reviewObj]
+                $each: [req.body]
             }
         }}
     )
