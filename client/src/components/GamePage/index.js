@@ -15,6 +15,8 @@ function Review() {
   const [loading, setLoading] = React.useState(false);
   //State for the average rating
   const [rating, setRating] = React.useState();
+  //State for new review visibility
+  const [newReviewBtn, setNewReviewBtn] = React.useState(false);
 
   //Initially Load the game
   React.useEffect(() => {
@@ -39,6 +41,11 @@ function Review() {
       setRating(average(ratingArray))
     })();
   }, [data.reviews, rating]);
+
+  //Display the buttons to add a review when input is focused
+  const handleFocus = (event) =>{
+    setNewReviewBtn(true)
+  }
 
   //Loading animation before the game loads
   if (loading) {
@@ -71,6 +78,14 @@ function Review() {
 
       <div className="Review">
         <h1>Reviews</h1>
+
+        <form className="addReview">
+          <input type="text"placeholder="Add a review" onFocus={handleFocus}></input>
+          {newReviewBtn === true &&
+            <><StarRating review={{ rating: 0, email: "1235" }} /><button>Add Review</button></>
+          }
+        </form>
+
         {data.reviews.length > 1
           ?data.reviews.map(review => {
             return (
