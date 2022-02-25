@@ -10,13 +10,15 @@ import ReactLoading from "react-loading";
 function Review() {
   const params = useParams();
   //State for the games
-  const [data, setData] = React.useState({reviews:[{"rating":0, "email":""}]});
+  const [data, setData] = React.useState({ reviews: [{ "rating": 0, "email": "" }] });
   //State for the loading state
   const [loading, setLoading] = React.useState(false);
   //State for the average rating
   const [rating, setRating] = React.useState();
   //State for new review visibility
   const [newReviewBtn, setNewReviewBtn] = React.useState(false);
+  //State for the rating of a new review
+  const [ratingStars, setRatingStars] = React.useState(0);
 
   //Initially Load the game
   React.useEffect(() => {
@@ -36,14 +38,19 @@ function Review() {
   //Computing the average rating
   React.useEffect(() => {
     (() => {
-      let ratingArray = data.reviews.map((review) => review.rating)
-      const average = (ratingArray) => ratingArray.reduce((a, b) => a + b) / ratingArray.length;
-      setRating(average(ratingArray))
+      if (data.reviews.length > 0) {
+        let ratingArray = data.reviews.map((review) => parseInt(review.rating))
+        const average = (ratingArray) => ratingArray.reduce((a, b) => a + b) / ratingArray.length;
+        setRating(average(ratingArray))
+      }
+      else {
+        setRating(0)
+      }
     })();
   }, [data.reviews, rating]);
 
   //Display the buttons to add a review when input is focused
-  const handleFocus = (event) =>{
+  const handleFocus = (event) => {
     setNewReviewBtn(true)
   }
 
@@ -56,6 +63,13 @@ function Review() {
     )
   }
 
+  function HandleSubmit(event) {
+    event.preventDefault();
+    console.log(event.target.reviewText.value);
+    console.log("rating starts: "+ratingStars)
+    console.log("rating: "+rating)
+  }
+
   //Link each button to their specific pages
   return (
     <div className="GamePage">
@@ -64,7 +78,7 @@ function Review() {
         <img className="GameCover" src={data.imageurl} alt={data.name}></img>
         <div className="NameStars">
           <h1>{data.name}</h1>
-          <StarRating review={{ rating: rating, email:"123" }} />
+          <StarRating review={{ rating: rating, email: "1234" }} isEditable={false} />
           <Link to="">
             <button className="AdminButton">Edit page</button>
           </Link>
@@ -79,20 +93,20 @@ function Review() {
       <div className="Review">
         <h1>Reviews</h1>
 
-        <form className="addReview">
-          <input type="text"placeholder="Add a review" onFocus={handleFocus}></input>
+        <form className="addReview" onSubmit={HandleSubmit}>
+          <input name="reviewText" type="text" placeholder="Add a review" onFocus={handleFocus}></input>
           {newReviewBtn === true &&
-            <><StarRating review={{ rating: 0, email: "1235" }} /><button>Add Review</button></>
+            <><StarRating review={{ rating: 0, email: "1235" }} isEditable={true} setRatingStars={setRatingStars} ratingStars={ratingStars} /><button>Add Review</button></>
           }
         </form>
 
-        {data.reviews.length > 1
-          ?data.reviews.map(review => {
+        {data.reviews.length > 0
+          ? data.reviews.map(review => {
             return (
               <ReviewCard key={review.email} review={review} />
             )
           })
-          : <p>No reviews</p>  
+          : <p>No reviews</p>
         }
       </div>
 

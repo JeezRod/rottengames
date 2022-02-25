@@ -13,7 +13,7 @@ const gameSchema = new Schema({
         comment: String,
         rate: Number
     }
-}, {timestamps: true});
+});
 
 const Game = mongoose.model('Game', gameSchema)
 
