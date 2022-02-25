@@ -1,21 +1,36 @@
 import React from "react";
 import "./userCard.css"
 
-function UserCard(user){
-    return(
+function UserCard({ user }) {
+    return (
         <div className="userCard">
             <div className="userPicture">
-                <h1>image</h1>
+                <img src="https://lh3.googleusercontent.com/a/AATXAJypp4eOWulLbjstSeVSukoMmtf9xz5IwfVyJ9Bn=s96-c"></img>
             </div>
             <div className="userInfo">
-                <h1>
-                    rrodrigo132@gmail.com
-                </h1>
-                <h1>
-                    admin: false
-                </h1>
+                <p>
+                    Rodrigo Rivas
+                </p>
+                <p>
+                    rivasal.rodrigo@gmail.com
+                </p>
+                {user.admin
+                    ? <p>
+                        Admin
+                    </p>
+                    :
+                    <p>
+                        User
+                    </p>
+                }
+                <p>
+
+                </p>
             </div>
-            
+            <div className="buttons">
+                <button>Edit</button>
+                <button>Delete</button>
+            </div>
         </div>
     );
 }
