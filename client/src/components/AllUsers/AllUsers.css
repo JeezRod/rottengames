@@ -1,5 +1,7 @@
 .allUsers{
-    display: flex;
-    flex-direction: column;
-    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 23%);
+    grid-template-rows: repeat(2,auto);
+    row-gap: 2em;
+    width: 90%;
 }

@@ -1,6 +1,6 @@
 import React from "react";
 import "./AllUsers.css"
-import User from "../UserCard"
+import UserCard from "../UserCard"
 import ReactLoading from "react-loading";
 
 function AllUsers() {  
@@ -11,31 +11,36 @@ function AllUsers() {
     //State for error
     const [error, setError] = React.useState(false);
 
-    async function fetchUsers(){
-        try{
-            setLoading(true);
-
-            let usersData = await fetch(); // create all users route
-            let usersJson = await usersData.json();
-
-            await setUsers(usersJson);
-
-            setError(false);
-        }catch(e){
-            setError(true);
-        } finally{
-            setLoading(false)
+    React.useEffect(()=>{
+        async function fetchUsers(){
+            try{
+                setLoading(true);
+    
+                let usersData = await fetch("/api/dashboard/users"); // create all users route
+                let usersJson = await usersData.json();
+    
+                await setUsers(usersJson);
+    
+                setError(false);
+            }catch(e){
+                setError(true);
+            } finally{
+                setLoading(false)
+            }
         }
-    }
+        fetchUsers();
+    },[]);
 
-    return (
+
+
+    return (    
         <main className="allUsers">
-            <User/>
-            <User/>
-            <User/>
-            <User/>
-            <User/>
-            <User/>
+            <UserCard user={data}/>
+            <UserCard user={data}/>
+            <UserCard user={data}/>
+            <UserCard user={data}/>
+            <UserCard user={data}/>
+            <UserCard user={data}/>
         </main>
     );
   }
