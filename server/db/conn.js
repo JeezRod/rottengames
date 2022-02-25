@@ -11,6 +11,4 @@ class DAO{
     }
 }
 
-
-
 module.exports = new DAO;

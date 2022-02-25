@@ -17,9 +17,10 @@ const StyledNav = styled(NavLink)`
 
 const Navbar = () => {
 
-  const [data, setData] = React.useState([]);
+  //The username of the user logged in
   const [username, setUserName] = React.useState("");
   
+  //This method handles the google login button
   const handleLogin = async googleData => {
     const res = await fetch("/api/v1/auth/google", {
       method: "POST",
@@ -31,20 +32,24 @@ const Navbar = () => {
       }
     })
     let data = await res.json()
-    console.log("email:"+ data.email)
+    console.log(data)
+    //set the userName to the email
     setUserName(data.email)
   }
   
+  // An example on how to use the user api to get the user data
   React.useEffect(() => {
     async function fetchMyAPI() {
       const res = await fetch("api/user")
+      console.log(res.status)
       let data = await res.json()
-      console.log("email:"+ data)
-      setUserName(data)
+      console.log(data)
+      setUserName(data.email)
     }
     fetchMyAPI()
   }, [])
 
+  //This method handles the google logout button
   const handleLogout = async response => {
   
     const res = await fetch("/api/v1/auth/logout", {
@@ -54,16 +59,6 @@ const Navbar = () => {
   const data = await res.json()
   setUserName("");
   }
-
-  async function fetchData() {
-    //Fetching the data
-    let data = await fetch("/api/users");
-    let dataJson = await data.json();
-    //Set the returned data
-    //console.log(dataJson);
-    //await setTotalUsers(dataJson);
-  }
-  fetchData();
 
   return (
   <header>

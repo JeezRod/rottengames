@@ -1,4 +1,3 @@
-/* eslint-disable strict */
 const express = require("express");
 const router = express.Router();
 const session = require("express-session");
@@ -15,28 +14,33 @@ router.get("/", (req, res) => {
   res.json({ message: "Work in progress!" })
 });
 
+// This route is called when the google login button is clicked
 router.post("/v1/auth/google", async (req, res) => {
   const { token } = req.body
   const ticket = await client.verifyIdToken({
     idToken: token,
     audience: process.env.REACT_APP_GOOGLE_CLIENT_ID
   });
+  // Gets the user information of google account
   const { name, email, picture } = ticket.getPayload();
 
+  // Create user object
   const user = { "name": name, "email": email, "picture": picture };
 
-  console.log("c caaaaa"+user.email)
+  // Set the session to the user email
   req.session.userId = user.email
-  console.log("c session"+req.session.userId)
-
+  
+  // Check if the user already exists in the database 
   const numUser = await User.find({ email: user.email }).count();
+  // If it does not exist then add it to the db
   if (numUser === 0) {
-    let new_user = new User({ email: user.email, name: user.name, picture: user.picture });
+    let new_user = new User({ email: user.email, name: user.name, picture: user.picture , admin: false});
     new_user.save(function (err, user) {
       if (err) {return console.error(err);}
       console.log(user.email + " saved to users collection.");
     });
   }
+  // If it does then do not add it
   else {
     console.log("user already exists");
   }
@@ -44,7 +48,9 @@ router.post("/v1/auth/google", async (req, res) => {
   res.json(user)
 })
 
+// This route is called when the google logout button is clicked
 router.delete("/v1/auth/logout", async (req, res) => {
+  //destroy the session of the user
   await req.session.destroy()
   res.status(200)
   res.json({
@@ -52,13 +58,20 @@ router.delete("/v1/auth/logout", async (req, res) => {
   })
 })
 
+//This route returns all the information of the current logged in user
+// email, name, profile picture and if the user is an admin
 router.get("/user", async (req, res) => {
+  // first check if a user is currently logged in 
   if(req.session.userId){
+    //fetch the user's information from the db using it's email
+    const user = await User.find({ email: req.session.userId }).findOne();
     res.status(200)
-    res.json(req.session.userId)
+    //return the information
+    res.json(user)
   }
+  //if no user is currently logged in return a 401 status
   else{
-    res.status(404)
+    res.status(401)
   }
 })
 
@@ -125,15 +138,6 @@ router.get("/games/count", async (req, res) => {
   res.json(result);
 });
 
-router.get("/users", async (req, res) => {
-
-  //let {email} = req.query.email; 
-  const result = await User.find({ email: "admin2@gmail.com" });
-  //const resultJson = await result.Json()
-  //console.log(resultJson)
-  res.json(result);
-
-})
 //Route to get a specific game in the database (/api/games/:id)
 router.get("/games/:gameId", async (req, res) => {
   const result = await Game.findById(req.params.gameId);

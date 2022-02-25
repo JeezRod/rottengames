@@ -6,7 +6,7 @@ const userSchema = new Schema({
     name: String,
     picture: String,
     admin: Boolean,
-}, {timestamps: true});
+},{ versionKey: false});
 
 const User = mongoose.model('User', userSchema)
 
