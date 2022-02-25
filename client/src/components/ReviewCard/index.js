@@ -5,15 +5,24 @@ import StarRating from "../StarRating";
 const ReviewCard = ({ review }) => {
   return (
     <div className="Rating">
+
       <div className="CommentCard">
-        <div className="UserReview">
-          <p>{review.email}</p>
-          <p>{review.text}</p>
+        <div className="pfp">
+          <img src="https://lh3.googleusercontent.com/a/AATXAJza_xmVChUyzU31XGCQdRUp9eHdvvSEylcADpvuyA=s96-c" alt="pfp"></img>
+
+          <div className="UserReview">
+            <p><strong>{review.email}</strong></p>
+            <p>{review.text}</p>
+          </div>
         </div>
-        <StarRating review={review} />
+
+        <div className="buttonStartContainer">
+          <StarRating review={review} />
+          <button className="UserButton">Comment</button>
+          <button className="AdminButton">Delete</button>
+        </div>
       </div>
-        <button className="UserButton">Comment</button>
-        <button className="AdminButton">Delete</button>
+
     </div>
   )
 }
