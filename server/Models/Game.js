@@ -9,9 +9,10 @@ const gameSchema = new Schema({
     platform: String,
     releasedate: String,
     reviews: {
-        user: String,
-        comment: String,
-        rate: Number
+        name: String,
+        text: String,
+        email: String,
+        ratingStars: Number
     }
 });
 
