@@ -10,8 +10,6 @@ const StarRating = ({ review, isEditable, setRatingStars, ratingStars}) => {
     setRatingStars(score);
   };
 
-  console.log("review.rating:"+review.rating);
-
   if(isEditable){
     return (
       <div className="App">
@@ -30,7 +28,7 @@ const StarRating = ({ review, isEditable, setRatingStars, ratingStars}) => {
       <RatingStar
         maxScore={5}
         id={review.email}
-        rating={review.rating}
+        rating={review.ratingStars}
       />
     </div>
   );

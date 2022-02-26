@@ -10,7 +10,7 @@ import ReactLoading from "react-loading";
 function Review() {
   const params = useParams();
   //State for the games
-  const [data, setData] = React.useState({ reviews: [{ "rating": 0, "email": "" }] });
+  const [data, setData] = React.useState({ reviews: [{ "ratingStars": 0, "email": "" }] });
   //State for the loading state
   const [loading, setLoading] = React.useState(false);
   //State for the average rating
@@ -41,13 +41,17 @@ function Review() {
   //Computing the average rating
   React.useEffect(() => {
     (() => {
-      if (data.reviews.length > 0) {
-        let ratingArray = data.reviews.map((review) => parseInt(review.rating))
-        const average = (ratingArray) => ratingArray.reduce((a, b) => a + b) / ratingArray.length;
-        setRating(average(ratingArray))
-      }
-      else {
-        setRating(0)
+      try{
+        if (data.reviews.length > 0) {
+          let ratingArray = data.reviews.map((review) => parseInt(review.ratingStars))
+          const average = (ratingArray) => ratingArray.reduce((a, b) => a + b) / ratingArray.length;
+          setRating(average(ratingArray))
+        }
+        else {
+          setRating(0)
+        }
+      } catch (e){
+        console.log("can't parse")
       }
     })();
   }, [data.reviews, rating]);
@@ -68,29 +72,30 @@ function Review() {
 
   async function HandleSubmit(event) {
     event.preventDefault();
+    try{
+      let user = await fetch("/api/user")
+      let userJson = await user.json()
 
-    let user = await fetch("/api/user")
-    let userJson = await user.json()
+      const url = ("/api/games/" + params.id)
 
-    const url = ("/api/games/" + params.id)
+      let text = event.target.reviewText.value 
+      let name = userJson.name
+      let email = userJson.email
+  
+      const requestOptions = {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ text, name, email, ratingStars })
+      };
+      fetch(url, requestOptions)
+          .then(response => console.log('Submitted successfully'))
+          .catch(error => console.log('Form submit error', error))
+  
+      setNewComment(true)
 
-    let text = event.target.reviewText.value 
-    let name = userJson.name
-
-
-    console.log(userJson)
-
-    const requestOptions = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ text, name , ratingStars })
-    };
-    fetch(url, requestOptions)
-        .then(response => console.log('Submitted successfully'))
-        .catch(error => console.log('Form submit error', error))
-
-  setNewComment(true)
-        
+    } catch (e){
+      console.log("no user")
+    }
   }
 
   //Link each button to their specific pages
@@ -101,7 +106,7 @@ function Review() {
         <img className="GameCover" src={data.imageurl} alt={data.name}></img>
         <div className="NameStars">
           <h1>{data.name}</h1>
-          <StarRating review={{ rating: rating, email: "1234" }} isEditable={false} />
+          <StarRating review={{ ratingStars: rating, email: "1234" }} />
           <Link to="">
             <button className="AdminButton">Edit page</button>
           </Link>
@@ -119,7 +124,7 @@ function Review() {
         <form className="addReview" onSubmit={HandleSubmit}>
           <input name="reviewText" type="text" placeholder="Add a review" onFocus={handleFocus}></input>
           {newReviewBtn === true &&
-            <><StarRating review={{ rating: 0, email: "1235" }} isEditable={true} setRatingStars={setRatingStars} ratingStars={ratingStars} /><button>Add Review</button></>
+            <><StarRating review={{ ratingStars: 0, email: "1235" }} isEditable={true} setRatingStars={setRatingStars} ratingStars={ratingStars} /><button>Add Review</button></>
           }
         </form>
 
