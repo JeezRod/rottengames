@@ -12,9 +12,9 @@ import GamePage from "./components/GamePage";
 
 
 function App() {
-  
+
   const [data, setData] = React.useState(null);
-  
+
   React.useEffect(() => {
     fetch("/api")
       .then((res) => res.json())
@@ -30,11 +30,11 @@ function App() {
       <Routes>
         <Route path="/" element={<App />} />
         <Route index element={<Home />} />
-        <Route path="about" element={<About/>}/>
-        <Route path="games" element={<Games/>}/>
-        <Route path="login" element={<Login />}/>
-        <Route path="register" element={<Register />}/>
-        <Route path="games/:id" element={<GamePage />}/>
+        <Route path="about" element={<About />} />
+        <Route path="games" element={<Games />} />
+        <Route path="login" element={<Login />} />
+        <Route path="register" element={<Register />} />
+        <Route path="games/:id" element={<GamePage />} />
       </Routes>
     </Router>
   );

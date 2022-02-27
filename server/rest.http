@@ -18,3 +18,10 @@ GET http://localhost:3001/api/games?page=1&size=2&name=zelda
 
 ### Get the count of games with filter
 GET http://localhost:3001/api/games/count?name=zelda
+
+### Post a review 
+POST http://localhost:3001/api/games/62193d7e1533a971c15a7bc9?email=rodddddd@email.com&rating=2&text=gamebad!!!
+
+### Get a profile picture
+GET http://localhost:3001/api/user/pfp?email=jwu12322@gmail.com
+
