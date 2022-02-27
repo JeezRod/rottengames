@@ -66,6 +66,7 @@ router.get("/user", async (req, res) => {
     //fetch the user's information from the db using it's email
     const user = await User.find({ email: req.session.userId }).findOne();
     res.status(200)
+    console.log(user)
     //return the information
     res.json(user)
   }
