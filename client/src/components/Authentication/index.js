@@ -5,7 +5,8 @@ import Logout from "../Logout";
 function Authentication(props) {
   
   const isLoggedIn = props.isLoggedIn;
-  if (isLoggedIn) {
+  console.log("this "+isLoggedIn)
+  if (!isLoggedIn) {
     return <Login/>;
   }
   return <Logout/>;

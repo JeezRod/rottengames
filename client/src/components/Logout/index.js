@@ -10,8 +10,7 @@ function Logout() {
      method: "DELETE",
  
   })
-  //const data = await res.json()
-  //setUserName("");
+  console.log("logout is getting called")
   }
   return (
     <GoogleLogout

@@ -48,47 +48,49 @@ router.post("/v1/auth/google", async (req, res) => {
   res.json(user)
 })
 
-// This route is called when the google logout button is clicked
+//This route is called when the google logout button is clicked
 router.delete("/v1/auth/logout", async (req, res) => {
   //destroy the session of the user
-  await req.session.destroy()
-  res.status(200)
-  res.json({
-    message: "Logged out successfully"
-  })
+  console.log("loggin out the user here")
+  await session.destroy();
+  //req.session = null;
+  //sq.session.userId = undefined;
+  //req.session.userId = undefined;
 })
 
 //This route returns all the information of the current logged in user
 // email, name, profile picture and if the user is an admin
 router.get("/user", async (req, res) => {
   // first check if a user is currently logged in 
-  if (req.session.userId) {
+  if (typeof (req.session.userId) !== "undefined") {
+    console.log(req.session.userId);
     //fetch the user's information from the db using it's email
     const user = await User.find({ email: req.session.userId }).findOne();
     res.status(200)
-    console.log(user)
+    console.log("logged in")
     //return the information
     res.json(user)
   }
   //if no user is currently logged in return a 401 status
   else {
+    console.log("logged out")
     res.status(401)
   }
 })
 
-router.get("/user/pfp", async (req, res) => {
-  try {
-    let { email } = req.query;
-    if (email === "") {
-      res.status(401);
-    }
-    const user = await User.find({ email: email }).findOne();
-    res.json(user.picture);
-  }
-  catch (e) {
-    console.log("no user");
-  }
-})
+// router.get("/user/pfp", async (req, res) => {
+//   try {
+//     let { email } = req.query;
+//     if (email === "") {
+//       res.status(401);
+//     }
+//     const user = await User.find({ email: email }).findOne();
+//     res.json(user.picture);
+//   }
+//   catch (e) {
+//     console.log("no user");
+//   }
+// })
 
 // Here you can find an incomplete list of routes that we can use to access the database.
 // The routes simply return a json with a message for now, we need to make database functions

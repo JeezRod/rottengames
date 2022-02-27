@@ -17,15 +17,27 @@ const StyledNav = styled(NavLink)`
 
 const Navbar = () => {
 
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState();
   
   // An example on how to use the user api to get the user data
-  React.useEffect(() => {
-    checkStatus();
-  }, []);
+  React.useEffect( () => {
+    let mounted = true;
+    fetch('/api/user').then(response => {
+      if (response.status === 200) {
+        console.log("1")
+         return response.json().then(setLoggedIn(true));
+      }
+      else {
+        console.log("2")
+        return response.json().then(setLoggedIn(false));
+      }
+    } )
+  //return () => mounted = false;
+}, [] );
+
 
   async function checkLoggedIn() {
-    const response = await fetch("api/user", {cookiePolicy:'single_host_origin'})
+    const response = await fetch("api/user")
     if(response.status.ok){
       setLoggedIn(true)
       console.log("this "+ {loggedIn})
@@ -54,6 +66,7 @@ const Navbar = () => {
         </ul>
     </nav>
     <Authentication isLoggedIn={loggedIn}/>
+    <p>other thing: {loggedIn}</p>
   </header>);
 };
 
