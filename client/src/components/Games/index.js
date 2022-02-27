@@ -14,7 +14,7 @@ function Games() {
 
   const [searchTerm, setSearchTerm] = React.useState('');
 
-  React.useEffect( () => {
+  React.useEffect(() => {
     //Async function to fetch count of all games
     async function fetchData() {
       //Fetching the data
@@ -24,31 +24,31 @@ function Games() {
       await setTotalGames(dataJson);
     }
     fetchData();
-  },[searchTerm]);
+  }, [searchTerm]);
 
   //Function to set the page everytime a new page has been clicked 
   const handlePageClick = (event) => {
     //Scrolls the page back to the top when rerender the grid
     window.scrollTo(0, 0)
     //Sets the page which will rerender the Gridview with the right page
-    setPage(event.selected+1)
-    
+    setPage(event.selected + 1)
+
   };
 
   return (
-      <div className="Games">
-        <div className="MainContainer">
-          <Filter setSearchTerm={setSearchTerm}></Filter>
-          <div className="GridPaginator">
-            <GridView page = {page} searchTerm={searchTerm} perPage={perPage}></GridView>
+    <div className="Games">
+      <div className="MainContainer">
+        <Filter setSearchTerm={setSearchTerm}></Filter>
+        <div className="GridPaginator">
+          <GridView page={page} searchTerm={searchTerm} perPage={perPage}></GridView>
 
-            <ReactPaginate
+          <ReactPaginate
             breakLabel="..."
             nextLabel="➜"
             onPageChange={handlePageClick}
             pageRangeDisplayed={0}
             marginPagesDisplayed={3}
-            pageCount={Math.ceil(totalGames/perPage)}
+            pageCount={Math.ceil(totalGames / perPage)}
             previousLabel="➜"
             renderOnZeroPageCount={null}
 
@@ -60,9 +60,9 @@ function Games() {
             breakLinkClassName="break"
           />
         </div>
-        </div>
       </div>
-      
+    </div>
+
   );
 }
 

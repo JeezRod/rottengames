@@ -19,7 +19,7 @@ function Review() {
   const [newReviewBtn, setNewReviewBtn] = React.useState(false);
   //State for the rating of a new review
   const [ratingStars, setRatingStars] = React.useState(0);
-
+  //State to trigger a "force rendering" of the page to load the new review from the db
   const [newComment, setNewComment] = React.useState(false);
 
   //Initially Load the game
@@ -35,22 +35,25 @@ function Review() {
       await setLoading(false)
     }
     fetchData();
+    //Set the force render state back to false
     setNewComment(false)
   }, [params.id, newComment]);
 
   //Computing the average rating
   React.useEffect(() => {
     (() => {
-      try{
+      try {
+        //If there are at least 1 review for a game, calculate its average
         if (data.reviews.length > 0) {
           let ratingArray = data.reviews.map((review) => parseInt(review.ratingStars))
           const average = (ratingArray) => ratingArray.reduce((a, b) => a + b) / ratingArray.length;
           setRating(average(ratingArray))
         }
+        //If there are no reviews for a game, set its rating at 0
         else {
           setRating(0)
         }
-      } catch (e){
+      } catch (e) {
         console.log("can't parse")
       }
     })();
@@ -70,30 +73,32 @@ function Review() {
     )
   }
 
+  //Async function used to add a new review to a specific game
   async function HandleSubmit(event) {
     event.preventDefault();
-    try{
+    try {
       let user = await fetch("/api/user")
       let userJson = await user.json()
 
       const url = ("/api/games/" + params.id)
 
-      let text = event.target.reviewText.value 
+      let text = event.target.reviewText.value
       let name = userJson.name
       let email = userJson.email
-  
+
       const requestOptions = {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ text, name, email, ratingStars })
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text, name, email, ratingStars })
       };
       fetch(url, requestOptions)
-          .then(response => console.log('Submitted successfully'))
-          .catch(error => console.log('Form submit error', error))
-  
+        .then(response => console.log('Submitted successfully'))
+        .catch(error => console.log('Form submit error', error))
+
+      //Force change state to refresh the page
       setNewComment(true)
 
-    } catch (e){
+    } catch (e) {
       console.log("no user")
     }
   }

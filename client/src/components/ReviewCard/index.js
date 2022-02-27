@@ -6,17 +6,14 @@ const ReviewCard = ({ review }) => {
 
   const [profilePicture, setProfilePicture] = React.useState("");
 
+  //Fetch the profile picture for the specific email
   React.useEffect(() => {
     async function fetchData() {
-      
-      //Fetching the profile picture
       let data = await fetch("/api/user/pfp?email=" + review.email);
       let dataJson = await data.json();
       setProfilePicture(dataJson)
-      console.log(dataJson);
     }
     fetchData();
-    console.log(review.email);
   }, [review.email]);
 
   return (

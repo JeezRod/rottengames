@@ -5,7 +5,7 @@ import ReactLoading from "react-loading";
 import { Link } from "react-router-dom"
 
 
-function GridView({ page, searchTerm, perPage}) {
+function GridView({ page, searchTerm, perPage }) {
   //State for the games
   const [data, setData] = React.useState([]);
   //State for the loading state

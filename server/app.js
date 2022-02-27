@@ -7,7 +7,7 @@ const users = new Array()
 const session = require("express-session");
 
 dotenv.config();
-app.use(session({secret: 'shhhhhhh'})); 
+app.use(session({ secret: 'shhhhhhh' }));
 // Have Node serve the files for our built React app
 app.use(express.static(path.resolve(__dirname, '../client/build')));
 
@@ -28,6 +28,6 @@ app.use(express.json());
     message: "Logged out successfully"
     })
 })*/
-    
+
 
 module.exports = app;

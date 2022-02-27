@@ -1,16 +1,17 @@
-//RatingStar from https://www.npmjs.com/package/rating-star
+//API used: RatingStar from https://www.npmjs.com/package/rating-star
 
 import React from "react";
 import { RatingStar } from "rating-star";
 
+const StarRating = ({ review, isEditable, setRatingStars, ratingStars }) => {
 
-const StarRating = ({ review, isEditable, setRatingStars, ratingStars}) => {
-
+  //Function called to change the ratingStars
   const onRatingChange = (score) => {
     setRatingStars(score);
   };
 
-  if(isEditable){
+  //If it is a new review, make the ratingStars clickable
+  if (isEditable) {
     return (
       <div className="App">
         <RatingStar
@@ -23,6 +24,7 @@ const StarRating = ({ review, isEditable, setRatingStars, ratingStars}) => {
       </div>
     );
   }
+  //Used for the average rating of all the reviews of the game, not editable
   return (
     <div className="App">
       <RatingStar
