@@ -3,7 +3,6 @@ const path = require("path");
 const app = express();
 const api = require("./routes/api")
 const dotenv = require('dotenv');
-const users = new Array()
 const session = require("express-session");
 
 dotenv.config();

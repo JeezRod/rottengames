@@ -9,7 +9,12 @@ function Authentication(props) {
   if (!isLoggedIn) {
     return <Login/>;
   }
-  return <Logout/>;
+  else if(isLoggedIn){
+    return <Logout/>;
+  }
+  else{
+    return <h1>not working</h1>
+  }
 }
 
 export default Authentication;

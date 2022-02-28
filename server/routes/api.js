@@ -52,7 +52,7 @@ router.post("/v1/auth/google", async (req, res) => {
 router.delete("/v1/auth/logout", async (req, res) => {
   //destroy the session of the user
   console.log("loggin out the user here")
-  await session.destroy();
+  await req.session.destroy();
   //req.session = null;
   //sq.session.userId = undefined;
   //req.session.userId = undefined;
