@@ -19,7 +19,7 @@ const Navbar = () => {
 
   const [loggedIn, setLoggedIn] = useState();
   
-  // An example on how to use the user api to get the user data
+  // checking if the user is logged in or not to determine if login or logout should be displayed.
   React.useEffect( () => {
     let mounted = true;
     fetch('/api/user').then(response => {
@@ -40,10 +40,8 @@ const Navbar = () => {
     const response = await fetch("api/user")
     if(response.status.ok){
       setLoggedIn(true)
-      console.log("this "+ {loggedIn})
     }
     else{
-      console.log("that "+ {loggedIn})
       setLoggedIn(false)
     }
   }
@@ -66,7 +64,6 @@ const Navbar = () => {
         </ul>
     </nav>
     <Authentication isLoggedIn={loggedIn}/>
-    <p>other thing: {loggedIn}</p>
   </header>);
 };
 

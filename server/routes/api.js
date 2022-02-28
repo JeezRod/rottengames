@@ -78,19 +78,19 @@ router.get("/user", async (req, res) => {
   }
 })
 
-// router.get("/user/pfp", async (req, res) => {
-//   try {
-//     let { email } = req.query;
-//     if (email === "") {
-//       res.status(401);
-//     }
-//     const user = await User.find({ email: email }).findOne();
-//     res.json(user.picture);
-//   }
-//   catch (e) {
-//     console.log("no user");
-//   }
-// })
+router.get("/user/pfp", async (req, res) => {
+  try {
+    let { email } = req.query;
+    if (email === "") {
+      res.status(401);
+    }
+    const user = await User.find({ email: email }).findOne();
+    res.json(user.picture);
+  }
+  catch (e) {
+    console.log("no user");
+  }
+})
 
 // Here you can find an incomplete list of routes that we can use to access the database.
 // The routes simply return a json with a message for now, we need to make database functions

@@ -16,6 +16,7 @@ function Login() {
     })
     let data = await res.json()
     console.log(data)
+    window.location.reload(false);
     //set the userName to the email
     //setUserName(data.email)
   }

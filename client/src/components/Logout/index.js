@@ -11,10 +11,12 @@ function Logout() {
   
     const res = await fetch("/api/v1/auth/logout", {
      method: "DELETE",
- 
-  })
-  navigate("about")
-  console.log("logout is getting called")
+     
+  },
+  reload())
+  }
+  function reload(){
+    window.location.reload(false);
   }
   return (
     <GoogleLogout
