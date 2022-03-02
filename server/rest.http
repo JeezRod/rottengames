@@ -21,3 +21,9 @@ GET http://localhost:3001/api/games/count?name=zelda
 
 ### Get all the users
 GET http://localhost:3001/api/users
+### Post a review 
+POST http://localhost:3001/api/games/62193d7e1533a971c15a7bc9?email=rodddddd@email.com&rating=2&text=gamebad!!!
+
+### Get a profile picture
+GET http://localhost:3001/api/user/pfp?email=jwu12322@gmail.com
+

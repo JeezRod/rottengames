@@ -1,10 +1,33 @@
 import React from "react";
+import GoogleLogin from 'react-google-login';
 
 function Login() {
+  
+  //This method handles the google login button
+  const handleLogin = async googleData => {
+    const res = await fetch("/api/v1/auth/google", {
+      method: "POST",
+      body: JSON.stringify({
+        token: googleData.tokenId
+      }),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+    let data = await res.json()
+    console.log(data)
+    window.location.reload(false);
+    //set the userName to the email
+    //setUserName(data.email)
+  }
   return (
-      <div className="Login">
-          <h1>Login</h1>
-      </div>
+    <GoogleLogin
+    clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
+    buttonText="Log in with Google"
+    onSuccess={handleLogin}
+    onFailure={handleLogin}
+    cookiePolicy={'single_host_origin'}
+  />
   );
 }
 

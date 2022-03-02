@@ -5,17 +5,15 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import About from "./components/About";
 import Games from "./components/Games";
 import Home from "./components/Home";
-import Login from "./components/Login";
 import Register from "./components/Register";
-import GoogleLogin, { GoogleLogout } from 'react-google-login';
 import GamePage from "./components/GamePage";
 import Dashboard from "./components/Dashboard";
 
 
 function App() {
-  
+
   const [data, setData] = React.useState(null);
-  
+
   React.useEffect(() => {
     fetch("/api")
       .then((res) => res.json())
@@ -33,8 +31,6 @@ function App() {
         <Route index element={<Home />} />
         <Route path="about" element={<About/>}/>
         <Route path="games" element={<Games/>}/>
-        <Route path="login" element={<Login />}/>
-        <Route path="register" element={<Register />}/>
         <Route path="games/:id" element={<GamePage />}/>
         <Route path="dashboard" element={<Dashboard />}/>
       </Routes>

@@ -29,14 +29,14 @@ router.post("/v1/auth/google", async (req, res) => {
 
   // Set the session to the user email
   req.session.userId = user.email
-  
+
   // Check if the user already exists in the database 
   const numUser = await User.find({ email: user.email }).count();
   // If it does not exist then add it to the db
   if (numUser === 0) {
-    let new_user = new User({ email: user.email, name: user.name, picture: user.picture , admin: false});
+    let new_user = new User({ email: user.email, name: user.name, picture: user.picture, admin: false });
     new_user.save(function (err, user) {
-      if (err) {return console.error(err);}
+      if (err) { return console.error(err); }
       console.log(user.email + " saved to users collection.");
     });
   }
@@ -48,29 +48,32 @@ router.post("/v1/auth/google", async (req, res) => {
   res.json(user)
 })
 
-// This route is called when the google logout button is clicked
+//This route is called when the google logout button is clicked
 router.delete("/v1/auth/logout", async (req, res) => {
   //destroy the session of the user
-  await req.session.destroy()
-  res.status(200)
-  res.json({
-    message: "Logged out successfully"
-  })
+  console.log("loggin out the user here")
+  await req.session.destroy();
+  //req.session = null;
+  //sq.session.userId = undefined;
+  //req.session.userId = undefined;
 })
 
 //This route returns all the information of the current logged in user
 // email, name, profile picture and if the user is an admin
 router.get("/user", async (req, res) => {
   // first check if a user is currently logged in 
-  if(req.session.userId){
+  if (typeof (req.session.userId) !== "undefined") {
+    console.log(req.session.userId);
     //fetch the user's information from the db using it's email
     const user = await User.find({ email: req.session.userId }).findOne();
     res.status(200)
+    console.log("logged in")
     //return the information
     res.json(user)
   }
   //if no user is currently logged in return a 401 status
-  else{
+  else {
+    console.log("logged out")
     res.status(401)
   }
 })
@@ -82,6 +85,20 @@ router.get("/user", async (req, res) => {
 router.get("/users", async(req,res)=>{
   const result =  await User.find()
   res.json(result)
+})
+
+router.get("/user/pfp", async (req, res) => {
+  try {
+    let { email } = req.query;
+    if (email === "") {
+      res.status(401);
+    }
+    const user = await User.find({ email: email }).findOne();
+    res.json(user.picture);
+  }
+  catch (e) {
+    console.log("no user");
+  }
 })
 
 // Here you can find an incomplete list of routes that we can use to access the database.
@@ -168,6 +185,30 @@ router.get("/games/:gameId/reviews/:reviewId", (req, res) => {
 });
 
 //POST Routes
+//This inserts an empty object for some reason
+router.post("/games/:gameId", async (req, res) => {
+  //First checks if the user has already commented on the review
+  const result = await Game.findById(req.params.gameId);
+  const isAlreadyCommented = result.reviews.email.includes(req.body.email)
+
+  //Only add the review if the user has not commented on the same game
+  if (!isAlreadyCommented) {
+    //Adding the review object to the reviews array in the database(if same object, does nothing)
+    await Game.updateOne(
+      { _id: req.params.gameId },
+      {
+        $addToSet: {
+          reviews: {
+            $each: [req.body]
+          }
+        }
+      }
+    )
+    res.end("success")
+  }
+
+  res.end("already exists")
+});
 
 //PUT Routes
 
