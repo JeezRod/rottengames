@@ -1,13 +1,14 @@
-main{
+.dash{
     display:flex;
+    height: auto;
+    align-items: flex-start;
 }
 
 .SidePanel{
     display:flex;
     flex-direction: column;
-    justify-content:baseline;
     align-items: center;
-    height: 90%;
+    height: auto;
     width: 20%  ;
 }
 
@@ -31,6 +32,6 @@ main{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 90%;
+    height: auto;
     width: 80%;
 }
