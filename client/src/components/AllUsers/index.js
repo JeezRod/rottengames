@@ -3,7 +3,7 @@ import "./AllUsers.css"
 import UserCard from "../UserCard"
 import ReactLoading from "react-loading";
 
-function AllUsers() {  
+function AllUsers({page, searchTerm, perPage}) {  
     //State for users
     const [data, setUsers] = React.useState([]);
     //State for the loading state
@@ -12,11 +12,12 @@ function AllUsers() {
     const [error, setError] = React.useState(false);
 
     React.useEffect(()=>{
+        //Async function to fetch count of all games
         async function fetchUsers(){
             try{
                 setLoading(true);
     
-                let usersData = await fetch("/api/users");
+                let usersData = await fetch("/api/users?page=" + page + "&name=" + searchTerm + "&size=" + perPage);
                 let usersJson = await usersData.json();
                 console.log(usersJson) // create all users route
 
@@ -31,9 +32,23 @@ function AllUsers() {
             }
         }
         fetchUsers();
-    },[]);
+    },[page, searchTerm, perPage]);
 
-
+    if (loading) {
+        return (
+          <div className='loading'>
+            <ReactLoading type={"spin"} color="#000" />
+          </div>
+        )
+      }
+    
+    if (error) {
+        return (
+          <div className='griderror'>
+            <p>An error has occured</p>
+          </div>
+        )
+    }
 
     return (    
         <main className="allUsers">
