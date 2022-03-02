@@ -35,24 +35,6 @@ const Navbar = () => {
   //return () => mounted = false;
 }, [] );
 
-
-  async function checkLoggedIn() {
-    const response = await fetch("api/user")
-    if(response.status.ok){
-      setLoggedIn(true)
-    }
-    else{
-      setLoggedIn(false)
-    }
-  }
-  const checkStatus = async () => {
-    const response = await fetch("api/user");
-      //setLoggedIn(true)
-      //console.log("this "+ {loggedIn})
-      //console.log("that "+ {loggedIn})
-      //setLoggedIn(false)
-    }
-
   return (
     <header>
       <Hamburger direction="right" />

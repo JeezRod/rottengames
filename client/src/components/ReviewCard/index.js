@@ -2,7 +2,7 @@ import React from "react";
 import "./ReviewCard.css";
 import StarRating from "../StarRating";
 
-const ReviewCard = ({ review }) => {
+const ReviewCard = ({ review, isAdmin, loggedIn }) => {
 
   const [profilePicture, setProfilePicture] = React.useState("");
 
@@ -31,8 +31,12 @@ const ReviewCard = ({ review }) => {
 
         <div className="buttonStartContainer">
           <StarRating review={review} />
-          <button className="UserButton">Comment</button>
+          {loggedIn === true &&
+            <button className="UserButton">Comment</button>
+          }
+          {isAdmin === true &&
           <button className="AdminButton">Delete</button>
+          }
         </div>
       </div>
 
