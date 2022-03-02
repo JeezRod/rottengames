@@ -5,9 +5,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import About from "./components/About";
 import Games from "./components/Games";
 import Home from "./components/Home";
-import Login from "./components/Login";
 import Register from "./components/Register";
-import GoogleLogin, { GoogleLogout } from 'react-google-login';
 import GamePage from "./components/GamePage";
 
 
@@ -30,11 +28,9 @@ function App() {
       <Routes>
         <Route path="/" element={<App />} />
         <Route index element={<Home />} />
-        <Route path="about" element={<About />} />
-        <Route path="games" element={<Games />} />
-        <Route path="login" element={<Login />} />
-        <Route path="register" element={<Register />} />
-        <Route path="games/:id" element={<GamePage />} />
+        <Route path="about" element={<About/>}/>
+        <Route path="games" element={<Games/>}/>
+        <Route path="games/:id" element={<GamePage />}/>
       </Routes>
     </Router>
   );

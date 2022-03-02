@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './nav.css'
 import Hamburger from 'hamburger-react'
 import { NavLink } from "react-router-dom";
 import styled from 'styled-components'
-import GoogleLogin, { GoogleLogout } from 'react-google-login';
+import Authentication from "../Authentication"
 
 //Style fo NavLink
 const StyledNav = styled(NavLink)`
@@ -17,45 +17,41 @@ const StyledNav = styled(NavLink)`
 
 const Navbar = () => {
 
-  //The username of the user logged in
-  const [username, setUserName] = React.useState("");
-
-  //This method handles the google login button
-  const handleLogin = async googleData => {
-    const res = await fetch("/api/v1/auth/google", {
-      method: "POST",
-      body: JSON.stringify({
-        token: googleData.tokenId
-      }),
-      headers: {
-        "Content-Type": "application/json"
+  const [loggedIn, setLoggedIn] = useState();
+  
+  // checking if the user is logged in or not to determine if login or logout should be displayed.
+  React.useEffect( () => {
+    let mounted = true;
+    fetch('/api/user').then(response => {
+      if (response.status === 200) {
+        console.log("1")
+         return response.json().then(setLoggedIn(true));
       }
-    })
-    let data = await res.json()
-    //set the userName to the email
-    setUserName(data.email)
-  }
+      else {
+        console.log("2")
+        return response.json().then(setLoggedIn(false));
+      }
+    } )
+  //return () => mounted = false;
+}, [] );
 
-  // An example on how to use the user api to get the user data
-  React.useEffect(() => {
-    async function fetchMyAPI() {
-      const res = await fetch("api/user")
-      let data = await res.json()
-      setUserName(data.email)
+
+  async function checkLoggedIn() {
+    const response = await fetch("api/user")
+    if(response.status.ok){
+      setLoggedIn(true)
     }
-    fetchMyAPI()
-  }, [])
-
-  //This method handles the google logout button
-  const handleLogout = async response => {
-
-    const res = await fetch("/api/v1/auth/logout", {
-      method: "DELETE",
-
-    })
-    const data = await res.json()
-    setUserName("");
+    else{
+      setLoggedIn(false)
+    }
   }
+  const checkStatus = async () => {
+    const response = await fetch("api/user");
+      //setLoggedIn(true)
+      //console.log("this "+ {loggedIn})
+      //console.log("that "+ {loggedIn})
+      //setLoggedIn(false)
+    }
 
   return (
     <header>
@@ -66,22 +62,9 @@ const Navbar = () => {
           <StyledNav to="/games"> Search </StyledNav>
           <StyledNav to="about">About </StyledNav>
         </ul>
-      </nav>
-      <GoogleLogin
-        clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
-        buttonText="Log in with Google"
-        onSuccess={handleLogin}
-        onFailure={handleLogin}
-        cookiePolicy={'single_host_origin'}
-      />
-      <GoogleLogout
-        clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
-        buttonText="Logout"
-        onLogoutSuccess={handleLogout}
-      />
-
-      <p>Hello {username === "" ? "Anonymous" : username}</p>
-    </header>);
+    </nav>
+    <Authentication isLoggedIn={loggedIn}/>
+  </header>);
 };
 
 export default Navbar;
