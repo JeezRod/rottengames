@@ -5,6 +5,7 @@ import StarRating from "../StarRating";
 import { Link } from "react-router-dom"
 import { useParams } from "react-router-dom";
 import ReactLoading from "react-loading";
+import Alert from '@mui/material/Alert';
 
 
 function Review() {
@@ -21,11 +22,13 @@ function Review() {
   const [ratingStars, setRatingStars] = React.useState(0);
   //State to trigger a "force rendering" of the page to load the new review from the db
   const [newComment, setNewComment] = React.useState(false);
+  //State to check if the user is logged in or not
+  const [loggedIn, setLoggedIn] = React.useState(false);
 
   //Initially Load the game
   React.useEffect(() => {
     //Async function to fetch all the games
-    async function fetchData() {
+    async function fetchGame() {
       await setLoading(true)
       //Fetching the data
       let data = await fetch("/api/games/" + params.id);
@@ -34,7 +37,20 @@ function Review() {
       await setData(dataJson);
       await setLoading(false)
     }
-    fetchData();
+    fetchGame();
+    async function checkLogin() {
+      fetch('/api/user').then(response => {
+        if (response.status === 200) {
+          console.log("1")
+           return response.json().then(setLoggedIn(true));
+        }
+        else {
+          console.log("2")
+          return response.json().then(setLoggedIn(false));
+        }
+      })
+    }
+    checkLogin();
     //Set the force render state back to false
     setNewComment(false)
   }, [params.id, newComment]);
@@ -125,7 +141,10 @@ function Review() {
 
       <div className="Review">
         <h1>Reviews</h1>
-
+        
+        {loggedIn === false &&
+          <Alert severity="error">You have to login to add a comment!</Alert>
+        }
         <form className="addReview" onSubmit={HandleSubmit}>
           <input name="reviewText" type="text" placeholder="Add a review" onFocus={handleFocus}></input>
           {newReviewBtn === true &&
