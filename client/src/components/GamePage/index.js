@@ -24,6 +24,8 @@ function Review() {
   const [newComment, setNewComment] = React.useState(false);
   //State to check if the user is logged in or not
   const [loggedIn, setLoggedIn] = React.useState(false);
+  //State to check if the user is logged in or not
+  const [isAdmin, setIsAdmin] = React.useState(false);
 
   //Initially Load the game
   React.useEffect(() => {
@@ -38,19 +40,33 @@ function Review() {
       await setLoading(false)
     }
     fetchGame();
-    async function checkLogin() {
-      fetch('/api/user').then(response => {
-        if (response.status === 200) {
-          console.log("1")
-           return response.json().then(setLoggedIn(true));
+    async function checkUser() {
+      // fetch('/api/user').then(response => {
+      //   if (response.status === 200) {
+      //     console.log("1")
+      //     let userJson = response.json();
+      //     console.log(userJson)
+      //     setLoggedIn(true);
+      //   }
+      //   else {
+      //     console.log("2")
+      //     return response.json().then(setLoggedIn(false));
+      //   }
+      // })
+      let response = await fetch('/api/user');
+      if(response.status === 200){
+        let userJson = await response.json();
+        setLoggedIn(true)
+        //console.log(userJson.admin)
+        if(userJson.admin){
+          setIsAdmin(true);
         }
-        else {
-          console.log("2")
-          return response.json().then(setLoggedIn(false));
-        }
-      })
+      }
+      else{
+        setLoggedIn(false);
+      }
     }
-    checkLogin();
+    checkUser();
     //Set the force render state back to false
     setNewComment(false)
   }, [params.id, newComment]);
@@ -77,7 +93,10 @@ function Review() {
 
   //Display the buttons to add a review when input is focused
   const handleFocus = (event) => {
-    setNewReviewBtn(true)
+    if(loggedIn){
+      setNewReviewBtn(true)
+    }
+    
   }
 
   //Loading animation before the game loads
@@ -129,7 +148,10 @@ function Review() {
           <h1>{data.name}</h1>
           <StarRating review={{ ratingStars: rating, email: "1234" }} />
           <Link to="">
+            {isAdmin === true && 
             <button className="AdminButton">Edit page</button>
+            }
+            
           </Link>
         </div>
       </div>
@@ -146,7 +168,9 @@ function Review() {
           <Alert severity="error">You have to login to add a comment!</Alert>
         }
         <form className="addReview" onSubmit={HandleSubmit}>
+          {loggedIn === true &&
           <input required name="reviewText" type="text" placeholder="Add a review" onFocus={handleFocus}></input>
+          }
           {newReviewBtn === true &&
             <><StarRating review={{ ratingStars: 0, email: "1235" }} isEditable={true} setRatingStars={setRatingStars} ratingStars={ratingStars} />
             <button>Add Review</button></>
@@ -156,7 +180,7 @@ function Review() {
         {data.reviews.length > 0
           ? data.reviews.map(review => {
             return (
-              <ReviewCard key={review.email} review={review} />
+              <ReviewCard key={review.email} review={review} isAdmin={isAdmin} loggedIn={loggedIn}/>
             )
           })
           : <p>No reviews</p>
