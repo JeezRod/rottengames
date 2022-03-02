@@ -182,7 +182,9 @@ router.post("/games/:gameId", async (req, res) => {
   //First checks if the user has already commented on the review
   const result = await Game.findById(req.params.gameId);
   const isAlreadyCommented = result.reviews.email.includes(req.body.email)
+  console.log(req.body);
 
+  
   //Only add the review if the user has not commented on the same game
   if (!isAlreadyCommented) {
     //Adding the review object to the reviews array in the database(if same object, does nothing)

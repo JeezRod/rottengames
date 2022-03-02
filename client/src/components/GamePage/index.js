@@ -19,7 +19,7 @@ function Review() {
   //State for new review visibility
   const [newReviewBtn, setNewReviewBtn] = React.useState(false);
   //State for the rating of a new review
-  const [ratingStars, setRatingStars] = React.useState(0);
+  const [ratingStars, setRatingStars] = React.useState(1);
   //State to trigger a "force rendering" of the page to load the new review from the db
   const [newComment, setNewComment] = React.useState(false);
   //State to check if the user is logged in or not
@@ -146,9 +146,10 @@ function Review() {
           <Alert severity="error">You have to login to add a comment!</Alert>
         }
         <form className="addReview" onSubmit={HandleSubmit}>
-          <input name="reviewText" type="text" placeholder="Add a review" onFocus={handleFocus}></input>
+          <input required name="reviewText" type="text" placeholder="Add a review" onFocus={handleFocus}></input>
           {newReviewBtn === true &&
-            <><StarRating review={{ ratingStars: 0, email: "1235" }} isEditable={true} setRatingStars={setRatingStars} ratingStars={ratingStars} /><button>Add Review</button></>
+            <><StarRating review={{ ratingStars: 0, email: "1235" }} isEditable={true} setRatingStars={setRatingStars} ratingStars={ratingStars} />
+            <button>Add Review</button></>
           }
         </form>
 
