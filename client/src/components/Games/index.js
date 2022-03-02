@@ -14,17 +14,20 @@ function Games() {
 
   const [searchTerm, setSearchTerm] = React.useState('');
 
+  const [searchPlatform, setSearchPlatform] = React.useState('');
+
   React.useEffect(() => {
     //Async function to fetch count of all games
     async function fetchData() {
       //Fetching the data
-      let data = await fetch("/api/games/count?name=" + searchTerm);
+      let data = await fetch("/api/games/count?name=" + searchTerm + "&platform=" + searchPlatform);
       let dataJson = await data.json();
       //Set the returned data
       await setTotalGames(dataJson);
+      console.log("/api/games/count?name=" + searchTerm + "&platform=" + searchPlatform);
     }
     fetchData();
-  }, [searchTerm]);
+  }, [searchTerm, searchPlatform]);
 
   //Function to set the page everytime a new page has been clicked 
   const handlePageClick = (event) => {
@@ -38,9 +41,9 @@ function Games() {
   return (
     <div className="Games">
       <div className="MainContainer">
-        <Filter setSearchTerm={setSearchTerm}></Filter>
+        <Filter setSearchTerm={setSearchTerm} setSearchPlatform={setSearchPlatform}></Filter>
         <div className="GridPaginator">
-          <GridView page={page} searchTerm={searchTerm} perPage={perPage}></GridView>
+          <GridView page={page} searchTerm={searchTerm} searchPlatform={searchPlatform} perPage={perPage}></GridView>
 
           <ReactPaginate
             breakLabel="..."

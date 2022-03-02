@@ -103,7 +103,7 @@ router.get("/user/pfp", async (req, res) => {
 //Route to get all games in the database (/api/games)
 router.get("/games", async (req, res) => {
   // get the page, size, and name from query
-  let { page, size, name } = req.query;
+  let { page, size, name, platform} = req.query;
 
   //Set default value for page
   if (!page) {
@@ -117,6 +117,10 @@ router.get("/games", async (req, res) => {
   if (!name) {
     name = "";
   }
+  //Set default value for platform if none is checked
+  if(!platform) {
+    platform = "";
+  }
 
   //Computes the number to skip (page number)
   const limit = parseInt(size);
@@ -126,7 +130,11 @@ router.get("/games", async (req, res) => {
   const result = await Game.find({
     name: {
       "$regex": name,
-      "$options": "i"
+      "$options": "i",
+    },
+    platform: {
+      "$regex": platform,
+      "$options": "i",
     }
   })
     .limit(limit)
@@ -138,11 +146,15 @@ router.get("/games", async (req, res) => {
 //Route to get all games in the database (/api/games)
 router.get("/games/count", async (req, res) => {
   //Get name from query
-  let { name } = req.query;
+  let { name, platform } = req.query;
 
   //Set default value for name
   if (!name) {
     name = "";
+  }
+
+  if (!platform) {
+    platform = "";
   }
 
   //Gets the count of a filtered name
@@ -150,6 +162,10 @@ router.get("/games/count", async (req, res) => {
     name: {
       "$regex": name,
       "$options": "i"
+    },
+    platform: {
+      "$regex": platform,
+      "$options": "i",
     }
   }).count();
 
