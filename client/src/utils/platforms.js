@@ -1,4 +1,5 @@
 export const platforms = [
+  //sony
   {
     name: "Playstation",
   },
@@ -18,6 +19,10 @@ export const platforms = [
     name: "PlayStation Vita",
   },
   {
+    name: "PSP",
+  },
+  //microsoft
+  {
     name: "Xbox",
   },
   {
@@ -29,6 +34,7 @@ export const platforms = [
   {
     name: "Xbox Series X|S",
   },
+  //nintendo
   {
     name: "NES",
   },
@@ -54,20 +60,12 @@ export const platforms = [
     name: "Switch",
   },
   {
-    name: "PSP",
-  },
-  {
     name: "DS",
   },
   {
     name: "3DS",
   },
-  {
-    name: "Dreamcast",
-  },
-  {
-    name: "Stadia",
-  },
+  //pc
   {
     name: "Windows",
   },
@@ -76,5 +74,13 @@ export const platforms = [
   },
   {
     name: "Linux",
-  }
+  },
+  //sega
+  {
+    name: "Dreamcast",
+  },
+  //google
+  {
+    name: "Stadia",
+  },
 ];

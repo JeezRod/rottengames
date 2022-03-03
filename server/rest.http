@@ -14,7 +14,7 @@ GET http://localhost:3001/api/games?page=2&size=2
 GET http://localhost:3001/api/games/count
 
 ### Get games filter by name
-GET http://localhost:3001/api/games?page=1&name=zelda&platform=Wii
+GET http://localhost:3001/api/games?page=1&name=zelda&platform=Wii&platform=DS
 
 ### Get the count of games with filter
 GET http://localhost:3001/api/games/count?name=zelda&platform=Wii

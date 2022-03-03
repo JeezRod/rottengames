@@ -14,6 +14,7 @@ function Filter({ setSearchTerm, setSearchPlatform }) {
     let plat = [];
     event.preventDefault();
     setSearchTerm(event.target.search.value);
+    console.log(event.target.search.value)
     if (allPlatforms) {
       allPlatforms.map((platform, index) => platform === true ? plat.push(platforms[index].name) : "");
     }
@@ -46,8 +47,8 @@ function Filter({ setSearchTerm, setSearchPlatform }) {
         <button className="searchBtn">➜</button>
       </form>
 
-      <h3>Platforms</h3>
       <ul className="platforms-list">
+      <h1 className="platformTitle">Platforms</h1>
         {platforms.map(({ name }, index) => {
           return (
             <li key={index}>
