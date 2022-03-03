@@ -5,7 +5,7 @@ import ReactLoading from "react-loading";
 import { Link } from "react-router-dom"
 
 
-function GridView({ page, searchTerm, perPage }) {
+function GridView({ page, searchTerm, perPage, searchPlatform }) {
   //State for the games
   const [data, setData] = React.useState([]);
   //State for the loading state
@@ -21,7 +21,7 @@ function GridView({ page, searchTerm, perPage }) {
         setLoading(true)
 
         //Fetching the data for the specific page
-        let data = await fetch("/api/games?page=" + page + "&name=" + searchTerm + "&size=" + perPage);
+        let data = await fetch("/api/games?page=" + page + "&name=" + searchTerm + "&size=" + perPage + "&platform="+ searchPlatform);
         let dataJson = await data.json();
         //Set the returned data
         await setData(dataJson);
@@ -38,7 +38,7 @@ function GridView({ page, searchTerm, perPage }) {
       }
     }
     fetchData();
-  }, [page, searchTerm, perPage]);
+  }, [page, searchTerm, perPage,searchPlatform]);
 
   //If the games are loading show loading prompt
   if (loading) {

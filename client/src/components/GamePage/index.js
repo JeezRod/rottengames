@@ -54,15 +54,15 @@ function Review() {
       //   }
       // })
       let response = await fetch('/api/user');
-      if(response.status === 200){
+      if (response.status === 200) {
         let userJson = await response.json();
         setLoggedIn(true)
         //console.log(userJson.admin)
-        if(userJson.admin){
+        if (userJson.admin) {
           setIsAdmin(true);
         }
       }
-      else{
+      else {
         setLoggedIn(false);
       }
     }
@@ -93,10 +93,10 @@ function Review() {
 
   //Display the buttons to add a review when input is focused
   const handleFocus = (event) => {
-    if(loggedIn){
+    if (loggedIn) {
       setNewReviewBtn(true)
     }
-    
+
   }
 
   //Loading animation before the game loads
@@ -148,10 +148,10 @@ function Review() {
           <h1>{data.name}</h1>
           <StarRating review={{ ratingStars: rating, email: "1234" }} />
           <Link to="">
-            {isAdmin === true && 
-            <button className="AdminButton">Edit page</button>
+            {isAdmin === true &&
+              <button className="AdminButton">Edit page</button>
             }
-            
+
           </Link>
         </div>
       </div>
@@ -161,26 +161,31 @@ function Review() {
         <p>{data.description}</p>
       </div>
 
+      <div className="Platform">
+        <h1>Available on</h1>
+        {data.platform}
+      </div>
+
       <div className="Review">
         <h1>Reviews</h1>
-        
+
         {loggedIn === false &&
           <Alert severity="error">You have to login to add a comment!</Alert>
         }
         <form className="addReview" onSubmit={HandleSubmit}>
           {loggedIn === true &&
-          <input required name="reviewText" type="text" placeholder="Add a review" onFocus={handleFocus}></input>
+            <input required name="reviewText" type="text" placeholder="Add a review" onFocus={handleFocus}></input>
           }
           {newReviewBtn === true &&
             <><StarRating review={{ ratingStars: 0, email: "1235" }} isEditable={true} setRatingStars={setRatingStars} ratingStars={ratingStars} />
-            <button>Add Review</button></>
+              <button>Add Review</button></>
           }
         </form>
 
         {data.reviews.length > 0
           ? data.reviews.map(review => {
             return (
-              <ReviewCard key={review.email} review={review} isAdmin={isAdmin} loggedIn={loggedIn}/>
+              <ReviewCard key={review.email} review={review} isAdmin={isAdmin} loggedIn={loggedIn} />
             )
           })
           : <p>No reviews</p>
