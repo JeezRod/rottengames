@@ -14,6 +14,15 @@ function Games() {
 
   const [searchTerm, setSearchTerm] = React.useState('');
 
+  React.useLayoutEffect(() => {
+    console.log(window.localStorage.getItem('searchTerm'))
+    setSearchTerm(window.localStorage.getItem('searchTerm'));
+  }, []);
+
+  React.useEffect(() => {
+    window.localStorage.setItem('searchTerm', searchTerm);
+  }, [searchTerm]);
+
   React.useEffect(() => {
     //Async function to fetch count of all games
     async function fetchData() {
@@ -40,7 +49,7 @@ function Games() {
   return (
     <div className="Games">
       <div className="MainContainer">
-        <Filter setSearchTerm={setSearchTerm}></Filter>
+        <Filter setSearchTerm={setSearchTerm} searchTerm={searchTerm}></Filter>
         <div className="GridPaginator">
           <GridView page={page} searchTerm={searchTerm} perPage={perPage}></GridView>
 

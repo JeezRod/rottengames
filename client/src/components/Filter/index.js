@@ -1,17 +1,30 @@
 import React from "react";
 import "./filter.css"
 
-function Filter({ setSearchTerm }) {
+function Filter({ setSearchTerm, searchTerm }) {
+  const [inputValue, setInputValue] = React.useState(searchTerm)
+  const [timer, setTimer] = React.useState(null)
 
   function HandleSubmit(event) {
     event.preventDefault();
     setSearchTerm(event.target.search.value);
   }
 
+  function handleChange(event) {
+    setInputValue(event.target.value)
+    clearTimeout(timer)
+
+    const newTimer = setTimeout(() => {
+      setSearchTerm(event.target.value);  
+    }, 500)
+
+    setTimer(newTimer)
+  }
+
   return (
     <div className="Filter">
       <form onSubmit={HandleSubmit} className="searchContainer">
-        <input name="search" className="searchBar" type="text" placeholder="Search"></input>
+        <input name="search" className="searchBar" type="text" placeholder="Search" value={inputValue} onChange={handleChange}></input>
         <button className="searchBtn">➜</button>
       </form>
 
