@@ -24,6 +24,7 @@ function Games() {
       await setTotalGames(dataJson);
     }
     fetchData();
+    //Resets the page to 1 when a new search time is entered
     setPage(1)
   }, [searchTerm]);
 
