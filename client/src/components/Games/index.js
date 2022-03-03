@@ -24,6 +24,7 @@ function Games() {
       await setTotalGames(dataJson);
     }
     fetchData();
+    setPage(1)
   }, [searchTerm]);
 
   //Function to set the page everytime a new page has been clicked 
@@ -51,6 +52,7 @@ function Games() {
             pageCount={Math.ceil(totalGames / perPage)}
             previousLabel="➜"
             renderOnZeroPageCount={null}
+            forcePage={page-1}
 
             containerClassName="paginator"
             activeClassName="currentPage"
