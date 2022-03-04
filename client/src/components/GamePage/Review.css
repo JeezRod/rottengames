@@ -20,7 +20,7 @@
     border-radius: 25px;
 }
 
-.Description {
+.Description, .Platform {
     padding-top:2%;
     padding-bottom:2%;
 }

@@ -3,6 +3,7 @@
     margin-left: 2%;
     margin-right: 2%;
 }
+
 .searchContainer{
     display: flex;
     width: 100%;
@@ -31,14 +32,37 @@
 }
 
 .platformTitle{
-    margin-top: 20%
+    margin-top: 10%;
+    margin-left: 10%;
+
 }
 
+.platforms-list{
+    display: flex;
+    flex-direction: column;
+}
+
+.platforms-list-item{
+    font-size: 21px;
+    margin-top: 20px;
+}
+
+.platforms-list-item input{
+    width: 18px;
+    height: 18px;
+}
+
+/** not used **/
 .make {
     margin-top: 15%;
     line-height: 25px;
 }
 
+/** not used **/
 .make input {
     margin-right: 10px
+}
+
+.custom-checkbox {
+    margin-right:10px;
 }

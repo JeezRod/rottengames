@@ -53,7 +53,7 @@ router.delete("/v1/auth/logout", async (req, res) => {
   //destroy the session of the user
   console.log("loggin out the user here")
   await req.session.destroy();
-  console.log("session: "+req.session)
+  console.log("session: " + req.session)
   //req.session = null;
   //sq.session.userId = undefined;
   //req.session.userId = undefined;
@@ -103,7 +103,7 @@ router.get("/user/pfp", async (req, res) => {
 //Route to get all games in the database (/api/games)
 router.get("/games", async (req, res) => {
   // get the page, size, and name from query
-  let { page, size, name } = req.query;
+  let { page, size, name, platform } = req.query;
 
   //Set default value for page
   if (!page) {
@@ -117,42 +117,79 @@ router.get("/games", async (req, res) => {
   if (!name) {
     name = "";
   }
+  //Set default value for platform if none is checked
+  if (!platform) {
+    platform = "";
+  }
 
   //Computes the number to skip (page number)
   const limit = parseInt(size);
   const skip = (page - 1) * size;
+  let result = null;
 
-  //Get all games that match the filter
-  const result = await Game.find({
-    name: {
-      "$regex": name,
-      "$options": "i"
-    }
-  })
-    .limit(limit)
-    .skip(skip);
-
+  if (platform === "") {
+    result = await Game.find({
+      name: {
+        "$regex": name,
+        "$options": "i"
+      }
+    })
+      .limit(limit)
+      .skip(skip);
+  }
+  else {
+    //Gets the count of a filtered name
+    result = await Game.find({
+      name: {
+        "$regex": name,
+        "$options": "i"
+      },
+      platform: {
+        "$in": platform
+      }
+    })
+      .limit(limit)
+      .skip(skip);
+  }
   res.json(result);
 });
 
 //Route to get all games in the database (/api/games)
 router.get("/games/count", async (req, res) => {
   //Get name from query
-  let { name } = req.query;
+  let { name, platform } = req.query;
 
   //Set default value for name
   if (!name) {
     name = "";
   }
 
-  //Gets the count of a filtered name
-  const result = await Game.find({
-    name: {
-      "$regex": name,
-      "$options": "i"
-    }
-  }).count();
+  if (!platform) {
+    platform = "";
+  }
 
+  let result = null;
+
+  if (platform === "") {
+    result = await Game.find({
+      name: {
+        "$regex": name,
+        "$options": "i"
+      }
+    }).count();
+  }
+  else {
+    //Gets the count of a filtered name
+    result = await Game.find({
+      name: {
+        "$regex": name,
+        "$options": "i"
+      },
+      platform: {
+        "$in": platform
+      }
+    }).count();
+  }
   res.json(result);
 });
 
@@ -184,7 +221,7 @@ router.post("/games/:gameId", async (req, res) => {
   const isAlreadyCommented = result.reviews.email.includes(req.body.email)
   console.log(req.body);
 
-  
+
   //Only add the review if the user has not commented on the same game
   if (!isAlreadyCommented) {
     //Adding the review object to the reviews array in the database(if same object, does nothing)
