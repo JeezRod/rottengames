@@ -15,8 +15,11 @@ function Games() {
   const [searchTerm, setSearchTerm] = React.useState('');
 
   React.useLayoutEffect(() => {
-    console.log(window.localStorage.getItem('searchTerm'))
-    setSearchTerm(window.localStorage.getItem('searchTerm'));
+    let searchInLocal = window.localStorage.getItem('searchTerm')
+    //Check if the search terms exists before setting it, Don't set it if its null
+    if(searchInLocal){
+      setSearchTerm(window.localStorage.getItem('searchTerm'));
+    }
   }, []);
 
   React.useEffect(() => {
