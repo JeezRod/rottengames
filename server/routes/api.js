@@ -83,10 +83,62 @@ router.get("/user", async (req, res) => {
 // component
 
 router.get("/users", async(req,res)=>{
-  const result =  await User.find()
-  res.json(result)
+  let { page, size, name } = req.query;
+
+  //Set default value for page
+  if (!page) {
+    page = 1;
+  }
+  //Set default value for games per page
+  if (!size) {
+    size = 12;
+  }
+  //Set default value for name
+  if (!name) {
+    name = "";
+  }
+
+  //Computes the number to skip (page number)
+  const limit = parseInt(size);
+  const skip = (page - 1) * size;
+
+  //Get all games that match the filter
+  const result = await User.find({
+    name: {
+      "$regex": name,
+      "$options": "i"
+    }
+  })
+    .limit(limit)
+    .skip(skip);
+  
+  res.json(result);
 })
 
+
+router.get("/users/count", async (req, res) => {
+  //Get name from query
+  let { name } = req.query;
+
+  //Set default value for name
+  if (!name) {
+    name = "";
+  }
+
+  //Gets the count of a filtered name
+  const result = await User.find({
+    name: {
+      "$regex": name,
+      "$options": "i"
+    }
+  }).count();
+
+  res.json(result);
+});
+
+
+
+// Profile picture
 router.get("/user/pfp", async (req, res) => {
   try {
     let { email } = req.query;
