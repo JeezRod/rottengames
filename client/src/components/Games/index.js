@@ -14,19 +14,34 @@ function Games() {
 
   const [searchTerm, setSearchTerm] = React.useState('');
 
+  const [searchPlatform, setSearchPlatform] = React.useState('');
+
   React.useEffect(() => {
     //Async function to fetch count of all games
     async function fetchData() {
-      //Fetching the data
-      let data = await fetch("/api/games/count?name=" + searchTerm);
-      let dataJson = await data.json();
-      //Set the returned data
-      await setTotalGames(dataJson);
+      if (searchPlatform.length > 0) {
+        let url = "/api/games/count?name=" + searchTerm;
+        for (let i = 0; i < searchPlatform.length; i++) {
+          url = url + "&platform=" + searchPlatform[i];
+        }
+        //Fetching the data
+        let data = await fetch(url);
+        let dataJson = await data.json();
+        //Set the returned data
+        await setTotalGames(dataJson);
+      }
+      else{
+        //Fetching the data
+        let data = await fetch("/api/games?page=" + page + "&name=" + searchTerm + "&size=" + perPage);
+        let dataJson = await data.json();
+        //Set the returned data
+        await setTotalGames(dataJson);
+      }
     }
     fetchData();
     //Resets the page to 1 when a new search time is entered
     setPage(1)
-  }, [searchTerm]);
+  }, [searchTerm, searchPlatform, page, perPage]);
 
   //Function to set the page everytime a new page has been clicked 
   const handlePageClick = (event) => {
@@ -40,9 +55,9 @@ function Games() {
   return (
     <div className="Games">
       <div className="MainContainer">
-        <Filter setSearchTerm={setSearchTerm}></Filter>
+        <Filter setSearchTerm={setSearchTerm} setSearchPlatform={setSearchPlatform}></Filter>
         <div className="GridPaginator">
-          <GridView page={page} searchTerm={searchTerm} perPage={perPage}></GridView>
+          <GridView page={page} searchTerm={searchTerm} searchPlatform={searchPlatform} perPage={perPage}></GridView>
 
           <ReactPaginate
             breakLabel="..."
@@ -53,7 +68,7 @@ function Games() {
             pageCount={Math.ceil(totalGames / perPage)}
             previousLabel="➜"
             renderOnZeroPageCount={null}
-            forcePage={page-1}
+            forcePage={page - 1}
 
             containerClassName="paginator"
             activeClassName="currentPage"

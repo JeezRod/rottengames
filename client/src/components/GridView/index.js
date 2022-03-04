@@ -5,7 +5,7 @@ import ReactLoading from "react-loading";
 import { Link } from "react-router-dom"
 
 
-function GridView({ page, searchTerm, perPage }) {
+function GridView({ page, searchTerm, perPage, searchPlatform }) {
   //State for the games
   const [data, setData] = React.useState([]);
   //State for the loading state
@@ -19,16 +19,26 @@ function GridView({ page, searchTerm, perPage }) {
       try {
         //Set loading to true
         setLoading(true)
-
-        //Fetching the data for the specific page
-        let data = await fetch("/api/games?page=" + page + "&name=" + searchTerm + "&size=" + perPage);
-        let dataJson = await data.json();
-        //Set the returned data
-        await setData(dataJson);
-
+        if (searchPlatform.length > 0) {
+          let url = "/api/games?page=" + page + "&name=" + searchTerm + "&size=" + perPage;
+          for (let i = 0; i < searchPlatform.length; i++) {
+            url = url + "&platform=" + searchPlatform[i];
+          }
+          //Fetching the data
+          let data = await fetch(url);
+          let dataJson = await data.json();
+          //Set the returned data
+          await setData(dataJson);
+        }
+        else{
+          //Fetching the data
+          let data = await fetch("/api/games?page=" + page + "&name=" + searchTerm + "&size=" + perPage);
+          let dataJson = await data.json();
+          //Set the returned data
+          await setData(dataJson);
+        }
         //No error has occured, set error to false
         setError(false)
-
       } catch (e) {
         //Error has occured, set error to true
         setError(true)
@@ -38,7 +48,7 @@ function GridView({ page, searchTerm, perPage }) {
       }
     }
     fetchData();
-  }, [page, searchTerm, perPage]);
+  }, [page, searchTerm, perPage, searchPlatform]);
 
   //If the games are loading show loading prompt
   if (loading) {
