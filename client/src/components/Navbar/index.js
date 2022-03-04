@@ -58,16 +58,10 @@ const Navbar = () => {
       <Hamburger direction="right" />
       <nav>
         <ul>
-<<<<<<< HEAD
             <StyledNav to="/"> Home </StyledNav>
             <StyledNav to="/games"> Search </StyledNav>
             <StyledNav to="about">About </StyledNav>
             <StyledNav to="dashboard">Dashboard </StyledNav>
-=======
-          <StyledNav to="/"> Home </StyledNav>
-          <StyledNav to="/games"> Search </StyledNav>
-          <StyledNav to="about">About </StyledNav>
->>>>>>> 34692a70a296599e3502760bbfb231da9e505365
         </ul>
     </nav>
     <Authentication isLoggedIn={loggedIn}/>
