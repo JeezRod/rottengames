@@ -2,6 +2,7 @@ import React from "react";
 import "./userCard.css"
 
 function UserCard({ user }) {
+    const [edit, setEdit] = React.useState(false);
     return (
         <div className="userCard">
             <div className="userPicture">
@@ -14,25 +15,53 @@ function UserCard({ user }) {
                 <p>
                     {user.email}
                 </p>
-                {user.admin
-                    ? <p>
-                        Admin
-                    </p>
-                    :
-                    <p>
-                        User
-                    </p>
-                }
-                <p>
 
-                </p>
+                {user.admin
+                    ?<select name="usertype" id="usert" disabled={!edit}>
+                    <option value="admin" selected>Admin</option>
+                    <option value="user">User</option>
+                </select>
+                    :
+                    <select name="usertype" id="usert" disabled={!edit}>
+                    <option value="admin" selected>Admin</option>
+                    <option value="user" selected>User</option>
+                </select>
+                }
             </div>
-            <div className="buttons">
-                <button>Edit</button>
-                <button>Delete</button>
-            </div>
+
+            {!edit
+                ? <div className="buttons">
+                    <button onClick={handleEdit}>Edit</button>
+                    <form onSubmit={handleDelete}>
+                        <button>Delete</button>
+                    </form>
+                </div>
+                :
+                <div className="buttons">
+                <form onSubmit={handleSubmit} >
+                    <button>Save</button>
+                </form>
+                </div>
+            } 
+
         </div>
     );
+
+    function handleEdit(){
+        setEdit(true)
+        
+    }
+
+    function handleSubmit(event){
+        event.preventDefault();
+        setEdit(false)
+    }
+
+    function handleDelete(event){
+        event.preventDefault();
+        const conf = window.confirm("Are you sure you want to delete the user" + user.name)
+        alert(conf)
+    }
 }
 
 export default UserCard;
