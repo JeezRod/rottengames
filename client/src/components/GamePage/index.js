@@ -41,18 +41,6 @@ function Review() {
     }
     fetchGame();
     async function checkUser() {
-      // fetch('/api/user').then(response => {
-      //   if (response.status === 200) {
-      //     console.log("1")
-      //     let userJson = response.json();
-      //     console.log(userJson)
-      //     setLoggedIn(true);
-      //   }
-      //   else {
-      //     console.log("2")
-      //     return response.json().then(setLoggedIn(false));
-      //   }
-      // })
       let response = await fetch('/api/user');
       if(response.status === 200){
         let userJson = await response.json();

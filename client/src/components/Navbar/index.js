@@ -24,11 +24,9 @@ const Navbar = () => {
     let mounted = true;
     fetch('/api/user').then(response => {
       if (response.status === 200) {
-        console.log("1")
-         return response.json().then(setLoggedIn(true));
+        return response.json().then(setLoggedIn(true));
       }
       else {
-        console.log("2")
         return response.json().then(setLoggedIn(false));
       }
     } )
