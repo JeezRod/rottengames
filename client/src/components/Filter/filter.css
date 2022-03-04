@@ -43,12 +43,13 @@
 }
 
 .platforms-list-item{
-    font-size: 22px;
+    font-size: 21px;
+    margin-top: 20px;
 }
 
 .platforms-list-item input{
-    width: 15px;
-    height: 15px;
+    width: 18px;
+    height: 18px;
 }
 
 /** not used **/
@@ -60,4 +61,8 @@
 /** not used **/
 .make input {
     margin-right: 10px
+}
+
+.custom-checkbox {
+    margin-right:10px;
 }
