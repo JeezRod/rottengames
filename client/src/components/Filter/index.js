@@ -12,27 +12,15 @@ function Filter({ setSearchTerm, searchTerm, setSearchPlatform }) {
   );
 
   //State to hold all the names of the platforms
-  const [allPlatforms, setPlatforms] = React.useState();
+  const [allPlatforms] = React.useState([]);
 
   //Function to handle the submit button
   function HandleSubmit(event) {
     event.preventDefault();
-
-    //New array to hold the names of all the platform chosen
-    let chosenPlatforms = [];
-
-    //Set the setSearchTerm prop to the search value
-    setSearchTerm(event.target.search.value);
-
-    //Set the setSearchPlatform prop to hold the array of all the platform names
-    if (allPlatforms) {
-      allPlatforms.map((platform, index) => platform === true ? chosenPlatforms.push(platforms[index].name) : "");
-    }
-    setSearchPlatform(chosenPlatforms);
   }
 
   //Function to handle the checkbox clicks
-  const handleOnChange = (position) => {
+  const handleOnChange = (position, name) => {
     const updatedCheckedState = checkedState.map((item, index) =>
       index === position ? !item : item
     );
@@ -40,16 +28,14 @@ function Filter({ setSearchTerm, searchTerm, setSearchPlatform }) {
     //Update the checkedState array with the boolean values
     setCheckedState(updatedCheckedState);
 
-    const platformCheck = updatedCheckedState.map(
-      (chosenPlatforms, currentState, index) => {
-        if (currentState === true) {
-          return chosenPlatforms + " " + platforms[index].name;
-        }
-        return chosenPlatforms;
-      }
-    );
-    //Update the allPlatform array with the platform names
-    setPlatforms(platformCheck);
+    if (allPlatforms.includes(name)){
+      allPlatforms.splice(allPlatforms.indexOf(name), 1)
+    }else {
+      allPlatforms.push(name)
+    }
+
+    setSearchPlatform([...allPlatforms]);
+    console.log(allPlatforms)
   }
 
   function handleChange(event) {
@@ -83,7 +69,7 @@ function Filter({ setSearchTerm, searchTerm, setSearchPlatform }) {
                   name={name}
                   value={name}
                   checked={checkedState[index]}
-                  onChange={() => handleOnChange(index)}
+                  onChange={() => handleOnChange(index, name)}
                 />
                 <label htmlFor={`custom-checkbox-${index}`}>{name}</label>
               </div>

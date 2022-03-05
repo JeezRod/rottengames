@@ -29,6 +29,8 @@ function Games() {
         console.log("Count: "+dataJson)
         //Set the returned data
         await setTotalGames(dataJson);
+        console.log(url)
+        console.log(searchPlatform)
       }
       else{
         //Fetching the data
