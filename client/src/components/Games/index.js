@@ -10,10 +10,28 @@ function Games() {
   //State for the total number of games
   const [totalGames, setTotalGames] = React.useState([]);
   //State for the number of games per page
-  const [perPage, setPerPage] = React.useState(30);
+  const [perPage] = React.useState(30);
 
+  //State for the search term
   const [searchTerm, setSearchTerm] = React.useState('');
+  //State for the selected platforms
   const [searchPlatform, setSearchPlatform] = React.useState('');
+
+  //State for loading the local storage
+  const [loadingStorage, setloadingStorage] = React.useState(true);
+
+  React.useEffect(() => {
+    let searchInLocal = window.localStorage.getItem('searchTerm')
+    //Check if the search terms exists before setting it, Don't set it if its null
+    if(searchInLocal){
+      setSearchTerm(window.localStorage.getItem('searchTerm'));
+    }
+    setloadingStorage(false)
+  },[]);
+
+  React.useEffect(() => {
+    window.localStorage.setItem('searchTerm', searchTerm);
+  }, [searchTerm]);
 
   React.useEffect(() => {
     //Async function to fetch count of all games
@@ -29,8 +47,6 @@ function Games() {
         console.log("Count: "+dataJson)
         //Set the returned data
         await setTotalGames(dataJson);
-        console.log(url)
-        console.log(searchPlatform)
       }
       else{
         //Fetching the data
@@ -54,6 +70,16 @@ function Games() {
     setPage(event.selected + 1)
 
   };
+  
+  if(loadingStorage){
+    return (
+      <div className="Games">
+      <div className="MainContainer">
+        <Filter setSearchTerm={setSearchTerm} searchTerm={searchTerm} setSearchPlatform={setSearchPlatform} ></Filter>
+      </div>
+    </div>
+    )
+  }
 
   return (
     <div className="Games">
