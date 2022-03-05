@@ -15,18 +15,6 @@ function Games() {
   const [searchTerm, setSearchTerm] = React.useState('');
   const [searchPlatform, setSearchPlatform] = React.useState('');
 
-  React.useLayoutEffect(() => {
-    let searchInLocal = window.localStorage.getItem('searchTerm')
-    //Check if the search terms exists before setting it, Don't set it if its null
-    if(searchInLocal){
-      setSearchTerm(window.localStorage.getItem('searchTerm'));
-    }
-  }, []);
-
-  React.useEffect(() => {
-    window.localStorage.setItem('searchTerm', searchTerm);
-  }, [searchTerm]);
-
   React.useEffect(() => {
     //Async function to fetch count of all games
     async function fetchData() {
