@@ -27,8 +27,6 @@ function Games() {
     window.localStorage.setItem('searchTerm', searchTerm);
   }, [searchTerm]);
 
-  
-
   React.useEffect(() => {
     //Async function to fetch count of all games
     async function fetchData() {
@@ -40,13 +38,15 @@ function Games() {
         //Fetching the data
         let data = await fetch(url);
         let dataJson = await data.json();
+        console.log("Count: "+dataJson)
         //Set the returned data
         await setTotalGames(dataJson);
       }
       else{
         //Fetching the data
-        let data = await fetch("/api/games?page=" + page + "&name=" + searchTerm + "&size=" + perPage);
+        let data = await fetch("/api/games/count?page=" + page + "&name=" + searchTerm + "&size=" + perPage);
         let dataJson = await data.json();
+        console.log("Count: "+dataJson)
         //Set the returned data
         await setTotalGames(dataJson);
       }
