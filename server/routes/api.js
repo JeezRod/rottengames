@@ -115,7 +115,7 @@ router.get("/users", async(req,res)=>{
   res.json(result);
 })
 
-
+//Route to get all users in the database (/api/users)
 router.get("/users/count", async (req, res) => {
   //Get name from query
   let { name } = req.query;
@@ -136,6 +136,12 @@ router.get("/users/count", async (req, res) => {
   res.json(result);
 });
 
+//Delete an user based on the user ID from the admin dashboard
+router.delete("/users/delete/:userId", async (req, res) => {
+  const user = await User.deleteOne({_id:req.params.userId})
+  res.status(200)
+  console.log("User deleted")
+});
 
 
 // Profile picture
