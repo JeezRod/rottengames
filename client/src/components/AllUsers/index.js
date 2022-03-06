@@ -19,8 +19,6 @@ function AllUsers({page, searchTerm, perPage}) {
     
                 let usersData = await fetch("/api/users?page=" + page + "&name=" + searchTerm + "&size=" + perPage);
                 let usersJson = await usersData.json();
-                console.log(usersJson) // create all users route
-
     
                 await setUsers(usersJson);
     
