@@ -1,19 +1,19 @@
 export const platforms = [
   //Sony platforms
   {
-    name: "Playstation",
+    name: "PlayStation",
   },
   {
-    name: "Playstation 2",
+    name: "PlayStation 2",
   },
   {
-    name: "Playstation 3",
+    name: "PlayStation 3",
   },
   {
-    name: "Playstation 4",
+    name: "PlayStation 4",
   },
   {
-    name: "Playstation 5",
+    name: "PlayStation 5",
   },
   {
     name: "PlayStation Vita",
