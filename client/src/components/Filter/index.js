@@ -14,8 +14,15 @@ function Filter({ setSearchTerm, setSearchPlatform }) {
     new Array(platforms.length).fill(false)
   );
 
+  let platformFromLocal = window.localStorage.getItem('platforms')
   //State to hold all the names of the platforms, initial value same as the local storage
-  const [allPlatforms] = React.useState(window.localStorage.getItem('platforms').split(","));
+  if(!platformFromLocal){
+    platformFromLocal = []
+  } else{
+    platformFromLocal.split(",")
+  }
+  
+  const [allPlatforms] = React.useState(platformFromLocal);
 
   //WHen page loads check the boxes of platforms that are present in the local storage
   React.useEffect(() => {
