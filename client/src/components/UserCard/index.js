@@ -59,8 +59,7 @@ function UserCard({ user }) {
 
     function handleDelete(event){
         event.preventDefault();
-        const conf = window.confirm("Are you sure you want to delete the user" + user.name)
-        alert(conf)
+        const conf = window.confirm("Are you sure you want to delete the user: " + user.name);
     }
 }
 
