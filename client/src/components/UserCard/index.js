@@ -57,9 +57,12 @@ function UserCard({ user }) {
         setEdit(false)
     }
 
-    function handleDelete(event){
-        event.preventDefault();
-        const conf = window.confirm("Are you sure you want to delete the user: " + user.name);
+    async function handleDelete(){
+        const confirmation = window.confirm("Are you sure you want to delete the user: " + user.name);
+        if(confirmation){
+            await fetch("/api/users/delete/"+user._id, { method: 'DELETE' })
+            window.alert("User deleted")
+        }
     }
 }
 
