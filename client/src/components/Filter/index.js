@@ -2,8 +2,8 @@ import React from "react";
 import "./filter.css"
 import { platforms } from "./platforms";
 
-function Filter({ setSearchTerm, searchTerm, setSearchPlatform }) {
-  const [inputValue, setInputValue] = React.useState(searchTerm)
+function Filter({ setSearchTerm, setSearchPlatform }) {
+  const [inputValue, setInputValue] = React.useState(window.localStorage.getItem('searchTerm'))
   const [timer, setTimer] = React.useState(null)
 
   //State to keep track of which platforms have been checked
@@ -12,7 +12,16 @@ function Filter({ setSearchTerm, searchTerm, setSearchPlatform }) {
   );
 
   //State to hold all the names of the platforms
-  const [allPlatforms] = React.useState([]);
+  const [allPlatforms] = React.useState(window.localStorage.getItem('platforms').split(","));
+
+  React.useEffect(() => {
+    console.log(allPlatforms)
+    const updatedCheckedState = platforms.map((item, index) => 
+      allPlatforms.includes(item.name) ? true : false
+    );
+    //Update the checkedState array with the boolean values
+    setCheckedState(updatedCheckedState);
+  }, [allPlatforms]);
 
   //Function to handle the submit button
   function HandleSubmit(event) {

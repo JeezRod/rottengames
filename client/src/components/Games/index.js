@@ -94,7 +94,7 @@ function Games() {
   return (
     <div className="Games">
       <div className="MainContainer">
-        <Filter setSearchTerm={setSearchTerm} searchTerm={searchTerm} setSearchPlatform={setSearchPlatform} ></Filter>
+        <Filter setSearchTerm={setSearchTerm} setSearchPlatform={setSearchPlatform} ></Filter>
         <div className="GridPaginator">
           <GridView page={page} searchTerm={searchTerm} searchPlatform={searchPlatform} perPage={perPage}></GridView>
 
