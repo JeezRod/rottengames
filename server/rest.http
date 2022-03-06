@@ -27,3 +27,5 @@ POST http://localhost:3001/api/games/62193d7e1533a971c15a7bc9?email=rodddddd@ema
 ### Get a profile picture
 GET http://localhost:3001/api/user/pfp?email=jwu12322@gmail.com
 
+### Delete an user
+DELETE http://localhost:3001/api/users/delete/62192e8d31881057a8dba25e
