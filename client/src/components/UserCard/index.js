@@ -7,7 +7,7 @@ function UserCard({ user }) {
     return (
         <div className="userCard">
             <div className="userPicture">
-                <img src={user.picture}></img>
+                <img src={user.picture} alt="profile-pic"></img>
             </div>
             <div className="userInfo">
                 <p>
@@ -18,14 +18,14 @@ function UserCard({ user }) {
                 </p>
 
                 {user.admin
-                    ?<select name="usertype" id="usert" disabled={!edit} onChange={handleUserType}>
-                    <option value={true} selected>Admin</option>
-                    <option value={false}>User</option>
-                </select>
-                    :
-                    <select name="usertype" id="usert" disabled={!edit} onChange={handleUserType}>
+                    ?<select name="usertype" id="usert" defaultValue={true} disabled={!edit} onChange={handleUserType}>
                     <option value={true}>Admin</option>
-                    <option value={false} selected>User</option>
+                    <option value={false}>User</option>
+                    </select>
+                    :
+                    <select name="usertype" id="usert" defaultValue={false} disabled={!edit} onChange={handleUserType}>
+                    <option value={true}>Admin</option>
+                    <option value={false}>User</option>
                 </select>
                 }
             </div>
