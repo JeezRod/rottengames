@@ -3,6 +3,7 @@ import "./userCard.css"
 
 function UserCard({ user }) {
     const [edit, setEdit] = React.useState(false);
+    const [choiceBox, setChoice] = React.useState(user.admin)
     return (
         <div className="userCard">
             <div className="userPicture">
@@ -17,14 +18,14 @@ function UserCard({ user }) {
                 </p>
 
                 {user.admin
-                    ?<select name="usertype" id="usert" disabled={!edit}>
-                    <option value="admin" selected>Admin</option>
-                    <option value="user">User</option>
+                    ?<select name="usertype" id="usert" disabled={!edit} onChange={handleUserType}>
+                    <option value={true} selected>Admin</option>
+                    <option value={false}>User</option>
                 </select>
                     :
-                    <select name="usertype" id="usert" disabled={!edit}>
-                    <option value="admin" selected>Admin</option>
-                    <option value="user" selected>User</option>
+                    <select name="usertype" id="usert" disabled={!edit} onChange={handleUserType}>
+                    <option value={true}>Admin</option>
+                    <option value={false} selected>User</option>
                 </select>
                 }
             </div>
@@ -38,7 +39,7 @@ function UserCard({ user }) {
                 </div>
                 :
                 <div className="buttons">
-                <form onSubmit={handleSubmit} >
+                <form onSubmit={handleSave} >
                     <button>Save</button>
                 </form>
                 </div>
@@ -48,12 +49,22 @@ function UserCard({ user }) {
     );
 
     function handleEdit(){
-        setEdit(true)
-        
+        setEdit(true)     
     }
 
-    function handleSubmit(event){
-        event.preventDefault();
+    function handleUserType(event){
+        setChoice(event.target.value);
+    }
+
+    async function handleSave(event){
+        window.alert("Settings saved")
+        const requestOptions = {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ admin: choiceBox })
+        };
+        await fetch("api/users/update/" + user._id, requestOptions)
+        window.alert(requestOptions);
         setEdit(false)
     }
 
