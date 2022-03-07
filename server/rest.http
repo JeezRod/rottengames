@@ -29,3 +29,6 @@ GET http://localhost:3001/api/user/pfp?email=jwu12322@gmail.com
 
 ### Delete an user
 DELETE http://localhost:3001/api/users/delete/62192e8d31881057a8dba25e
+
+### Update admin permissions
+PUT http://localhost:3001/api/users/update/6224f270f052985a6a7d2820
