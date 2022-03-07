@@ -44,6 +44,7 @@ const Navbar = () => {
             <StyledNav to="/games"> Search </StyledNav>
             <StyledNav to="about">About </StyledNav>
             <StyledNav to="dashboard">Dashboard </StyledNav>
+            <StyledNav to="profile">Profile</StyledNav>
         </ul>
     </nav>
     <Authentication isLoggedIn={loggedIn}/>
