@@ -34,7 +34,7 @@ function App() {
         <Route path="games" element={<Games/>}/>
         <Route path="games/:id" element={<GamePage />}/>
         <Route path="dashboard" element={<Dashboard />}/>
-        <Route path="profile" element={<UserProfile />}/> 
+        <Route path="profile/:id" element={<UserProfile />}/> 
       </Routes>
     </Router>
   );

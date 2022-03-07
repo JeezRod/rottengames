@@ -18,6 +18,7 @@ const StyledNav = styled(NavLink)`
 const Navbar = () => {
 
   const [loggedIn, setLoggedIn] = useState();
+  const [userId, setUserId] = useState("")
   
   // checking if the user is logged in or not to determine if login or logout should be displayed.
   React.useEffect( () => {
@@ -25,7 +26,8 @@ const Navbar = () => {
     fetch('/api/user').then(response => {
       if (response.status === 200) {
         console.log("1")
-         return response.json().then(setLoggedIn(true));
+
+         return response.json().then(user => setUserId("profile/"+user._id)).then(setLoggedIn(true));
       }
       else {
         console.log("2")
@@ -44,7 +46,7 @@ const Navbar = () => {
             <StyledNav to="/games"> Search </StyledNav>
             <StyledNav to="about">About </StyledNav>
             <StyledNav to="dashboard">Dashboard </StyledNav>
-            <StyledNav to="profile">Profile</StyledNav>
+            <StyledNav to={userId}>Profile</StyledNav>
         </ul>
     </nav>
     <Authentication isLoggedIn={loggedIn}/>
