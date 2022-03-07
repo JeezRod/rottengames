@@ -81,10 +81,9 @@ router.get("/user", async (req, res) => {
 })
 
 //Route to get a specific user
-router.get("/userId", async (req, res) => {
+router.get("/user/:userId", async (req, res) => {
   try{
-    let {id} = req.query
-    const user = await User.findOne({_id: id});
+    const user = await User.findOne({_id: req.params.userId});
     res.json(user);
   } catch (e){
     res.status(401)
