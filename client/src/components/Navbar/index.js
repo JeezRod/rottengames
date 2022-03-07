@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import './nav.css'
-import Hamburger from 'hamburger-react'
 import { NavLink } from "react-router-dom";
 import styled from 'styled-components'
 import Authentication from "../Authentication"
+import HamburgerMenu from '../HamburgerMenu';
 
 //Style fo NavLink
 const StyledNav = styled(NavLink)`
@@ -37,15 +37,15 @@ const Navbar = () => {
 
   return (
     <header>
-      <Hamburger direction="right" />
-      <nav>
+      {/* <nav>
         <ul>
             <StyledNav to="/"> Home </StyledNav>
             <StyledNav to="/games"> Search </StyledNav>
             <StyledNav to="about">About </StyledNav>
             <StyledNav to="dashboard">Dashboard </StyledNav>
         </ul>
-    </nav>
+    </nav> */}
+    <HamburgerMenu/>
     <Authentication isLoggedIn={loggedIn}/>
   </header>);
 };
