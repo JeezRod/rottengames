@@ -90,6 +90,16 @@ router.get("/user/:userId", async (req, res) => {
   }
 })
 
+//Route to get a specific user
+router.get("/user/:userEmail/comments", async (req, res) => {
+  try{
+    const user = await Game.find({ "reviews.email": userEmail});
+    res.json(user);
+  } catch (e){
+    res.status(401)
+  }
+})
+
 //This route gets all the user so when administration tries to see
 // them all, they can locate it. This route it is used in the dashboard
 // component

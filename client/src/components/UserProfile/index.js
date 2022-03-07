@@ -7,6 +7,8 @@ const UserProfile = () => {
     const params = useParams();
     //State for the user
     const [user, setUser] = React.useState({});
+    //State to hold all reviews for spefific user
+    const [userReviews, setUserReviews] = React.useState({});
     //State for loading
     const [loading, setLoading] = React.useState(true)
 
@@ -16,7 +18,7 @@ const UserProfile = () => {
             setLoading(true)
             let response = await fetch('/api/user/'+params.id);
             if (response.status === 200) {
-            let userJson = await response.json();
+                let userJson = await response.json();
                 console.log(userJson);
                 setUser(userJson);
             } else {
@@ -24,6 +26,27 @@ const UserProfile = () => {
             }
         }
         fetchUser();
+        async function fetchComments(){
+            let response = await fetch('/api/user/'+user.email+"/comments");
+            if (response.status === 200) {
+            let gamesJson = await response.json();
+            
+            let userReviews = []
+            gamesJson.forEach(game => {
+                game.reviews.forEach(review => {
+                    if (review.email === user.email){
+                        let userReview = {}
+                        userReview[game.name] = review
+                        userReviews.push(userReview);
+                    }
+                })
+            })
+            setUserReviews(userReviews)  
+            } else {
+                console.log("no user");
+            }
+        }
+        fetchComments()
         setLoading(false)
     },[]);
 
@@ -55,6 +78,7 @@ const UserProfile = () => {
 
             <main className='mainProfile'>
                 <h2>All Reviews</h2>
+
             </main>
         </div>
     )
