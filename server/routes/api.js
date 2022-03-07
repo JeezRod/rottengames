@@ -7,6 +7,7 @@ const Game = require("../Models/Game")
 const User = require("../Models/user")
 
 const { OAuth2Client } = require("google-auth-library");
+const { route } = require("express/lib/application");
 const client = new OAuth2Client(process.env.REACT_APP_GOOGLE_CLIENT_ID);
 
 //Sample get route (/api/)
@@ -136,14 +137,6 @@ router.get("/users/count", async (req, res) => {
   res.json(result);
 });
 
-//Delete an user based on the user ID from the admin dashboard
-router.delete("/users/delete/:userId", async (req, res) => {
-  const user = await User.deleteOne({_id:req.params.userId})
-  res.status(200)
-  console.log("User deleted")
-});
-
-
 // Profile picture
 router.get("/user/pfp", async (req, res) => {
   try {
@@ -269,7 +262,19 @@ router.post("/games/:gameId", async (req, res) => {
 });
 
 //PUT Routes
+// This route updates the users admin permission
+router.put("/users/update/:userId", async (req, res)=>{
+  await User.updateOne(
+    {_id: req.params.userId},
+     {$set: {"admin": req.body.admin}})
+  res.end("permissions updated")
+})
 
 //DELETE Routes
 
+//Delete an user based on the user ID from the admin dashboard
+router.delete("/users/delete/:userId", async (req, res) => {
+  await User.deleteOne({_id: req.params.userId})
+  res.end("user deleted")
+});
 module.exports = router;
