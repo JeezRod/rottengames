@@ -80,6 +80,17 @@ router.get("/user", async (req, res) => {
   }
 })
 
+//Route to get a specific user
+router.get("/userId", async (req, res) => {
+  try{
+    let {id} = req.query
+    const user = await User.findOne({_id: id});
+    res.json(user);
+  } catch (e){
+    res.status(401)
+  }
+})
+
 //This route gets all the user so when administration tries to see
 // them all, they can locate it. This route it is used in the dashboard
 // component
