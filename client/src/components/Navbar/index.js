@@ -40,9 +40,10 @@ const Navbar = () => {
       <Hamburger direction="right" />
       <nav>
         <ul>
-          <StyledNav to="/"> Home </StyledNav>
-          <StyledNav to="/games"> Search </StyledNav>
-          <StyledNav to="about">About </StyledNav>
+            <StyledNav to="/"> Home </StyledNav>
+            <StyledNav to="/games"> Search </StyledNav>
+            <StyledNav to="about">About </StyledNav>
+            <StyledNav to="dashboard">Dashboard </StyledNav>
         </ul>
     </nav>
     <Authentication isLoggedIn={loggedIn}/>

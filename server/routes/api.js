@@ -7,6 +7,7 @@ const Game = require("../Models/Game")
 const User = require("../Models/user")
 
 const { OAuth2Client } = require("google-auth-library");
+const { route } = require("express/lib/application");
 const client = new OAuth2Client(process.env.REACT_APP_GOOGLE_CLIENT_ID);
 
 //Sample get route (/api/)
@@ -79,6 +80,65 @@ router.get("/user", async (req, res) => {
   }
 })
 
+//This route gets all the user so when administration tries to see
+// them all, they can locate it. This route it is used in the dashboard
+// component
+
+router.get("/users", async(req,res)=>{
+  let { page, size, name } = req.query;
+
+  //Set default value for page
+  if (!page) {
+    page = 1;
+  }
+  //Set default value for games per page
+  if (!size) {
+    size = 12;
+  }
+  //Set default value for name
+  if (!name) {
+    name = "";
+  }
+
+  //Computes the number to skip (page number)
+  const limit = parseInt(size);
+  const skip = (page - 1) * size;
+
+  //Get all games that match the filter
+  const result = await User.find({
+    name: {
+      "$regex": name,
+      "$options": "i"
+    }
+  })
+    .limit(limit)
+    .skip(skip);
+  
+  res.json(result);
+})
+
+//Route to get all users in the database (/api/users)
+router.get("/users/count", async (req, res) => {
+  //Get name from query
+  let { name } = req.query;
+
+  //Set default value for name
+  if (!name) {
+    name = "";
+  }
+
+  //Gets the count of a filtered name
+  const result = await User.find({
+    name: {
+      "$regex": name,
+      "$options": "i"
+    }
+  }).count();
+
+  res.json(result);
+});
+
+// Profile picture
 router.get("/user/pfp", async (req, res) => {
   try {
     let { email } = req.query;
@@ -242,7 +302,19 @@ router.post("/games/:gameId", async (req, res) => {
 });
 
 //PUT Routes
+// This route updates the users admin permission
+router.put("/users/update/:userId", async (req, res)=>{
+  await User.updateOne(
+    {_id: req.params.userId},
+     {$set: {"admin": req.body.admin}})
+  res.end("permissions updated")
+})
 
 //DELETE Routes
 
+//Delete an user based on the user ID from the admin dashboard
+router.delete("/users/delete/:userId", async (req, res) => {
+  await User.deleteOne({_id: req.params.userId})
+  res.end("user deleted")
+});
 module.exports = router;
