@@ -37,4 +37,4 @@ PUT http://localhost:3001/api/users/update/6224f270f052985a6a7d2820
 GET http://localhost:3001/api/user/621ac4e04390cb547c00fe7f
 
 ### Get all comments from specific user
-GET http://localhost:3001/api/user/621ac4e04390cb547c00fe7f/comments
+GET http://localhost:3001/api/user/le.dt.ly@gmail.com/comments

@@ -93,7 +93,7 @@ router.get("/user/:userId", async (req, res) => {
 //Route to get a specific user
 router.get("/user/:userEmail/comments", async (req, res) => {
   try{
-    const user = await Game.find({ "reviews.email": userEmail});
+    const user = await Game.find({ "reviews.email": req.params.userEmail});
     res.json(user);
   } catch (e){
     res.status(401)
