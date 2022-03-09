@@ -8,7 +8,10 @@ export default function About() {
   return (
     <div className="About">
       <h1>About page</h1>
-      <h2>{user}</h2>
+      <h2>{user.email}</h2>
+      <h2>{user.name}</h2>
+      <h2>{user.admin}</h2>
+      <h2>{user.email}</h2>
     </div>
 
   );

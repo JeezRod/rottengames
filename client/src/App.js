@@ -11,26 +11,6 @@ import { UserProvider } from './UserContext';
 
 function App() {
 
-  //const [data, setData] = React.useState(null);
-  //const [user, setUser] = React.useState(null);
-
-  // React.useEffect(() => {
-  //   let mounted = true;
-  //   async function getUser() {
-  //     let response = await fetch('/api/user');
-  //     if(response.status === 200){
-  //       let userJson = await response.json();
-  //       console.log("user: "+JSON.stringify(userJson))
-  //       setUser(JSON.stringify(userJson));
-  //       console.log("user1: "+ user)
-  //       //console.log(userJson.admin)
-  //     }
-  //   }
-  //   getUser();
-  //   console.log("user2: "+ user)
-  //   return () => mounted = false;
-  // }, [user]);
-
 // useEffect( () => {
 //   let mounted = true;
 //   fetch('/api/user').then(response => {

@@ -12,14 +12,21 @@ export function useUserUpdateContext(){
 }
 
 export function UserProvider({children}){
-    const [user, setUser] = React.useState(null);
+    const [user, setUser] = React.useState({});
 
     React.useEffect( () => {
         let mounted = true;
         fetch('/api/user').then(response => {
             if (response.status === 200) {
                 console.log("response 200")
-                return response.json().then(data => setUser(data.email));
+                return response.json().then(data => setUser(
+                    {
+                        email: data.email, 
+                        admin: data.admin, 
+                        picture: data.picture, 
+                        name: data.name
+                    }
+                    ));
             }
             else {
             console.log("response 400")
@@ -28,7 +35,7 @@ export function UserProvider({children}){
         })
         console.log("user: "+ user)
         return () => mounted = false;
-    }, [user]);
+    }, [user.email]);
 
     function logoutUser(){
      console.log("logout user context")   
