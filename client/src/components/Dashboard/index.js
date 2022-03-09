@@ -1,5 +1,5 @@
 import React from "react";
-import "./Dashboard.css"
+//import "./Dashboard.css"
 import ReactPaginate from 'react-paginate';
 import Users from "../AllUsers";
 
@@ -12,6 +12,9 @@ function Dashboard() {
   const [perPage, setPerPage] = React.useState(12);
 
   const [searchTerm, setSearchTerm] = React.useState('');
+
+  //TailwindCSS for the buttons
+  const buttonStyle = "m-1.5 p-10 rounded-none w-full bg-white text-black shadow-xl h-60 mt-10px transition ease-in-out duration-300 hover:shadow-2xl";
 
   React.useEffect(() => {
     //Async function to fetch count of all games
@@ -35,13 +38,13 @@ function Dashboard() {
     };
 
   return (
-      <main className="dash">
-        <div className="SidePanel">
-            <button>Users</button>
-            <button>Add Game</button>
-            <button>Reviews</button>
+      <main className="dash flex h-auto items-start">
+        <div className="flex items-center h-auto w-1/5 flex-col">
+            <button className={buttonStyle}>Users</button>
+            <button className={buttonStyle}>Add Game</button>
+            <button className={buttonStyle}>Reviews</button>
         </div>
-        <div className="MainPanel">
+        <div className="flex flex-col justify-center items-center h-auto w-10/12">
         <div>
           <form onSubmit={HandleSubmit} className="searchContainer">
             <input name="search" className="searchBar" type="text" placeholder="Search"></input>

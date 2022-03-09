@@ -95,7 +95,7 @@ function Games() {
     <div className="Games">
       <div className="MainContainer">
         <Filter setSearchTerm={setSearchTerm} setSearchPlatform={setSearchPlatform} ></Filter>
-        <div className="GridPaginator">
+        <div className="GridPaginator w-fit">
           <GridView page={page} searchTerm={searchTerm} searchPlatform={searchPlatform} perPage={perPage}></GridView>
 
           <ReactPaginate

@@ -34,6 +34,7 @@
 .platformTitle{
     margin-top: 10%;
     margin-left: 10%;
+    font-size:33px;
 }
 
 .platforms-list{
@@ -49,17 +50,6 @@
 .platforms-list-item input{
     width: 18px;
     height: 18px;
-}
-
-/** not used **/
-.make {
-    margin-top: 15%;
-    line-height: 25px;
-}
-
-/** not used **/
-.make input {
-    margin-right: 10px
 }
 
 .custom-checkbox {
