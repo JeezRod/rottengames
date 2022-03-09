@@ -12,9 +12,7 @@ function Logout() {
     const res = await fetch("/api/v1/auth/logout", {
      method: "DELETE",
      
-  },
-  reload())
-  }
+  },reload())}
   function reload(){
     window.location.reload(false);
   }
