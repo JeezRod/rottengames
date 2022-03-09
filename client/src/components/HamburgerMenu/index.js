@@ -24,9 +24,13 @@ const HamburgerMenu = (props) =>{
             <StyledNav to="/games"> Search </StyledNav>
             <StyledNav to="about">About </StyledNav>
             {props.isLoggedIn
-            ?<StyledNav to="dashboard">Dashboard </StyledNav>
+            ?<>
+            <StyledNav to="dashboard">Dashboard </StyledNav>
+            <StyledNav to={props.userId}>Profile</StyledNav>
+            </>
             :
             null}
+            
         </Menu>
     )
 }

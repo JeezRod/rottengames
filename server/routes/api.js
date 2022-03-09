@@ -163,7 +163,8 @@ router.get("/user/profile/picture", async (req, res) => {
   try {
     let { email } = req.query;
     
-    const user = await User.find({ email: email }).findOne();
+    const user = await User.findOne({ email: email });
+    console.log(user.picture)
     res.json(user.picture);
     res.status(200)
   }

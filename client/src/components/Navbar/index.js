@@ -46,7 +46,7 @@ const Navbar = () => {
             <StyledNav to="about">About </StyledNav>
         </ul>
     </nav> */}
-    <HamburgerMenu isLoggedIn={loggedIn}/>
+    <HamburgerMenu isLoggedIn={loggedIn} userId={userId}/>
     <nav>
         <ul>
             <StyledNav to="/"> Home </StyledNav>
