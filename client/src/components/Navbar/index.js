@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 import styled from 'styled-components'
 import Authentication from "../Authentication"
 import HamburgerMenu from '../HamburgerMenu';
+import {useUser, useUserUpdateContext} from "../../UserContext"
 
 //Style fo NavLink
 const StyledNav = styled(NavLink)`
@@ -17,21 +18,21 @@ const StyledNav = styled(NavLink)`
 
 const Navbar = () => {
 
-  const [loggedIn, setLoggedIn] = useState();
+  const user = useUser();
   
   // checking if the user is logged in or not to determine if login or logout should be displayed.
-  React.useEffect( () => {
-    let mounted = true;
-    fetch('/api/user').then(response => {
-      if (response.status === 200) {
-        return response.json().then(setLoggedIn(true));
-      }
-      else {
-        return response.json().then(setLoggedIn(false));
-      }
-    } )
-  //return () => mounted = false;
-}, [] );
+//   React.useEffect( () => {
+//     let mounted = true;
+//     fetch('/api/user').then(response => {
+//       if (response.status === 200) {
+//         return response.json().then(setLoggedIn(true));
+//       }
+//       else {
+//         return response.json().then(setLoggedIn(false));
+//       }
+//     } )
+//   //return () => mounted = false;
+// }, [] );
 
   return (
     <header>
@@ -42,7 +43,7 @@ const Navbar = () => {
             <StyledNav to="about">About </StyledNav>
         </ul>
     </nav> */}
-    <HamburgerMenu isLoggedIn={loggedIn}/>
+    <HamburgerMenu/>
     <nav>
         <ul>
             <StyledNav to="/"> Home </StyledNav>
@@ -50,7 +51,7 @@ const Navbar = () => {
             <StyledNav to="about">About </StyledNav>
         </ul>
     </nav>
-    <Authentication isLoggedIn={loggedIn}/>
+    <Authentication/>
   </header>);
 };
 

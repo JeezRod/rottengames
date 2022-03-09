@@ -1,14 +1,15 @@
 import React from "react";
 import Login from "../Login";
 import Logout from "../Logout";
+import {useUser, useUserUpdateContext} from "../../UserContext"
 
 function Authentication(props) {
   
-  const isLoggedIn = props.isLoggedIn;
-  if (!isLoggedIn) {
+  const user = useUser();
+  if (!user.email) {
     return <Login/>;
   }
-  else if(isLoggedIn){
+  else if(user.email){
     return <Logout/>;
   }
   else{
