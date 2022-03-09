@@ -27,9 +27,13 @@ const HamburgerMenu = (props) =>{
             <StyledNav to="/games"> Search </StyledNav>
             <StyledNav to="about">About </StyledNav>
             {user.email
-            ?<StyledNav to="dashboard">Dashboard </StyledNav>
+            ?<>
+              <StyledNav to="dashboard">Dashboard </StyledNav>
+              <StyledNav to={"profile/"+user.id}>Profile</StyledNav>
+            </>
             :
             null}
+            
         </Menu>
     )
 }

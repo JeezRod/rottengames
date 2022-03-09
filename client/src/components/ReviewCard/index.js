@@ -11,7 +11,7 @@ const ReviewCard = ({ review, isAdmin, loggedIn }) => {
   //Fetch the profile picture for the specific email
   React.useEffect(() => {
     async function fetchData() {
-      let data = await fetch("/api/user/pfp?email=" + review.email);
+      let data = await fetch("/api/user/profile/picture?email=" + review.email);
       let dataJson = await data.json();
       setProfilePicture(dataJson)
     }
@@ -36,7 +36,7 @@ const ReviewCard = ({ review, isAdmin, loggedIn }) => {
           {user.email &&
             <button className="UserButton">Comment</button>
           }
-          {user.admin &&
+          {isAdmin &&
           <button className="AdminButton">Delete</button>
           }
         </div>

@@ -74,6 +74,26 @@ router.get("/user", async (req, res) => {
   }
 })
 
+//Route to get a specific user
+router.get("/user/:userId", async (req, res) => {
+  try{
+    const user = await User.findOne({_id: req.params.userId});
+    res.json(user);
+  } catch (e){
+    res.status(401)
+  }
+})
+
+//Route to get a specific user
+router.get("/user/:userEmail/comments", async (req, res) => {
+  try{
+    const user = await Game.find({ "reviews.email": req.params.userEmail});
+    res.json(user);
+  } catch (e){
+    res.status(401)
+  }
+})
+
 //This route gets all the user so when administration tries to see
 // them all, they can locate it. This route it is used in the dashboard
 // component
@@ -133,17 +153,17 @@ router.get("/users/count", async (req, res) => {
 });
 
 // Profile picture
-router.get("/user/pfp", async (req, res) => {
+router.get("/user/profile/picture", async (req, res) => {
   try {
     let { email } = req.query;
-    if (email === "") {
-      res.status(401);
-    }
-    const user = await User.find({ email: email }).findOne();
+    
+    const user = await User.findOne({ email: email });
+    console.log(user.picture)
     res.json(user.picture);
+    res.status(200)
   }
   catch (e) {
-    console.log("no user");
+    console.log(e)
   }
 })
 

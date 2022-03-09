@@ -24,7 +24,8 @@ export function UserProvider({children}){
                         email: data.email, 
                         admin: data.admin, 
                         picture: data.picture, 
-                        name: data.name
+                        name: data.name,
+                        id: data._id
                     }
                     ));
             }

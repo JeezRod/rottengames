@@ -8,6 +8,7 @@ import Home from "./components/Home";
 import GamePage from "./components/GamePage";
 import { UserProvider } from './UserContext';
 import Dashboard from "./components/Dashboard";
+import UserProfile from "./components/UserProfile";
 
 
 function App() {
@@ -25,6 +26,8 @@ function App() {
           <Route path="about" element={<About/>}/>
           <Route path="games" element={<Games/>}/>
           <Route path="games/:id" element={<GamePage />}/>
+          <Route path="dashboard" element={<Dashboard />}/>
+          <Route path="profile/:id" element={<UserProfile />}/>
         </Routes>
       </Router>
     </UserProvider>

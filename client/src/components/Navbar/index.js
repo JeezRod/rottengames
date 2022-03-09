@@ -36,13 +36,6 @@ const Navbar = () => {
 
   return (
     <header>
-      {/* <nav>
-        <ul>
-            <StyledNav to="/"> Home </StyledNav>
-            <StyledNav to="/games"> Search </StyledNav>
-            <StyledNav to="about">About </StyledNav>
-        </ul>
-    </nav> */}
     <HamburgerMenu/>
     <nav>
         <ul>
