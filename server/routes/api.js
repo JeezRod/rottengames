@@ -159,17 +159,16 @@ router.get("/users/count", async (req, res) => {
 });
 
 // Profile picture
-router.get("/user/pfp", async (req, res) => {
+router.get("/user/profile/picture", async (req, res) => {
   try {
     let { email } = req.query;
-    if (email === "") {
-      res.status(401);
-    }
+    
     const user = await User.find({ email: email }).findOne();
     res.json(user.picture);
+    res.status(200)
   }
   catch (e) {
-    console.log("no user");
+    console.log(e)
   }
 })
 

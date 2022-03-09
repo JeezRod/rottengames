@@ -91,7 +91,7 @@ const UserProfile = () => {
                 <h2>All Reviews</h2>
                 {Object.keys(userReviews).map( (key) => {
                     return(
-                        <div classnname="reviewRow" key={key}>
+                        <div className="reviewRow" key={key}>
                             <h2>{key}</h2>
                             <ReviewCard review={userReviews[key]} isAdmin={false} loggedIn={false}></ReviewCard>
                         </div>
