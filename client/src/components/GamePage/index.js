@@ -6,6 +6,7 @@ import { Link } from "react-router-dom"
 import { useParams } from "react-router-dom";
 import ReactLoading from "react-loading";
 import Alert from '@mui/material/Alert';
+import {useUser, useUserUpdateContext} from "../../UserContext"
 
 
 function Review() {
@@ -27,6 +28,8 @@ function Review() {
   //State to check if the user is logged in or not
   const [isAdmin, setIsAdmin] = React.useState(false);
 
+  const user = useUser();
+
   //Initially Load the game
   React.useEffect(() => {
     //Async function to fetch all the games
@@ -40,34 +43,6 @@ function Review() {
       await setLoading(false)
     }
     fetchGame();
-    async function checkUser() {
-      // fetch('/api/user').then(response => {
-      //   if (response.status === 200) {
-      //     console.log("1")
-      //     let userJson = response.json();
-      //     console.log(userJson)
-      //     setLoggedIn(true);
-      //   }
-      //   else {
-      //     console.log("2")
-      //     return response.json().then(setLoggedIn(false));
-      //   }
-      // })
-      let response = await fetch('/api/user');
-      if (response.status === 200) {
-        let userJson = await response.json();
-        setLoggedIn(true)
-        //console.log(userJson.admin)
-        if (userJson.admin) {
-          setIsAdmin(true);
-        }
-      }
-      else {
-        setLoggedIn(false);
-      }
-    }
-    checkUser();
-    //Set the force render state back to false
     setNewComment(false)
   }, [params.id, newComment]);
 
@@ -93,7 +68,7 @@ function Review() {
 
   //Display the buttons to add a review when input is focused
   const handleFocus = (event) => {
-    if (loggedIn) {
+    if(user.email){
       setNewReviewBtn(true)
     }
 
@@ -148,8 +123,8 @@ function Review() {
           <h1>{data.name}</h1>
           <StarRating review={{ ratingStars: rating, email: "1234" }} />
           <Link to="">
-            {isAdmin === true &&
-              <button className="AdminButton">Edit page</button>
+            {user.admin && 
+            <button className="AdminButton">Edit page</button>
             }
 
           </Link>
@@ -168,13 +143,13 @@ function Review() {
 
       <div className="Review">
         <h1>Reviews</h1>
-
-        {loggedIn === false &&
+        
+        {!user.email  &&
           <Alert severity="error">You have to login to add a comment!</Alert>
         }
         <form className="addReview" onSubmit={HandleSubmit}>
-          {loggedIn === true &&
-            <input required name="reviewText" type="text" placeholder="Add a review" onFocus={handleFocus}></input>
+          {user.email &&
+          <input required name="reviewText" type="text" placeholder="Add a review" onFocus={handleFocus}></input>
           }
           {newReviewBtn === true &&
             <><StarRating review={{ ratingStars: 0, email: "1235" }} isEditable={true} setRatingStars={setRatingStars} ratingStars={ratingStars} />
@@ -185,7 +160,7 @@ function Review() {
         {data.reviews.length > 0
           ? data.reviews.map(review => {
             return (
-              <ReviewCard key={review.email} review={review} isAdmin={isAdmin} loggedIn={loggedIn} />
+              <ReviewCard key={review.email} review={review} />
             )
           })
           : <p>No reviews</p>

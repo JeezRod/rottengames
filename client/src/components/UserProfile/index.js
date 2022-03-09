@@ -4,13 +4,16 @@ import ReviewCard from "../ReviewCard";
 import { useParams } from "react-router-dom";
 import ReactLoading from "react-loading";
 import { Link } from "react-router-dom"
+import {useUser, useUserUpdateContext} from "../../UserContext"
 
 const UserProfile = () => {
     const params = useParams();
     //State for the user
     const [user, setUser] = React.useState({});
-    //State for currently logged in user
-    const [currentUser, setCurrentUser] = React.useState({});
+    
+    //State for the user
+    const currentUser = useUser();
+
     //State for if currentUser is the owner of the profile page
     const [isSameUser, setIsSameUser] = React.useState(false);
 
@@ -28,24 +31,10 @@ const UserProfile = () => {
                 let userJson = await response.json();
                 console.log(userJson);
                 await setUser(userJson);
-            } else {
-                console.log("no user");
-            }
-        }
-        fetchUser();
-        setLoading(false)
-    },[params.id, user.email]);
-
-    //Loading the current logged in user from the url params
-    React.useEffect( () => {
-        async function fetchUser(){
-            setLoading(true)
-            let response = await fetch('/api/user');
-            if (response.status === 200) {
-                let userJson = await response.json();
-                await setCurrentUser(userJson);
-
-                if (userJson._id === user._id){
+                console.log(currentUser.id)
+                console.log(userJson._id)
+                console.log(userJson._id === currentUser.id);
+                if(userJson._id === currentUser.id){
                     setIsSameUser(true);
                 }
             } else {
@@ -53,9 +42,8 @@ const UserProfile = () => {
             }
         }
         fetchUser();
-        console.log(Object.keys(currentUser).length !== 0)
         setLoading(false)
-    },[user.email]);
+    },[params.id, user.email, currentUser.id]);
 
     React.useEffect(() => {
         async function fetchComments(){

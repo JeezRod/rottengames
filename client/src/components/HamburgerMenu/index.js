@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import { slide as Menu } from 'react-burger-menu'
 import "./HamburgerMenu.css";
 import styled from 'styled-components'
+import {useUser, useUserUpdateContext} from "../../UserContext"
 
 
 
@@ -18,15 +19,17 @@ const StyledNav = styled(NavLink)`
 
 
 const HamburgerMenu = (props) =>{
+
+    const user = useUser();
     return(
         <Menu>
             <StyledNav to="/"> Home </StyledNav>
             <StyledNav to="/games"> Search </StyledNav>
             <StyledNav to="about">About </StyledNav>
-            {props.isLoggedIn
+            {user.email
             ?<>
-            <StyledNav to="dashboard">Dashboard </StyledNav>
-            <StyledNav to={props.userId}>Profile</StyledNav>
+              <StyledNav to="dashboard">Dashboard </StyledNav>
+              <StyledNav to={"profile/"+user.id}>Profile</StyledNav>
             </>
             :
             null}

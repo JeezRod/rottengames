@@ -1,10 +1,12 @@
 import React from "react";
 import "./ReviewCard.css";
 import StarRating from "../StarRating";
+import {useUser, useUserUpdateContext} from "../../UserContext"
 
 const ReviewCard = ({ review, isAdmin, loggedIn }) => {
 
   const [profilePicture, setProfilePicture] = React.useState("");
+  const user = useUser();
 
   //Fetch the profile picture for the specific email
   React.useEffect(() => {
@@ -31,10 +33,10 @@ const ReviewCard = ({ review, isAdmin, loggedIn }) => {
 
         <div className="buttonStartContainer">
           <StarRating review={review} />
-          {loggedIn === true &&
+          {user.email &&
             <button className="UserButton">Comment</button>
           }
-          {isAdmin === true &&
+          {user.admin &&
           <button className="AdminButton">Delete</button>
           }
         </div>
