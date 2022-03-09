@@ -5,38 +5,35 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import About from "./components/About";
 import Games from "./components/Games";
 import Home from "./components/Home";
-import Register from "./components/Register";
 import GamePage from "./components/GamePage";
+import { UserProvider } from './UserContext';
 import Dashboard from "./components/Dashboard";
 import AddGame from "./components/AddGame";
+import UserProfile from "./components/UserProfile";
 
 
 function App() {
 
-  const [data, setData] = React.useState(null);
-
-  React.useEffect(() => {
-    fetch("/api")
-      .then((res) => res.json())
-      .then((data) => setData(data.message));
-  }, []);
-
   return (
-    <Router>
-      <div className="NavContainer">
-        <Navbar ></Navbar>
-        <br></br>
-      </div>
-      <Routes>
-        <Route path="/" element={<App />} />
-        <Route index element={<Home />} />
-        <Route path="about" element={<About/>}/>
-        <Route path="games" element={<Games/>}/>
-        <Route path="games/:id" element={<GamePage />}/>
-        <Route path="dashboard" element={<Dashboard />}/>
-        <Route path="dashboard/addGame" element={<AddGame />} />
-      </Routes>
-    </Router>
+    <UserProvider>
+      <Router>
+        <div className="NavContainer">
+          <Navbar ></Navbar>
+          <br></br>
+        </div>
+        <Routes>
+          <Route path="/" element={<App />} />
+          <Route index element={<Home />} />
+          <Route path="about" element={<About/>}/>
+          <Route path="games" element={<Games/>}/>
+          <Route path="games/:id" element={<GamePage />}/>
+          <Route path="dashboard" element={<Dashboard />}/>
+          <Route path="profile/:id" element={<UserProfile />}/>
+          <Route path="dashboard/addGame" element={<AddGame />} />
+        </Routes>
+      </Router>
+    </UserProvider>
+    
   );
 }
 
