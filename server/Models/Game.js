@@ -6,7 +6,7 @@ const gameSchema = new Schema({
     description: String,
     imageurl: String,
     name: String,
-    platform: String,
+    platform: Array,
     releasedate: String,
     reviews: {
         name: String,

@@ -71,7 +71,7 @@ function Review() {
     if(user.email){
       setNewReviewBtn(true)
     }
-    
+
   }
 
   //Loading animation before the game loads
@@ -126,7 +126,7 @@ function Review() {
             {user.admin && 
             <button className="AdminButton">Edit page</button>
             }
-            
+
           </Link>
         </div>
       </div>
@@ -134,6 +134,11 @@ function Review() {
       <div className="Description">
         <h1>Description</h1>
         <p>{data.description}</p>
+      </div>
+
+      <div className="Platform">
+        <h1>Available on</h1>
+        {data.platform}
       </div>
 
       <div className="Review">
@@ -148,7 +153,7 @@ function Review() {
           }
           {newReviewBtn === true &&
             <><StarRating review={{ ratingStars: 0, email: "1235" }} isEditable={true} setRatingStars={setRatingStars} ratingStars={ratingStars} />
-            <button>Add Review</button></>
+              <button>Add Review</button></>
           }
         </form>
 

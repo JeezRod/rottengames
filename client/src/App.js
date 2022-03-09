@@ -7,6 +7,7 @@ import Games from "./components/Games";
 import Home from "./components/Home";
 import GamePage from "./components/GamePage";
 import { UserProvider } from './UserContext';
+import Dashboard from "./components/Dashboard";
 
 
 function App() {
