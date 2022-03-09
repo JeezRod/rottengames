@@ -9,6 +9,11 @@ const UserProfile = () => {
     const params = useParams();
     //State for the user
     const [user, setUser] = React.useState({});
+    //State for currently logged in user
+    const [currentUser, setCurrentUser] = React.useState({});
+    //State for if currentUser is the owner of the profile page
+    const [isSameUser, setIsSameUser] = React.useState(false);
+
     //State to hold all reviews for spefific user
     const [userReviews, setUserReviews] = React.useState({});
     //State for loading
@@ -30,6 +35,27 @@ const UserProfile = () => {
         fetchUser();
         setLoading(false)
     },[params.id, user.email]);
+
+    //Loading the current logged in user from the url params
+    React.useEffect( () => {
+        async function fetchUser(){
+            setLoading(true)
+            let response = await fetch('/api/user');
+            if (response.status === 200) {
+                let userJson = await response.json();
+                await setCurrentUser(userJson);
+
+                if (userJson._id === user._id){
+                    setIsSameUser(true);
+                }
+            } else {
+                console.log("no user");
+            }
+        }
+        fetchUser();
+        console.log(Object.keys(currentUser).length !== 0)
+        setLoading(false)
+    },[user.email]);
 
     React.useEffect(() => {
         async function fetchComments(){
@@ -70,12 +96,14 @@ const UserProfile = () => {
         </div>
         )
     }
-    console.log(userReviews)
     return (
         <div className='profile'>
             
             <aside className='user'>
-                <h2>Your Profile</h2>
+                {isSameUser 
+                ? <h2>Your Profile</h2>
+                : <h2>{user.name}' Profile</h2>}
+                
                 <img className='profilePicture' src={user.picture} alt="profile"></img>
                 
                 <div className='userSection'>
@@ -95,7 +123,7 @@ const UserProfile = () => {
                         <div className="reviewRow" key={key}>
                             <h2>{key}</h2>
                             <Link className="link"to={"/games/"+userReviews[key].id}>
-                                <ReviewCard review={userReviews[key].review} isAdmin={user.admin} loggedIn={false}></ReviewCard>
+                                <ReviewCard review={userReviews[key].review} isAdmin={currentUser.admin || isSameUser} loggedIn={Object.keys(currentUser).length !== 0}/>
                             </Link>
                         </div>
                     )
