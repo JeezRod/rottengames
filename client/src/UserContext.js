@@ -33,7 +33,7 @@ export function UserProvider({children}){
             return response.json().then(setUser(null));
             }
         })
-        console.log("user: "+ user)
+        console.log("user: "+ user.admin)
         return () => mounted = false;
     }, [user.email]);
 

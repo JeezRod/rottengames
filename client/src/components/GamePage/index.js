@@ -6,6 +6,7 @@ import { Link } from "react-router-dom"
 import { useParams } from "react-router-dom";
 import ReactLoading from "react-loading";
 import Alert from '@mui/material/Alert';
+import {useUser, useUserUpdateContext} from "../../UserContext"
 
 
 function Review() {
@@ -26,6 +27,8 @@ function Review() {
   const [loggedIn, setLoggedIn] = React.useState(false);
   //State to check if the user is logged in or not
   const [isAdmin, setIsAdmin] = React.useState(false);
+
+  const user = useUser();
 
   //Initially Load the game
   React.useEffect(() => {
@@ -152,11 +155,11 @@ function Review() {
       <div className="Review">
         <h1>Reviews</h1>
         
-        {loggedIn === false &&
+        {typeof(user.email) == undefined  &&
           <Alert severity="error">You have to login to add a comment!</Alert>
         }
         <form className="addReview" onSubmit={HandleSubmit}>
-          {loggedIn === true &&
+          {typeof(user.email) != undefined &&
           <input required name="reviewText" type="text" placeholder="Add a review" onFocus={handleFocus}></input>
           }
           {newReviewBtn === true &&
