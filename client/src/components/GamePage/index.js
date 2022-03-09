@@ -10,6 +10,7 @@ import Alert from '@mui/material/Alert';
 import {useUser, useUserUpdateContext} from "../../UserContext"
 
 
+
 function Review() {
   const navigate = useNavigate();
   const params = useParams();
@@ -115,15 +116,15 @@ function Review() {
     }
   }
 
-  async function handleDelete(){
-    // const confirmation = window.confirm("Are you sure you want to delete this game?");
-    // if(confirmation){
+  async function handleDelete(e){
+    e.preventDefault();
+    const confirmation = window.confirm("Are you sure you want to delete this game?");
+    if(confirmation){
         await fetch("/api/games/delete/"+params.id, { method: 'DELETE' })
         window.alert("Game deleted");
-
-    // }
-    navigate("/games")
-}
+        navigate("/games")
+    }
+  }
 
   //Link each button to their specific pages
   return (
