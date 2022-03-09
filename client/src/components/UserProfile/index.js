@@ -3,6 +3,7 @@ import "./userProfile.css"
 import ReviewCard from "../ReviewCard";
 import { useParams } from "react-router-dom";
 import ReactLoading from "react-loading";
+import { Link } from "react-router-dom"
 
 const UserProfile = () => {
     const params = useParams();
@@ -44,7 +45,7 @@ const UserProfile = () => {
                     //If the review is written by the user (same email)
                     if (review.email === user.email){
                         let userReview = {}
-                        userReviewsArray[game.name] = review
+                        userReviewsArray[game.name] = {id: game._id, review: review}
                         //Check if the userReview is empty before pushing to array 
                         if(Object.keys(userReview).length !== 0)
                             userReviewsArray.push(userReview);
@@ -93,7 +94,9 @@ const UserProfile = () => {
                     return(
                         <div className="reviewRow" key={key}>
                             <h2>{key}</h2>
-                            <ReviewCard review={userReviews[key]} isAdmin={false} loggedIn={false}></ReviewCard>
+                            <Link className="link"to={"/games/"+userReviews[key].id}>
+                                <ReviewCard review={userReviews[key].review} isAdmin={user.admin} loggedIn={false}></ReviewCard>
+                            </Link>
                         </div>
                     )
                 })}
