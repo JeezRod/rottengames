@@ -343,7 +343,8 @@ router.delete("/users/delete/:userId", async (req, res) => {
 //Deletes chosen game when "delete game" button is clicked
 router.delete("/games/delete/:gameId", async (req, res) => {
   await Game.deleteOne({_id: req.params.gameId})
-  res.end("game deleted")
+  res.redirect(200,'/games');
+  // res.end("game deleted")
 })
 
 module.exports = router;
