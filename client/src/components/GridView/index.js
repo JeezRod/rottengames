@@ -70,7 +70,7 @@ function GridView({ page, searchTerm, perPage, searchPlatform }) {
 
   //Else render the gridview of all the games
   return (
-    <div className='gridview'>
+    <div className='gridview' >
       {data.map(game => {
         return (
           <Link key={game._id} className="link" to={game._id}>

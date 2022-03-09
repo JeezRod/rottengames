@@ -22,7 +22,7 @@ function App() {
 
   return (
     <Router>
-      <div className="NavContainer">
+      <div className="NavContainer" >
         <Navbar ></Navbar>
         <br></br>
       </div>
