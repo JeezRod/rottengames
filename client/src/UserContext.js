@@ -35,7 +35,7 @@ export function UserProvider({children}){
         })
         console.log("user: "+ user.admin)
         return () => mounted = false;
-    }, [user.email]);
+    }, [user.email, user.admin]);
 
     function logoutUser(){
      console.log("logout user context")   

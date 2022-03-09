@@ -43,22 +43,6 @@ function Review() {
       await setLoading(false)
     }
     fetchGame();
-    async function checkUser() {
-      let response = await fetch('/api/user');
-      if(response.status === 200){
-        let userJson = await response.json();
-        setLoggedIn(true)
-        //console.log(userJson.admin)
-        if(userJson.admin){
-          setIsAdmin(true);
-        }
-      }
-      else{
-        setLoggedIn(false);
-      }
-    }
-    checkUser();
-    //Set the force render state back to false
     setNewComment(false)
   }, [params.id, newComment]);
 
@@ -84,7 +68,7 @@ function Review() {
 
   //Display the buttons to add a review when input is focused
   const handleFocus = (event) => {
-    if(loggedIn){
+    if(user.email){
       setNewReviewBtn(true)
     }
     
@@ -139,7 +123,7 @@ function Review() {
           <h1>{data.name}</h1>
           <StarRating review={{ ratingStars: rating, email: "1234" }} />
           <Link to="">
-            {isAdmin === true && 
+            {user.admin && 
             <button className="AdminButton">Edit page</button>
             }
             
@@ -155,11 +139,11 @@ function Review() {
       <div className="Review">
         <h1>Reviews</h1>
         
-        {typeof(user.email) == undefined  &&
+        {!user.email  &&
           <Alert severity="error">You have to login to add a comment!</Alert>
         }
         <form className="addReview" onSubmit={HandleSubmit}>
-          {typeof(user.email) != undefined &&
+          {user.email &&
           <input required name="reviewText" type="text" placeholder="Add a review" onFocus={handleFocus}></input>
           }
           {newReviewBtn === true &&
@@ -171,7 +155,7 @@ function Review() {
         {data.reviews.length > 0
           ? data.reviews.map(review => {
             return (
-              <ReviewCard key={review.email} review={review} isAdmin={isAdmin} loggedIn={loggedIn}/>
+              <ReviewCard key={review.email} review={review} />
             )
           })
           : <p>No reviews</p>

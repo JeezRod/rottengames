@@ -54,9 +54,6 @@ router.delete("/v1/auth/logout", async (req, res) => {
   console.log("loggin out the user here")
   await req.session.destroy();
   console.log("session: "+req.session)
-  //req.session = null;
-  //sq.session.userId = undefined;
-  //req.session.userId = undefined;
 })
 
 //This route returns all the information of the current logged in user
@@ -64,17 +61,14 @@ router.delete("/v1/auth/logout", async (req, res) => {
 router.get("/user", async (req, res) => {
   // first check if a user is currently logged in 
   if (typeof (req.session.userId) !== "undefined") {
-    console.log(req.session.userId);
     //fetch the user's information from the db using it's email
     const user = await User.find({ email: req.session.userId }).findOne();
     res.status(200)
-    console.log("logged in")
     //return the information
     res.json(user)
   }
   //if no user is currently logged in return a 401 status
   else {
-    console.log("logged out")
     res.status(401)
   }
 })

@@ -11,23 +11,6 @@ import { UserProvider } from './UserContext';
 
 function App() {
 
-// useEffect( () => {
-//   let mounted = true;
-//   fetch('/api/user').then(response => {
-//     if (response.status === 200) {
-//         console.log("response 200")
-//         return response.json().then(data => setUser(data.email));
-//     }
-//     else {
-//       console.log("response 400")
-//       return response.json().then(setUser(null));
-//     }
-//   })
-//   console.log("user: "+ user)
-//   return () => mounted = false;
-// }, [user]);
-
-
   return (
     <UserProvider>
       <Router>
