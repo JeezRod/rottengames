@@ -17,13 +17,16 @@ const StyledNav = styled(NavLink)`
 `;
 
 
-const HamburgerMenu = () =>{
+const HamburgerMenu = (props) =>{
     return(
         <Menu>
             <StyledNav to="/"> Home </StyledNav>
             <StyledNav to="/games"> Search </StyledNav>
             <StyledNav to="about">About </StyledNav>
-            <StyledNav to="dashboard">Dashboard </StyledNav>
+            {props.isLoggedIn
+            ?<StyledNav to="dashboard">Dashboard </StyledNav>
+            :
+            null}
         </Menu>
     )
 }
