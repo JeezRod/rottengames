@@ -42,10 +42,16 @@ const Navbar = () => {
             <StyledNav to="/"> Home </StyledNav>
             <StyledNav to="/games"> Search </StyledNav>
             <StyledNav to="about">About </StyledNav>
-            <StyledNav to="dashboard">Dashboard </StyledNav>
         </ul>
     </nav> */}
-    <HamburgerMenu/>
+    <HamburgerMenu isLoggedIn={loggedIn}/>
+    <nav>
+        <ul>
+            <StyledNav to="/"> Home </StyledNav>
+            <StyledNav to="/games"> Search </StyledNav>
+            <StyledNav to="about">About </StyledNav>
+        </ul>
+    </nav>
     <Authentication isLoggedIn={loggedIn}/>
   </header>);
 };
