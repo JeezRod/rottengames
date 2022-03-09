@@ -36,14 +36,16 @@ const UserProfile = () => {
                 console.log(userJson._id === currentUser.id);
                 if(userJson._id === currentUser.id){
                     setIsSameUser(true);
+                    console.log(isSameUser)
                 }
+                console.log(isSameUser)
             } else {
                 console.log("no user");
             }
         }
         fetchUser();
         setLoading(false)
-    },[params.id, user.email, currentUser.id]);
+    },[params.id, user.email, currentUser.id, isSameUser]);
 
     React.useEffect(() => {
         async function fetchComments(){
