@@ -8,6 +8,7 @@ import Home from "./components/Home";
 import GamePage from "./components/GamePage";
 import { UserProvider } from './UserContext';
 import Dashboard from "./components/Dashboard";
+import AddGame from "./components/AddGame";
 import UserProfile from "./components/UserProfile";
 
 
@@ -28,6 +29,7 @@ function App() {
           <Route path="games/:id" element={<GamePage />}/>
           <Route path="dashboard" element={<Dashboard />}/>
           <Route path="profile/:id" element={<UserProfile />}/>
+          <Route path="dashboard/addGame" element={<AddGame />} />
         </Routes>
       </Router>
     </UserProvider>

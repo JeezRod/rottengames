@@ -324,6 +324,14 @@ router.put("/users/update/:userId", async (req, res)=>{
   res.end("permissions updated")
 })
 
+// router.put("users/updat/:gameId", async (req, res) => {
+  const item = {
+
+  }
+//   await Game.updateOne({_id: req.params.gameId},
+//     )
+// })
+
 //DELETE Routes
 
 //Delete an user based on the user ID from the admin dashboard
@@ -331,4 +339,12 @@ router.delete("/users/delete/:userId", async (req, res) => {
   await User.deleteOne({_id: req.params.userId})
   res.end("user deleted")
 });
+
+//Deletes chosen game when "delete game" button is clicked
+router.delete("/games/delete/:gameId", async (req, res) => {
+  await Game.deleteOne({_id: req.params.gameId})
+  res.redirect(200,'/games');
+  // res.end("game deleted")
+})
+
 module.exports = router;

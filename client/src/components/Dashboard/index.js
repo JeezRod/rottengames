@@ -2,6 +2,7 @@ import React from "react";
 import "./Dashboard.css"
 import ReactPaginate from 'react-paginate';
 import Users from "../AllUsers";
+import { Link } from "react-router-dom"
 
 function Dashboard() {
 
@@ -38,7 +39,7 @@ function Dashboard() {
       <main className="dash">
         <div className="SidePanel">
             <button>Users</button>
-            <button>Add Game</button>
+            <Link to="addGame"><button>Add Game</button></Link>
             <button>Reviews</button>
         </div>
         <div className="MainPanel">
