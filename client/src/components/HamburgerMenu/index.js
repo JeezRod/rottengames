@@ -28,7 +28,7 @@ const HamburgerMenu = (props) =>{
             <StyledNav to="about">About </StyledNav>
             {user.email
             ?<>
-              <StyledNav to="dashboard">Dashboard </StyledNav>
+              {user.admin && <StyledNav to="dashboard">Dashboard </StyledNav>}
               <StyledNav to={"profile/"+user.id}>Profile</StyledNav>
             </>
             :

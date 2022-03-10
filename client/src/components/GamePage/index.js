@@ -3,13 +3,16 @@ import "./Review.css"
 import ReviewCard from "../ReviewCard";
 import StarRating from "../StarRating";
 import { Link } from "react-router-dom"
+import { useNavigate } from 'react-router';
 import { useParams } from "react-router-dom";
 import ReactLoading from "react-loading";
 import Alert from '@mui/material/Alert';
 import {useUser, useUserUpdateContext} from "../../UserContext"
 
 
+
 function Review() {
+  const navigate = useNavigate();
   const params = useParams();
   //State for the games
   const [data, setData] = React.useState({ reviews: [{ "ratingStars": 0, "email": "" }] });
@@ -113,6 +116,16 @@ function Review() {
     }
   }
 
+  async function handleDelete(e){
+    e.preventDefault();
+    const confirmation = window.confirm("Are you sure you want to delete this game?");
+    if(confirmation){
+        await fetch("/api/games/delete/"+params.id, { method: 'DELETE' })
+        window.alert("Game deleted");
+        navigate("/games")
+    }
+  }
+
   //Link each button to their specific pages
   return (
     <div className="GamePage">
@@ -122,12 +135,20 @@ function Review() {
         <div className="NameStars">
           <h1>{data.name}</h1>
           <StarRating review={{ ratingStars: rating, email: "1234" }} />
+          {/* () => navigate("/games") */}
+          <form onSubmit={handleDelete}>
+          {user.admin && 
+            <button className="AdminButton">Delete Game</button>
+            }
+          </form>
+
           <Link to="">
             {user.admin && 
             <button className="AdminButton">Edit page</button>
             }
 
           </Link>
+
         </div>
       </div>
 
