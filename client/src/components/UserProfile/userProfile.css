@@ -28,6 +28,18 @@
     margin-top: 2%;
 }
 
+.bioText{
+    width: 400px;
+    height: 100px;
+    resize: none;
+}
+
+.nameText{
+    width: 400px;
+    height: 30px;
+    resize: none;
+}
+
 .userSection{
     margin-top: 4%;
 }

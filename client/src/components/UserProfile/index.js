@@ -106,13 +106,18 @@ const UserProfile = () => {
                     <img className='profilePicture' src={user.picture} alt="profile"></img>
                     
                     <div className='userSection'>
-                        <h2>{user.name}</h2>
+                        <h2>Name</h2>
+                        {isEdit
+                        ?<textarea className='nameText'></textarea>
+                        :<h3>{user.name}</h3>
+                        }
+                       
                         <p>{user.email}</p>
                     </div>
                     <div className='userSection'>
                         <h2>Bio</h2>
                         {isEdit
-                        ?<textarea></textarea>
+                        ?<textarea className='bioText'></textarea>
                         :<p>No Bio</p>
                         }
                         
