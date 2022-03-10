@@ -36,7 +36,7 @@ const ReviewCard = ({ review, isAdmin, loggedIn }) => {
           {user.email &&
             <button className="UserButton">Comment</button>
           }
-          {isAdmin &&
+          {(isAdmin || user.admin) &&
           <button className="AdminButton">Delete</button>
           }
         </div>
