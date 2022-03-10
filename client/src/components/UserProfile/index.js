@@ -10,10 +10,8 @@ const UserProfile = () => {
     const params = useParams();
     //State for the user
     const [user, setUser] = React.useState({});
-    
     //State for the user
     const currentUser = useUser();
-
     //State for if currentUser is the owner of the profile page
     const [isSameUser, setIsSameUser] = React.useState(false);
 
@@ -22,6 +20,9 @@ const UserProfile = () => {
     //State for loading
     const [loading, setLoading] = React.useState(true)
 
+    //State for editing mode
+    const [isEdit, setIsEdit] = React.useState(false)
+
     //Loading the user from the url params
     React.useEffect( () => {
         async function fetchUser(){
@@ -29,18 +30,10 @@ const UserProfile = () => {
             let response = await fetch('/api/user/'+params.id);
             if (response.status === 200) {
                 let userJson = await response.json();
-                console.log(userJson);
                 await setUser(userJson);
-                console.log(currentUser.id)
-                console.log(userJson._id)
-                console.log(userJson._id === currentUser.id);
                 if(userJson._id === currentUser.id){
                     setIsSameUser(true);
-                    console.log(isSameUser)
                 }
-                console.log(isSameUser)
-            } else {
-                console.log("no user");
             }
         }
         fetchUser();
@@ -78,6 +71,21 @@ const UserProfile = () => {
         fetchComments();
     },[user.email])
 
+    const handleClick = (e) =>{
+        e.preventDefault();
+        if(isEdit){
+            setIsEdit(false);
+        }else{
+            setIsEdit(true);
+        }
+    }
+
+    const handleSave = (e) =>{
+        e.preventDefault();
+        setIsEdit(false)
+        console.log("hello")
+    }
+
     //If the profile is loading show loading prompt
     if (loading) {
         return (
@@ -90,20 +98,32 @@ const UserProfile = () => {
         <div className='profile'>
             
             <aside className='user'>
-                {isSameUser 
-                ? <h2>Your Profile</h2>
-                : <h2>{user.name}' Profile</h2>}
-                
-                <img className='profilePicture' src={user.picture} alt="profile"></img>
-                
-                <div className='userSection'>
-                    <h2>{user.name}</h2>
-                    <p>{user.email}</p>
-                </div>
-                <div className='userSection'>
-                    <h2>Bio</h2>
-                    <p>I am pro gamer</p>
-                </div>
+                <form>
+                    {isSameUser 
+                    ? <h2>Your Profile</h2>
+                    : <h2>{user.name}' Profile</h2>}
+                    
+                    <img className='profilePicture' src={user.picture} alt="profile"></img>
+                    
+                    <div className='userSection'>
+                        <h2>{user.name}</h2>
+                        <p>{user.email}</p>
+                    </div>
+                    <div className='userSection'>
+                        <h2>Bio</h2>
+                        {isEdit
+                        ?<textarea></textarea>
+                        :<p>No Bio</p>
+                        }
+                        
+                    </div>
+                    {isSameUser
+                    ? isEdit 
+                        ?<div className='userSection'><button onClick={handleSave}>Save</button></div>
+                        :<div className='userSection'><button onClick={handleClick}>Edit Profile</button></div>
+                    :<></>
+                    }
+                </form>
             </aside>
 
             <main className='mainProfile'>
