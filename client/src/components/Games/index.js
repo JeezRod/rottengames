@@ -31,7 +31,6 @@ function Games() {
     if(platformInLocal){
       setSearchPlatform(window.localStorage.getItem('platforms').split(","))
     }
-    console.log([platformInLocal.split(",")])
     //Loading from local storage completed
     setloadingStorage(false)
   },[]);
