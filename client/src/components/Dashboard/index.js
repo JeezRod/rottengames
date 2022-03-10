@@ -2,6 +2,7 @@ import React from "react";
 //import "./Dashboard.css"
 import ReactPaginate from 'react-paginate';
 import Users from "../AllUsers";
+import { Link } from "react-router-dom"
 
 function Dashboard() {
 
@@ -38,10 +39,10 @@ function Dashboard() {
     };
 
   return (
-      <main className="dash flex h-auto items-start">
-        <div className="flex items-center h-auto w-1/5 flex-col">
+      <main className="dash">
+        <div className="SidePanel">
             <button className={buttonStyle}>Users</button>
-            <button className={buttonStyle}>Add Game</button>
+            <Link className={buttonStyle} to="addGame"><button>Add Game</button></Link>
             <button className={buttonStyle}>Reviews</button>
         </div>
         <div className="flex flex-col justify-center items-center h-auto w-10/12">

@@ -1,15 +1,17 @@
 import React from "react";
 import "./ReviewCard.css";
 import StarRating from "../StarRating";
+import {useUser, useUserUpdateContext} from "../../UserContext"
 
 const ReviewCard = ({ review, isAdmin, loggedIn }) => {
 
   const [profilePicture, setProfilePicture] = React.useState("");
+  const user = useUser();
 
   //Fetch the profile picture for the specific email
   React.useEffect(() => {
     async function fetchData() {
-      let data = await fetch("/api/user/pfp?email=" + review.email);
+      let data = await fetch("/api/user/profile/picture?email=" + review.email);
       let dataJson = await data.json();
       setProfilePicture(dataJson)
     }
@@ -31,10 +33,10 @@ const ReviewCard = ({ review, isAdmin, loggedIn }) => {
 
         <div className="buttonStartContainer">
           <StarRating review={review} />
-          {loggedIn === true &&
+          {user.email &&
             <button className="UserButton">Comment</button>
           }
-          {isAdmin === true &&
+          {(isAdmin || user.admin) &&
           <button className="AdminButton">Delete</button>
           }
         </div>

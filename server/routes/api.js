@@ -54,10 +54,7 @@ router.delete("/v1/auth/logout", async (req, res) => {
   //destroy the session of the user
   console.log("loggin out the user here")
   await req.session.destroy();
-  console.log("session: " + req.session)
-  //req.session = null;
-  //sq.session.userId = undefined;
-  //req.session.userId = undefined;
+  console.log("session: "+req.session)
 })
 
 //This route returns all the information of the current logged in user
@@ -65,17 +62,34 @@ router.delete("/v1/auth/logout", async (req, res) => {
 router.get("/user", async (req, res) => {
   // first check if a user is currently logged in 
   if (typeof (req.session.userId) !== "undefined") {
-    console.log(req.session.userId);
     //fetch the user's information from the db using it's email
     const user = await User.find({ email: req.session.userId }).findOne();
     res.status(200)
-    console.log("logged in")
     //return the information
     res.json(user)
   }
   //if no user is currently logged in return a 401 status
   else {
-    console.log("logged out")
+    res.status(401)
+  }
+})
+
+//Route to get a specific user
+router.get("/user/:userId", async (req, res) => {
+  try{
+    const user = await User.findOne({_id: req.params.userId});
+    res.json(user);
+  } catch (e){
+    res.status(401)
+  }
+})
+
+//Route to get a specific user
+router.get("/user/:userEmail/comments", async (req, res) => {
+  try{
+    const user = await Game.find({ "reviews.email": req.params.userEmail});
+    res.json(user);
+  } catch (e){
     res.status(401)
   }
 })
@@ -139,17 +153,17 @@ router.get("/users/count", async (req, res) => {
 });
 
 // Profile picture
-router.get("/user/pfp", async (req, res) => {
+router.get("/user/profile/picture", async (req, res) => {
   try {
     let { email } = req.query;
-    if (email === "") {
-      res.status(401);
-    }
-    const user = await User.find({ email: email }).findOne();
+    
+    const user = await User.findOne({ email: email });
+    console.log(user.picture)
     res.json(user.picture);
+    res.status(200)
   }
   catch (e) {
-    console.log("no user");
+    console.log(e)
   }
 })
 
@@ -310,6 +324,14 @@ router.put("/users/update/:userId", async (req, res)=>{
   res.end("permissions updated")
 })
 
+// router.put("users/updat/:gameId", async (req, res) => {
+  const item = {
+
+  }
+//   await Game.updateOne({_id: req.params.gameId},
+//     )
+// })
+
 //DELETE Routes
 
 //Delete an user based on the user ID from the admin dashboard
@@ -317,4 +339,12 @@ router.delete("/users/delete/:userId", async (req, res) => {
   await User.deleteOne({_id: req.params.userId})
   res.end("user deleted")
 });
+
+//Deletes chosen game when "delete game" button is clicked
+router.delete("/games/delete/:gameId", async (req, res) => {
+  await Game.deleteOne({_id: req.params.gameId})
+  res.redirect(200,'/games');
+  // res.end("game deleted")
+})
+
 module.exports = router;

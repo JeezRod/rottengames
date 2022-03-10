@@ -6,10 +6,16 @@
 header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
     width: 100%;
-    padding-left:2%;
-    padding-right:2%
+}
+
+header nav, button{
+    align-items: center;
+}
+
+header button{
+    height: 4em;
+    margin: 1em;
 }
 
 nav {

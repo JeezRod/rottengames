@@ -3,8 +3,6 @@ import React from "react";
 import { platforms } from "./platforms";
 
 function Filter({ setSearchTerm, setSearchPlatform }) {
-  //State for the value of the input, initial value same as the local storage
-  const [inputValue, setInputValue] = React.useState(window.localStorage.getItem('searchTerm'))
   
   //Timer to send a request only when the user stops typing
   const [timer, setTimer] = React.useState(null)
@@ -13,6 +11,14 @@ function Filter({ setSearchTerm, setSearchPlatform }) {
   const [checkedState, setCheckedState] = React.useState(
     new Array(platforms.length).fill(false)
   );
+
+  //Check if search term from local is null, if so set it to empty string
+  let searchFromLocal =  window.localStorage.getItem('searchTerm');
+  if(!searchFromLocal){
+    searchFromLocal = "";
+  } 
+  //State for the value of the input, initial value same as the local storage
+  const [inputValue, setInputValue] = React.useState(searchFromLocal)
 
   let platformFromLocal = window.localStorage.getItem('platforms')
   //State to hold all the names of the platforms, initial value same as the local storage
