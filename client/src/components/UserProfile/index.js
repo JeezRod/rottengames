@@ -86,6 +86,10 @@ const UserProfile = () => {
         console.log("hello")
     }
 
+    const handleCancel = (e) => {
+        e.preventDefault()
+        setIsEdit(false)
+    }
     //If the profile is loading show loading prompt
     if (loading) {
         return (
@@ -124,8 +128,8 @@ const UserProfile = () => {
                     </div>
                     {isSameUser
                     ? isEdit 
-                        ?<div className='userSection'><button onClick={handleSave}>Save</button></div>
-                        :<div className='userSection'><button onClick={handleClick}>Edit Profile</button></div>
+                        ?<div className='userSection'><button onClick={handleSave}>Save</button><button onClick={handleCancel}>Cancel</button></div>
+                        : <div className='userSection'><button onClick={handleClick}>Edit Profile</button> </div>
                     :<></>
                     }
                 </form>
