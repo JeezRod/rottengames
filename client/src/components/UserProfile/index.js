@@ -4,7 +4,7 @@ import ReviewCard from "../ReviewCard";
 import { useParams } from "react-router-dom";
 import ReactLoading from "react-loading";
 import { Link } from "react-router-dom"
-import {useUser, useUserUpdateContext} from "../../UserContext"
+import {useUser} from "../../UserContext"
 
 const UserProfile = () => {
     const params = useParams();
