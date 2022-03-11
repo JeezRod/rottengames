@@ -2,19 +2,31 @@ import React from 'react';
 import {useState} from 'react';
 import "./GameForm.css"
 import {MultiSelect} from "react-multi-select-component";
-
+import Files from 'react-files'
 
 const AddGame = () => {
 
+  //hooks for the fields in the form
   const [name, setName] = useState("")
   const [description, setDescription] = useState("")
   const [date, setDate] = useState("")
-  const [selected, setSelected] = useState([]);
-  
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    console.log(date)
-    console.log(selected[0].value)
+  const [selected, setSelected] = useState([])
+  const [selectedFile, setSelectedFile] = useState()
+  const [isSelected, setIsSelected] = useState(false)
+  const [image, setImage] = useState(null)
+
+  // const handleSubmit = (e) => {
+  //   e.preventDefault()
+  //   console.log(date)
+  //   console.log(selected[0].value)
+  // }
+
+  // Submits the form
+  const uploadFile =(e) => {
+    e.preventDefault();
+    var formData = new FormData();
+    formData.append('file', selectedFile);
+    updateImage(formData);
   }
 
   // Stores platform options for the add game form
@@ -63,10 +75,46 @@ const AddGame = () => {
     );
   };
 
+  const fileChangeHandler = (event) => {
+    setSelectedFile(event.target.files[0]);
+    setIsSelected(true);
+    // onImageChange()
+  }
+
+  const onFilesChange = (files) => {
+    console.log(files)
+    try {
+      setImage(URL.createObjectURL(files[0]));
+    }
+    catch (e) {
+      console.log('error')
+    }
+  }
+
+  const onFilesError = (error, file) => {
+    // console.log('error code ' + error.code + ': ' + error.message)
+  }
+
+  const onImageChange = (event) => {
+    if (event.target.files && event.target.files[0]) {
+      setImage(URL.createObjectURL(event.target.files[0]));
+    }
+   }
+
+  function updateImage(formData) {
+    return fetch('/image', {
+      method : 'POST',
+      headers : {        
+      },
+      body : formData
+    }).then(data => data.json)
+  }
+
   // Creates the form for adding a game
   return (
     <div class="box">
-      <form onSubmit={handleSubmit}>
+      {/* FUNCTION handleSubmit ON ONSUBMIT */}
+      <form onSubmit={uploadFile}>
       <h2>Add Game Form</h2>
         <label for="gameName">Game Name : </label>
         <input type="text" id="gameName" name="gameName" value={name} onChange={(e) => setName(e.target.value)} required></input>
@@ -83,8 +131,23 @@ const AddGame = () => {
         <label for="releaseDate">Release Date : </label>
         <input type="date" id="releaseDate" name="releaseDate" value={date} onChange={(e) => setDate(e.target.value)}></input>
         <label for="lname">Image : </label>
-        <input type="file" id="lname" name="lname"></input>
+        {/* <input type="file" id="lname" name="lname" onChange={onImageChange}></input> */}
+        <img src={image} alt="preview image"/>
         <br></br>
+        <div className="files">
+        <Files
+          className='files-dropzone'
+          onChange={onFilesChange}
+          onError={onFilesError}
+          accepts={['image/png', 'image/jpg', 'image/jpeg']}
+          multiple={false}
+          maxFileSize={10000000}
+          minFileSize={0}
+          clickable
+        >
+          Drop files here or click to upload
+        </Files>
+      </div>
         <input id="button" type="submit" value="Add Game"></input>
         {/* <pre>{JSON.stringify(selected)}</pre> */}
       </form>
