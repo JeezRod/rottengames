@@ -1,5 +1,5 @@
 import React from 'react'
-import "./userProfile.css"
+//import "./userProfile.css"
 import ReviewCard from "../ReviewCard";
 import { useParams } from "react-router-dom";
 import ReactLoading from "react-loading";
@@ -87,31 +87,31 @@ const UserProfile = () => {
         )
     }
     return (
-        <div className='profile'>
+        <div className='profile flex pl-20 pr-20'>
             
-            <aside className='user'>
+            <aside className='user mt-12 w-3/12 h-full'>
                 {isSameUser 
-                ? <h2>Your Profile</h2>
-                : <h2>{user.name}' Profile</h2>}
+                ? <p className="text-3xl font-bold">My Profile</p>
+                : <p>{user.name}' Profile</p>}
                 
-                <img className='profilePicture' src={user.picture} alt="profile"></img>
+                <img className='profilePicture mt-8 rounded-full w-36 h-36' src={user.picture} alt="profile"></img>
                 
-                <div className='userSection'>
-                    <h2>{user.name}</h2>
-                    <p>{user.email}</p>
+                <div className='userSection mt-16'>
+                    <p className="text-3xl font-bold">{user.name}</p>
+                    <p className="text-xl">{user.email}</p>
                 </div>
-                <div className='userSection'>
-                    <h2>Bio</h2>
-                    <p>I am pro gamer</p>
+                <div className='userSection mt-16'>
+                    <p className="text-3xl font-bold">Bio</p>
+                    <p className="text-xl">I am pro gamer</p>
                 </div>
             </aside>
 
-            <main className='mainProfile'>
-                <h2>All Reviews</h2>
+            <main className='mainProfile mt-12 w-9/12 flex flex-col items-start'>
+                <p className="text-3xl font-bold">All Reviews</p>
                 {Object.keys(userReviews).map( (key) => {
                     return(
-                        <div className="reviewRow" key={key}>
-                            <h2>{key}</h2>
+                        <div className="reviewRow w-full mt-12" key={key}>
+                            <p className="text-2xl font-bold">{key}</p>
                             <Link className="link"to={"/games/"+userReviews[key].id}>
                                 <ReviewCard review={userReviews[key].review} isAdmin={currentUser.admin || isSameUser} loggedIn={Object.keys(currentUser).length !== 0}/>
                             </Link>

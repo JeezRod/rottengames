@@ -21,3 +21,18 @@ code {
     monospace;
 }
 
+button {
+  @apply bg-black text-white p-2.5 font-bold rounded-3xl
+}
+
+/* ul li {
+  @apply list-none inline-block ml-7 text-2xl
+} */
+
+nav {
+  @apply flex-initial justify-between
+}
+
+header button {
+  @apply h-16 m-4
+}

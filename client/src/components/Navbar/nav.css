@@ -1,40 +1,40 @@
-.NavContainer {
+/* .NavContainer {
     display: flex;
     justify-content: space-around;
-}
+} */
 
-header {
+/* header {
     display: flex;
     justify-content: space-between;
     width: 100%;
-}
+} */
 
-header nav, button{
+/* header nav, button{
     align-items: center;
-}
+} */
 
-header button{
+/* header button{
     height: 4em;
     margin: 1em;
-}
+} */
 
-nav {
+/* nav {
     display:flex;
     justify-content: space-between;
-}
+} */
 
-ul li {
+/* ul li {
     list-style: none;
     display: inline-block;
     padding: 0px 30px;
     font-size: 24px;
-}
+} */
 
-button {
+/* button {
     background-color: black;
     color: white;
     padding: 10px;
     border: black;
     border-radius: 20px;
     font-weight: 700;
-}
+} */

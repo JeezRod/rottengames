@@ -133,7 +133,7 @@ function Review() {
       <div className="GameInfo flex">
         <img className="GameCover w-80 rounded-3xl" src={data.imageurl} alt={data.name}></img>
         <div className="NameStars flex items-center pl-10">
-          <h1 className="text-4xl">{data.name}</h1>
+          <h1 className="text-5xl font-bold">{data.name}</h1>
           <StarRating review={{ ratingStars: rating, email: "1234" }} />
           {/* () => navigate("/games") */}
           <form onSubmit={handleDelete}>
@@ -153,28 +153,28 @@ function Review() {
       </div>
 
       <div className="Description pt-10">
-        <h1 className="text-2xl">Description</h1>
+        <h1 className="text-3xl font-bold">Description</h1>
         <p className="text-xl">{data.description}</p>
       </div>
 
       <div className="Platform pt-10">
-        <h1 className="text-2xl">Available on</h1>
+        <h1 className="text-3xl font-bold">Available on</h1>
         <p className="text-xl">{data.platform}</p>
       </div>
 
       <div className="Review pt-10">
-        <h1 className="text-2xl">Reviews</h1>
+        <h1 className="text-3xl font-bold">Reviews</h1>
         
         {!user.email  &&
           <Alert severity="error">You have to login to add a comment!</Alert>
         }
-        <form className="addReview flex justify-between items-center pt-10 pb-10" onSubmit={HandleSubmit}>
+        <form className="addReview flex justify-between flex-row items-center mt-10 mb-10" onSubmit={HandleSubmit}>
           {user.email &&
-          <input className="w-5/6 h-1/2 border-0 focus:outline-none focus:border-black focus:border-b mb-4" required name="reviewText" type="text" placeholder="Add a review" onFocus={handleFocus}></input>
+          <input className="w-5/6 h-11 border-0 focus:outline-none focus:border-black focus:border-b" required name="reviewText" type="text" placeholder="Add a review" onFocus={handleFocus}></input>
           }
           {newReviewBtn === true &&
             <><StarRating review={{ ratingStars: 0, email: "1235" }} isEditable={true} setRatingStars={setRatingStars} ratingStars={ratingStars} />
-              <button className="mt-4">Add Review</button></>
+              <button>Add Review</button></>
           }
         </form>
 
@@ -184,7 +184,7 @@ function Review() {
               <ReviewCard key={review.email} review={review} />
             )
           })
-          : <p>No reviews</p>
+          : <p className="text-2xl font-bold">No reviews</p>
         }
       </div>
 

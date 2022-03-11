@@ -1,11 +1,11 @@
-main{
+/* main{
     display:flex;
     justify-content: space-between;
     align-items: center;
     height: 90%;
-}
+} */
 
-#landing{
+/* #landing{
     width:50%;
     height: 100%;
     display: flex;
@@ -14,15 +14,15 @@ main{
     justify-content: center;
     font-size: 32px;
     line-height: 200%;
-}
+} */
 
-#landing button{
+/* #landing button{
     margin-top: 60px;
-}
-
+} */
+/* 
 img {
     height: auto;
     object-fit: cover;
     width: 50%;
     height: 100%;
-}
+} */
