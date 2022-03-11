@@ -1,36 +1,36 @@
-.GamePage {
+/* .GamePage {
     padding-left: 5%;
     padding-right: 5%;
     padding-top: 5%;
-}
+} */
 
-.GameInfo {
+/* .GameInfo {
     display:flex;
-    
-}
+} */
 
-.NameStars{
+/* .NameStars{
     display:flex;
     align-items: center;
     padding-left:2%;
-}
+} */
 
-.GameCover {
+/* .GameCover {
     width: 300px;
     border-radius: 25px;
-}
+} */
 
-.Description, .Platform {
+/* .Description, .Platform {
     padding-top:2%;
     padding-bottom:2%;
-}
-.addReview{
+} */
+
+/* .addReview{
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 2%;
     margin-top: 2%;
-}
+} */
 
 .addReview input{
     width: 80%;

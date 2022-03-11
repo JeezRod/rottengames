@@ -1,6 +1,6 @@
 import React from 'react'
 import GameCard from '../GameCard'
-import './GridView.css'
+//import './GridView.css'
 import ReactLoading from "react-loading";
 import { Link } from "react-router-dom"
 
@@ -53,7 +53,7 @@ function GridView({ page, searchTerm, perPage, searchPlatform }) {
   //If the games are loading show loading prompt
   if (loading) {
     return (
-      <div className='loading'>
+      <div className='loading flex justify-center'>
         <ReactLoading type={"spin"} color="#000" />
       </div>
     )
@@ -62,7 +62,7 @@ function GridView({ page, searchTerm, perPage, searchPlatform }) {
   //If there is an issue in loading the games show error message
   if (error) {
     return (
-      <div className='griderror'>
+      <div className='griderror flex justify-center text-red-600 bg-red-300 border border-red-800 p-1.5'>
         <p>An error has occured</p>
       </div>
     )
@@ -70,7 +70,7 @@ function GridView({ page, searchTerm, perPage, searchPlatform }) {
 
   //Else render the gridview of all the games
   return (
-    <div className='gridview' >
+    <div className='gridview grid grid-cols-5 gap-x-12 gap-y-8 pr-10 pt-14' >
       {data.map(game => {
         return (
           <Link key={game._id} className="link" to={game._id}>

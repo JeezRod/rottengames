@@ -15,7 +15,7 @@ function Dashboard() {
   const [searchTerm, setSearchTerm] = React.useState('');
 
   //TailwindCSS for the buttons
-  const buttonStyle = "m-1.5 p-10 rounded-none w-full bg-white text-black shadow-xl h-60 mt-10px transition ease-in-out duration-300 hover:shadow-2xl";
+  const buttonStyle = "m-1 p-10 rounded-none w-full bg-white text-black shadow-xl h-60 mt-10px transition ease-in-out duration-300 hover:shadow-2xl";
 
   React.useEffect(() => {
     //Async function to fetch count of all games
@@ -39,13 +39,13 @@ function Dashboard() {
     };
 
   return (
-      <main className="dash">
-        <div className="SidePanel">
+      <main className="dash flex h-auto items-start">
+        <div className="SidePanel flex flex-col justify-center h-auto w-3/12">
             <button className={buttonStyle}>Users</button>
-            <Link className={buttonStyle} to="addGame"><button>Add Game</button></Link>
+            <Link to="addGame" className="addGameButton"><button className={buttonStyle}>Add Game</button></Link>
             <button className={buttonStyle}>Reviews</button>
         </div>
-        <div className="flex flex-col justify-center items-center h-auto w-10/12">
+        <div className="MainPanel flex flex-col justify-center items-center h-auto w-10/12">
         <div>
           <form onSubmit={HandleSubmit} className="searchContainer">
             <input name="search" className="searchBar" type="text" placeholder="Search"></input>

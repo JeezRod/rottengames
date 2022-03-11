@@ -1,57 +1,57 @@
-.MainContainer{
+/* .MainContainer{
     display: flex;
-}
+} */
 
-.Filter {
+/* .Filter {
     width: 15%;
-}
+} */
 
-.GridPaginator{
+/* .GridPaginator{
     width: 90%;
-}
+} */
 
 /*Styles for Paginations*/
-.paginator{
+/* .paginator{
     display:flex;
     justify-content:center;
     padding:5%;
-}
+} */
 
-.currentPage{
+/* .currentPage{
     color:white;
     background-color: black;
     padding: 15px;
     border-radius: 10%;
-}
+} */
 
-.pages {
+/* .pages {
     transition:all .2s ease-in;
-}
+} */
 
-.pages, .next, .previous, .break{
+/* .pages, .next, .previous, .break{
     padding: 15px;
     margin-left:3px;
     margin-right:3px;
-}
+} */
 
-.pages:hover{
+/* .pages:hover{
     color:white;
     background-color: black;
     border-radius: 10%;
     cursor: pointer;
-}
+} */
 
-.previous{
+/* .previous{
     transform: rotate(-180deg);
 }
 
 .next, .previous{
     transition:all .2s ease-in;
-}
+} */
 
-.next:hover, .previous:hover{
+/* .next:hover, .previous:hover{
     color:white;
     background-color: black;
     border-radius: 10%;
     cursor: pointer;
-}
+} */
