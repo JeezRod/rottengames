@@ -142,7 +142,7 @@ function Review() {
             }
           </form>
 
-          <Link to="">
+          <Link to="" >
             {user.admin && 
             <button className="AdminButton">Edit page</button>
             }
