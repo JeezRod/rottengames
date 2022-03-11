@@ -318,10 +318,21 @@ router.post("/games/:gameId", async (req, res) => {
 //PUT Routes
 // This route updates the users admin permission
 router.put("/users/update/:userId", async (req, res)=>{
-  await User.updateOne(
-    {_id: req.params.userId},
-     {$set: {"admin": req.body.admin}})
-  res.end("permissions updated")
+  if(req.body.handle === "permissions"){
+    await User.updateOne(
+      {_id: req.params.userId},
+       {$set: {"admin": req.body.admin}})
+    res.end("permissions updated")
+    console.log("permissions updated")
+  }
+  if(req.body.handle === "profile"){
+    await User.updateOne(
+      {_id: req.params.userId},
+       {$set: {"name": req.body.name, "bio": req.body.bio}})
+    res.end("user updated")
+    console.log("user updated")
+  }
+  
 })
 
 // router.put("users/updat/:gameId", async (req, res) => {
