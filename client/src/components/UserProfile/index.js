@@ -80,10 +80,18 @@ const UserProfile = () => {
         }
     }
 
-    const handleSave = (e) =>{
-        e.preventDefault();
+     async function handleSave (e){
+        const requestOptions = {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ 
+                name: e.target.name.value,
+                bio: e.target.bio.value,
+                handle: "profile" })
+        };
+        await fetch("/api/users/update/" + user._id, requestOptions)
+        window.alert(requestOptions);
         setIsEdit(false)
-        console.log("hello")
     }
 
     const handleCancel = (e) => {
@@ -102,7 +110,7 @@ const UserProfile = () => {
         <div className='profile'>
             
             <aside className='user'>
-                <form>
+                <form onSubmit={handleSave} >
                     {isSameUser 
                     ? <h2>Your Profile</h2>
                     : <h2>{user.name}' Profile</h2>}
@@ -112,7 +120,7 @@ const UserProfile = () => {
                     <div className='userSection'>
                         <h2>Name</h2>
                         {isEdit
-                        ?<textarea className='nameText'></textarea>
+                        ?<textarea className='nameText' name="name" defaultValue={user.name}></textarea>
                         :<h3>{user.name}</h3>
                         }
                        
@@ -121,14 +129,14 @@ const UserProfile = () => {
                     <div className='userSection'>
                         <h2>Bio</h2>
                         {isEdit
-                        ?<textarea className='bioText'></textarea>
-                        :<p>No Bio</p>
+                        ?<textarea className='bioText' name="bio" defaultValue={user.bio}></textarea>
+                        :<p>{user.bio}</p>
                         }
                         
                     </div>
                     {isSameUser
                     ? isEdit 
-                        ?<div className='userSection'><button onClick={handleSave}>Save</button><button onClick={handleCancel}>Cancel</button></div>
+                        ?<div className='userSection'><button>Save</button><button onClick={handleCancel}>Cancel</button></div>
                         : <div className='userSection'><button onClick={handleClick}>Edit Profile</button> </div>
                     :<></>
                     }
