@@ -61,9 +61,9 @@ function UserCard({ user }) {
         const requestOptions = {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ admin: choiceBox })
+            body: JSON.stringify({ admin: choiceBox, handle: "permissions" })
         };
-        await fetch("api/users/update/" + user._id, requestOptions)
+        await fetch("/api/users/update/" + user._id, requestOptions)
         window.alert(requestOptions);
         setEdit(false)
     }
