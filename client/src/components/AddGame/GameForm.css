@@ -15,7 +15,7 @@
   margin:0 auto;
   margin-top: 50px;
   width:500px;
-  height:600px;
+  height:700px;
   padding:20px;
   background:#f9f9f9;
   border:2px solid #333;
@@ -33,11 +33,22 @@ form {
   /* align-items: stretch; */
 }
 
+img {
+  height: 150px;
+  width: 150px;
+  
+}
+
 #button {
   height: 38px;
   width: 243px;
   border-radius: 20px;
-  background-color: #5dade2 ;
+  /* background-color: #5dade2 ; */
+  background-color: #f7d9f3;
+}
+
+#description {
+  height: 50px;
 }
 
 #platforms {
