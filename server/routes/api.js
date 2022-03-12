@@ -225,7 +225,8 @@ router.get("/games", async (req, res) => {
         "$options": "i"
       },
       platform: {
-        "$in": platform
+        "$regex": platform,
+        "$options": "i"
       }
     })
       .limit(limit)
@@ -266,7 +267,8 @@ router.get("/games/count", async (req, res) => {
         "$options": "i"
       },
       platform: {
-        "$in": platform
+        "$regex": platform,
+        "$options": "i"
       }
     }).count();
   }
