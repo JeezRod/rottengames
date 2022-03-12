@@ -1,7 +1,8 @@
 import React from "react";
 import "./ReviewCard.css";
 import StarRating from "../StarRating";
-import {useUser, useUserUpdateContext} from "../../UserContext"
+import {useUser} from "../../UserContext"
+import { Link } from "react-router-dom"
 
 const ReviewCard = ({ review, isAdmin, loggedIn }) => {
 
@@ -26,7 +27,9 @@ const ReviewCard = ({ review, isAdmin, loggedIn }) => {
           <img src={profilePicture} alt="pfp"></img>
 
           <div className="UserReview">
-            <p><strong>{review.name}</strong></p>
+            <Link className="link" to={"/profile/"+review.userId}>
+              <p><strong>{review.name}</strong></p>
+            </Link>
             <p>{review.text}</p>
           </div>
         </div>

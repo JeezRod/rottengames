@@ -113,7 +113,7 @@ const UserProfile = () => {
                 <form onSubmit={handleSave} >
                     {isSameUser 
                     ? <h2>Your Profile</h2>
-                    : <h2>{user.name}' Profile</h2>}
+                    : <h2>{user.name}'s Profile</h2>}
                     
                     <img className='profilePicture' src={user.picture} alt="profile"></img>
                     

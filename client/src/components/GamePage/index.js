@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router';
 import { useParams } from "react-router-dom";
 import ReactLoading from "react-loading";
 import Alert from '@mui/material/Alert';
-import {useUser, useUserUpdateContext} from "../../UserContext"
+import {useUser} from "../../UserContext"
 
 
 
@@ -98,11 +98,12 @@ function Review() {
       let text = event.target.reviewText.value
       let name = userJson.name
       let email = userJson.email
+      let userId = userJson._id
 
       const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ text, name, email, ratingStars })
+        body: JSON.stringify({ text, name, email, ratingStars, userId })
       };
       fetch(url, requestOptions)
         .then(response => console.log('Submitted successfully'))
