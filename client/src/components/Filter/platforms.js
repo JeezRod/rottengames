@@ -61,13 +61,7 @@ export const platforms = [
   },
   //PC platforms
   {
-    name: "Windows",
-  },
-  {
-    name: "Mac",
-  },
-  {
-    name: "Linux",
+    name: "windows;mac;linux",
   },
   //Sega platforms
   {

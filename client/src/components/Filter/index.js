@@ -61,7 +61,7 @@ function Filter({ setSearchTerm, setSearchPlatform }) {
       allPlatforms.splice(allPlatforms.indexOf(name), 1)
     }else {
       //else add to allPlatforms
-      allPlatforms.push(name)
+      allPlatforms.push(name);
     }
     //Set searchPlatform as new array for re-render
     setSearchPlatform([...allPlatforms]);
