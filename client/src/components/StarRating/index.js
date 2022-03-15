@@ -17,7 +17,7 @@ const StarRating = ({ review, isEditable, setRatingStars, ratingStars }) => {
         <RatingStar
           clickable
           maxScore={5}
-          id={review.email}
+          id={review.userId}
           rating={ratingStars}
           onRatingChange={onRatingChange}
         />
@@ -26,10 +26,11 @@ const StarRating = ({ review, isEditable, setRatingStars, ratingStars }) => {
   }
   //Used for the average rating of all the reviews of the game, not editable
   return (
+    
     <div className="App">
       <RatingStar
         maxScore={5}
-        id={review.email}
+        id={review.userId}
         rating={review.ratingStars}
       />
     </div>
