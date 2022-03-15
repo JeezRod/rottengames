@@ -2,7 +2,6 @@ import React from "react";
 import GridView from "../GridView";
 import Filter from "../Filter"
 import ReactPaginate from 'react-paginate';
-import "./Games.css"
 
 function Games() {
   //State for page number
@@ -83,7 +82,7 @@ function Games() {
   if(loadingStorage){
     return (
       <div className="Games">
-      <div className="MainContainer">
+      <div className="MainContainer flex">
         <Filter setSearchTerm={setSearchTerm} searchTerm={searchTerm} setSearchPlatform={setSearchPlatform} ></Filter>
       </div>
     </div>
@@ -92,9 +91,9 @@ function Games() {
 
   return (
     <div className="Games">
-      <div className="MainContainer">
+      <div className="MainContainer flex">
         <Filter setSearchTerm={setSearchTerm} setSearchPlatform={setSearchPlatform} ></Filter>
-        <div className="GridPaginator">
+        <div className="GridPaginator w-full">
           <GridView page={page} searchTerm={searchTerm} searchPlatform={searchPlatform} perPage={perPage}></GridView>
 
           <ReactPaginate
@@ -108,11 +107,11 @@ function Games() {
             renderOnZeroPageCount={null}
             forcePage={page - 1}
 
-            containerClassName="paginator"
-            activeClassName="currentPage"
-            pageClassName="pages"
-            nextClassName="next"
-            previousClassName="previous"
+            containerClassName="paginator flex justify-center mb-20 text-2xl mt-8 items-center"
+            activeClassName="currentPage text-white bg-black rounded-3xl"
+            pageClassName="pages transition-all ease-in duration-400 p-4 mr-1 ml-1 hover:text-white hover:bg-black hover:rounded-xl"
+            nextClassName="next p-4 transition-all ease-in duration-400 transition-all ease-in duration-400 hover:text-white hover:bg-black hover:rounded-xl"
+            previousClassName="previous p-4 -rotate-180 transition-all ease-in duration-400 hover:text-white hover:bg-black hover:rounded-xl"
             breakLinkClassName="break"
           />
         </div>

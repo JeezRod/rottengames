@@ -1,5 +1,4 @@
 import React from 'react'
-import "./userProfile.css"
 import ReviewCard from "../ReviewCard";
 import { useParams } from "react-router-dom";
 import ReactLoading from "react-loading";
@@ -107,48 +106,47 @@ const UserProfile = () => {
         )
     }
     return (
-        <div className='profile'>
+        <div className='profile flex pl-20 pr-20 mt-12'>
             
             <aside className='user'>
                 <form onSubmit={handleSave} >
                     {isSameUser 
-                    ? <h2>Your Profile</h2>
-                    : <h2>{user.name}' Profile</h2>}
+                    ? <p className="text-3xl font-bold">My Profile</p>
+                    : <p className="text-3xl font-bold w-50">{user.name}'s Profile</p>}
                     
-                    <img className='profilePicture' src={user.picture} alt="profile"></img>
+                    <img className='profilePicture mt-8 rounded-full w-36 h-36' src={user.picture} alt="profile"></img>
                     
-                    <div className='userSection'>
-                        <h2>Name</h2>
+                    <div className='userSection mt-16'>
                         {isEdit
-                        ?<textarea className='nameText' name="name" defaultValue={user.name}></textarea>
-                        :<h3>{user.name}</h3>
+                        ?<textarea className='nameText w-96 h-8 resize-none text-3xl font-bold' name="name" defaultValue={user.name}></textarea>
+                        :<p className="text-3xl font-bold">{user.name}</p>
                         }
                        
-                        <p>{user.email}</p>
+                       <p className="text-xl">{user.email}</p>
                     </div>
-                    <div className='userSection'>
-                        <h2>Bio</h2>
+                    <div className='userSection mt-16'>
+                    <p className="text-3xl font-bold">Bio</p>
                         {isEdit
-                        ?<textarea className='bioText' name="bio" defaultValue={user.bio}></textarea>
-                        :<p>{user.bio}</p>
+                        ?<textarea className='bioText text-xl' name="bio" defaultValue={user.bio}></textarea>
+                        :<p className="text-xl">{user.bio}</p>
                         }
                         
                     </div>
                     {isSameUser
                     ? isEdit 
-                        ?<div className='userSection'><button>Save</button><button onClick={handleCancel}>Cancel</button></div>
-                        : <div className='userSection'><button onClick={handleClick}>Edit Profile</button> </div>
+                        ?<div className='userSection mt-16'><button>Save</button><button onClick={handleCancel}>Cancel</button></div>
+                        : <div className='userSection mt-16'><button onClick={handleClick}>Edit Profile</button> </div>
                     :<></>
                     }
                 </form>
             </aside>
 
-            <main className='mainProfile'>
-                <h2>All Reviews</h2>
+            <main className='mainProfile ml-20 w-9/12 flex flex-col items-start'>
+                <p className="text-3xl font-bold">All Reviews</p>
                 {Object.keys(userReviews).map( (key) => {
                     return(
-                        <div className="reviewRow" key={key}>
-                            <h2>{key}</h2>
+                        <div className="reviewRow w-full mt-12" key={key}>
+                            <p className="text-2xl font-bold">{key}</p>
                             <Link className="link"to={"/games/"+userReviews[key].id}>
                                 <ReviewCard review={userReviews[key].review} isAdmin={currentUser.admin || isSameUser} loggedIn={Object.keys(currentUser).length !== 0}/>
                             </Link>

@@ -1,6 +1,8 @@
 import React from "react";
-import "./filter.css"
 import { platforms } from "./platforms";
+
+//search button
+//<button className="searchBtn text-black bg-white p-4 duration-75 transition ease-in hover:ml-8 hover:text-white hover:bg-black hover:rounded hover:cursor-pointer">➜</button>
 
 function Filter({ setSearchTerm, setSearchPlatform }) {
   
@@ -82,22 +84,21 @@ function Filter({ setSearchTerm, setSearchPlatform }) {
   }
 
   return (
-    <div className="Filter">
-      <form onSubmit={HandleSubmit} className="searchContainer">
-        <input name="search" className="searchBar" type="text" placeholder="Search" value={inputValue} onChange={handleChangeSearchBox}></input>
-        <button className="searchBtn">➜</button>
+    <div className="Filter pt-1 mr-1 ml-1">
+      <form onSubmit={HandleSubmit} className="searchContainer flex w-full justify-between pt-14">
+        <input name="search" className="searchBar h-12 w-80 sticky ml-8 text-2xl border-b-2 w-64" type="text" placeholder="Search..." value={inputValue} onChange={handleChangeSearchBox}></input>
       </form>
 
-      <ul className="platforms-list">
-        <h1 className="platformTitle">Platforms</h1>
+      <ul className="flex flex-col mr-16">
+        <h1 className="platformTitle mt-9 ml-7 text-4xl">Platforms</h1>
         {platforms.map(({ name }, index) => {
           return (
             <li key={index}>
-              <div className="platforms-list-item">
+              <div className="platforms-list text-2xl pt-6 w-64 list-none inline-block ml-7">
                 <input
                   type="checkbox"
                   id={`custom-checkbox-${index}`}
-                  className="custom-checkbox"
+                  className="platforms-list-item w-5 h-5 mr-1"
                   name={name}
                   value={name}
                   checked={checkedState[index]}

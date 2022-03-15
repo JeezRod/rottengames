@@ -1,5 +1,4 @@
 import React from "react";
-import "./Review.css"
 import ReviewCard from "../ReviewCard";
 import StarRating from "../StarRating";
 import { Link } from "react-router-dom"
@@ -130,12 +129,12 @@ function Review() {
 
   //Link each button to their specific pages
   return (
-    <div className="GamePage">
+    <div className="GamePage pl-28 pr-28 pt-14 pb-16">
 
-      <div className="GameInfo">
-        <img className="GameCover" src={data.imageurl} alt={data.name}></img>
-        <div className="NameStars">
-          <h1>{data.name}</h1>
+      <div className="GameInfo flex">
+        <img className="GameCover w-80 rounded-3xl" src={data.imageurl} alt={data.name}></img>
+        <div className="NameStars flex items-center pl-10">
+          <h1 className="text-5xl font-bold">{data.name}</h1>
           <StarRating review={{ ratingStars: rating, userId: "1234" }} />
           {/* () => navigate("/games") */}
           <form onSubmit={handleDelete}>
@@ -154,25 +153,25 @@ function Review() {
         </div>
       </div>
 
-      <div className="Description">
-        <h1>Description</h1>
-        <p>{data.description}</p>
+      <div className="Description pt-10">
+        <h1 className="text-3xl font-bold">Description</h1>
+        <p className="text-xl">{data.description}</p>
       </div>
 
-      <div className="Platform">
-        <h1>Available on</h1>
-        {data.platform}
+      <div className="Platform pt-10">
+        <h1 className="text-3xl font-bold">Available on</h1>
+        <p className="text-xl">{data.platform}</p>
       </div>
 
-      <div className="Review">
-        <h1>Reviews</h1>
+      <div className="Review pt-10">
+        <h1 className="text-3xl font-bold">Reviews</h1>
         
         {!user.email  &&
           <Alert severity="error">You have to login to add a comment!</Alert>
         }
-        <form className="addReview" onSubmit={HandleSubmit}>
+        <form className="addReview flex justify-between flex-row items-center mt-10 mb-10" onSubmit={HandleSubmit}>
           {user.email &&
-          <input required name="reviewText" type="text" placeholder="Add a review" onFocus={handleFocus}></input>
+          <input className="w-5/6 h-11 border-0 focus:outline-none focus:border-black focus:border-b" required name="reviewText" type="text" placeholder="Add a review" onFocus={handleFocus}></input>
           }
           {newReviewBtn === true &&
             <><StarRating review={{ ratingStars: 0, userId: "1235" }} isEditable={true} setRatingStars={setRatingStars} ratingStars={ratingStars} />
@@ -186,7 +185,7 @@ function Review() {
               <ReviewCard key={review.userId} review={review} />
             )
           })
-          : <p>No reviews</p>
+          : <p className="text-2xl font-bold">No reviews</p>
         }
       </div>
 
@@ -195,3 +194,4 @@ function Review() {
 }
 
 export default Review;
+//outline-none !important bottom-px
