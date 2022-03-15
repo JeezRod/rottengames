@@ -15,7 +15,7 @@ function Review() {
   const navigate = useNavigate();
   const params = useParams();
   //State for the games
-  const [data, setData] = React.useState({ reviews: [{ "ratingStars": 0, "email": "" }] });
+  const [data, setData] = React.useState({ reviews: [{ "ratingStars": 0, "userId": "" }] });
   //State for the loading state
   const [loading, setLoading] = React.useState(false);
   //State for the average rating
@@ -96,13 +96,15 @@ function Review() {
       const url = ("/api/games/" + params.id)
 
       let text = event.target.reviewText.value
-      let name = userJson.name
-      let email = userJson.email
+      // let name = userJson.name
+      // let email = userJson.email
+      let userId = userJson._id
+      console.log(userJson)
 
       const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ text, name, email, ratingStars })
+        body: JSON.stringify({ text, userId, ratingStars })
       };
       fetch(url, requestOptions)
         .then(response => console.log('Submitted successfully'))
@@ -134,7 +136,7 @@ function Review() {
         <img className="GameCover w-80 rounded-3xl" src={data.imageurl} alt={data.name}></img>
         <div className="NameStars flex items-center pl-10">
           <h1 className="text-5xl font-bold">{data.name}</h1>
-          <StarRating review={{ ratingStars: rating, email: "1234" }} />
+          <StarRating review={{ ratingStars: rating, userId: "1234" }} />
           {/* () => navigate("/games") */}
           <form onSubmit={handleDelete}>
           {user.admin && 
@@ -173,7 +175,7 @@ function Review() {
           <input className="w-5/6 h-11 border-0 focus:outline-none focus:border-black focus:border-b" required name="reviewText" type="text" placeholder="Add a review" onFocus={handleFocus}></input>
           }
           {newReviewBtn === true &&
-            <><StarRating review={{ ratingStars: 0, email: "1235" }} isEditable={true} setRatingStars={setRatingStars} ratingStars={ratingStars} />
+            <><StarRating review={{ ratingStars: 0, userId: "1235" }} isEditable={true} setRatingStars={setRatingStars} ratingStars={ratingStars} />
               <button>Add Review</button></>
           }
         </form>
@@ -181,7 +183,7 @@ function Review() {
         {data.reviews.length > 0
           ? data.reviews.map(review => {
             return (
-              <ReviewCard key={review.email} review={review} />
+              <ReviewCard key={review.userId} review={review} />
             )
           })
           : <p className="text-2xl font-bold">No reviews</p>

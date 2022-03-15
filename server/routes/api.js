@@ -91,9 +91,9 @@ router.get("/user/:userId", async (req, res) => {
 })
 
 //Route to get a specific user
-router.get("/user/:userEmail/comments", async (req, res) => {
+router.get("/user/:userId/comments", async (req, res) => {
   try {
-    const user = await Game.find({ "reviews.email": req.params.userEmail });
+    const user = await Game.find({ "reviews.userId": req.params.userId });
     res.json(user);
   } catch (e) {
     res.status(401)
@@ -297,8 +297,8 @@ router.get("/games/:gameId/reviews/:reviewId", (req, res) => {
 router.post("/games/:gameId", async (req, res) => {
   //First checks if the user has already commented on the review
   const result = await Game.findById(req.params.gameId);
-  const isAlreadyCommented = result.reviews.email.includes(req.body.email)
-
+  const isAlreadyCommented = result.reviews.userId.includes(req.body.userId)
+  console.log(req.body)
   //Only add the review if the user has not commented on the same game
   if (!isAlreadyCommented) {
     //Adding the review object to the reviews array in the database(if same object, does nothing)

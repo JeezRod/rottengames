@@ -5,28 +5,28 @@ import {useUser, useUserUpdateContext} from "../../UserContext"
 
 const ReviewCard = ({ review, isAdmin, loggedIn }) => {
 
-  const [profilePicture, setProfilePicture] = React.useState("");
+  const [userReview, setUserReview] = React.useState("");
   const user = useUser();
 
   //Fetch the profile picture for the specific email
   React.useEffect(() => {
     async function fetchData() {
-      let data = await fetch("/api/user/profile/picture?email=" + review.email);
+      let data = await fetch("/api/user/" + review.userId);
       let dataJson = await data.json();
-      setProfilePicture(dataJson)
+      setUserReview(dataJson)
     }
     fetchData();
-  }, [review.email]);
+  }, [review.userId]);
 
   return (
     <div className="Rating mb-1 flex items-center justify-between p-1 shadow-lg mb-8 mt-8">
 
       <div className="CommentCard flex w-full justify-between leading-8">
         <div className="pfp flex items-center">
-          <img src={profilePicture} alt="pfp" className="w-24 h-24 object-cover mr-5 rounded-full content-center"></img>
+          <img src={userReview.picture} alt="pfp" className="w-24 h-24 object-cover mr-5 rounded-full content-center"></img>
 
           <div className="UserReview">
-            <p className="font-bold text-2xl">{review.name}</p>
+            <p className="font-bold text-2xl">{userReview.name}</p>
             <p className="text-xl">{review.text}</p>
           </div>
         </div>

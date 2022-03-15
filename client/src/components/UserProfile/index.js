@@ -42,7 +42,7 @@ const UserProfile = () => {
 
     React.useEffect(() => {
         async function fetchComments(){
-            let response = await fetch('/api/user/'+user.email+"/comments");
+            let response = await fetch('/api/user/'+user._id+"/comments");
             if (response.status === 200) {
             let gamesJson = await response.json();
             
@@ -52,7 +52,7 @@ const UserProfile = () => {
                 //Loops through all reviews
                 game.reviews.forEach(review => {
                     //If the review is written by the user (same email)
-                    if (review.email === user.email){
+                    if (review.userId === user._id){
                         let userReview = {}
                         userReviewsArray[game.name] = {id: game._id, review: review}
                         //Check if the userReview is empty before pushing to array 
@@ -69,7 +69,7 @@ const UserProfile = () => {
             }
         }
         fetchComments();
-    },[user.email])
+    },[user._id])
 
     const handleClick = (e) =>{
         e.preventDefault();
