@@ -24,8 +24,8 @@ function Filter({ setSearchTerm, setSearchPlatform }) {
   //State to hold all the names of the platforms, initial value same as the local storage
   if(!platformFromLocal){
     platformFromLocal = []
-  } else{
-    platformFromLocal.split(",")
+  } else {
+    platformFromLocal = platformFromLocal.split(",");
   }
   
   const [allPlatforms] = React.useState(platformFromLocal);
@@ -53,6 +53,7 @@ function Filter({ setSearchTerm, setSearchPlatform }) {
     );
     //Update the checkedState array with the boolean values
     setCheckedState(updatedCheckedState);
+    console.log(allPlatforms)
 
     //If the allPlatforms includes the checkbox currently clicked
     if (allPlatforms.includes(name)){
@@ -60,9 +61,8 @@ function Filter({ setSearchTerm, setSearchPlatform }) {
       allPlatforms.splice(allPlatforms.indexOf(name), 1)
     }else {
       //else add to allPlatforms
-      allPlatforms.push(name)
+      allPlatforms.push(name);
     }
-
     //Set searchPlatform as new array for re-render
     setSearchPlatform([...allPlatforms]);
   }
