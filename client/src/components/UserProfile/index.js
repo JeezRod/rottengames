@@ -113,14 +113,13 @@ const UserProfile = () => {
                 <form onSubmit={handleSave} >
                     {isSameUser 
                     ? <p className="text-3xl font-bold">My Profile</p>
-                    : <p>{user.name}' Profile</p>}
+                    : <p className="text-3xl font-bold w-50">{user.name}'s Profile</p>}
                     
                     <img className='profilePicture mt-8 rounded-full w-36 h-36' src={user.picture} alt="profile"></img>
                     
                     <div className='userSection mt-16'>
-                        <h2>Name</h2>
                         {isEdit
-                        ?<textarea className='nameText w-96 h-8 resize-none' name="name" defaultValue={user.name}></textarea>
+                        ?<textarea className='nameText w-96 h-8 resize-none text-3xl font-bold' name="name" defaultValue={user.name}></textarea>
                         :<p className="text-3xl font-bold">{user.name}</p>
                         }
                        
@@ -129,7 +128,7 @@ const UserProfile = () => {
                     <div className='userSection mt-16'>
                     <p className="text-3xl font-bold">Bio</p>
                         {isEdit
-                        ?<textarea className='bioText' name="bio" defaultValue={user.bio}></textarea>
+                        ?<textarea className='bioText text-xl' name="bio" defaultValue={user.bio}></textarea>
                         :<p className="text-xl">{user.bio}</p>
                         }
                         
@@ -143,7 +142,7 @@ const UserProfile = () => {
                 </form>
             </aside>
 
-            <main className='mainProfile mt-12 w-9/12 flex flex-col items-start'>
+            <main className='mainProfile mt-12 ml-12 w-9/12 flex flex-col items-start'>
                 <p className="text-3xl font-bold">All Reviews</p>
                 {Object.keys(userReviews).map( (key) => {
                     return(
