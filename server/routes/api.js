@@ -164,7 +164,6 @@ router.get("/user/profile/picture", async (req, res) => {
     let { email } = req.query;
 
     const user = await User.findOne({ email: email });
-    console.log(user.picture)
     res.json(user.picture);
     res.status(200)
   }
@@ -299,8 +298,6 @@ router.post("/games/:gameId", async (req, res) => {
   //First checks if the user has already commented on the review
   const result = await Game.findById(req.params.gameId);
   const isAlreadyCommented = result.reviews.email.includes(req.body.email)
-  console.log(req.body);
-
 
   //Only add the review if the user has not commented on the same game
   if (!isAlreadyCommented) {
