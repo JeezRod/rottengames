@@ -4,16 +4,14 @@ import ReviewCard from "../ReviewCard";
 import { useParams } from "react-router-dom";
 import ReactLoading from "react-loading";
 import { Link } from "react-router-dom"
-import {useUser, useUserUpdateContext} from "../../UserContext"
+import {useUser} from "../../UserContext"
 
 const UserProfile = () => {
     const params = useParams();
     //State for the user
     const [user, setUser] = React.useState({});
-    
     //State for the user
     const currentUser = useUser();
-
     //State for if currentUser is the owner of the profile page
     const [isSameUser, setIsSameUser] = React.useState(false);
 
@@ -22,6 +20,9 @@ const UserProfile = () => {
     //State for loading
     const [loading, setLoading] = React.useState(true)
 
+    //State for editing mode
+    const [isEdit, setIsEdit] = React.useState(false)
+
     //Loading the user from the url params
     React.useEffect( () => {
         async function fetchUser(){
@@ -29,18 +30,10 @@ const UserProfile = () => {
             let response = await fetch('/api/user/'+params.id);
             if (response.status === 200) {
                 let userJson = await response.json();
-                console.log(userJson);
                 await setUser(userJson);
-                console.log(currentUser.id)
-                console.log(userJson._id)
-                console.log(userJson._id === currentUser.id);
                 if(userJson._id === currentUser.id){
                     setIsSameUser(true);
-                    console.log(isSameUser)
                 }
-                console.log(isSameUser)
-            } else {
-                console.log("no user");
             }
         }
         fetchUser();
@@ -78,6 +71,33 @@ const UserProfile = () => {
         fetchComments();
     },[user.email])
 
+    const handleClick = (e) =>{
+        e.preventDefault();
+        if(isEdit){
+            setIsEdit(false);
+        }else{
+            setIsEdit(true);
+        }
+    }
+
+     async function handleSave (e){
+        const requestOptions = {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ 
+                name: e.target.name.value,
+                bio: e.target.bio.value,
+                handle: "profile" })
+        };
+        await fetch("/api/users/update/" + user._id, requestOptions)
+        window.alert(requestOptions);
+        setIsEdit(false)
+    }
+
+    const handleCancel = (e) => {
+        e.preventDefault()
+        setIsEdit(false)
+    }
     //If the profile is loading show loading prompt
     if (loading) {
         return (
@@ -89,21 +109,38 @@ const UserProfile = () => {
     return (
         <div className='profile flex pl-20 pr-20'>
             
-            <aside className='user mt-12 w-3/12 h-full'>
-                {isSameUser 
-                ? <p className="text-3xl font-bold">My Profile</p>
-                : <p>{user.name}' Profile</p>}
-                
-                <img className='profilePicture mt-8 rounded-full w-36 h-36' src={user.picture} alt="profile"></img>
-                
-                <div className='userSection mt-16'>
-                    <p className="text-3xl font-bold">{user.name}</p>
-                    <p className="text-xl">{user.email}</p>
-                </div>
-                <div className='userSection mt-16'>
+            <aside className='user'>
+                <form onSubmit={handleSave} >
+                    {isSameUser 
+                    ? <p className="text-3xl font-bold">My Profile</p>
+                    : <p>{user.name}' Profile</p>}
+                    
+                    <img className='profilePicture mt-8 rounded-full w-36 h-36' src={user.picture} alt="profile"></img>
+                    
+                    <div className='userSection mt-16'>
+                        <h2>Name</h2>
+                        {isEdit
+                        ?<textarea className='nameText w-96 h-8 resize-none' name="name" defaultValue={user.name}></textarea>
+                        :<p className="text-3xl font-bold">{user.name}</p>
+                        }
+                       
+                       <p className="text-xl">{user.email}</p>
+                    </div>
+                    <div className='userSection mt-16'>
                     <p className="text-3xl font-bold">Bio</p>
-                    <p className="text-xl">I am pro gamer</p>
-                </div>
+                        {isEdit
+                        ?<textarea className='bioText' name="bio" defaultValue={user.bio}></textarea>
+                        :<p className="text-xl">{user.bio}</p>
+                        }
+                        
+                    </div>
+                    {isSameUser
+                    ? isEdit 
+                        ?<div className='userSection mt-16'><button>Save</button><button onClick={handleCancel}>Cancel</button></div>
+                        : <div className='userSection mt-16'><button onClick={handleClick}>Edit Profile</button> </div>
+                    :<></>
+                    }
+                </form>
             </aside>
 
             <main className='mainProfile mt-12 w-9/12 flex flex-col items-start'>

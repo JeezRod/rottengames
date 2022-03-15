@@ -17,36 +17,42 @@ router.get("/", (req, res) => {
 
 // This route is called when the google login button is clicked
 router.post("/v1/auth/google", async (req, res) => {
-  const { token } = req.body
-  const ticket = await client.verifyIdToken({
-    idToken: token,
-    audience: process.env.REACT_APP_GOOGLE_CLIENT_ID
-  });
-  // Gets the user information of google account
-  const { name, email, picture } = ticket.getPayload();
-
-  // Create user object
-  const user = { "name": name, "email": email, "picture": picture };
-
-  // Set the session to the user email
-  req.session.userId = user.email
-
-  // Check if the user already exists in the database 
-  const numUser = await User.find({ email: user.email }).count();
-  // If it does not exist then add it to the db
-  if (numUser === 0) {
-    let new_user = new User({ email: user.email, name: user.name, picture: user.picture, admin: false });
-    new_user.save(function (err, user) {
-      if (err) { return console.error(err); }
-      console.log(user.email + " saved to users collection.");
+  try {
+    const { token } = req.body
+    const ticket = await client.verifyIdToken({
+      idToken: token,
+      audience: process.env.REACT_APP_GOOGLE_CLIENT_ID
     });
+    // Gets the user information of google account
+    const { name, email, picture } = ticket.getPayload();
+
+    // Create user object
+    const user = { "name": name, "email": email, "picture": picture };
+
+    // Set the session to the user email
+    req.session.userId = user.email
+
+    // Check if the user already exists in the database 
+    const numUser = await User.find({ email: user.email }).count();
+    // If it does not exist then add it to the db
+    if (numUser === 0) {
+      let new_user = new User({ email: user.email, name: user.name, picture: user.picture, admin: false });
+      new_user.save(function (err, user) {
+        if (err) { return console.error(err); }
+        console.log(user.email + " saved to users collection.");
+      });
+    }
+    // If it does then do not add it
+    else {
+      console.log("user already exists");
+    }
+    res.status(201)
+    res.json(user)
   }
-  // If it does then do not add it
-  else {
-    console.log("user already exists");
+  catch(e){
+    console.log("cancelled login")
   }
-  res.status(201)
-  res.json(user)
+  
 })
 
 //This route is called when the google logout button is clicked
@@ -54,7 +60,7 @@ router.delete("/v1/auth/logout", async (req, res) => {
   //destroy the session of the user
   console.log("loggin out the user here")
   await req.session.destroy();
-  console.log("session: "+req.session)
+  console.log("session: " + req.session)
 })
 
 //This route returns all the information of the current logged in user
@@ -76,20 +82,20 @@ router.get("/user", async (req, res) => {
 
 //Route to get a specific user
 router.get("/user/:userId", async (req, res) => {
-  try{
-    const user = await User.findOne({_id: req.params.userId});
+  try {
+    const user = await User.findOne({ _id: req.params.userId });
     res.json(user);
-  } catch (e){
+  } catch (e) {
     res.status(401)
   }
 })
 
 //Route to get a specific user
 router.get("/user/:userEmail/comments", async (req, res) => {
-  try{
-    const user = await Game.find({ "reviews.email": req.params.userEmail});
+  try {
+    const user = await Game.find({ "reviews.email": req.params.userEmail });
     res.json(user);
-  } catch (e){
+  } catch (e) {
     res.status(401)
   }
 })
@@ -98,7 +104,7 @@ router.get("/user/:userEmail/comments", async (req, res) => {
 // them all, they can locate it. This route it is used in the dashboard
 // component
 
-router.get("/users", async(req,res)=>{
+router.get("/users", async (req, res) => {
   let { page, size, name } = req.query;
 
   //Set default value for page
@@ -127,7 +133,7 @@ router.get("/users", async(req,res)=>{
   })
     .limit(limit)
     .skip(skip);
-  
+
   res.json(result);
 })
 
@@ -156,9 +162,8 @@ router.get("/users/count", async (req, res) => {
 router.get("/user/profile/picture", async (req, res) => {
   try {
     let { email } = req.query;
-    
+
     const user = await User.findOne({ email: email });
-    console.log(user.picture)
     res.json(user.picture);
     res.status(200)
   }
@@ -293,8 +298,6 @@ router.post("/games/:gameId", async (req, res) => {
   //First checks if the user has already commented on the review
   const result = await Game.findById(req.params.gameId);
   const isAlreadyCommented = result.reviews.email.includes(req.body.email)
-  console.log(req.body);
-
 
   //Only add the review if the user has not commented on the same game
   if (!isAlreadyCommented) {
@@ -318,16 +321,27 @@ router.post("/games/:gameId", async (req, res) => {
 //PUT Routes
 // This route updates the users admin permission
 router.put("/users/update/:userId", async (req, res)=>{
-  await User.updateOne(
-    {_id: req.params.userId},
-     {$set: {"admin": req.body.admin}})
-  res.end("permissions updated")
+  if(req.body.handle === "permissions"){
+    await User.updateOne(
+      {_id: req.params.userId},
+       {$set: {"admin": req.body.admin}})
+    res.end("permissions updated")
+    console.log("permissions updated")
+  }
+  if(req.body.handle === "profile"){
+    await User.updateOne(
+      {_id: req.params.userId},
+       {$set: {"name": req.body.name, "bio": req.body.bio}})
+    res.end("user updated")
+    console.log("user updated")
+  }
+  
 })
 
 // router.put("users/updat/:gameId", async (req, res) => {
-  const item = {
+const item = {
 
-  }
+}
 //   await Game.updateOne({_id: req.params.gameId},
 //     )
 // })
@@ -336,14 +350,14 @@ router.put("/users/update/:userId", async (req, res)=>{
 
 //Delete an user based on the user ID from the admin dashboard
 router.delete("/users/delete/:userId", async (req, res) => {
-  await User.deleteOne({_id: req.params.userId})
+  await User.deleteOne({ _id: req.params.userId })
   res.end("user deleted")
 });
 
 //Deletes chosen game when "delete game" button is clicked
 router.delete("/games/delete/:gameId", async (req, res) => {
-  await Game.deleteOne({_id: req.params.gameId})
-  res.redirect(200,'/games');
+  await Game.deleteOne({ _id: req.params.gameId })
+  res.redirect(200, '/games');
   // res.end("game deleted")
 })
 

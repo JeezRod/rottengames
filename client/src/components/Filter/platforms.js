@@ -32,15 +32,9 @@ export const platforms = [
     name: "Xbox One",
   },
   {
-    name: "Xbox Series X|S",
+    name: "Xbox Series X",
   },
   //Nintendo platforms
-  {
-    name: "NES",
-  },
-  {
-    name: "SNES",
-  },
   {
     name: "Nintendo 64",
   },
@@ -67,13 +61,7 @@ export const platforms = [
   },
   //PC platforms
   {
-    name: "Windows",
-  },
-  {
-    name: "Mac",
-  },
-  {
-    name: "Linux",
+    name: "windows;mac;linux",
   },
   //Sega platforms
   {
