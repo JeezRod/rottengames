@@ -1,6 +1,5 @@
 import React from 'react'
 import GameCard from '../GameCard'
-//import './GridView.css'
 import ReactLoading from "react-loading";
 import { Link } from "react-router-dom"
 

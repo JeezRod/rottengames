@@ -1,5 +1,4 @@
 import React from "react";
-//import "./userCard.css"
 
 function UserCard({ user }) {
     const [edit, setEdit] = React.useState(false);

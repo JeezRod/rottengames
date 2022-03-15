@@ -1,5 +1,4 @@
 import React from "react";
-//import "./filter.css"
 import { platforms } from "./platforms";
 
 //search button
@@ -90,7 +89,7 @@ function Filter({ setSearchTerm, setSearchPlatform }) {
         <input name="search" className="searchBar h-12 w-80 sticky ml-8 text-2xl border-b-2 w-64" type="text" placeholder="Search..." value={inputValue} onChange={handleChangeSearchBox}></input>
       </form>
 
-      <ul className="flex flex-col">
+      <ul className="flex flex-col mr-16">
         <h1 className="platformTitle mt-9 ml-7 text-4xl">Platforms</h1>
         {platforms.map(({ name }, index) => {
           return (

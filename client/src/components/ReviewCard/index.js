@@ -21,9 +21,9 @@ const ReviewCard = ({ review, isAdmin, loggedIn }) => {
   return (
     <div className="Rating mb-1 flex items-center justify-between p-1 shadow-lg mb-8 mt-8">
 
-      <div className="CommentCard flex w-full justify-between leading-8">
+      <div className="CommentCard flex w-full justify-between leading-8 p-4">
         <div className="pfp flex items-center">
-          <img src={userReview.picture} alt="pfp" className="w-24 h-24 object-cover mr-5 rounded-full content-center"></img>
+          <img src={userReview.picture} alt="pfp" className="w-12 h-12 object-cover mr-5 rounded-full content-center"></img>
 
           <div className="UserReview">
             <p className="font-bold text-2xl">{userReview.name}</p>

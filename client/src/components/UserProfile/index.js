@@ -1,5 +1,4 @@
 import React from 'react'
-//import "./userProfile.css"
 import ReviewCard from "../ReviewCard";
 import { useParams } from "react-router-dom";
 import ReactLoading from "react-loading";
@@ -107,7 +106,7 @@ const UserProfile = () => {
         )
     }
     return (
-        <div className='profile flex pl-20 pr-20'>
+        <div className='profile flex pl-20 pr-20 mt-12'>
             
             <aside className='user'>
                 <form onSubmit={handleSave} >
@@ -142,7 +141,7 @@ const UserProfile = () => {
                 </form>
             </aside>
 
-            <main className='mainProfile mt-12 ml-12 w-9/12 flex flex-col items-start'>
+            <main className='mainProfile ml-20 w-9/12 flex flex-col items-start'>
                 <p className="text-3xl font-bold">All Reviews</p>
                 {Object.keys(userReviews).map( (key) => {
                     return(

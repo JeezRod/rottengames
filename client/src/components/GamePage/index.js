@@ -1,5 +1,4 @@
 import React from "react";
-//import "./Review.css"
 import ReviewCard from "../ReviewCard";
 import StarRating from "../StarRating";
 import { Link } from "react-router-dom"
@@ -130,7 +129,7 @@ function Review() {
 
   //Link each button to their specific pages
   return (
-    <div className="GamePage pl-28 pr-28 pt-14">
+    <div className="GamePage pl-28 pr-28 pt-14 pb-16">
 
       <div className="GameInfo flex">
         <img className="GameCover w-80 rounded-3xl" src={data.imageurl} alt={data.name}></img>

@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-//import './nav.css'
 import { NavLink } from "react-router-dom";
 import styled from 'styled-components'
 import Authentication from "../Authentication"
