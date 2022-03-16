@@ -106,7 +106,7 @@ const UserProfile = () => {
         )
     }
     return (
-        <div className='profile flex pl-20 pr-20 mt-12'>
+        <div className='profile flex pl-20 pr-20 pt-32'>
             
             <aside className='user'>
                 <form onSubmit={handleSave} >

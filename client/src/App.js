@@ -13,15 +13,11 @@ import UserProfile from "./components/UserProfile";
 
 
 function App() {
-  //DarkMode();
   return (
     <div>
       <UserProvider>
         <Router>
-          <div>
             <Navbar ></Navbar>
-            <br></br>
-          </div>
           <Routes>
             <Route path="/" element={<App />} />
             <Route index element={<Home />} />
