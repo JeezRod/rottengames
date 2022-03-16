@@ -4,15 +4,15 @@ function UserCard({ user }) {
     const [edit, setEdit] = React.useState(false);
     const [choiceBox, setChoice] = React.useState(user.admin)
     return (
-        <div className="userCard flex flex-col justify-evenly w-full h-full p-4 rounded-xl shadow-xl duration-300 hover:shadow-2xl">
+        <div className="userCard flex flex-col justify-evenly w-full h-full p-4 rounded-xl shadow-xl duration-300 hover:shadow-2xl dark:hover:shadow-white dark:shadow-white">
             <div className="userPicture flex justify-center items-center">
-                <img className="w-24 h-24 rounded-full" src={user.picture} alt="profile-pic"></img>
+                <img className="w-24 h-24 rounded-full dark:text-white" src={user.picture} alt="profile-pic"></img>
             </div>
             <div className="userInfo flex flex-col justify-center">
-                <p className="text-center w-full overflow-auto">
+                <p className="text-center w-full overflow-auto dark:text-white">
                     {user.name}
                 </p>
-                <p className="text-center w-full overflow-auto">
+                <p className="text-center w-full overflow-auto dark:text-white">
                     {user.email}
                 </p>
 
@@ -31,15 +31,15 @@ function UserCard({ user }) {
 
             {!edit
                 ? <div className="buttons flex flex-row items-center justify-center">
-                    <button className="m-1 rounded-xl duration-200 w-20 hover:bg-white hover:text-black hover:shadow-2xl" onClick={handleEdit}>Edit</button>
+                    <button className="m-1 rounded-xl duration-200 w-20 hover:bg-white hover:text-black hover:shadow-2xl dark:bg-white dark:text-black dark:hover:bg-gray-600 dark:hover:text-white dark:text-white" onClick={handleEdit}>Edit</button>
                     <form onSubmit={handleDelete}>
-                        <button className="m-1 rounded-xl duration-200 w-20 hover:bg-white hover:text-black hover:shadow-2xl">Delete</button>
+                        <button className="m-1 rounded-xl duration-200 w-20 hover:bg-white hover:text-black hover:shadow-2xl dark:bg-white dark:text-black dark:hover:bg-gray-600 dark:hover:text-white dark:text-white">Delete</button>
                     </form>
                 </div>
                 :
                 <div className="buttons flex flex-row items-center justify-center">
                     <form onSubmit={handleSave} >
-                        <button className="m-1 h-10 rounded-xl duration-200 w-20 hover:bg-white hover:text-black hover:shadow-2xl">Save</button>
+                        <button className="m-1 h-10 rounded-xl duration-200 w-20 hover:bg-white hover:text-black hover:shadow-2xl dark:bg-white dark:text-black dark:hover:bg-gray-600 dark:hover:text-white dark:text-white">Save</button>
                     </form>
                 </div>
             }

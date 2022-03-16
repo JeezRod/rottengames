@@ -19,7 +19,7 @@ function Dashboard() {
   const user = useUser();
 
   //TailwindCSS for the buttons
-  const buttonStyle = "m-1 p-1 rounded-none w-full bg-white text-black shadow-xl h-24 mt-10px transition ease-in-out duration-300 hover:shadow-2xl";
+  const buttonStyle = "m-1 p-1 rounded-none w-full bg-white text-black shadow-xl h-24 mt-10px transition ease-in-out duration-300 hover:shadow-2xl dark:text-white dark:bg-black dark:shadow-white";
 
   React.useEffect(() => {
     //Async function to fetch count of all games
@@ -54,7 +54,7 @@ function Dashboard() {
           ? <div>
             <form onSubmit={HandleSubmit} className="searchContainer flex flex-row justify-center items-center mb-8">
               <input name="search" className="searchBar mr-4 p-2" type="text" placeholder="Search"></input>
-              <button className="searchBtn">➜</button>
+              <button className="searchBtn dark:text-black dark:bg-white dark:hover:bg-gray-600 dark:hover:text-white">➜</button>
             </form>
           
             <Users page={page} searchTerm={searchTerm} perPage={perPage}/>
@@ -68,11 +68,11 @@ function Dashboard() {
               previousLabel="➜"
               renderOnZeroPageCount={null}
 
-              containerClassName="paginator flex justify-center my-8 text-2xl items-center "
-              activeClassName="currentPage text-white bg-black rounded-3xl"
+              containerClassName="paginator flex justify-center my-8 text-2xl items-center"
+              activeClassName="currentPage text-white bg-black rounded-3xl dark:hover:bg-gray-600 dark:hover:text-white dark:text-white dark:bg-gray-600 dark:text-white"
               pageClassName="pages transition-all ease-in duration-400 p-4 mr-1 ml-1 hover:text-white hover:bg-black hover:rounded-xl"
-              nextClassName="next p-4 transition-all ease-in duration-400 transition-all ease-in duration-400 hover:text-white hover:bg-black hover:rounded-xl"
-              previousClassName="previous p-4 -rotate-180 transition-all ease-in duration-400 hover:text-white hover:bg-black hover:rounded-xl"
+              nextClassName="next p-4 transition-all ease-in duration-400 transition-all ease-in duration-400 hover:text-white hover:bg-black hover:rounded-xl dark:hover:bg-gray-600 dark:hover:text-white dark:text-white"
+              previousClassName="previous p-4 -rotate-180 transition-all ease-in duration-400 hover:text-white hover:bg-black hover:rounded-xl dark:hover:bg-gray-600 dark:hover:text-white dark:text-white"
               breakLinkClassName="break"
             />
           </div>
@@ -84,7 +84,10 @@ function Dashboard() {
   );
   }
   return(
+  <div>
     <h1>Forbidden</h1>
+  </div>
+   
   );
 
 
