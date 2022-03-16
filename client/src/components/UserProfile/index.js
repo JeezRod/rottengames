@@ -111,20 +111,20 @@ const UserProfile = () => {
             <aside className='user'>
                 <form onSubmit={handleSave} >
                     {isSameUser 
-                    ? <p className="text-3xl font-bold">My Profile</p>
-                    : <p className="text-3xl font-bold w-50">{user.name}'s Profile</p>}
+                    ? <p className="text-3xl font-bold dark:text-white">My Profile</p>
+                    : <p className="text-3xl font-bold w-50 dark:text-white">{user.name}'s Profile</p>}
                     
                     <img className='profilePicture mt-8 rounded-full w-36 h-36' src={user.picture} alt="profile"></img>
                     
                     <div className='userSection mt-16'>
                         {isEdit
                         ?<textarea className='nameText w-96 h-8 resize-none text-3xl font-bold' name="name" defaultValue={user.name}></textarea>
-                        :<p className="text-3xl font-bold">{user.name}</p>
+                        :<p className="text-3xl font-bold dark:text-white">{user.name}</p>
                         }
                        
-                       <p className="text-xl">{user.email}</p>
+                       <p className="text-xl dark:text-white">{user.email}</p>
                     </div>
-                    <div className='userSection mt-16'>
+                    <div className='userSection mt-16 dark:text-white'>
                     <p className="text-3xl font-bold">Bio</p>
                         {isEdit
                         ?<textarea className='bioText text-xl' name="bio" defaultValue={user.bio}></textarea>
@@ -134,19 +134,19 @@ const UserProfile = () => {
                     </div>
                     {isSameUser
                     ? isEdit 
-                        ?<div className='userSection mt-16'><button>Save</button><button onClick={handleCancel}>Cancel</button></div>
-                        : <div className='userSection mt-16'><button onClick={handleClick}>Edit Profile</button> </div>
+                        ?<div className='userSection mt-16'><button className="dark:text-white">Save</button><button onClick={handleCancel}>Cancel</button></div>
+                        : <div className='userSection mt-16'><button className="dark:text-black dark:bg-white" onClick={handleClick}>Edit Profile</button> </div>
                     :<></>
                     }
                 </form>
             </aside>
 
             <main className='mainProfile ml-20 w-9/12 flex flex-col items-start'>
-                <p className="text-3xl font-bold">All Reviews</p>
+                <p className="text-3xl font-bold dark:text-white">All Reviews</p>
                 {Object.keys(userReviews).map( (key) => {
                     return(
-                        <div className="reviewRow w-full mt-12" key={key}>
-                            <p className="text-2xl font-bold">{key}</p>
+                        <div className="reviewRow w-full mt-12 dark:text-white" key={key}>
+                            <p className="text-2xl font-bold dark:text-white">{key}</p>
                             <Link className="link"to={"/games/"+userReviews[key].id}>
                                 <ReviewCard review={userReviews[key].review} isAdmin={currentUser.admin || isSameUser} loggedIn={Object.keys(currentUser).length !== 0}/>
                             </Link>

@@ -7,7 +7,7 @@
 /* Ctrl+K to find css styles */
 
 body {
-  @apply bg-white dark:bg-black transition-all;
+  @apply bg-white dark:bg-black transition-all transition duration-1000;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -24,10 +24,6 @@ code {
 button {
   @apply bg-black text-white p-2.5 font-bold rounded-3xl
 }
-
-/* ul li {
-  @apply list-none inline-block ml-7 text-2xl
-} */
 
 nav {
   @apply flex-initial justify-between

@@ -13,7 +13,8 @@ const StyledNav = styled(NavLink)`
   font-size: 24px;
   text-decoration: none;
   color:black;
-  margin: 1em
+  margin: 1em;
+  dark:text-white;
 `;
 
 const Navbar = () => {
@@ -25,9 +26,9 @@ const Navbar = () => {
       <HamburgerMenu />
       <nav className="items-center">
         <ul>
-          <StyledNav to="/">Home</StyledNav>
-          <StyledNav to="/games">Search</StyledNav>
-          <StyledNav to="about">About </StyledNav>
+          <StyledNav className="dark:text-white" to="/">Home</StyledNav>
+          <StyledNav className="dark:text-white" to="/games">Search</StyledNav>
+          <StyledNav className="dark:text-white" to="about">About </StyledNav>
         </ul>
       </nav>
       <Authentication />

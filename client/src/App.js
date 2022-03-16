@@ -10,16 +10,15 @@ import { UserProvider } from './UserContext';
 import Dashboard from "./components/Dashboard";
 import AddGame from "./components/AddGame";
 import UserProfile from "./components/UserProfile";
-import DarkMode from "./hooks/DarkMode";
 
 
 function App() {
-  
+  //DarkMode();
   return (
-    <div className="dark:bg-black">
+    <div>
       <UserProvider>
         <Router>
-          <div className="NavContainer dark:white">
+          <div>
             <Navbar ></Navbar>
             <br></br>
           </div>

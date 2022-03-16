@@ -9,10 +9,10 @@ function Home() {
       <img src={LandingImg} alt="Landing" className="h-screen w-3/6 h-full object-cover items-stretch"></img>
       <div className="landing w-3/6 h-full flex flex-col pl-24 justify-center text-4xl leading-loose">
         <div>
-          <h1 className="font-bold text-7xl">Rotten Games</h1>
-          <h4>Search. Review. Assist.</h4>
+          <p className="font-bold text-7xl dark:text-white">Rotten Games</p>
+          <p className="dark:text-white">Search. Review. Assist.</p>
           <Link to="/games">
-            <button className="mt-6 text-lg pr-4 pl-4">Search Now !</button>
+            <button className="mt-6 text-lg pr-4 pl-4 dark:bg-white dark:text-black">Search Now !</button>
           </Link>
         </div>
       </div>
