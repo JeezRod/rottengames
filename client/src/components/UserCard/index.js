@@ -4,7 +4,7 @@ function UserCard({ user }) {
     const [edit, setEdit] = React.useState(false);
     const [choiceBox, setChoice] = React.useState(user.admin)
     return (
-        <div className="userCard flex flex-col justify-evenly w-full h-full p-4 mt-2.5 rounded-xl shadow-xl duration-300 hover:shadow-2xl dark:hover:shadow-white dark:shadow-white">
+        <div className="userCard flex flex-col justify-evenly w-full h-full p-4 rounded-xl shadow-xl duration-300 hover:shadow-2xl dark:hover:shadow-white dark:shadow-white">
             <div className="userPicture flex justify-center items-center">
                 <img className="w-24 h-24 rounded-full dark:text-white" src={user.picture} alt="profile-pic"></img>
             </div>

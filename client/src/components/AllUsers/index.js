@@ -49,7 +49,7 @@ function AllUsers({page, searchTerm, perPage}) {
     }
 
     return (    
-        <main className="allUsers grid grid-cols-4 gap-x-8 gap-y-8 w-10/12">
+        <main className="allUsers grid grid-cols-4 gap-x-8 gap-y-8 mx-4">
             {data.map( user =>{
                 return(
                     <UserCard key={user._id} user={user}/>
