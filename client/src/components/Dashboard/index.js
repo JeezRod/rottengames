@@ -84,8 +84,10 @@ function Dashboard() {
   );
   }
   return(
-  <div>
-    <h1>Forbidden</h1>
+  <div className=" flex flex-col pt-32 dark:text-white text-center pt-80">
+    <p className="text-9xl items-center font-bold">403</p>
+    <p className="text-3xl font-bold">Forbidden</p>
+    <p className="text-xl font-bold">Access Denied!</p>
   </div>
    
   );
