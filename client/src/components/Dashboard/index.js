@@ -17,7 +17,7 @@ function Dashboard() {
   const [selectedComponent, setComponent] = React.useState("users")
 
   //TailwindCSS for the buttons
-  const buttonStyle = "m-1 p-10 rounded-none w-full bg-white text-black shadow-xl h-60 mt-10px transition ease-in-out duration-300 hover:shadow-2xl";
+  const buttonStyle = "m-1 p-1 rounded-none w-full bg-white text-black shadow-xl h-24 mt-10px transition ease-in-out duration-300 hover:shadow-2xl";
 
   React.useEffect(() => {
     //Async function to fetch count of all games
@@ -50,7 +50,7 @@ function Dashboard() {
         <div className="MainPanel flex flex-col justify-center items-center h-auto w-10/12">
           {selectedComponent === "users"
           ? <div>
-            <form onSubmit={HandleSubmit} className="searchContainer flex flex-row items-center mb-8">
+            <form onSubmit={HandleSubmit} className="searchContainer flex flex-row justify-center items-center mb-8">
               <input name="search" className="searchBar mr-4 p-2" type="text" placeholder="Search"></input>
               <button className="searchBtn">➜</button>
             </form>
@@ -66,7 +66,7 @@ function Dashboard() {
               previousLabel="➜"
               renderOnZeroPageCount={null}
 
-              containerClassName="paginator flex justify-center mb-20 text-2xl mt-8 items-center pt-12"
+              containerClassName="paginator flex justify-center my-8 text-2xl items-center "
               activeClassName="currentPage text-white bg-black rounded-3xl"
               pageClassName="pages transition-all ease-in duration-400 p-4 mr-1 ml-1 hover:text-white hover:bg-black hover:rounded-xl"
               nextClassName="next p-4 transition-all ease-in duration-400 transition-all ease-in duration-400 hover:text-white hover:bg-black hover:rounded-xl"

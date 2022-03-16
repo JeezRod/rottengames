@@ -8,7 +8,7 @@ import { useUser, useUserUpdateContext } from "../../UserContext"
 //Style fo NavLink
 const StyledNav = styled(NavLink)`
   display: inline-block;
-  padding-left: 100px;
+  padding: 0 50px;
   font-weight: 700;
   font-size: 24px;
   text-decoration: none;
