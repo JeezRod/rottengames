@@ -111,9 +111,9 @@ router.get("/users", async (req, res) => {
   if (!page) {
     page = 1;
   }
-  //Set default value for games per page
+  //Set default value for users per page
   if (!size) {
-    size = 12;
+    size = 8;
   }
   //Set default value for name
   if (!name) {
