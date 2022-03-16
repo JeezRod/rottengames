@@ -2,7 +2,7 @@ import React from "react";
 import ReactPaginate from 'react-paginate';
 import Users from "../AllUsers";
 import AddGame from "../AddGame"
-import { Link } from "react-router-dom"
+import {useUser, useUserUpdateContext} from "../../UserContext"
 
 function Dashboard() {
 
@@ -15,6 +15,8 @@ function Dashboard() {
   const [searchTerm, setSearchTerm] = React.useState('');
 
   const [selectedComponent, setComponent] = React.useState("users")
+
+  const user = useUser();
 
   //TailwindCSS for the buttons
   const buttonStyle = "m-1 p-1 rounded-none w-full bg-white text-black shadow-xl h-24 mt-10px transition ease-in-out duration-300 hover:shadow-2xl";
@@ -39,7 +41,7 @@ function Dashboard() {
       setPage(event.selected + 1)
   
     };
-
+  if(user.admin){
   return (
       <main className="dash flex h-auto items-start">
         <div className="SidePanel flex flex-col justify-center h-auto w-3/12">
@@ -79,6 +81,10 @@ function Dashboard() {
 
         </div>
       </main>
+  );
+  }
+  return(
+    <h1>Forbidden</h1>
   );
 
 
