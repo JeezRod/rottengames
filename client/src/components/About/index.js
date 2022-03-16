@@ -6,7 +6,7 @@ export default function About() {
   const user = useUser()
 
   return (
-    <div className="About">
+    <div className="About dark:text-white">
       <h1>About page</h1>
       <h2>{user.email}</h2>
       <h2>{user.name}</h2>

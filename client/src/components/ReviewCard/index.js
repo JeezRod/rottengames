@@ -19,25 +19,25 @@ const ReviewCard = ({ review, isAdmin, loggedIn }) => {
   }, [review.userId]);
 
   return (
-    <div className="Rating mb-1 flex items-center justify-between p-1 shadow-lg mb-8 mt-8">
+    <div className="Rating mb-1 flex items-center justify-between p-1 shadow-lg mb-8 mt-8 dark:shadow-white">
 
       <div className="CommentCard flex w-full justify-between leading-8 p-4">
         <div className="pfp flex items-center">
           <img src={userReview.picture} alt="pfp" className="w-12 h-12 object-cover mr-5 rounded-full content-center"></img>
 
           <div className="UserReview">
-            <p className="font-bold text-2xl">{userReview.name}</p>
-            <p className="text-xl">{review.text}</p>
+            <p className="font-bold text-2xl dark:text-white">{userReview.name}</p>
+            <p className="text-xl dark:text-white">{review.text}</p>
           </div>
         </div>
 
         <div className="buttonStartContainer">
           <StarRating review={review} />
           {user.email &&
-            <button className="UserButton ml-1.5">Comment</button>
+            <button className="UserButton ml-1.5 dark:text-black dark:bg-white dark:hover:bg-gray-600 dark:hover:text-white">Comment</button>
           }
           {(isAdmin || user.admin) &&
-          <button className="AdminButton ml-1.5">Delete</button>
+          <button className="AdminButton ml-1.5 dark:text-black dark:bg-white dark:hover:bg-gray-600 dark:hover:text-white">Delete</button>
           }
         </div>
       </div>

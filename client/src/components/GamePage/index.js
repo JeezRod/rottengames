@@ -134,18 +134,18 @@ function Review() {
       <div className="GameInfo flex">
         <img className="GameCover w-80 rounded-3xl" src={data.imageurl} alt={data.name}></img>
         <div className="NameStars flex items-center pl-10">
-          <h1 className="text-5xl font-bold">{data.name}</h1>
+          <p className="text-5xl font-bold dark:text-white">{data.name}</p>
           <StarRating review={{ ratingStars: rating, userId: "1234" }} />
           {/* () => navigate("/games") */}
           <form onSubmit={handleDelete}>
           {user.admin && 
-            <button className="AdminButton">Delete Game</button>
+            <button className="AdminButton dark:hover:bg-gray-600 dark:hover:text-white dark:text-black dark:bg-white">Delete Game</button>
             }
           </form>
 
           <Link to="">
             {user.admin && 
-            <button className="AdminButton">Edit page</button>
+            <button className="AdminButton dark:hover:bg-gray-600 dark:hover:text-white dark:text-black dark:bg-white">Edit page</button>
             }
 
           </Link>
@@ -153,17 +153,17 @@ function Review() {
         </div>
       </div>
 
-      <div className="Description pt-10">
-        <h1 className="text-3xl font-bold">Description</h1>
-        <p className="text-xl">{data.description}</p>
+      <div className="Description pt-10 dark:text-white">
+        <p className="text-3xl font-bold">Description</p>
+        <p className="text-xl ">{data.description}</p>
       </div>
 
-      <div className="Platform pt-10">
-        <h1 className="text-3xl font-bold">Available on</h1>
+      <div className="Platform pt-10 dark:text-white">
+        <p className="text-3xl font-bold">Available on</p>
         <p className="text-xl">{data.platform}</p>
       </div>
 
-      <div className="Review pt-10">
+      <div className="Review pt-10 dark:text-white">
         <h1 className="text-3xl font-bold">Reviews</h1>
         
         {!user.email  &&
@@ -171,11 +171,11 @@ function Review() {
         }
         <form className="addReview flex justify-between flex-row items-center mt-10 mb-10" onSubmit={HandleSubmit}>
           {user.email &&
-          <input className="w-5/6 h-11 border-0 focus:outline-none focus:border-black focus:border-b" required name="reviewText" type="text" placeholder="Add a review" onFocus={handleFocus}></input>
+          <input className="w-5/6 h-11 border-0 focus:outline-none focus:border-black focus:border-b dark:text-white dark:border-0 dark:bg-black dark:focus:border-white dark:border-b" required name="reviewText" type="text" placeholder="Add a review" onFocus={handleFocus}></input>
           }
           {newReviewBtn === true &&
             <><StarRating review={{ ratingStars: 0, userId: "1235" }} isEditable={true} setRatingStars={setRatingStars} ratingStars={ratingStars} />
-              <button>Add Review</button></>
+              <button className="dark:hover:bg-gray-600 dark:hover:text-white dark:text-black dark:bg-white">Add Review</button></>
           }
         </form>
 

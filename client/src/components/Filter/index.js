@@ -1,9 +1,6 @@
 import React from "react";
 import { platforms } from "./platforms";
 
-//search button
-//<button className="searchBtn text-black bg-white p-4 duration-75 transition ease-in hover:ml-8 hover:text-white hover:bg-black hover:rounded hover:cursor-pointer">➜</button>
-
 function Filter({ setSearchTerm, setSearchPlatform }) {
   
   //Timer to send a request only when the user stops typing
@@ -90,7 +87,7 @@ function Filter({ setSearchTerm, setSearchPlatform }) {
       </form>
 
       <ul className="flex flex-col mr-16">
-        <h1 className="platformTitle mt-9 ml-7 text-4xl">Platforms</h1>
+        <h1 className="platformTitle mt-9 ml-7 text-4xl dark:text-white">Platforms</h1>
         {platforms.map(({ name }, index) => {
           return (
             <li key={index}>
@@ -104,7 +101,7 @@ function Filter({ setSearchTerm, setSearchPlatform }) {
                   checked={checkedState[index]}
                   onChange={() => handleChangeCheckBox(index, name)}
                 />
-                <label htmlFor={`custom-checkbox-${index}`}>{name}</label>
+                <label htmlFor={`custom-checkbox-${index}`} className="dark:text-white">{name}</label>
               </div>
             </li>
           );
