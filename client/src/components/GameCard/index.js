@@ -6,7 +6,7 @@ const GameCard = ({ game }) => {
   return (
     <div className='gamecard'>
       <LazyLoadImage className='gameImage w-full h-96 object-cover' effect='blur' src={game.imageurl} alt="" />
-      <h2 className='gameTitle pt-3 text-xl'>{game.name}</h2>
+      <h2 className='gameTitle pt-3 text-xl dark:text-white'>{game.name}</h2>
     </div>
   )
 }

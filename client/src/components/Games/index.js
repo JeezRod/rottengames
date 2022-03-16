@@ -108,11 +108,11 @@ function Games() {
             forcePage={page - 1}
 
             containerClassName="paginator flex justify-center mb-20 text-2xl mt-8 items-center"
-            activeClassName="currentPage text-white bg-black rounded-3xl"
-            pageClassName="pages transition-all ease-in duration-400 p-4 mr-1 ml-1 hover:text-white hover:bg-black hover:rounded-xl"
-            nextClassName="next p-4 transition-all ease-in duration-400 transition-all ease-in duration-400 hover:text-white hover:bg-black hover:rounded-xl"
-            previousClassName="previous p-4 -rotate-180 transition-all ease-in duration-400 hover:text-white hover:bg-black hover:rounded-xl"
-            breakLinkClassName="break"
+            activeClassName="currentPage text-white bg-black rounded-3xl dark:bg-gray-600 dark:text-white"
+            pageClassName="pages transition-all ease-in duration-400 p-4 mr-1 ml-1 hover:text-white hover:bg-black hover:rounded-xl dark:hover:bg-gray-600 dark:hover:text-white dark:text-white"
+            nextClassName="next p-4 transition-all ease-in duration-400 transition-all ease-in duration-400 hover:text-white hover:bg-black hover:rounded-xl dark:hover:bg-gray-600 dark:hover:text-white dark:text-white"
+            previousClassName="previous p-4 -rotate-180 transition-all ease-in duration-400 hover:text-white hover:bg-black hover:rounded-xl dark:hover:bg-gray-600 dark:hover:text-white dark:text-white"
+            breakLinkClassName="break dark:text-white"
           />
         </div>
       </div>
