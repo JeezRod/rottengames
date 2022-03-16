@@ -1,6 +1,7 @@
 import React from "react";
 import ReactPaginate from 'react-paginate';
 import Users from "../AllUsers";
+import AddGame from "../AddGame"
 import { Link } from "react-router-dom"
 
 function Dashboard() {
@@ -12,6 +13,8 @@ function Dashboard() {
   const [perPage, setPerPage] = React.useState(12);
 
   const [searchTerm, setSearchTerm] = React.useState('');
+
+  const [selectedComponent, setComponent] = React.useState("users")
 
   //TailwindCSS for the buttons
   const buttonStyle = "m-1 p-10 rounded-none w-full bg-white text-black shadow-xl h-60 mt-10px transition ease-in-out duration-300 hover:shadow-2xl";
@@ -40,35 +43,40 @@ function Dashboard() {
   return (
       <main className="dash flex h-auto items-start">
         <div className="SidePanel flex flex-col justify-center h-auto w-3/12">
-            <button className={buttonStyle}>Users</button>
-            <Link to="addGame" className="addGameButton"><button className={buttonStyle}>Add Game</button></Link>
-            <button className={buttonStyle}>Reviews</button>
+            <button className={buttonStyle} onClick={()=>setComponent("users")}>Users</button>
+            {/* <Link to="addGame" className="addGameButton"><button className={buttonStyle}>Add Game</button></Link> */}
+            <button className={buttonStyle} onClick={()=>setComponent("addGame")}>Add Game</button>
         </div>
         <div className="MainPanel flex flex-col justify-center items-center h-auto w-10/12">
-        <div>
-          <form onSubmit={HandleSubmit} className="searchContainer flex flex-row items-center mb-8">
-            <input name="search" className="searchBar mr-4 p-2" type="text" placeholder="Search"></input>
-            <button className="searchBtn">➜</button>
-          </form>
-        </div>
-          <Users page={page} searchTerm={searchTerm} perPage={perPage}/>
-          <ReactPaginate
-            breakLabel="..."
-            nextLabel="➜"
-            onPageChange={handlePageClick}
-            pageRangeDisplayed={0}
-            marginPagesDisplayed={3}
-            pageCount={Math.ceil(totalUsers / perPage)}
-            previousLabel="➜"
-            renderOnZeroPageCount={null}
+          {selectedComponent === "users"
+          ? <div>
+            <form onSubmit={HandleSubmit} className="searchContainer flex flex-row items-center mb-8">
+              <input name="search" className="searchBar mr-4 p-2" type="text" placeholder="Search"></input>
+              <button className="searchBtn">➜</button>
+            </form>
+          
+            <Users page={page} searchTerm={searchTerm} perPage={perPage}/>
+            <ReactPaginate
+              breakLabel="..."
+              nextLabel="➜"
+              onPageChange={handlePageClick}
+              pageRangeDisplayed={0}
+              marginPagesDisplayed={3}
+              pageCount={Math.ceil(totalUsers / perPage)}
+              previousLabel="➜"
+              renderOnZeroPageCount={null}
 
-            containerClassName="paginator flex justify-center mb-20 text-2xl mt-8 items-center pt-12"
-            activeClassName="currentPage text-white bg-black rounded-3xl"
-            pageClassName="pages transition-all ease-in duration-400 p-4 mr-1 ml-1 hover:text-white hover:bg-black hover:rounded-xl"
-            nextClassName="next p-4 transition-all ease-in duration-400 transition-all ease-in duration-400 hover:text-white hover:bg-black hover:rounded-xl"
-            previousClassName="previous p-4 -rotate-180 transition-all ease-in duration-400 hover:text-white hover:bg-black hover:rounded-xl"
-            breakLinkClassName="break"
-          />
+              containerClassName="paginator flex justify-center mb-20 text-2xl mt-8 items-center pt-12"
+              activeClassName="currentPage text-white bg-black rounded-3xl"
+              pageClassName="pages transition-all ease-in duration-400 p-4 mr-1 ml-1 hover:text-white hover:bg-black hover:rounded-xl"
+              nextClassName="next p-4 transition-all ease-in duration-400 transition-all ease-in duration-400 hover:text-white hover:bg-black hover:rounded-xl"
+              previousClassName="previous p-4 -rotate-180 transition-all ease-in duration-400 hover:text-white hover:bg-black hover:rounded-xl"
+              breakLinkClassName="break"
+            />
+          </div>
+          : <AddGame/>}
+          
+
         </div>
       </main>
   );
