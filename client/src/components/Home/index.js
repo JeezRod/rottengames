@@ -5,8 +5,8 @@ import { Link } from "react-router-dom"
 function Home() {
 
   return (
-    <main className="Home flex justify-between items-center h-full">
-      <img src={LandingImg} alt="Landing" className="h-screen w-3/6 h-full object-cover items-stretch"></img>
+    <main className="Home flex justify-between items-center">
+      <img src={LandingImg} alt="Landing" className="w-3/6 h-screen object-cover items-stretch"></img>
       <div className="landing w-3/6 h-full flex flex-col pl-24 justify-center text-4xl leading-loose">
         <div>
           <p className="font-bold text-7xl dark:text-white">Rotten Games</p>

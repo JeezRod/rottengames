@@ -22,7 +22,7 @@ const Navbar = () => {
   const user = useUser();
 
   return (
-    <header className="flex w-full justify-between">
+    <header className="flex w-full justify-between fixed z-10 dark:bg-gray-800 bg-white">
       <HamburgerMenu />
       <nav className="items-center">
         <ul>
