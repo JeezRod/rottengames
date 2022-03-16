@@ -134,8 +134,8 @@ const UserProfile = () => {
                     </div>
                     {isSameUser
                     ? isEdit 
-                        ?<div className='userSection mt-16'><button className="dark:text-white">Save</button><button onClick={handleCancel}>Cancel</button></div>
-                        : <div className='userSection mt-16'><button className="dark:text-black dark:bg-white" onClick={handleClick}>Edit Profile</button> </div>
+                        ?<div className='userSection mt-16'><button className="dark:text-black dark:bg-white dark:hover:bg-gray-600 dark:hover:text-white">Save</button><button className="dark:text-black dark:bg-white dark:hover:bg-gray-600 dark:hover:text-white" onClick={handleCancel}>Cancel</button></div>
+                        : <div className='userSection mt-16'><button className="dark:text-black dark:bg-white dark:hover:bg-gray-600 dark:hover:text-white" onClick={handleClick}>Edit Profile</button> </div>
                     :<></>
                     }
                 </form>
