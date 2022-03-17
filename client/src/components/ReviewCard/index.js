@@ -1,7 +1,8 @@
 import React from "react";
 //import "./ReviewCard.css";
 import StarRating from "../StarRating";
-import {useUser, useUserUpdateContext} from "../../UserContext"
+import {useUser} from "../../UserContext"
+import { Link } from "react-router-dom"
 
 const ReviewCard = ({ review, isAdmin, loggedIn }) => {
 
