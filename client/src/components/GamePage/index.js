@@ -25,10 +25,6 @@ function Review() {
   const [ratingStars, setRatingStars] = React.useState(1);
   //State to trigger a "force rendering" of the page to load the new review from the db
   const [newComment, setNewComment] = React.useState(false);
-  //State to check if the user is logged in or not
-  const [loggedIn, setLoggedIn] = React.useState(false);
-  //State to check if the user is logged in or not
-  const [isAdmin, setIsAdmin] = React.useState(false);
 
   const user = useUser();
 

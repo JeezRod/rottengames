@@ -146,10 +146,11 @@ const UserProfile = () => {
                 {Object.keys(userReviews).map( (key) => {
                     return(
                         <div className="reviewRow w-full mt-12 dark:text-white" key={key}>
-                            <p className="text-2xl font-bold dark:text-white">{key}</p>
                             <Link className="link"to={"/games/"+userReviews[key].id}>
-                                <ReviewCard review={userReviews[key].review} isAdmin={currentUser.admin || isSameUser} loggedIn={Object.keys(currentUser).length !== 0}/>
+                                <p className="text-2xl font-bold dark:text-white">{key}</p>
                             </Link>
+                            <ReviewCard review={userReviews[key].review} isAdmin={currentUser.admin || isSameUser} loggedIn={Object.keys(currentUser).length !== 0}/>
+                            
                         </div>
                     )
                 })}

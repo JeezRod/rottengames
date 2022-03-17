@@ -27,7 +27,9 @@ const ReviewCard = ({ review, isAdmin, loggedIn }) => {
           <img src={userReview.picture} alt="pfp" className="w-12 h-12 object-cover mr-5 rounded-full content-center"></img>
 
           <div className="UserReview">
-            <p className="font-bold text-2xl dark:text-white">{userReview.name}</p>
+            <Link to={"/profile/"+userReview._id}>
+              <p className="font-bold text-2xl dark:text-white">{userReview.name}</p>
+            </Link>
             <p className="text-xl dark:text-white">{review.text}</p>
           </div>
         </div>
