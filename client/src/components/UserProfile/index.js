@@ -118,8 +118,8 @@ const UserProfile = () => {
                     
                     <div className='userSection mt-16'>
                         {isEdit
-                        ?<textarea className='nameText w-96 h-8 resize-none text-3xl font-bold' name="name" defaultValue={user.name}></textarea>
-                        :<p className="text-3xl font-bold dark:text-white">{user.name}</p>
+                        ?<textarea className='nameText w-96 h-8 resize-none text-3xl font-bold border-2' name="name" defaultValue={user.name}></textarea>
+                        :<p className="text-3xl font-bold dark:text-white w-96 ">{user.name}</p>
                         }
                        
                        <p className="text-xl dark:text-white">{user.email}</p>
@@ -127,8 +127,8 @@ const UserProfile = () => {
                     <div className='userSection mt-16 dark:text-white'>
                     <p className="text-3xl font-bold">Bio</p>
                         {isEdit
-                        ?<textarea className='bioText text-xl' name="bio" defaultValue={user.bio}></textarea>
-                        :<p className="text-xl">{user.bio}</p>
+                        ?<textarea className='bioText text-xl w-96 h-8 resize-none border-2' name="bio" defaultValue={user.bio}></textarea>
+                        :<p className="text-xl w-96 ">{user.bio}</p>
                         }
                         
                     </div>
