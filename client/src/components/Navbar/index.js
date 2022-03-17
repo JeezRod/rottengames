@@ -10,7 +10,7 @@ const StyledNav = styled(NavLink)`
   display: inline-block;
   padding: 0 50px;
   font-weight: 700;
-  font-size: 24px;
+  font-size: 20px;
   text-decoration: none;
   color:black;
   margin: 1em;
@@ -22,7 +22,7 @@ const Navbar = () => {
   const user = useUser();
 
   return (
-    <header className="flex w-full justify-between fixed z-10 dark:bg-gray-800 bg-white">
+    <header className="flex w-full justify-between fixed z-10 dark:bg-gray-900 bg-white border-b-2 h-20">
       <HamburgerMenu />
       <nav className="items-center">
         <ul>

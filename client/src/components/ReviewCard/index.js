@@ -20,7 +20,7 @@ const ReviewCard = ({ review, isAdmin, loggedIn }) => {
   }, [review.userId]);
 
   return (
-    <div className="Rating mb-1 flex items-center justify-between p-1 shadow-lg mb-8 mt-8 dark:bg-gray-800">
+    <div className="Rating mb-1 flex items-center justify-between p-1 shadow-lg mb-8 mt-8 dark:bg-neutral-700">
 
       <div className="CommentCard flex w-full justify-between leading-8 p-4">
         <div className="pfp flex items-center">
