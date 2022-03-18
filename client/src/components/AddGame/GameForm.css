@@ -26,11 +26,10 @@
   max-width: 300px;
 }
 
-form {
+#addGameForm {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  /* align-items: stretch; */
 }
 
 #gameImage {

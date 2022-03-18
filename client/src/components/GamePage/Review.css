@@ -6,7 +6,6 @@
 
 .GameInfo {
     display:flex;
-    
 }
 
 .NameStars{
@@ -44,3 +43,8 @@
     outline: none !important;
     border-bottom:1px solid black;
   }
+
+#deleteGameBtn {
+    float: right;
+    width: 10%;
+}

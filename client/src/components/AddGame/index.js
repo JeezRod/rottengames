@@ -22,8 +22,6 @@ const AddGame = () => {
   const [selectedFile, setSelectedFile] = useState()
   const [isSelected, setIsSelected] = useState(false)
   const [image, setImage] = useState(null)
-  //State for editing mode
-  const [isEdit, setIsEdit] = useState(false)
 
   // const handleSubmit = (e) => {
   //   e.preventDefault()
@@ -124,7 +122,7 @@ const AddGame = () => {
   return (
     <div class="box">
       {/* FUNCTION handleSubmit ON ONSUBMIT */}
-      <form onSubmit={uploadFile}>
+      <form id="addGameForm" onSubmit={uploadFile}>
       <h2>Add Game Form</h2>
         <label for="gameName">Game Name : </label>
         <input type="text" id="gameName" name="gameName" value={name} onChange={(e) => setName(e.target.value)} required></input>
