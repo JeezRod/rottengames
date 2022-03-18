@@ -19,6 +19,9 @@ function Logout() {
   return (
     <GoogleLogout
           clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
+          render={renderProps => (
+            <button onClick={renderProps.onClick} className="mt-2 text-lg pr-4 pl-4">Logout</button>
+          )}
           buttonText="Logout"
           onLogoutSuccess={handleLogout}
       />

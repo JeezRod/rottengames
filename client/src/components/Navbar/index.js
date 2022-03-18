@@ -15,6 +15,9 @@ const StyledNav = styled(NavLink)`
   color:black;
   margin: 1em;
   dark:text-white;
+  &:hover {
+    text-decoration: underline;
+  }
 `;
 
 const Navbar = () => {
@@ -22,9 +25,10 @@ const Navbar = () => {
   const user = useUser();
 
   return (
-    <header className="flex w-full justify-between fixed z-10 dark:bg-gray-900 bg-white border-b-2 h-20">
+    <header className="flex w-full justify-between fixed z-10 dark:bg-gray-900 bg-white h-20">
       <HamburgerMenu />
-      <nav className="items-center">
+      <nav className="items-center lg:inline-block md:hidden hidden
+">
         <ul>
           <StyledNav className="dark:text-white" to="/">Home</StyledNav>
           <StyledNav className="dark:text-white" to="/games">Search</StyledNav>
