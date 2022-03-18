@@ -10,7 +10,7 @@ function Dashboard() {
 
   const [totalUsers, setTotalUsers] = React.useState([]);
 
-  const [perPage, setPerPage] = React.useState(12);
+  const [perPage, setPerPage] = React.useState(8);
 
   const [searchTerm, setSearchTerm] = React.useState('');
 
@@ -68,12 +68,12 @@ function Dashboard() {
               previousLabel="➜"
               renderOnZeroPageCount={null}
 
-              containerClassName="paginator flex justify-center my-8 text-2xl items-center"
-              activeClassName="currentPage text-white bg-black rounded-3xl dark:hover:bg-gray-600 dark:hover:text-white dark:text-white dark:bg-gray-600 dark:text-white"
-              pageClassName="pages transition-all ease-in duration-400 p-4 mr-1 ml-1 hover:text-white hover:bg-black hover:rounded-xl"
+              containerClassName="paginator flex justify-center mb-20 text-2xl mt-8 items-center"
+              activeClassName="currentPage text-white bg-black rounded-3xl dark:bg-gray-600 dark:text-white"
+              pageClassName="pages transition-all ease-in duration-400 p-4 mr-1 ml-1 hover:text-white hover:bg-black hover:rounded-xl dark:hover:bg-gray-600 dark:hover:text-white dark:text-white"
               nextClassName="next p-4 transition-all ease-in duration-400 transition-all ease-in duration-400 hover:text-white hover:bg-black hover:rounded-xl dark:hover:bg-gray-600 dark:hover:text-white dark:text-white"
               previousClassName="previous p-4 -rotate-180 transition-all ease-in duration-400 hover:text-white hover:bg-black hover:rounded-xl dark:hover:bg-gray-600 dark:hover:text-white dark:text-white"
-              breakLinkClassName="break"
+              breakLinkClassName="break dark:text-white"
             />
           </div>
           : <AddGame/>}

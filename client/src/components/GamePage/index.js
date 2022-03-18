@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router';
 import { useParams } from "react-router-dom";
 import ReactLoading from "react-loading";
 import Alert from '@mui/material/Alert';
-import {useUser, useUserUpdateContext} from "../../UserContext"
+import {useUser} from "../../UserContext"
 
 
 
@@ -25,10 +25,6 @@ function Review() {
   const [ratingStars, setRatingStars] = React.useState(1);
   //State to trigger a "force rendering" of the page to load the new review from the db
   const [newComment, setNewComment] = React.useState(false);
-  //State to check if the user is logged in or not
-  const [loggedIn, setLoggedIn] = React.useState(false);
-  //State to check if the user is logged in or not
-  const [isAdmin, setIsAdmin] = React.useState(false);
 
   const user = useUser();
 
@@ -139,13 +135,13 @@ function Review() {
           {/* () => navigate("/games") */}
           <form onSubmit={handleDelete}>
           {user.admin && 
-            <button className="AdminButton dark:hover:bg-gray-600 dark:hover:text-white dark:text-black dark:bg-white">Delete Game</button>
+            <button className="AdminButton">Delete Game</button>
             }
           </form>
 
           <Link to="">
             {user.admin && 
-            <button className="AdminButton dark:hover:bg-gray-600 dark:hover:text-white dark:text-black dark:bg-white">Edit page</button>
+            <button className="AdminButton ">Edit page</button>
             }
 
           </Link>
@@ -171,11 +167,11 @@ function Review() {
         }
         <form className="addReview flex justify-between flex-row items-center mt-10 mb-10" onSubmit={HandleSubmit}>
           {user.email &&
-          <input className="w-5/6 h-11 border-0 focus:outline-none focus:border-black focus:border-b dark:text-white dark:border-0 dark:bg-black dark:focus:border-white dark:border-b" required name="reviewText" type="text" placeholder="Add a review" onFocus={handleFocus}></input>
+          <input className="w-5/6 h-11 border-0 focus:outline-none focus:border-black focus:border-b" required name="reviewText" type="text" placeholder="Add a review" onFocus={handleFocus}></input>
           }
           {newReviewBtn === true &&
             <><StarRating review={{ ratingStars: 0, userId: "1235" }} isEditable={true} setRatingStars={setRatingStars} ratingStars={ratingStars} />
-              <button className="dark:hover:bg-gray-600 dark:hover:text-white dark:text-black dark:bg-white">Add Review</button></>
+              <button className="">Add Review</button></>
           }
         </form>
 

@@ -1,7 +1,8 @@
 import React from "react";
 //import "./ReviewCard.css";
 import StarRating from "../StarRating";
-import {useUser, useUserUpdateContext} from "../../UserContext"
+import {useUser} from "../../UserContext"
+import { Link } from "react-router-dom"
 
 const ReviewCard = ({ review, isAdmin, loggedIn }) => {
 
@@ -19,14 +20,16 @@ const ReviewCard = ({ review, isAdmin, loggedIn }) => {
   }, [review.userId]);
 
   return (
-    <div className="Rating mb-1 flex items-center justify-between p-1 shadow-lg mb-8 mt-8 dark:shadow-white">
+    <div className="Rating mb-1 flex items-center justify-between p-1 shadow-lg mb-8 mt-8 dark:bg-gray-800">
 
       <div className="CommentCard flex w-full justify-between leading-8 p-4">
         <div className="pfp flex items-center">
           <img src={userReview.picture} alt="pfp" className="w-12 h-12 object-cover mr-5 rounded-full content-center"></img>
 
           <div className="UserReview">
-            <p className="font-bold text-2xl dark:text-white">{userReview.name}</p>
+            <Link to={"/profile/"+userReview._id}>
+              <p className="font-bold text-2xl dark:text-white">{userReview.name}</p>
+            </Link>
             <p className="text-xl dark:text-white">{review.text}</p>
           </div>
         </div>
@@ -34,10 +37,10 @@ const ReviewCard = ({ review, isAdmin, loggedIn }) => {
         <div className="buttonStartContainer">
           <StarRating review={review} />
           {user.email &&
-            <button className="UserButton ml-1.5 dark:text-black dark:bg-white dark:hover:bg-gray-600 dark:hover:text-white">Comment</button>
+            <button className="UserButton ml-1.5 ">Comment</button>
           }
           {(isAdmin || user.admin) &&
-          <button className="AdminButton ml-1.5 dark:text-black dark:bg-white dark:hover:bg-gray-600 dark:hover:text-white">Delete</button>
+          <button className="AdminButton ml-1.5 ">Delete</button>
           }
         </div>
       </div>

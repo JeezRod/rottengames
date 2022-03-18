@@ -31,15 +31,15 @@ function UserCard({ user }) {
 
             {!edit
                 ? <div className="buttons flex flex-row items-center justify-center">
-                    <button className="m-1 rounded-xl duration-200 w-20 hover:bg-white hover:text-black hover:shadow-2xl dark:bg-white dark:text-black dark:hover:bg-gray-600 dark:hover:text-white dark:text-white" onClick={handleEdit}>Edit</button>
+                    <button className="m-1 rounded-xl duration-200 w-20 hover:shadow-2xl" onClick={handleEdit}>Edit</button>
                     <form onSubmit={handleDelete}>
-                        <button className="m-1 rounded-xl duration-200 w-20 hover:bg-white hover:text-black hover:shadow-2xl dark:bg-white dark:text-black dark:hover:bg-gray-600 dark:hover:text-white dark:text-white">Delete</button>
+                        <button className="m-1 rounded-xl duration-200 w-20 hover:shadow-2xl ">Delete</button>
                     </form>
                 </div>
                 :
                 <div className="buttons flex flex-row items-center justify-center">
                     <form onSubmit={handleSave} >
-                        <button className="m-1 h-10 rounded-xl duration-200 w-20 hover:bg-white hover:text-black hover:shadow-2xl dark:bg-white dark:text-black dark:hover:bg-gray-600 dark:hover:text-white dark:text-white">Save</button>
+                        <button className="m-1 h-10 rounded-xl duration-200 w-20 hover:bg-white hover:text-black hover:shadow-2xl">Save</button>
                     </form>
                 </div>
             }

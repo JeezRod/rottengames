@@ -1,9 +1,9 @@
 .bm-burger-button {
     position:fixed;
     width: 36px;
-    height: 30px;
-    left: 36px;
-    top: 36px;
+    height: 24px;
+    left:1%;
+    top: 3%;
   }
 
 
@@ -28,6 +28,7 @@
     background: #1f2020;
     height: 24px;
     width: 6px;
+    @apply dark:bg-white
   }
 
   #react-burger-cross-btn span{
