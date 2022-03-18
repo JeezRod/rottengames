@@ -341,13 +341,15 @@ router.put("/users/update/:userId", async (req, res)=>{
   
 })
 
-// router.put("users/updat/:gameId", async (req, res) => {
-const item = {
-
-}
-//   await Game.updateOne({_id: req.params.gameId},
-//     )
-// })
+// This route updates a game's page
+router.put("/games/update/:gameId", async (req, res) => {
+  if (req.body.handle === "gamePage"){
+    await Game.updateOne({_id: req.params.gameId},
+      {$set: {"name": req.body.name, "description": req.body.description}})
+    res.end("game page updated")
+    console.log("game page updated")
+  }
+})
 
 //DELETE Routes
 
@@ -360,8 +362,8 @@ router.delete("/users/delete/:userId", async (req, res) => {
 //Deletes chosen game when "delete game" button is clicked
 router.delete("/games/delete/:gameId", async (req, res) => {
   await Game.deleteOne({ _id: req.params.gameId })
-  res.redirect(200, '/games');
-  // res.end("game deleted")
+  // res.redirect(200, '/games');
+  res.end("game deleted")
 })
 
 module.exports = router;

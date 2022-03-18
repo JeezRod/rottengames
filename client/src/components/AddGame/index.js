@@ -6,14 +6,24 @@ import Files from 'react-files'
 
 const AddGame = () => {
 
-  //hooks for the fields in the form
+  // State for the game name
   const [name, setName] = useState("")
+
+  // State for the new game's description
   const [description, setDescription] = useState("")
+
+  // State for the new game's release date
   const [date, setDate] = useState("")
+
+  // State for the options selected for the platforms
   const [selected, setSelected] = useState([])
+
+  // State for 
   const [selectedFile, setSelectedFile] = useState()
   const [isSelected, setIsSelected] = useState(false)
   const [image, setImage] = useState(null)
+  //State for editing mode
+  const [isEdit, setIsEdit] = useState(false)
 
   // const handleSubmit = (e) => {
   //   e.preventDefault()
@@ -132,7 +142,7 @@ const AddGame = () => {
         <input type="date" id="releaseDate" name="releaseDate" value={date} onChange={(e) => setDate(e.target.value)}></input>
         <label for="lname">Image : </label>
         {/* <input type="file" id="lname" name="lname" onChange={onImageChange}></input> */}
-        <img src={image} alt="preview image"/>
+        <img id="gameImage" src={image} alt="preview image"/>
         <br></br>
         <div className="files">
         <Files

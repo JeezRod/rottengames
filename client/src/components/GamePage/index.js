@@ -30,6 +30,8 @@ function Review() {
   const [loggedIn, setLoggedIn] = React.useState(false);
   //State to check if the user is logged in or not
   const [isAdmin, setIsAdmin] = React.useState(false);
+  //State for editing mode
+  const [isEdit, setIsEdit] = React.useState(false)
 
   const user = useUser();
 
@@ -126,37 +128,80 @@ function Review() {
     }
   }
 
+  const handleClick = (e) =>{
+    e.preventDefault();
+    if(isEdit){
+        setIsEdit(false);
+    }else{
+        setIsEdit(true);
+    }
+  }
+
+  async function handleSave (e){
+    console.log(e.target.description.value)
+    const requestOptions = {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+            name: e.target.name.value,
+            description: e.target.description.value,
+            handle: "gamePage" })
+    };
+    console.log("----------")
+    await fetch("/api/games/update/" + params.id, requestOptions)
+    window.alert(requestOptions);
+    setIsEdit(false)
+  }
+
+  const handleCancel = (e) => {
+    e.preventDefault()
+    setIsEdit(false)
+  }
+
   //Link each button to their specific pages
   return (
     <div className="GamePage">
-
-      <div className="GameInfo">
-        <img className="GameCover" src={data.imageurl} alt={data.name}></img>
-        <div className="NameStars">
-          <h1>{data.name}</h1>
-          <StarRating review={{ ratingStars: rating, email: "1234" }} />
-          {/* () => navigate("/games") */}
-          <form onSubmit={handleDelete}>
-          {user.admin && 
-            <button className="AdminButton">Delete Game</button>
+      <form>
+        <div className="GameInfo">
+          <img className="GameCover" src={data.imageurl} alt={data.name}></img>
+          <div className="NameStars">
+            {isEdit
+            ?<textarea className='nameText' name="name" defaultValue={data.name}></textarea>
+            :<h1>{data.name}</h1>
             }
-          </form>
+            {/* <h1>{data.name}</h1> */}
+            <StarRating review={{ ratingStars: rating, email: "1234" }} />
 
-          <Link to="" >
-            {user.admin && 
-            <button className="AdminButton">Edit page</button>
-            }
+{/* DELETE */}
 
-          </Link>
+            <Link to="" >
+              {isEdit
+              ?<div className='gameSection'>{user.admin && <button onClick={handleSave}>Save</button>}{user.admin && <button onClick={handleCancel}>Cancel</button>}</div>
+              :<div className='gameSection'>{user.admin && <button onClick={handleClick}>Edit Page</button>} </div>
+              }
+              {/* {user.admin && 
+              <button className="AdminButton">Edit page</button>
+              } */}
 
+            </Link>
+          </div>
         </div>
-      </div>
 
-      <div className="Description">
-        <h1>Description</h1>
-        <p>{data.description}</p>
-      </div>
+        <div className="Description">
+          <h1>Description</h1>
+          {isEdit
+          ?<textarea className='descriptionText' name="description" defaultValue={data.description}></textarea>
+          :<p>{data.description}</p>
+          }
+          {/* <p>{data.description}</p> */}
+        </div>
+      </form>
 
+      <form onSubmit={handleDelete}>
+          {user.admin && 
+          <button className="AdminButton">Delete Game</button>
+          }
+      </form>
       <div className="Platform">
         <h1>Available on</h1>
         {data.platform}
