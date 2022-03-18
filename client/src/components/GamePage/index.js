@@ -161,7 +161,16 @@ function Review() {
   //Link each button to their specific pages
   return (
     <div className="GamePage">
-      <form>
+
+      <form id="deleteGameBtn" onSubmit={handleDelete}>
+        <div>
+          {user.admin && 
+          <button>Delete Game</button>
+          }
+        </div>
+      </form>
+
+      <form onSubmit={handleSave}>
         <div className="GameInfo">
           <img className="GameCover" src={data.imageurl} alt={data.name}></img>
           <div className="NameStars">
@@ -172,18 +181,16 @@ function Review() {
             {/* <h1>{data.name}</h1> */}
             <StarRating review={{ ratingStars: rating, email: "1234" }} />
 
-{/* DELETE */}
-
-            <Link to="" >
+            <div>
               {isEdit
-              ?<div className='gameSection'>{user.admin && <button onClick={handleSave}>Save</button>}{user.admin && <button onClick={handleCancel}>Cancel</button>}</div>
+              ?<div className='gameSection'>{user.admin && <button>Save</button>}{user.admin && <button onClick={handleCancel}>Cancel</button>}</div>
               :<div className='gameSection'>{user.admin && <button onClick={handleClick}>Edit Page</button>} </div>
               }
               {/* {user.admin && 
               <button className="AdminButton">Edit page</button>
               } */}
 
-            </Link>
+            </div>
           </div>
         </div>
 
@@ -197,11 +204,6 @@ function Review() {
         </div>
       </form>
 
-      <form onSubmit={handleDelete}>
-          {user.admin && 
-          <button className="AdminButton">Delete Game</button>
-          }
-      </form>
       <div className="Platform">
         <h1>Available on</h1>
         {data.platform}
