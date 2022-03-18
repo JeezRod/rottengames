@@ -11,7 +11,6 @@ import DarkMode from "../../hooks/DarkMode";
 //Style fo NavLink
 const StyledNav = styled(NavLink)`
   display: inline-block;
-  padding-left: 100px;
   font-weight: 700;
   font-size: 18px;
   text-decoration: none;
@@ -24,13 +23,17 @@ const HamburgerMenu = (props) => {
   const user = useUser();
   const [colorTheme, setTheme] = DarkMode();
 
+  const responsive = "hidden"
+
   DarkMode();
   return (
-    <Menu>
-      <StyledNav to="/"> Home </StyledNav>
-      <StyledNav to="/games"> Search </StyledNav>
-      <StyledNav to="about">About </StyledNav>
-
+    <Menu >
+      <div className='hidden'>
+        <StyledNav to="/"> Home </StyledNav>
+        <StyledNav to="/games"> Search </StyledNav>
+        <StyledNav to="about">About </StyledNav>
+      </div>
+      <>
       {
         user.email
           ? <>
@@ -40,7 +43,7 @@ const HamburgerMenu = (props) => {
           :
           null
       }
-
+      </>
       <button onClick={() => setTheme(colorTheme)}>
         {colorTheme === 'light' ?
           <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>

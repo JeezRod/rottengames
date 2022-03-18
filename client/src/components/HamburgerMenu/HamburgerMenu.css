@@ -69,7 +69,7 @@
   }
 
   .bm-item-list a{
-    margin: 1em;
+    margin: 1em 0;
     padding: 1em;
     border-radius: 0;
     width: 100%;
@@ -85,7 +85,11 @@
   
   /* Individual item */
   .bm-item {
-    display: inline-block;
+    /* display: inline-block; */
+  }
+
+  .bm-item a{
+    @apply inline-block lg:hidden
   }
   
   /* Styling of overlay */
