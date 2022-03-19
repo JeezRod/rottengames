@@ -23,22 +23,22 @@ const HamburgerMenu = (props) => {
   const user = useUser();
   const [colorTheme, setTheme] = DarkMode();
 
-  const responsive = "hidden"
-
+  const [menuOpenState, setMenuOpenState] = React.useState(false)
+  console.log(menuOpenState)
   DarkMode();
   return (
-    <Menu >
+    <Menu isOpen={menuOpenState} onOpen={()=>setMenuOpenState(true)} onClose={()=>setMenuOpenState(false)}>
       <div className='hidden'>
-        <StyledNav to="/"> Home </StyledNav>
-        <StyledNav to="/games"> Search </StyledNav>
-        <StyledNav to="about">About </StyledNav>
+        <StyledNav onClick={()=>setMenuOpenState(false)} to="/"> Home </StyledNav>
+        <StyledNav onClick={()=>setMenuOpenState(false)} to="/games"> Search </StyledNav>
+        <StyledNav onClick={()=>setMenuOpenState(false)} to="about">About </StyledNav>
       </div>
       <>
       {
         user.email
           ? <>
-            {user.admin && <StyledNav to="dashboard">Dashboard </StyledNav>}
-            <StyledNav to={"profile/" + user.id}>Profile</StyledNav>
+            {user.admin && <StyledNav onClick={()=>setMenuOpenState(false)} to="dashboard">Dashboard </StyledNav>}
+            <StyledNav onClick={()=>setMenuOpenState(false)} to={"profile/" + user.id}>Profile</StyledNav>
           </>
           :
           null
