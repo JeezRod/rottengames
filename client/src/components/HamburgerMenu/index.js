@@ -22,9 +22,8 @@ const HamburgerMenu = (props) => {
 
   const user = useUser();
   const [colorTheme, setTheme] = DarkMode();
-
   const [menuOpenState, setMenuOpenState] = React.useState(false)
-  console.log(menuOpenState)
+
   DarkMode();
   return (
     <Menu isOpen={menuOpenState} onOpen={()=>setMenuOpenState(true)} onClose={()=>setMenuOpenState(false)}>
