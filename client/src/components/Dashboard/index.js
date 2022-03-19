@@ -19,7 +19,7 @@ function Dashboard() {
   const user = useUser();
 
   //TailwindCSS for the buttons
-  const buttonStyle = "m-5 lg:m-1 lg:p-1 rounded-none w-full bg-white text-black shadow-xl h-24 mt-10px transition ease-in-out duration-300 hover:shadow-2xl dark:text-white dark:bg-gray-800";
+  const buttonStyle = "mx-5 mb-5 lg:m-1 lg:p-1 rounded-none w-full bg-white text-black shadow-xl h-24 mt-10px transition ease-in-out duration-300 hover:shadow-2xl dark:text-white dark:bg-gray-800";
 
   React.useEffect(() => {
     //Async function to fetch count of all games
