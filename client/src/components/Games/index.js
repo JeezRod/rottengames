@@ -19,6 +19,11 @@ function Games() {
   //State for loading the local storage
   const [loadingStorage, setloadingStorage] = React.useState(true);
 
+  const [isCollapsed, setCollapse] = React.useState(false);
+
+  const buttonStyle = "mx-5 mb-5 lg:m-1 lg:p-1 rounded-none w-full bg-white text-black shadow-xl h-24 mt-10px transition ease-in-out duration-300 hover:shadow-2xl dark:text-white dark:bg-gray-800";
+
+
   //Loading the state from local storoge when the page loads
   React.useEffect(() => {
     let searchInLocal = window.localStorage.getItem('searchTerm')
@@ -89,11 +94,18 @@ function Games() {
     )
   }
 
+
   return (
     <div className="Games">
-      <div className="MainContainer flex">
-        <Filter setSearchTerm={setSearchTerm} setSearchPlatform={setSearchPlatform} ></Filter>
-        <div className="GridPaginator w-full">
+      <div className="MainContainer flex flex-col lg:flex-row">
+
+        <div className={`mt-32 pt-14 block lg:hidden`}>
+          <button className="w-full" onClick={()=>setCollapse(!isCollapsed)}>Filters</button>
+          <div className={` ${isCollapsed ? 'block' : 'hidden'} text-center`}><Filter setSearchTerm={setSearchTerm} setSearchPlatform={setSearchPlatform}/></div>
+        </div>
+
+        <div className="hidden lg:block"><Filter setSearchTerm={setSearchTerm} setSearchPlatform={setSearchPlatform}/></div>
+        <div className={`GridPaginator w-full ${isCollapsed ? 'hidden' : 'block'}` }>
           <GridView page={page} searchTerm={searchTerm} searchPlatform={searchPlatform} perPage={perPage}></GridView>
 
           <ReactPaginate
@@ -107,9 +119,9 @@ function Games() {
             renderOnZeroPageCount={null}
             forcePage={page - 1}
 
-            containerClassName="paginator flex justify-center mb-20 text-2xl mt-8 items-center"
+            containerClassName="paginator flex justify-center mb-20 lg:text-2xl mt-8 items-center"
             activeClassName="currentPage text-white bg-black rounded-3xl dark:bg-gray-600 dark:text-white"
-            pageClassName="pages transition-all ease-in duration-400 p-4 mr-1 ml-1 hover:text-white hover:bg-black hover:rounded-xl dark:hover:bg-gray-600 dark:hover:text-white dark:text-white"
+            pageClassName="pages transition-all ease-in duration-400 p-4 mr-0.5 lg:mr-1 ml-0.5 lg:ml-1 hover:text-white hover:bg-black hover:rounded-xl dark:hover:bg-gray-600 dark:hover:text-white dark:text-white"
             nextClassName="next p-4 transition-all ease-in duration-400 transition-all ease-in duration-400 hover:text-white hover:bg-black hover:rounded-xl dark:hover:bg-gray-600 dark:hover:text-white dark:text-white"
             previousClassName="previous p-4 -rotate-180 transition-all ease-in duration-400 hover:text-white hover:bg-black hover:rounded-xl dark:hover:bg-gray-600 dark:hover:text-white dark:text-white"
             breakLinkClassName="break dark:text-white"
