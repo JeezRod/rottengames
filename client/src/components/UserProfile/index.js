@@ -106,17 +106,17 @@ const UserProfile = () => {
         )
     }
     return (
-        <div className='profile flex pl-20 pr-20 pt-32'>
+        <div className='profile flex flex-col lg:flex-row px-5 md:px-10 lg:px-20 py-32'>
             
-            <aside className='user'>
-                <form onSubmit={handleSave} >
+            <aside className='user lg:w-3/12'>
+                <form onSubmit={handleSave} className="items-center lg:items-start text-center lg:text-left" >
                     {isSameUser 
                     ? <p className="text-3xl font-bold dark:text-white">My Profile</p>
                     : <p className="text-3xl font-bold w-50 dark:text-white">{user.name}'s Profile</p>}
                     
-                    <img className='profilePicture mt-8 rounded-full w-36 h-36' src={user.picture} alt="profile"></img>
+                    <img className='profilePicture my-4 lg:mt-8 rounded-full w-36 h-36' src={user.picture} alt="profile"></img>
                     
-                    <div className='userSection mt-16'>
+                    <div className='userSection my-8 lg:mt-16'>
                         {isEdit
                         ?<textarea className='nameText w-96 h-8 resize-none text-3xl font-bold border-2' name="name" defaultValue={user.name}></textarea>
                         :<p className="text-3xl font-bold dark:text-white w-96 ">{user.name}</p>
@@ -124,7 +124,7 @@ const UserProfile = () => {
                        
                        <p className="text-xl dark:text-white">{user.email}</p>
                     </div>
-                    <div className='userSection mt-16 dark:text-white'>
+                    <div className='userSection my-8 lg:mt-16 dark:text-white'>
                     <p className="text-3xl font-bold">Bio</p>
                         {isEdit
                         ?<textarea className='bioText text-xl w-96 h-8 resize-none border-2' name="bio" defaultValue={user.bio}></textarea>
@@ -134,18 +134,18 @@ const UserProfile = () => {
                     </div>
                     {isSameUser
                     ? isEdit 
-                        ?<div className='userSection mt-16'><button className="dark:text-black dark:bg-white dark:hover:bg-gray-600 dark:hover:text-white">Save</button><button className="dark:text-black dark:bg-white dark:hover:bg-gray-600 dark:hover:text-white" onClick={handleCancel}>Cancel</button></div>
-                        : <div className='userSection mt-16'><button className="dark:text-black dark:bg-white dark:hover:bg-gray-600 dark:hover:text-white" onClick={handleClick}>Edit Profile</button> </div>
+                        ?<div className='userSection my-8 lg:mt-16'><button className="dark:text-black dark:bg-white dark:hover:bg-gray-600 dark:hover:text-white">Save</button><button className="dark:text-black dark:bg-white dark:hover:bg-gray-600 dark:hover:text-white" onClick={handleCancel}>Cancel</button></div>
+                        : <div className='userSection my-8 lg:mt-16'><button className="dark:text-black dark:bg-white dark:hover:bg-gray-600 dark:hover:text-white" onClick={handleClick}>Edit Profile</button> </div>
                     :<></>
                     }
                 </form>
             </aside>
 
-            <main className='mainProfile ml-20 w-9/12 flex flex-col items-start'>
-                <p className="text-3xl font-bold dark:text-white">All Reviews</p>
+            <main className='mainProfile w-full lg:w-9/12 flex flex-col items-start'>
+                <p className="text-3xl my-6 lg:mt-0 lg:mb-6 font-bold dark:text-white">All Reviews</p>
                 {Object.keys(userReviews).map( (key) => {
                     return(
-                        <div className="reviewRow w-full mt-12 dark:text-white" key={key}>
+                        <div className="reviewRow w-full my-6lg:mt-12 dark:text-white" key={key}>
                             <Link className="link"to={"/games/"+userReviews[key].id}>
                                 <p className="text-2xl font-bold dark:text-white">{key}</p>
                             </Link>
