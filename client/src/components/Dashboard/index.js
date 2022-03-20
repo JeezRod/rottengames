@@ -19,7 +19,7 @@ function Dashboard() {
   const user = useUser();
 
   //TailwindCSS for the buttons
-  const buttonStyle = "m-1 p-1 rounded-none w-full bg-white text-black shadow-xl h-24 mt-10px transition ease-in-out duration-300 hover:shadow-2xl dark:text-white dark:bg-gray-800";
+  const buttonStyle = "mx-5 mb-5 lg:m-1 lg:p-1 rounded-none w-full bg-white text-black shadow-xl h-24 mt-10px transition ease-in-out duration-300 hover:shadow-2xl dark:text-white dark:bg-gray-800";
 
   React.useEffect(() => {
     //Async function to fetch count of all games
@@ -43,13 +43,12 @@ function Dashboard() {
     };
   if(user.admin){
   return (
-      <main className="dash flex h-auto items-start pt-32">
-        <div className="SidePanel flex flex-col justify-center h-auto w-3/12">
+      <main className="dash flex flex-col lg:flex-row h-auto items-start pt-32">
+        <div className="SidePanel flex flex-row mx-auto lg:flex-col justify-center h-auto lg:w-3/12 w-10/12">
             <button className={buttonStyle} onClick={()=>setComponent("users")}>Users</button>
-            {/* <Link to="addGame" className="addGameButton"><button className={buttonStyle}>Add Game</button></Link> */}
             <button className={buttonStyle} onClick={()=>setComponent("addGame")}>Add Game</button>
         </div>
-        <div className="MainPanel flex flex-col justify-center items-center h-auto w-10/12">
+        <div className="MainPanel flex flex-col justify-center items-center h-auto lg:w-10/12 m-auto">
           {selectedComponent === "users"
           ? <div>
             <form onSubmit={HandleSubmit} className="searchContainer flex flex-row justify-center items-center mb-8">
