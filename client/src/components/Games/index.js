@@ -99,7 +99,7 @@ function Games() {
     <div className="Games">
       <div className="MainContainer flex flex-col lg:flex-row">
 
-        <div className={`mt-32 pt-14 block lg:hidden`}>
+        <div className={`pt-7 mt-16 lg:mt-32 lg:pt-14 block lg:hidden`}>
           <button className="w-full" onClick={()=>setCollapse(!isCollapsed)}>Filters</button>
           <div className={` ${isCollapsed ? 'block' : 'hidden'} text-center`}><Filter setSearchTerm={setSearchTerm} setSearchPlatform={setSearchPlatform}/></div>
         </div>
@@ -121,9 +121,9 @@ function Games() {
 
             containerClassName="paginator flex justify-center mb-20 lg:text-2xl mt-8 items-center"
             activeClassName="currentPage text-white bg-black rounded-3xl dark:bg-gray-600 dark:text-white"
-            pageClassName="pages transition-all ease-in duration-400 p-4 mr-0.5 lg:mr-1 ml-0.5 lg:ml-1 hover:text-white hover:bg-black hover:rounded-xl dark:hover:bg-gray-600 dark:hover:text-white dark:text-white"
-            nextClassName="next p-4 transition-all ease-in duration-400 transition-all ease-in duration-400 hover:text-white hover:bg-black hover:rounded-xl dark:hover:bg-gray-600 dark:hover:text-white dark:text-white"
-            previousClassName="previous p-4 -rotate-180 transition-all ease-in duration-400 hover:text-white hover:bg-black hover:rounded-xl dark:hover:bg-gray-600 dark:hover:text-white dark:text-white"
+            pageClassName="pages transition-all ease-in duration-400 p-3 lg:p-4 mr-0.5 lg:mr-1 ml-0.5 lg:ml-1 hover:text-white hover:bg-black hover:rounded-xl dark:hover:bg-gray-600 dark:hover:text-white dark:text-white"
+            nextClassName="next p-3 lg:p-4 transition-all ease-in duration-400 transition-all ease-in duration-400 hover:text-white hover:bg-black hover:rounded-xl dark:hover:bg-gray-600 dark:hover:text-white dark:text-white"
+            previousClassName="previous p-3 lg:p-4 -rotate-180 transition-all ease-in duration-400 hover:text-white hover:bg-black hover:rounded-xl dark:hover:bg-gray-600 dark:hover:text-white dark:text-white"
             breakLinkClassName="break dark:text-white"
           />
         </div>

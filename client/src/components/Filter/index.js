@@ -82,8 +82,8 @@ function Filter({ setSearchTerm, setSearchPlatform }) {
 
   return (
     <div className="Filter pt-1 mr-1 ml-1">
-      <form onSubmit={HandleSubmit} className="searchContainer flex w-full justify-between pt-14">
-        <input name="search" className="searchBar h-12 w-80 sticky mt-32 ml-8 text-2xl border-b-2 w-64" type="text" placeholder="Search..." value={inputValue} onChange={handleChangeSearchBox}></input>
+      <form onSubmit={HandleSubmit} className="searchContainer flex w-full justify-between lg:pt-14">
+        <input name="search" className="searchBar h-12 w-3/4 lg:w-80 sticky mt-14 lg:mt-32 mx-auto lg:ml-8 text-2xl border-b-2 w-64" type="text" placeholder="Search..." value={inputValue} onChange={handleChangeSearchBox}></input>
       </form>
 
       <ul className="flex flex-col mx-4 lg:mx-4 xl:mx-8">
