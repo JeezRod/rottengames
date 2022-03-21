@@ -48,3 +48,8 @@
     float: right;
     width: 10%;
 }
+
+/* !!! */
+#description {
+    width: 75%;
+}

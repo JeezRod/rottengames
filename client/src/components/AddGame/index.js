@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { Component } from 'react';
+import Select from "react-select"
 import {useState} from 'react';
 import "./GameForm.css"
 import {MultiSelect} from "react-multi-select-component";
@@ -8,19 +9,17 @@ const AddGame = () => {
 
   // State for the game name
   const [name, setName] = useState("")
-
   // State for the new game's description
   const [description, setDescription] = useState("")
-
   // State for the new game's release date
   const [date, setDate] = useState("")
-
   // State for the options selected for the platforms
-  const [selected, setSelected] = useState([])
-
-  // State for 
+  const [selected, setSelected] = useState(null)
+  // State for selected file
   const [selectedFile, setSelectedFile] = useState()
+  // State for the options selected (platforms)
   const [isSelected, setIsSelected] = useState(false)
+  // State for the game image
   const [image, setImage] = useState(null)
 
   // const handleSubmit = (e) => {
@@ -35,6 +34,23 @@ const AddGame = () => {
     var formData = new FormData();
     formData.append('file', selectedFile);
     updateImage(formData);
+    const url = ("/api/games/add")
+    let rating = 0
+    let description = e.target.description.value
+    // let image = 
+    let name = e.target.gameName.value
+    let platform = e.target.platform.value
+    let date = e.target.releaseDate.value
+    let reviews = []
+
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ rating, description, name, platform, date, reviews})
+    };
+    fetch(url, requestOptions)
+      .then(response => console.log('Submitted successfully'))
+      .catch(error => console.log('Form submit error', error))
   }
 
   // Stores platform options for the add game form
@@ -129,12 +145,14 @@ const AddGame = () => {
         <label for="description">Description : </label>
         <input type="text" id="description" name="description" value={description} onChange={(e) => setDescription(e.target.value)} required></input>
         <label for="platform">Platform : </label>
-        <MultiSelect
+        <Select
+          name = "platform"
+          isClearable={true}
           options={options}
           value={selected}
           onChange={setSelected}
           labelledBy={"Select :"}
-          ItemRenderer={itemRenderer}
+          // ItemRenderer={itemRenderer}
         />
         <label for="releaseDate">Release Date : </label>
         <input type="date" id="releaseDate" name="releaseDate" value={date} onChange={(e) => setDate(e.target.value)}></input>

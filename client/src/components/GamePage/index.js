@@ -10,7 +10,6 @@ import Alert from '@mui/material/Alert';
 import {useUser, useUserUpdateContext} from "../../UserContext"
 
 
-
 function Review() {
   const navigate = useNavigate();
   const params = useParams();
@@ -118,6 +117,7 @@ function Review() {
     }
   }
 
+  // This function fetches the delete game api when delete game is clicked.
   async function handleDelete(e){
     e.preventDefault();
     const confirmation = window.confirm("Are you sure you want to delete this game?");
@@ -128,6 +128,7 @@ function Review() {
     }
   }
 
+  // Sets the isEdit constant to opposite boolean when edit game button is clicked.
   const handleClick = (e) =>{
     e.preventDefault();
     if(isEdit){
@@ -137,8 +138,8 @@ function Review() {
     }
   }
 
+  // This function fetches the edit game route api when save button is clicked.
   async function handleSave (e){
-    console.log(e.target.description.value)
     const requestOptions = {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
@@ -147,18 +148,18 @@ function Review() {
             description: e.target.description.value,
             handle: "gamePage" })
     };
-    console.log("----------")
     await fetch("/api/games/update/" + params.id, requestOptions)
     window.alert(requestOptions);
     setIsEdit(false)
   }
 
+  // When cancel button is clicked, this constant sets the isEdit constant to false.
   const handleCancel = (e) => {
     e.preventDefault()
     setIsEdit(false)
   }
 
-  //Link each button to their specific pages
+  // Link each button to their specific pages
   return (
     <div className="GamePage">
 
@@ -178,7 +179,6 @@ function Review() {
             ?<textarea className='nameText' name="name" defaultValue={data.name}></textarea>
             :<h1>{data.name}</h1>
             }
-            {/* <h1>{data.name}</h1> */}
             <StarRating review={{ ratingStars: rating, email: "1234" }} />
 
             <div>
@@ -186,10 +186,6 @@ function Review() {
               ?<div className='gameSection'>{user.admin && <button>Save</button>}{user.admin && <button onClick={handleCancel}>Cancel</button>}</div>
               :<div className='gameSection'>{user.admin && <button onClick={handleClick}>Edit Page</button>} </div>
               }
-              {/* {user.admin && 
-              <button className="AdminButton">Edit page</button>
-              } */}
-
             </div>
           </div>
         </div>
@@ -197,10 +193,9 @@ function Review() {
         <div className="Description">
           <h1>Description</h1>
           {isEdit
-          ?<textarea className='descriptionText' name="description" defaultValue={data.description}></textarea>
+          ?<textarea className='descriptionText' id="description" name="description" defaultValue={data.description}></textarea>
           :<p>{data.description}</p>
           }
-          {/* <p>{data.description}</p> */}
         </div>
       </form>
 
