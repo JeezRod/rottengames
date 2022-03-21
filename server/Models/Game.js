@@ -10,9 +10,7 @@ const gameSchema = new Schema({
     releasedate: String,
     reviews: {
         userId: String,
-        name: String,
         text: String,
-        email: String,
         ratingStars: Number
     }
 });

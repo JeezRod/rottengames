@@ -1,5 +1,4 @@
 import React from "react";
-import "./filter.css"
 import { platforms } from "./platforms";
 
 function Filter({ setSearchTerm, setSearchPlatform }) {
@@ -24,8 +23,8 @@ function Filter({ setSearchTerm, setSearchPlatform }) {
   //State to hold all the names of the platforms, initial value same as the local storage
   if(!platformFromLocal){
     platformFromLocal = []
-  } else{
-    platformFromLocal.split(",")
+  } else {
+    platformFromLocal = platformFromLocal.split(",");
   }
   
   const [allPlatforms] = React.useState(platformFromLocal);
@@ -53,6 +52,7 @@ function Filter({ setSearchTerm, setSearchPlatform }) {
     );
     //Update the checkedState array with the boolean values
     setCheckedState(updatedCheckedState);
+    console.log(allPlatforms)
 
     //If the allPlatforms includes the checkbox currently clicked
     if (allPlatforms.includes(name)){
@@ -60,9 +60,8 @@ function Filter({ setSearchTerm, setSearchPlatform }) {
       allPlatforms.splice(allPlatforms.indexOf(name), 1)
     }else {
       //else add to allPlatforms
-      allPlatforms.push(name)
+      allPlatforms.push(name);
     }
-
     //Set searchPlatform as new array for re-render
     setSearchPlatform([...allPlatforms]);
   }
@@ -82,28 +81,27 @@ function Filter({ setSearchTerm, setSearchPlatform }) {
   }
 
   return (
-    <div className="Filter">
-      <form onSubmit={HandleSubmit} className="searchContainer">
-        <input name="search" className="searchBar" type="text" placeholder="Search" value={inputValue} onChange={handleChangeSearchBox}></input>
-        <button className="searchBtn">➜</button>
+    <div className="Filter pt-1 mr-1 ml-1">
+      <form onSubmit={HandleSubmit} className="searchContainer flex w-full justify-between lg:pt-14">
+        <input name="search" className="searchBar h-12 w-3/4 lg:w-80 sticky mt-14 lg:mt-32 mx-auto lg:ml-8 text-2xl border-b-2 w-64" type="text" placeholder="Search..." value={inputValue} onChange={handleChangeSearchBox}></input>
       </form>
 
-      <ul className="platforms-list">
-        <h1 className="platformTitle">Platforms</h1>
+      <ul className="flex flex-col mx-4 lg:mx-4 xl:mx-8">
+        <h1 className="platformTitle mt-9 ml-7 text-3xl lg:text-3xl xl:text-4xl dark:text-white">Platforms</h1>
         {platforms.map(({ name }, index) => {
           return (
             <li key={index}>
-              <div className="platforms-list-item">
+              <div className="platforms-list text-xl lg:text-2xl xl:text-3xl pt-6 w-64 list-none inline-block ml-7">
                 <input
                   type="checkbox"
                   id={`custom-checkbox-${index}`}
-                  className="custom-checkbox"
+                  className="platforms-list-item w-5 h-5 mr-1"
                   name={name}
                   value={name}
                   checked={checkedState[index]}
                   onChange={() => handleChangeCheckBox(index, name)}
                 />
-                <label htmlFor={`custom-checkbox-${index}`}>{name}</label>
+                <label htmlFor={`custom-checkbox-${index}`} className="dark:text-white">{name}</label>
               </div>
             </li>
           );

@@ -1,51 +1,42 @@
 import React, { useState } from 'react';
-import './nav.css'
 import { NavLink } from "react-router-dom";
 import styled from 'styled-components'
 import Authentication from "../Authentication"
 import HamburgerMenu from '../HamburgerMenu';
-import {useUser, useUserUpdateContext} from "../../UserContext"
+import { useUser, useUserUpdateContext } from "../../UserContext"
 
 //Style fo NavLink
 const StyledNav = styled(NavLink)`
   display: inline-block;
-  padding-left: 100px;
+  padding: 0 50px;
   font-weight: 700;
-  font-size: 18px;
+  font-size: 20px;
   text-decoration: none;
   color:black;
+  margin: 1em;
+  dark:text-white;
+  &:hover {
+    text-decoration: underline;
+  }
 `;
 
 const Navbar = () => {
 
   const user = useUser();
-  
-  // checking if the user is logged in or not to determine if login or logout should be displayed.
-//   React.useEffect( () => {
-//     let mounted = true;
-//     fetch('/api/user').then(response => {
-//       if (response.status === 200) {
-//         return response.json().then(setLoggedIn(true));
-//       }
-//       else {
-//         return response.json().then(setLoggedIn(false));
-//       }
-//     } )
-//   //return () => mounted = false;
-// }, [] );
 
   return (
-    <header>
-    <HamburgerMenu/>
-    <nav>
+    <header className="flex w-full justify-between fixed z-10 dark:bg-gray-900 bg-white h-20">
+      <HamburgerMenu />
+      <nav className="items-center lg:inline-block md:hidden hidden
+">
         <ul>
-            <StyledNav to="/"> Home </StyledNav>
-            <StyledNav to="/games"> Search </StyledNav>
-            <StyledNav to="about">About </StyledNav>
+          <StyledNav className="dark:text-white" to="/">Home</StyledNav>
+          <StyledNav className="dark:text-white" to="/games">Search</StyledNav>
+          <StyledNav className="dark:text-white" to="about">About </StyledNav>
         </ul>
-    </nav>
-    <Authentication/>
-  </header>);
+      </nav>
+      <Authentication />
+    </header>);
 };
 
 export default Navbar;

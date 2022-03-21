@@ -1,43 +1,46 @@
 import React from "react";
-import "./ReviewCard.css";
+//import "./ReviewCard.css";
 import StarRating from "../StarRating";
-import {useUser, useUserUpdateContext} from "../../UserContext"
+import {useUser} from "../../UserContext"
+import { Link } from "react-router-dom"
 
 const ReviewCard = ({ review, isAdmin, loggedIn }) => {
 
-  const [profilePicture, setProfilePicture] = React.useState("");
+  const [userReview, setUserReview] = React.useState("");
   const user = useUser();
 
   //Fetch the profile picture for the specific email
   React.useEffect(() => {
     async function fetchData() {
-      let data = await fetch("/api/user/profile/picture?email=" + review.email);
+      let data = await fetch("/api/user/" + review.userId);
       let dataJson = await data.json();
-      setProfilePicture(dataJson)
+      setUserReview(dataJson)
     }
     fetchData();
-  }, [review.email]);
+  }, [review.userId]);
 
   return (
-    <div className="Rating">
+    <div className="Rating my-4 flex items-center justify-between p-1 shadow-lg dark:bg-gray-800">
 
-      <div className="CommentCard">
-        <div className="pfp">
-          <img src={profilePicture} alt="pfp"></img>
+      <div className="CommentCard flex-row md:flex w-full justify-between leading-8 lg:p-4">
+        <div className="pfp flex w-full items-start md:w-9/12 md:items-center">
+          <img src={userReview.picture} alt="pfp" className="w-12 h-12 object-cover mr-5 rounded-full content-center"></img>
 
           <div className="UserReview">
-            <p><strong>{review.name}</strong></p>
-            <p>{review.text}</p>
+            <Link to={"/profile/"+userReview._id}>
+              <p className="font-bold text-2xl dark:text-white">{userReview.name}</p>
+            </Link>
+            <p className="text-xl dark:text-white">{review.text}</p>
           </div>
         </div>
 
-        <div className="buttonStartContainer">
+        <div className="buttonStartContainer flex flex-col items-center">
           <StarRating review={review} />
           {user.email &&
-            <button className="UserButton">Comment</button>
+            <button className="UserButton  my-0.5 ">Comment</button>
           }
           {(isAdmin || user.admin) &&
-          <button className="AdminButton">Delete</button>
+          <button className="AdminButton px-5 my-0.5 ">Delete</button>
           }
         </div>
       </div>

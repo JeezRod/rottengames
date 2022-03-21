@@ -1,5 +1,5 @@
 import React from "react";
-import "./AllUsers.css"
+//import "./AllUsers.css"
 import UserCard from "../UserCard"
 import ReactLoading from "react-loading";
 
@@ -49,7 +49,7 @@ function AllUsers({page, searchTerm, perPage}) {
     }
 
     return (    
-        <main className="allUsers">
+        <main className="allUsers grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-x-8 gap-y-8 mx-4">
             {data.map( user =>{
                 return(
                     <UserCard key={user._id} user={user}/>

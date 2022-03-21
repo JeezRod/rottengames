@@ -13,27 +13,25 @@ import UserProfile from "./components/UserProfile";
 
 
 function App() {
-
   return (
-    <UserProvider>
-      <Router>
-        <div className="NavContainer">
-          <Navbar ></Navbar>
-          <br></br>
-        </div>
-        <Routes>
-          <Route path="/" element={<App />} />
-          <Route index element={<Home />} />
-          <Route path="about" element={<About/>}/>
-          <Route path="games" element={<Games/>}/>
-          <Route path="games/:id" element={<GamePage />}/>
-          <Route path="dashboard" element={<Dashboard />}/>
-          <Route path="profile/:id" element={<UserProfile />}/>
-          <Route path="dashboard/addGame" element={<AddGame />} />
-        </Routes>
-      </Router>
-    </UserProvider>
-    
+    <div>
+      <UserProvider>
+        <Router>
+            <Navbar ></Navbar>
+          <Routes>
+            <Route path="/" element={<App />} />
+            <Route index element={<Home />} />
+            <Route path="about" element={<About />} />
+            <Route path="games" element={<Games />} />
+            <Route path="games/:id" element={<GamePage />} />
+            <Route path="dashboard" element={<Dashboard />} />
+            <Route path="profile/:id" element={<UserProfile />} />
+            <Route path="dashboard/addGame" element={<AddGame />} />
+          </Routes>
+        </Router>
+      </UserProvider>
+    </div>
+
   );
 }
 

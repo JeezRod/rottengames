@@ -22,36 +22,36 @@ const AddGame = () => {
   // State for the game image
   const [image, setImage] = useState(null)
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault()
-  //   console.log(date)
-  //   console.log(selected[0].value)
-  // }
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    console.log(date)
+    console.log(selected[0].value)
+  }
 
   // Submits the form
-  const uploadFile =(e) => {
-    e.preventDefault();
-    var formData = new FormData();
-    formData.append('file', selectedFile);
-    updateImage(formData);
-    const url = ("/api/games/add")
-    let rating = 0
-    let description = e.target.description.value
-    // let image = 
-    let name = e.target.gameName.value
-    let platform = e.target.platform.value
-    let date = e.target.releaseDate.value
-    let reviews = []
+  // const uploadFile =(e) => {
+  //   e.preventDefault();
+  //   var formData = new FormData();
+  //   formData.append('file', selectedFile);
+  //   updateImage(formData);
+  //   const url = ("/api/games/add")
+  //   let rating = 0
+  //   let description = e.target.description.value
+  //   // let image = 
+  //   let name = e.target.gameName.value
+  //   let platform = e.target.platform.value
+  //   let date = e.target.releaseDate.value
+  //   let reviews = []
 
-    const requestOptions = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ rating, description, name, platform, date, reviews})
-    };
-    fetch(url, requestOptions)
-      .then(response => console.log('Submitted successfully'))
-      .catch(error => console.log('Form submit error', error))
-  }
+  //   const requestOptions = {
+  //     method: 'POST',
+  //     headers: { 'Content-Type': 'application/json' },
+  //     body: JSON.stringify({ rating, description, name, platform, date, reviews})
+  //   };
+  //   fetch(url, requestOptions)
+  //     .then(response => console.log('Submitted successfully'))
+  //     .catch(error => console.log('Form submit error', error))
+  // }
 
   // Stores platform options for the add game form
   const options = [
@@ -138,7 +138,7 @@ const AddGame = () => {
   return (
     <div class="box">
       {/* FUNCTION handleSubmit ON ONSUBMIT */}
-      <form id="addGameForm" onSubmit={uploadFile}>
+      <form id="addGameForm" onSubmit={handleSubmit}>
       <h2>Add Game Form</h2>
         <label for="gameName">Game Name : </label>
         <input type="text" id="gameName" name="gameName" value={name} onChange={(e) => setName(e.target.value)} required></input>

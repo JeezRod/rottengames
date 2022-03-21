@@ -1,5 +1,4 @@
 import React from "react";
-import "./Review.css"
 import ReviewCard from "../ReviewCard";
 import StarRating from "../StarRating";
 import { Link } from "react-router-dom"
@@ -7,14 +6,14 @@ import { useNavigate } from 'react-router';
 import { useParams } from "react-router-dom";
 import ReactLoading from "react-loading";
 import Alert from '@mui/material/Alert';
-import {useUser, useUserUpdateContext} from "../../UserContext"
+import {useUser} from "../../UserContext"
 
 
 function Review() {
   const navigate = useNavigate();
   const params = useParams();
   //State for the games
-  const [data, setData] = React.useState({ reviews: [{ "ratingStars": 0, "email": "" }] });
+  const [data, setData] = React.useState({ reviews: [{ "ratingStars": 0, "userId": "" }] });
   //State for the loading state
   const [loading, setLoading] = React.useState(false);
   //State for the average rating
@@ -25,10 +24,6 @@ function Review() {
   const [ratingStars, setRatingStars] = React.useState(1);
   //State to trigger a "force rendering" of the page to load the new review from the db
   const [newComment, setNewComment] = React.useState(false);
-  //State to check if the user is logged in or not
-  const [loggedIn, setLoggedIn] = React.useState(false);
-  //State to check if the user is logged in or not
-  const [isAdmin, setIsAdmin] = React.useState(false);
   //State for editing mode
   const [isEdit, setIsEdit] = React.useState(false)
 
@@ -97,13 +92,15 @@ function Review() {
       const url = ("/api/games/" + params.id)
 
       let text = event.target.reviewText.value
-      let name = userJson.name
-      let email = userJson.email
+      // let name = userJson.name
+      // let email = userJson.email
+      let userId = userJson._id
+      console.log(userJson)
 
       const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ text, name, email, ratingStars })
+        body: JSON.stringify({ text, userId, ratingStars })
       };
       fetch(url, requestOptions)
         .then(response => console.log('Submitted successfully'))
@@ -161,9 +158,9 @@ function Review() {
 
   // Link each button to their specific pages
   return (
-    <div className="GamePage">
+    <div className="GamePage pl-28 pr-28 pt-32 pb-16">
 
-      <form id="deleteGameBtn" onSubmit={handleDelete}>
+      <form className="w-1/12 float-right" onSubmit={handleDelete}>
         <div>
           {user.admin && 
           <button>Delete Game</button>
@@ -172,14 +169,15 @@ function Review() {
       </form>
 
       <form onSubmit={handleSave}>
-        <div className="GameInfo">
-          <img className="GameCover" src={data.imageurl} alt={data.name}></img>
-          <div className="NameStars">
+      <div className="GameInfo flex">
+          <img className="GameCover w-80 rounded-3xl" src={data.imageurl} alt={data.name}></img>
+          <div className="NameStars flex items-center pl-10">
             {isEdit
             ?<textarea className='nameText' name="name" defaultValue={data.name}></textarea>
-            :<h1>{data.name}</h1>
+            :<p className="text-5xl font-bold dark:text-white">{data.name}</p>
             }
-            <StarRating review={{ ratingStars: rating, email: "1234" }} />
+        
+          <StarRating review={{ ratingStars: rating, userId: "1234" }} />
 
             <div>
               {isEdit
@@ -190,43 +188,43 @@ function Review() {
           </div>
         </div>
 
-        <div className="Description">
-          <h1>Description</h1>
+        <div className="Description pt-10 dark:text-white">
+          <p className="text-3xl font-bold">Description</p>
           {isEdit
-          ?<textarea className='descriptionText' id="description" name="description" defaultValue={data.description}></textarea>
-          :<p>{data.description}</p>
+          ?<textarea className='descriptionText w-3/4' name="description" defaultValue={data.description}></textarea>
+          :<p className="text-xl ">{data.description}</p>
           }
         </div>
       </form>
 
-      <div className="Platform">
-        <h1>Available on</h1>
-        {data.platform}
+      <div className="Platform pt-10 dark:text-white">
+        <p className="text-3xl font-bold">Available on</p>
+        <p className="text-xl">{data.platform}</p>
       </div>
 
-      <div className="Review">
-        <h1>Reviews</h1>
+      <div className="Review pt-10 dark:text-white">
+        <h1 className="text-3xl font-bold">Reviews</h1>
         
         {!user.email  &&
           <Alert severity="error">You have to login to add a comment!</Alert>
         }
-        <form className="addReview" onSubmit={HandleSubmit}>
+        <form className="addReview flex justify-between flex-row items-center mt-10 mb-10" onSubmit={HandleSubmit}>
           {user.email &&
-          <input required name="reviewText" type="text" placeholder="Add a review" onFocus={handleFocus}></input>
+          <input className="w-5/6 h-11 border-0 focus:outline-none focus:border-black focus:border-b" required name="reviewText" type="text" placeholder="Add a review" onFocus={handleFocus}></input>
           }
           {newReviewBtn === true &&
-            <><StarRating review={{ ratingStars: 0, email: "1235" }} isEditable={true} setRatingStars={setRatingStars} ratingStars={ratingStars} />
-              <button>Add Review</button></>
+            <><StarRating review={{ ratingStars: 0, userId: "1235" }} isEditable={true} setRatingStars={setRatingStars} ratingStars={ratingStars} />
+              <button className="">Add Review</button></>
           }
         </form>
 
         {data.reviews.length > 0
           ? data.reviews.map(review => {
             return (
-              <ReviewCard key={review.email} review={review} />
+              <ReviewCard key={review.userId} review={review} />
             )
           })
-          : <p>No reviews</p>
+          : <p className="text-2xl font-bold">No reviews</p>
         }
       </div>
 
@@ -235,3 +233,4 @@ function Review() {
 }
 
 export default Review;
+//outline-none !important bottom-px

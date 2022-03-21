@@ -1,8 +1,8 @@
 import React from "react";
-import "./Dashboard.css"
 import ReactPaginate from 'react-paginate';
 import Users from "../AllUsers";
-import { Link } from "react-router-dom"
+import AddGame from "../AddGame"
+import {useUser, useUserUpdateContext} from "../../UserContext"
 
 function Dashboard() {
 
@@ -10,9 +10,16 @@ function Dashboard() {
 
   const [totalUsers, setTotalUsers] = React.useState([]);
 
-  const [perPage, setPerPage] = React.useState(12);
+  const [perPage, setPerPage] = React.useState(8);
 
   const [searchTerm, setSearchTerm] = React.useState('');
+
+  const [selectedComponent, setComponent] = React.useState("users")
+
+  const user = useUser();
+
+  //TailwindCSS for the buttons
+  const buttonStyle = "mx-5 mb-5 lg:m-1 lg:p-1 rounded-none w-full bg-white text-black shadow-xl h-24 mt-10px transition ease-in-out duration-300 hover:shadow-2xl dark:text-white dark:bg-gray-800";
 
   React.useEffect(() => {
     //Async function to fetch count of all games
@@ -34,41 +41,54 @@ function Dashboard() {
       setPage(event.selected + 1)
   
     };
-
+  if(user.admin){
   return (
-      <main className="dash">
-        <div className="SidePanel">
-            <button>Users</button>
-            <Link to="addGame"><button>Add Game</button></Link>
-            <button>Reviews</button>
+      <main className="dash flex flex-col lg:flex-row h-auto items-start pt-32">
+        <div className="SidePanel flex flex-row mx-auto lg:flex-col justify-center h-auto lg:w-3/12 w-10/12">
+            <button className={buttonStyle} onClick={()=>setComponent("users")}>Users</button>
+            <button className={buttonStyle} onClick={()=>setComponent("addGame")}>Add Game</button>
         </div>
-        <div className="MainPanel">
-        <div>
-          <form onSubmit={HandleSubmit} className="searchContainer">
-            <input name="search" className="searchBar" type="text" placeholder="Search"></input>
-            <button className="searchBtn">➜</button>
-          </form>
-        </div>
-          <Users page={page} searchTerm={searchTerm} perPage={perPage}/>
-          <ReactPaginate
-            breakLabel="..."
-            nextLabel="➜"
-            onPageChange={handlePageClick}
-            pageRangeDisplayed={0}
-            marginPagesDisplayed={3}
-            pageCount={Math.ceil(totalUsers / perPage)}
-            previousLabel="➜"
-            renderOnZeroPageCount={null}
+        <div className="MainPanel flex flex-col justify-center items-center h-auto lg:w-10/12 m-auto">
+          {selectedComponent === "users"
+          ? <div>
+            <form onSubmit={HandleSubmit} className="searchContainer flex flex-row justify-center items-center mb-8">
+              <input name="search" className="searchBar mr-4 p-2" type="text" placeholder="Search"></input>
+              <button className="searchBtn dark:text-black dark:bg-white dark:hover:bg-gray-600 dark:hover:text-white">➜</button>
+            </form>
+          
+            <Users page={page} searchTerm={searchTerm} perPage={perPage}/>
+            <ReactPaginate
+              breakLabel="..."
+              nextLabel="➜"
+              onPageChange={handlePageClick}
+              pageRangeDisplayed={0}
+              marginPagesDisplayed={3}
+              pageCount={Math.ceil(totalUsers / perPage)}
+              previousLabel="➜"
+              renderOnZeroPageCount={null}
 
-            containerClassName="paginator"
-            activeClassName="currentPage"
-            pageClassName="pages"
-            nextClassName="next"
-            previousClassName="previous"
-            breakLinkClassName="break"
-          />
+              containerClassName="paginator flex justify-center mb-20 text-2xl mt-8 items-center"
+              activeClassName="currentPage text-white bg-black rounded-3xl dark:bg-gray-600 dark:text-white"
+              pageClassName="pages transition-all ease-in duration-400 p-4 mr-1 ml-1 hover:text-white hover:bg-black hover:rounded-xl dark:hover:bg-gray-600 dark:hover:text-white dark:text-white"
+              nextClassName="next p-4 transition-all ease-in duration-400 transition-all ease-in duration-400 hover:text-white hover:bg-black hover:rounded-xl dark:hover:bg-gray-600 dark:hover:text-white dark:text-white"
+              previousClassName="previous p-4 -rotate-180 transition-all ease-in duration-400 hover:text-white hover:bg-black hover:rounded-xl dark:hover:bg-gray-600 dark:hover:text-white dark:text-white"
+              breakLinkClassName="break dark:text-white"
+            />
+          </div>
+          : <AddGame/>}
+          
+
         </div>
       </main>
+  );
+  }
+  return(
+  <div className=" flex flex-col pt-32 dark:text-white text-center pt-80">
+    <p className="text-9xl items-center font-bold">403</p>
+    <p className="text-3xl font-bold">Forbidden</p>
+    <p className="text-xl font-bold">Access Denied!</p>
+  </div>
+   
   );
 
 

@@ -2,7 +2,6 @@ import React from "react";
 import GridView from "../GridView";
 import Filter from "../Filter"
 import ReactPaginate from 'react-paginate';
-import "./Games.css"
 
 function Games() {
   //State for page number
@@ -20,10 +19,20 @@ function Games() {
   //State for loading the local storage
   const [loadingStorage, setloadingStorage] = React.useState(true);
 
+  const [isCollapsed, setCollapse] = React.useState(false);
+
+  const [winSize, setWinSize] = React.useState(window.innerWidth);
+
+  const buttonStyle = "mx-5 mb-5 lg:m-1 lg:p-1 rounded-none w-full bg-white text-black shadow-xl h-24 mt-10px transition ease-in-out duration-300 hover:shadow-2xl dark:text-white dark:bg-gray-800";
+
+
   //Loading the state from local storoge when the page loads
   React.useEffect(() => {
     let searchInLocal = window.localStorage.getItem('searchTerm')
     let platformInLocal = window.localStorage.getItem('platforms')
+
+    window.addEventListener("resize", () => setWinSize(window.innerWidth));
+
     //Check if the search terms exists before setting it, Don't set it if its null
     if(searchInLocal){
       setSearchTerm(window.localStorage.getItem('searchTerm'));
@@ -83,7 +92,7 @@ function Games() {
   if(loadingStorage){
     return (
       <div className="Games">
-      <div className="MainContainer">
+      <div className="MainContainer flex">
         <Filter setSearchTerm={setSearchTerm} searchTerm={searchTerm} setSearchPlatform={setSearchPlatform} ></Filter>
       </div>
     </div>
@@ -92,30 +101,43 @@ function Games() {
 
   return (
     <div className="Games">
-      <div className="MainContainer">
-        <Filter setSearchTerm={setSearchTerm} setSearchPlatform={setSearchPlatform} ></Filter>
-        <div className="GridPaginator">
-          <GridView page={page} searchTerm={searchTerm} searchPlatform={searchPlatform} perPage={perPage}></GridView>
+      <div className="MainContainer flex flex-col lg:flex-row">
 
-          <ReactPaginate
-            breakLabel="..."
-            nextLabel="➜"
-            onPageChange={handlePageClick}
-            pageRangeDisplayed={0}
-            marginPagesDisplayed={3}
-            pageCount={Math.ceil(totalGames / perPage)}
-            previousLabel="➜"
-            renderOnZeroPageCount={null}
-            forcePage={page - 1}
-
-            containerClassName="paginator"
-            activeClassName="currentPage"
-            pageClassName="pages"
-            nextClassName="next"
-            previousClassName="previous"
-            breakLinkClassName="break"
-          />
+        {winSize < 1024
+        ? 
+        // block lg:hidden
+        <div className={`pt-7 mt-16 lg:mt-32 lg:pt-14`}>  
+          <button className="w-full" onClick={()=>setCollapse(!isCollapsed)}>Filters</button>
+          <div className={` ${isCollapsed ? 'block' : 'hidden'} text-center`}><Filter setSearchTerm={setSearchTerm} setSearchPlatform={setSearchPlatform}/></div>
         </div>
+        : 
+        // hidden lg:block
+        <div className=""><Filter setSearchTerm={setSearchTerm} setSearchPlatform={setSearchPlatform}/></div>
+        }
+
+        <div className={`GridPaginator w-full` }>
+        <GridView page={page} searchTerm={searchTerm} searchPlatform={searchPlatform} perPage={perPage}></GridView>
+
+        <ReactPaginate
+          breakLabel="..."
+          nextLabel="➜"
+          onPageChange={handlePageClick}
+          pageRangeDisplayed={0}
+          marginPagesDisplayed={3}
+          pageCount={Math.ceil(totalGames / perPage)}
+          previousLabel="➜"
+          renderOnZeroPageCount={null}
+          forcePage={page - 1}
+
+          containerClassName="paginator flex justify-center mb-20 lg:text-2xl mt-8 items-center"
+          activeClassName="currentPage text-white bg-black rounded-3xl dark:bg-gray-600 dark:text-white"
+          pageClassName="pages transition-all ease-in duration-400 p-3 lg:p-4 mr-0.5 lg:mr-1 ml-0.5 lg:ml-1 hover:text-white hover:bg-black hover:rounded-xl dark:hover:bg-gray-600 dark:hover:text-white dark:text-white"
+          nextClassName="next p-3 lg:p-4 transition-all ease-in duration-400 transition-all ease-in duration-400 hover:text-white hover:bg-black hover:rounded-xl dark:hover:bg-gray-600 dark:hover:text-white dark:text-white"
+          previousClassName="previous p-3 lg:p-4 -rotate-180 transition-all ease-in duration-400 hover:text-white hover:bg-black hover:rounded-xl dark:hover:bg-gray-600 dark:hover:text-white dark:text-white"
+          breakLinkClassName="break dark:text-white"
+        />
+      </div>
+        
       </div>
     </div>
 
