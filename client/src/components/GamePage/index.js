@@ -9,7 +9,6 @@ import Alert from '@mui/material/Alert';
 import {useUser} from "../../UserContext"
 
 
-
 function Review() {
   const navigate = useNavigate();
   const params = useParams();
@@ -25,6 +24,8 @@ function Review() {
   const [ratingStars, setRatingStars] = React.useState(1);
   //State to trigger a "force rendering" of the page to load the new review from the db
   const [newComment, setNewComment] = React.useState(false);
+  //State for editing mode
+  const [isEdit, setIsEdit] = React.useState(false)
 
   const user = useUser();
 
@@ -113,6 +114,7 @@ function Review() {
     }
   }
 
+  // This function fetches the delete game api when delete game is clicked.
   async function handleDelete(e){
     e.preventDefault();
     const confirmation = window.confirm("Are you sure you want to delete this game?");
@@ -123,36 +125,77 @@ function Review() {
     }
   }
 
-  //Link each button to their specific pages
+  // Sets the isEdit constant to opposite boolean when edit game button is clicked.
+  const handleClick = (e) =>{
+    e.preventDefault();
+    if(isEdit){
+        setIsEdit(false);
+    }else{
+        setIsEdit(true);
+    }
+  }
+
+  // This function fetches the edit game route api when save button is clicked.
+  async function handleSave (e){
+    const requestOptions = {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+            name: e.target.name.value,
+            description: e.target.description.value,
+            handle: "gamePage" })
+    };
+    await fetch("/api/games/update/" + params.id, requestOptions)
+    window.alert(requestOptions);
+    setIsEdit(false)
+  }
+
+  // When cancel button is clicked, this constant sets the isEdit constant to false.
+  const handleCancel = (e) => {
+    e.preventDefault()
+    setIsEdit(false)
+  }
+
+  // Link each button to their specific pages
   return (
     <div className="GamePage pl-28 pr-28 pt-32 pb-16">
 
-      <div className="GameInfo flex">
-        <img className="GameCover w-80 rounded-3xl" src={data.imageurl} alt={data.name}></img>
-        <div className="NameStars flex items-center pl-10">
-          <p className="text-5xl font-bold dark:text-white">{data.name}</p>
-          <StarRating review={{ ratingStars: rating, userId: "1234" }} />
-          {/* () => navigate("/games") */}
-          <form onSubmit={handleDelete}>
+      <form className="w-1/12 float-right" onSubmit={handleDelete}>
+        <div>
           {user.admin && 
-            <button className="AdminButton">Delete Game</button>
-            }
-          </form>
-
-          <Link to="">
-            {user.admin && 
-            <button className="AdminButton ">Edit page</button>
-            }
-
-          </Link>
-
+          <button>Delete Game</button>
+          }
         </div>
-      </div>
+      </form>
 
-      <div className="Description pt-10 dark:text-white">
-        <p className="text-3xl font-bold">Description</p>
-        <p className="text-xl ">{data.description}</p>
-      </div>
+      <form onSubmit={handleSave}>
+      <div className="GameInfo flex">
+          <img className="GameCover w-80 rounded-3xl" src={data.imageurl} alt={data.name}></img>
+          <div className="NameStars flex items-center pl-10">
+            {isEdit
+            ?<textarea className='nameText' name="name" defaultValue={data.name}></textarea>
+            :<p className="text-5xl font-bold dark:text-white">{data.name}</p>
+            }
+        
+          <StarRating review={{ ratingStars: rating, userId: "1234" }} />
+
+            <div>
+              {isEdit
+              ?<div className='gameSection'>{user.admin && <button>Save</button>}{user.admin && <button onClick={handleCancel}>Cancel</button>}</div>
+              :<div className='gameSection'>{user.admin && <button onClick={handleClick}>Edit Page</button>} </div>
+              }
+            </div>
+          </div>
+        </div>
+
+        <div className="Description pt-10 dark:text-white">
+          <p className="text-3xl font-bold">Description</p>
+          {isEdit
+          ?<textarea className='descriptionText w-3/4' name="description" defaultValue={data.description}></textarea>
+          :<p className="text-xl ">{data.description}</p>
+          }
+        </div>
+      </form>
 
       <div className="Platform pt-10 dark:text-white">
         <p className="text-3xl font-bold">Available on</p>

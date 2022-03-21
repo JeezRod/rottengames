@@ -2,6 +2,17 @@ const express = require("express");
 const router = express.Router();
 const session = require("express-session");
 
+// import express from "express";
+// const dotenv = require("dotenv")
+// import dotenv from 'dotenv';
+// const fileUpload = require("express-fileupload")
+// const intoStream = require("into-stream")
+// import fileUpload from 'express-fileupload';
+// import intoStream from 'into-stream';
+// const { BlobServiceClient, ContainerClient} = require("@azure/storage-blob")
+// import { BlobServiceClient, ContainerClient} from '@azure/storage-blob';
+// dotenv.config();
+
 router.use(express.json());
 const Game = require("../Models/Game")
 const User = require("../Models/user")
@@ -9,6 +20,44 @@ const User = require("../Models/user")
 const { OAuth2Client } = require("google-auth-library");
 const { route } = require("express/lib/application");
 const client = new OAuth2Client(process.env.REACT_APP_GOOGLE_CLIENT_ID);
+
+// const sasToken = process.env.AZURE_SAS;
+// const containerName = 'helloblob';
+// const storageAccountName = process.env.storagereousrcename || "azuretest1741928";
+// const blobService = new BlobServiceClient(
+//   `https://${storageAccountName}.blob.core.windows.net/?${sasToken}`
+// );
+// console.log( `https://${storageAccountName}.blob.core.windows.net/?${sasToken}`);
+
+// const containerClient = blobService.getContainerClient(containerName);
+
+// router.use(
+//   fileUpload({
+//     createParentPath: true,
+//   })
+// )
+
+// router.post("/fileUpload", (req,res) => {
+//   console.log(JSON.stringify(req.files));
+
+//   const file = req.files.file;
+//   const path = file.name;
+
+//   const blobName = req.files.file.name;
+//   const stream = intoStream(req.files.file.data);
+
+//   const blobClient = containerClient.getBlockBlobClient(blobName);
+  
+//   // set mimetype as determined from browser with file upload control
+//   const options = { blobHTTPHeaders: { blobContentType: file.mimetype } };
+//   blobClient.uploadStream(stream, undefined, undefined, options)
+//   .then(err => {
+//     if (err) {
+//       return res.status(500).send(err);
+//     }
+//     return res.send({status : "success", path: path});
+//   });
+// })
 
 //Sample get route (/api/)
 router.get("/", (req, res) => {
@@ -318,6 +367,27 @@ router.post("/games/:gameId", async (req, res) => {
   res.end("already exists")
 });
 
+// router.post("/games/add", async (req, res) => {
+//   // Check if the game already exists in the database 
+//   // const numGame = await Game.find({ /** name : req.body.name */ }).count();
+//   // const game = await Game.find({ /** name : game name entered on form */ })
+//   //if game's platform = platform given on form then res.end() or find by platform too
+//   // If it does not exist then add it to the db
+//   // if (numGame === 0) {
+//     await Game.inserteOne(
+//       {
+//         $addToSet: {
+//           reviews: {
+//             $each: [req.body]
+//           }
+//         }
+//       }
+//     )
+//     res.end("success")
+//   // }
+//   res.end("game already exists")
+// })
+
 //PUT Routes
 // This route updates the users admin permission
 router.put("/users/update/:userId", async (req, res)=>{
@@ -338,13 +408,15 @@ router.put("/users/update/:userId", async (req, res)=>{
   
 })
 
-// router.put("users/updat/:gameId", async (req, res) => {
-const item = {
-
-}
-//   await Game.updateOne({_id: req.params.gameId},
-//     )
-// })
+// This route updates a game's page
+router.put("/games/update/:gameId", async (req, res) => {
+  if (req.body.handle === "gamePage"){
+    await Game.updateOne({_id: req.params.gameId},
+      {$set: {"name": req.body.name, "description": req.body.description}})
+    res.end("game page updated")
+    console.log("game page updated")
+  }
+})
 
 //DELETE Routes
 
@@ -357,8 +429,8 @@ router.delete("/users/delete/:userId", async (req, res) => {
 //Deletes chosen game when "delete game" button is clicked
 router.delete("/games/delete/:gameId", async (req, res) => {
   await Game.deleteOne({ _id: req.params.gameId })
-  res.redirect(200, '/games');
-  // res.end("game deleted")
+  // res.redirect(200, '/games');
+  res.end("game deleted")
 })
 
 module.exports = router;
