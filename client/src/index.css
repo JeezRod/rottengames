@@ -29,6 +29,10 @@ nav {
   @apply flex-initial justify-between
 }
 
+input{
+  @apply text-black
+}
+
 header button {
   @apply h-16 m-4
 }
