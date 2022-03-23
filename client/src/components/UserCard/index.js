@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom"
 
 function UserCard({ user }) {
     const [edit, setEdit] = React.useState(false);
@@ -9,9 +10,11 @@ function UserCard({ user }) {
                 <img className="w-24 h-24 rounded-full dark:text-white" src={user.picture} alt="profile-pic"></img>
             </div>
             <div className="userInfo flex flex-col justify-center">
-                <p className="text-center w-full overflow-auto dark:text-white">
-                    {user.name}
-                </p>
+                <Link to={"/profile/" + user._id}>
+                    <p className="text-center w-full overflow-auto dark:text-white">
+                        {user.name}
+                    </p>
+                </Link>
                 <p className="text-center w-full overflow-auto dark:text-white">
                     {user.email}
                 </p>

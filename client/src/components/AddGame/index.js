@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Select from "react-select"
 import {useState} from 'react';
-import "./GameForm.css"
 import {MultiSelect} from "react-multi-select-component";
 import Files from 'react-files'
 
@@ -94,7 +93,7 @@ const AddGame = () => {
           checked={checked}
           disabled={disabled}
         />
-        <label id="platforms" for={option.label}>{option.label}</label>
+        <label id="platforms" className="text-base italic" for={option.label}>{option.label}</label>
       </div>
     );
   };
@@ -136,14 +135,14 @@ const AddGame = () => {
 
   // Creates the form for adding a game
   return (
-    <div class="box">
+    <div className="box flex justify-evenly m-0 mt-12 lg:w-4/12 h-full p-5 bg-white border-2 border-black rounded-3xl">
       {/* FUNCTION handleSubmit ON ONSUBMIT */}
-      <form id="addGameForm" onSubmit={handleSubmit}>
-      <h2>Add Game Form</h2>
+      <form className="addGameForm flex flex-col justify-evenly" onSubmit={handleSubmit}>
+      <p className="text-2xl">Add Game Form</p>
         <label for="gameName">Game Name : </label>
-        <input type="text" id="gameName" name="gameName" value={name} onChange={(e) => setName(e.target.value)} required></input>
+        <input type="text" name="gameName" value={name} onChange={(e) => setName(e.target.value)} required></input>
         <label for="description">Description : </label>
-        <input type="text" id="description" name="description" value={description} onChange={(e) => setDescription(e.target.value)} required></input>
+        <input type="text" className="h-12" name="description" value={description} onChange={(e) => setDescription(e.target.value)} required></input>
         <label for="platform">Platform : </label>
         <Select
           name = "platform"
@@ -158,7 +157,7 @@ const AddGame = () => {
         <input type="date" id="releaseDate" name="releaseDate" value={date} onChange={(e) => setDate(e.target.value)}></input>
         <label for="lname">Image : </label>
         {/* <input type="file" id="lname" name="lname" onChange={onImageChange}></input> */}
-        <img id="gameImage" src={image} alt="preview image"/>
+        <img className="gameImage h-40 w-40" src={image} alt="preview"/>
         <br></br>
         <div className="files">
         <Files
@@ -171,10 +170,10 @@ const AddGame = () => {
           minFileSize={0}
           clickable
         >
-          Drop files here or click to upload
+          Drop files here or click here to upload
         </Files>
       </div>
-        <input id="button" type="submit" value="Add Game"></input>
+        <button type="submit">Add Game</button>
         {/* <pre>{JSON.stringify(selected)}</pre> */}
       </form>
     </div>);
