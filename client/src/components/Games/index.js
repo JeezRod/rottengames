@@ -8,8 +8,6 @@ function Games() {
   const [page, setPage] = React.useState(1);
   //State for the total number of games
   const [totalGames, setTotalGames] = React.useState([]);
-  //State for the number of games per page
-  const [perPage] = React.useState(30);
 
   //State for the search term
   const [searchTerm, setSearchTerm] = React.useState('');
@@ -22,6 +20,9 @@ function Games() {
   const [isCollapsed, setCollapse] = React.useState(false);
 
   const [winSize, setWinSize] = React.useState(window.innerWidth);
+
+  //State for the number of games per page
+  const [perPage, setPerPage] = React.useState(28);
 
   const buttonStyle = "mx-5 mb-5 lg:m-1 lg:p-1 rounded-none w-full bg-white text-black shadow-xl h-24 mt-10px transition ease-in-out duration-300 hover:shadow-2xl dark:text-white dark:bg-gray-800";
 
@@ -80,6 +81,15 @@ function Games() {
     
     console.log(page)
   }, [searchTerm, searchPlatform, page, perPage]);
+
+  React.useEffect(()=>{
+    if(winSize>=1440){
+      setPerPage(28)
+    }
+    if(winSize>=1024 && winSize<1440){
+      setPerPage(27)
+    }
+  },[winSize])
 
   //Function to set the page everytime a new page has been clicked 
   const handlePageClick = (event) => {

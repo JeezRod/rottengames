@@ -114,12 +114,12 @@ const UserProfile = () => {
                     ? <p className="text-3xl font-bold dark:text-white">My Profile</p>
                     : <p className="text-3xl font-bold w-50 dark:text-white">{user.name}'s Profile</p>}
                     
-                    <img className='profilePicture my-4 lg:mt-8 rounded-full w-36 h-36' src={user.picture} alt="profile"></img>
+                    <img className='profilePicture mx-auto my-4 lg:mx-0 lg:mt-8 rounded-full w-36 h-36' src={user.picture} alt="profile"></img>
                     
                     <div className='userSection my-8 lg:mt-16'>
                         {isEdit
                         ?<textarea className='nameText w-96 h-8 resize-none text-3xl font-bold border-2' name="name" defaultValue={user.name}></textarea>
-                        :<p className="text-3xl font-bold dark:text-white w-96 ">{user.name}</p>
+                        :<p className="text-3xl font-bold dark:text-white w-96 mx-auto">{user.name}</p>
                         }
                        
                        <p className="text-xl dark:text-white">{user.email}</p>
@@ -128,14 +128,14 @@ const UserProfile = () => {
                     <p className="text-3xl font-bold">Bio</p>
                         {isEdit
                         ?<textarea className='bioText text-xl w-96 h-8 resize-none border-2' name="bio" defaultValue={user.bio}></textarea>
-                        :<p className="text-xl w-96 ">{user.bio}</p>
+                        :<p className="text-xl w-96 mx-auto">{user.bio}</p>
                         }
                         
                     </div>
                     {isSameUser
                     ? isEdit 
-                        ?<div className='userSection my-8 lg:mt-16'><button className="dark:text-black dark:bg-white dark:hover:bg-gray-600 dark:hover:text-white">Save</button><button className="dark:text-black dark:bg-white dark:hover:bg-gray-600 dark:hover:text-white" onClick={handleCancel}>Cancel</button></div>
-                        : <div className='userSection my-8 lg:mt-16'><button className="dark:text-black dark:bg-white dark:hover:bg-gray-600 dark:hover:text-white" onClick={handleClick}>Edit Profile</button> </div>
+                        ?<div className='userSection my-8 lg:mt-16'><button>Save</button><button onClick={handleCancel}>Cancel</button></div>
+                        : <div className='userSection my-8 lg:mt-16'><button onClick={handleClick}>Edit Profile</button> </div>
                     :<></>
                     }
                 </form>
