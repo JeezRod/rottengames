@@ -53,7 +53,7 @@ function Dashboard() {
           ? <div>
             <form onSubmit={HandleSubmit} className="searchContainer flex flex-row justify-center items-center mb-8">
               <input name="search" className="searchBar mr-4 p-2" type="text" placeholder="Search"></input>
-              <button className="searchBtn dark:text-black dark:bg-white dark:hover:bg-gray-600 dark:hover:text-white">➜</button>
+              <button>➜</button>
             </form>
           
             <Users page={page} searchTerm={searchTerm} perPage={perPage}/>
