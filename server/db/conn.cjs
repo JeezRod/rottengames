@@ -12,3 +12,4 @@ class DAO{
 }
 
 module.exports = new DAO;
+// export default DAO;
