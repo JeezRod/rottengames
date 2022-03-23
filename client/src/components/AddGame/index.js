@@ -21,91 +21,104 @@ const AddGame = () => {
   // State for the game image
   const [image, setImage] = useState(null)
 
+  const [data, setData] = useState(null);
+
+  React.useEffect(() => {
+    fetch("/")
+    .then((res) => res.json())
+    .then((data) => setData(data.message));
+  }, []);
+
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log(date)
-    console.log(selected[0].value)
+    onFilesChange()
+    console.log("url"+image)
+    console.log(e.target.description.value)
+    console.log(e.target.platform.value)
   }
 
   // Submits the form
-  // const uploadFile =(e) => {
-  //   e.preventDefault();
-  //   var formData = new FormData();
-  //   formData.append('file', selectedFile);
-  //   updateImage(formData);
-  //   const url = ("/api/games/add")
-  //   let rating = 0
-  //   let description = e.target.description.value
-  //   // let image = 
-  //   let name = e.target.gameName.value
-  //   let platform = e.target.platform.value
-  //   let date = e.target.releaseDate.value
-  //   let reviews = []
+  const uploadFile = (e) => {
+    e.preventDefault();
+    // var formData = new FormData();
+    // formData.append('file', selectedFile);
+    // updateImage(formData);
+    const url = ("/api/games/add")
+    let rating = 0
+    let description = e.target.description.value
+    let image = image
+    let name = e.target.gameName.value
+    let platform = e.target.platform.value
+    let date = e.target.releaseDate.value
+    let reviews = []
 
-  //   const requestOptions = {
-  //     method: 'POST',
-  //     headers: { 'Content-Type': 'application/json' },
-  //     body: JSON.stringify({ rating, description, name, platform, date, reviews})
-  //   };
-  //   fetch(url, requestOptions)
-  //     .then(response => console.log('Submitted successfully'))
-  //     .catch(error => console.log('Form submit error', error))
-  // }
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ rating, description, name, platform, date, reviews})
+    };
+    fetch(url, requestOptions)
+      .then(response => console.log('Submitted successfully'))
+      .catch(error => console.log('Form submit error', error))
+  }
 
   // Stores platform options for the add game form
   const options = [
-    { label: "PlayStation 1", value: "ps1" },
-    { label: "PlayStation 2", value: "ps2" },
-    { label: "PlayStation 3", value: "ps3" },
-    { label: "PlayStation 4", value: "ps4" },
-    { label: "PlayStation 5", value: "ps5" },
-    { label: "PlayStation Vita", value: "psVita" },
-    { label: "PSP", value: "psp" },
-    { label: "Xbox", value: "xbox" },
-    { label: "Xbox 360", value: "xbox360" },
-    { label: "Xbox One", value: "xbox1" },
-    { label: "Xbox Series X|S", value: "xboxSeries" },
-    { label: "Ninentendo NES", value: "NES" },
-    { label: "Nintendo SNES", value: "SNES" },
-    { label: "Nintendo 64", value: "N64" },
-    { label: "GameCube", value: "gameCube" },
-    { label: "Game Boy Advance", value: "gameBoy" },
-    { label: "Wii", value: "wii" },
-    { label: "Wii U", value: "wiiU" },
-    { label: "DS", value: "ds" },
-    { label: "3DS", value: "3ds" },
-    { label: "Switch", value: "switch" },
-    { label: "Windows", value: "windows" },
-    { label: "Mac", value: "mac" },
-    { label: "Linux", value: "linux" },
-    { label: "Dreamcast", value: "dreamcast" },
-    { label: "Stadia", value: "stadia" },
+    { label: "PlayStation", value: "PlayStation" },
+    { label: "PlayStation 2", value: "PlayStation 2" },
+    { label: "PlayStation 3", value: "PlayStation 3" },
+    { label: "PlayStation 4", value: "PlayStation 4" },
+    { label: "PlayStation 5", value: "PlayStation 5" },
+    { label: "PlayStation Vita", value: "PlayStation Vita" },
+    { label: "PSP", value: "PSP" },
+    { label: "Xbox", value: "Xbox" },
+    { label: "Xbox 360", value: "Xbox 360" },
+    { label: "Xbox One", value: "Xbox One" },
+    { label: "Xbox Series X|S", value: "Xbox Series X" },
+    { label: "Nintendo 64", value: "Nintendo 64" },
+    { label: "GameCube", value: "GameCube" },
+    { label: "Game Boy Advance", value: "Game Boy Advance" },
+    { label: "Wii", value: "Wii" },
+    { label: "Wii U", value: "Wii U" },
+    { label: "DS", value: "DS" },
+    { label: "3DS", value: "3DS" },
+    { label: "Switch", value: "Switch" },
+    { label: "Windows;Mac;Linux", value: "windows;mac;linux" },
+    { label: "Dreamcast", value: "Dreamcast" },
+    { label: "Stadia", value: "Stadia" },
   ];
 
 
-  const itemRenderer = ({ checked, option, onClick, disabled }) => {
-    return (
-      <div>
-        <input
-          id={option.label}
-          type="checkbox"
-          onChange={onClick}
-          checked={checked}
-          disabled={disabled}
-        />
-        <label id="platforms" className="text-base italic" for={option.label}>{option.label}</label>
-      </div>
-    );
-  };
-
-  const fileChangeHandler = (event) => {
-    setSelectedFile(event.target.files[0]);
-    setIsSelected(true);
-    // onImageChange()
-  }
+  // const itemRenderer = ({ checked, option, onClick, disabled }) => {
+  //   return (
+  //     <div>
+  //       <input
+  //         id={option.label}
+  //         type="checkbox"
+  //         onChange={onClick}
+  //         checked={checked}
+  //         disabled={disabled}
+  //       />
+  //       <label id="platforms" className="text-base italic" for={option.label}>{option.label}</label>
+  //     </div>
+  //   );
+  // };
 
   const onFilesChange = (files) => {
-    console.log(files)
+
+    // const fileChangeHandler = (event) => {
+    //   setSelectedFile(event.target.files[0]);
+    //   setIsSelected(true);
+    //   // onImageChange()
+    // }
+
+    // const onImageChange = (event) => {
+    //  if (event.target.files && event.target.files[0]) {
+    //    setImage(URL.createObjectURL(event.target.files[0]));
+    //  }
+    // }
+
+    // console.log(files)
     try {
       setImage(URL.createObjectURL(files[0]));
     }
@@ -118,14 +131,9 @@ const AddGame = () => {
     // console.log('error code ' + error.code + ': ' + error.message)
   }
 
-  const onImageChange = (event) => {
-    if (event.target.files && event.target.files[0]) {
-      setImage(URL.createObjectURL(event.target.files[0]));
-    }
-   }
-
   function updateImage(formData) {
-    return fetch('/image', {
+    // /image??
+    return fetch('/fileUpload', {
       method : 'POST',
       headers : {        
       },
@@ -174,7 +182,6 @@ const AddGame = () => {
         </Files>
       </div>
         <button type="submit">Add Game</button>
-        {/* <pre>{JSON.stringify(selected)}</pre> */}
       </form>
     </div>);
 };

@@ -1,9 +1,13 @@
-const express = require("express");
-const path = require("path");
 const app = express();
-const api = require("./routes/api")
-const dotenv = require('dotenv');
-const session = require("express-session");
+import express from "express";
+import path from "path";
+import router from "./routes/api.js";
+import dotenv from "dotenv";
+import session from "express-session";
+import {dirname} from "path";
+import {fileURLToPath} from "url"
+
+const __dirname = dirname(fileURLToPath(import.meta.url))
 
 dotenv.config();
 app.use(session({ secret: 'shhhhhhh' }));
@@ -11,7 +15,7 @@ app.use(session({ secret: 'shhhhhhh' }));
 app.use(express.static(path.resolve(__dirname, '../client/build')));
 
 // anything in the URL path /api uses the Router
-app.use("/api", api);
+app.use("/api", router);
 
 // All other GET requests not handled before will return our React app
 app.get('*', (req, res) => {
@@ -29,4 +33,5 @@ app.use(express.json());
 })*/
 
 
-module.exports = app;
+// module.exports = app;
+export default app;

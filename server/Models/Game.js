@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+import mongoose from "mongoose";
 
 const gameSchema = new Schema({
     averagerating: Number,
@@ -17,5 +17,6 @@ const gameSchema = new Schema({
 
 const Game = mongoose.model('Game', gameSchema)
 
-module.exports = Game;
+// module.exports = Game;
+export default Game;
 
