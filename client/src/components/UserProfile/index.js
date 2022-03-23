@@ -149,7 +149,7 @@ const UserProfile = () => {
                             <Link className="link"to={"/games/"+userReviews[key].id}>
                                 <p className="text-2xl font-bold dark:text-white">{key}</p>
                             </Link>
-                            <ReviewCard review={userReviews[key].review} isAdmin={currentUser.admin || isSameUser} loggedIn={Object.keys(currentUser).length !== 0}/>
+                            <ReviewCard gameId={userReviews[key].id} review={userReviews[key].review} isAdmin={currentUser.admin || isSameUser} loggedIn={Object.keys(currentUser).length !== 0}/>
                             
                         </div>
                     )
