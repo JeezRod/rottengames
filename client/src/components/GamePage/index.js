@@ -1,7 +1,6 @@
 import React from "react";
 import ReviewCard from "../ReviewCard";
 import StarRating from "../StarRating";
-import { Link } from "react-router-dom"
 import { useNavigate } from 'react-router';
 import { useParams } from "react-router-dom";
 import ReactLoading from "react-loading";
@@ -221,7 +220,7 @@ function Review() {
         {data.reviews.length > 0
           ? data.reviews.map(review => {
             return (
-              <ReviewCard key={review.userId} review={review} />
+              <ReviewCard key={review.userId} review={review} gameId={params.id} />
             )
           })
           : <p className="text-2xl font-bold">No reviews</p>

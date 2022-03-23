@@ -4,7 +4,7 @@ import StarRating from "../StarRating";
 import {useUser} from "../../UserContext"
 import { Link } from "react-router-dom"
 
-const ReviewCard = ({ review, isAdmin, loggedIn }) => {
+const ReviewCard = ({ gameId, review, isAdmin }) => {
 
   const [userReview, setUserReview] = React.useState("");
   const user = useUser();
@@ -18,6 +18,16 @@ const ReviewCard = ({ review, isAdmin, loggedIn }) => {
     }
     fetchData();
   }, [review.userId]);
+
+  // This function fetches the delete game api when delete game is clicked.
+  async function handleDelete(e){
+    const confirmation = window.confirm("Are you sure you want to this review?");
+    console.log("GameId: "+gameId);
+    console.log("UserId: "+review.userId)
+    if(confirmation){
+        await fetch("/api/games/delete/"+gameId+"/"+review.userId, { method: 'DELETE' })
+    }
+  }
 
   return (
     <div className="Rating my-4 flex items-center justify-between p-1 shadow-lg dark:bg-gray-800">
@@ -40,7 +50,9 @@ const ReviewCard = ({ review, isAdmin, loggedIn }) => {
             <button className="UserButton  my-0.5 ">Comment</button>
           }
           {(isAdmin || user.admin) &&
-          <button className="AdminButton px-5 my-0.5 ">Delete</button>
+          <form onSubmit={handleDelete}>
+            <button className="AdminButton px-5 my-0.5 ">Delete</button>
+          </form>
           }
         </div>
       </div>

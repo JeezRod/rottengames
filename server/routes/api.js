@@ -433,4 +433,15 @@ router.delete("/games/delete/:gameId", async (req, res) => {
   res.end("game deleted")
 })
 
+router.delete("/games/delete/:gameId/:userId", async (req, res) =>{
+  //Query to delete a specific review for a specific game
+  await Game.updateMany(
+    { "_id": req.params.gameId }, 
+    {"$pull": {"reviews": {"userId": req.params.userId}}},
+    {"multi": true}
+    );
+
+  res.end("Review deleted")
+});
+
 module.exports = router;
