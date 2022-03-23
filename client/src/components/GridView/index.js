@@ -52,8 +52,8 @@ function GridView({ page, searchTerm, perPage, searchPlatform }) {
   //If the games are loading show loading prompt
   if (loading) {
     return (
-      <div className='loading flex justify-center'>
-        <ReactLoading type={"spin"} color="#000" />
+      <div className='loading flex justify-center items-center h-1/2'>
+        <ReactLoading type={"spin"} color="#696969" />
       </div>
     )
   }
