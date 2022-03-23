@@ -434,19 +434,12 @@ router.delete("/games/delete/:gameId", async (req, res) => {
 })
 
 router.delete("/games/delete/:gameId/:userId", async (req, res) =>{
-  console.log("Deleting Game")
-  console.log("GameId: "+req.params.gameId)
-  console.log("UserId: "+req.params.userId)
-
-  /*
-  Game.updateOne({ _id: req.params.gameId }, {
-    $pull: {
-        reviews: [{userId: req.params.userId}],
-    },
-  });*/
-
-  let result = await Game.findOne({ _id: req.params.gameId})
-  result.reviews.pull({userId: req.params.userId})
+  //Query to delete a specific review for a specific game
+  await Game.updateMany(
+    { "_id": req.params.gameId }, 
+    {"$pull": {"reviews": {"userId": req.params.userId}}},
+    {"multi": true}
+    );
 
   res.end("Review deleted")
 });
