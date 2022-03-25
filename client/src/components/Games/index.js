@@ -122,7 +122,7 @@ function Games() {
         </div>
         : 
         // hidden lg:block
-        <div className=""><Filter setSearchTerm={setSearchTerm} setSearchPlatform={setSearchPlatform}/></div>
+        <Filter setSearchTerm={setSearchTerm} setSearchPlatform={setSearchPlatform}/>
         }
 
         <div className={`GridPaginator w-full` }>
