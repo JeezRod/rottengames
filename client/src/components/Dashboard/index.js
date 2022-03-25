@@ -2,7 +2,7 @@ import React from "react";
 import ReactPaginate from 'react-paginate';
 import Users from "../AllUsers";
 import AddGame from "../AddGame"
-import {useUser, useUserUpdateContext} from "../../UserContext"
+import {useUser} from "../../UserContext"
 
 function Dashboard() {
 
@@ -10,7 +10,7 @@ function Dashboard() {
 
   const [totalUsers, setTotalUsers] = React.useState([]);
 
-  const [perPage, setPerPage] = React.useState(8);
+  const [perPage] = React.useState(8);
 
   const [searchTerm, setSearchTerm] = React.useState('');
 

@@ -22,6 +22,64 @@ user.get("/", async (req, res) => {
   }
 })
 
+//This route gets all the user so when administration tries to see
+// them all, they can locate it. This route it is used in the dashboard
+// component
+
+user.get("/all", async (req, res) => {
+  let { page, size, name } = req.query;
+
+  //Set default value for page
+  if (!page) {
+    page = 1;
+  }
+  //Set default value for users per page
+  if (!size) {
+    size = 8;
+  }
+  //Set default value for name
+  if (!name) {
+    name = "";
+  }
+
+  //Computes the number to skip (page number)
+  const limit = parseInt(size);
+  const skip = (page - 1) * size;
+
+  //Get all games that match the filter
+  const result = await User.find({
+    name: {
+      "$regex": name,
+      "$options": "i"
+    }
+  })
+    .limit(limit)
+    .skip(skip);
+
+  res.json(result);
+})
+
+//Route to get all users in the database (/api/users)
+user.get("/count", async (req, res) => {
+  //Get name from query
+  let { name } = req.query;
+
+  //Set default value for name
+  if (!name) {
+    name = "";
+  }
+
+  //Gets the count of a filtered name
+  const result = await User.find({
+    name: {
+      "$regex": name,
+      "$options": "i"
+    }
+  }).count();
+
+  res.json(result);
+});
+
 //Route to get a specific user
 user.get("/:userId", async (req, res) => {
   try {
@@ -42,7 +100,5 @@ user.get("/:userId/comments", async (req, res) => {
     res.status(401)
   }
 })
-
-
 
 export default user
