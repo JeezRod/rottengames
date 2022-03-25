@@ -117,4 +117,10 @@ user.put("/:userId", async (req, res)=>{
   }
 })
 
+//Delete an user based on the user ID from the admin dashboard
+user.delete("/:userId", async (req, res) => {
+  await User.deleteOne({ _id: req.params.userId })
+  res.end("user deleted")
+});
+
 export default user

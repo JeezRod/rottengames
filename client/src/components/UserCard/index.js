@@ -73,7 +73,7 @@ function UserCard({ user }) {
     async function handleDelete() {
         const confirmation = window.confirm("Are you sure you want to delete the user: " + user.name);
         if (confirmation) {
-            await fetch("/api/users/delete/" + user._id, { method: 'DELETE' })
+            await fetch("/api/user/" + user._id, { method: 'DELETE' })
             window.alert("User deleted")
         }
     }
