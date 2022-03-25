@@ -292,12 +292,6 @@ router.put("/games/update/:gameId", async (req, res) => {
 
 //DELETE Routes
 
-//Delete an user based on the user ID from the admin dashboard
-router.delete("/users/delete/:userId", async (req, res) => {
-  await User.deleteOne({ _id: req.params.userId })
-  res.end("user deleted")
-});
-
 //Deletes chosen game when "delete game" button is clicked
 router.delete("/games/delete/:gameId", async (req, res) => {
   await Game.deleteOne({ _id: req.params.gameId })
