@@ -101,4 +101,20 @@ user.get("/:userId/comments", async (req, res) => {
   }
 })
 
+// This route updates the users admin permission
+user.put("/:userId", async (req, res)=>{
+  if(req.body.handle === "permissions"){
+    await User.updateOne(
+      {_id: req.params.userId},
+       {$set: {"admin": req.body.admin}})
+    res.end("permissions updated")
+  }
+  if(req.body.handle === "profile"){
+    await User.updateOne(
+      {_id: req.params.userId},
+       {$set: {"name": req.body.name, "bio": req.body.bio}})
+    res.end("user updated")
+  }
+})
+
 export default user

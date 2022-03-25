@@ -88,7 +88,7 @@ const UserProfile = () => {
                 bio: e.target.bio.value,
                 handle: "profile" })
         };
-        await fetch("/api/users/update/" + user._id, requestOptions)
+        await fetch("/api/user/" + user._id, requestOptions)
         window.alert(requestOptions);
         setIsEdit(false)
     }

@@ -65,7 +65,7 @@ function UserCard({ user }) {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ admin: choiceBox, handle: "permissions" })
         };
-        await fetch("/api/users/update/" + user._id, requestOptions)
+        await fetch("/api/user/" + user._id, requestOptions)
         window.alert(requestOptions);
         setEdit(false)
     }
