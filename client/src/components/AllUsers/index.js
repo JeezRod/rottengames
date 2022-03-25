@@ -17,7 +17,7 @@ function AllUsers({ page, searchTerm, perPage }) {
       try {
         setLoading(true);
 
-        let usersData = await fetch("/api/users?page=" + page + "&name=" + searchTerm + "&size=" + perPage);
+        let usersData = await fetch("/api/user/all?page=" + page + "&name=" + searchTerm + "&size=" + perPage);
         let usersJson = await usersData.json();
 
         await setUsers(usersJson);

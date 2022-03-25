@@ -1,4 +1,7 @@
 const router = express.Router();
+
+import user from "./user.js"
+
 import session from "express-session";
 import express from "express";
 import dotenv from 'dotenv';
@@ -105,42 +108,7 @@ router.delete("/v1/auth/logout", async (req, res) => {
   console.log("session: " + req.session)
 })
 
-//This route returns all the information of the current logged in user
-// email, name, profile picture and if the user is an admin
-router.get("/user", async (req, res) => {
-  // first check if a user is currently logged in 
-  if (typeof (req.session.userId) !== "undefined") {
-    //fetch the user's information from the db using it's email
-    const user = await User.find({ email: req.session.userId }).findOne();
-    res.status(200)
-    //return the information
-    res.json(user)
-  }
-  //if no user is currently logged in return a 401 status
-  else {
-    res.status(401)
-  }
-})
-
-//Route to get a specific user
-router.get("/user/:userId", async (req, res) => {
-  try {
-    const user = await User.findOne({ _id: req.params.userId });
-    res.json(user);
-  } catch (e) {
-    res.status(401)
-  }
-})
-
-//Route to get a specific user
-router.get("/user/:userId/comments", async (req, res) => {
-  try {
-    const user = await Game.find({ "reviews.userId": req.params.userId });
-    res.json(user);
-  } catch (e) {
-    res.status(401)
-  }
-})
+router.use("/user", user);
 
 //This route gets all the user so when administration tries to see
 // them all, they can locate it. This route it is used in the dashboard
