@@ -88,7 +88,7 @@ function Review() {
       let user = await fetch("/api/user")
       let userJson = await user.json()
 
-      const url = ("/api/games/" + params.id)
+      const url = ("/api/games/" + params.id+ "/review")
 
       let text = event.target.reviewText.value
       // let name = userJson.name

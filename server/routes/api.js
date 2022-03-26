@@ -113,32 +113,6 @@ router.use("/user", user);
 
 router.use("/games", gameRoute);
 
-//POST Routes
-//This inserts an empty object for some reason
-router.post("/games/:gameId", async (req, res) => {
-  //First checks if the user has already commented on the review
-  const result = await Game.findById(req.params.gameId);
-  const isAlreadyCommented = result.reviews.userId.includes(req.body.userId)
-  console.log(req.body)
-  //Only add the review if the user has not commented on the same game
-  if (!isAlreadyCommented) {
-    //Adding the review object to the reviews array in the database(if same object, does nothing)
-    await Game.updateOne(
-      { _id: req.params.gameId },
-      {
-        $addToSet: {
-          reviews: {
-            $each: [req.body]
-          }
-        }
-      }
-    )
-    res.end("success")
-  }
-
-  res.end("already exists")
-});
-
 router.post("/games/add", async (req, res) => {
   // Check if the game already exists in the database 
   // const numGame = await Game.find({ /** name : req.body.name */ }).count();

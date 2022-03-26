@@ -106,4 +106,51 @@ gameRoute.get("/", async (req, res) => {
     res.json(result)
   });
 
+  //Inserts a new game
+  gameRoute.post("/add", async (req, res) => {
+    // Check if the game already exists in the database 
+    // const numGame = await Game.find({ /** name : req.body.name */ }).count();
+    // const game = await Game.find({ /** name : game name entered on form */ })
+    //if game's platform = platform given on form then res.end() or find by platform too
+    // If it does not exist then add it to the db
+    // if (numGame === 0) {
+      await Game.inserteOne(
+        {
+          $addToSet: {
+            reviews: {
+              $each: [req.body]
+            }
+          }
+        }
+      )
+      res.end("success")
+    // }
+    res.end("game already exists")
+  })
+
+  //This inserts an empty object for some reason
+  gameRoute.post("/:gameId/review", async (req, res) => {
+    //First checks if the user has already commented on the review
+    const result = await Game.findById(req.params.gameId);
+    const isAlreadyCommented = result.reviews.userId.includes(req.body.userId)
+    console.log(req.body)
+    //Only add the review if the user has not commented on the same game
+    if (!isAlreadyCommented) {
+      //Adding the review object to the reviews array in the database(if same object, does nothing)
+      await Game.updateOne(
+        { _id: req.params.gameId },
+        {
+          $addToSet: {
+            reviews: {
+              $each: [req.body]
+            }
+          }
+        }
+      )
+      res.end("success")
+    }
+  
+    res.end("review already exists")
+  });
+
 export default gameRoute
