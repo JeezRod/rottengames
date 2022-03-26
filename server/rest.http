@@ -20,7 +20,7 @@ GET http://localhost:3001/api/games?page=1&name=zelda&platform=Wii&platform=DS
 GET http://localhost:3001/api/games/count?name=zelda&platform=Wii
 
 ### Get all the users
-GET http://localhost:3001/api/users
+GET http://localhost:3001/api/user/all
 ### Post a review 
 POST http://localhost:3001/api/games/62193d7e1533a971c15a7bc9?email=rodddddd@email.com&rating=2&text=gamebad!!!
 

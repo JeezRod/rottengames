@@ -16,7 +16,7 @@ export function UserProvider({children}){
 
     React.useEffect( () => {
         let mounted = true;
-        fetch('/api/user').then(response => {
+        fetch('/api/users').then(response => {
             if (response.status === 200) {
                 console.log("response 200")
                 return response.json().then(data => setUser(

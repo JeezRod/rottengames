@@ -88,7 +88,7 @@ function Review() {
       let user = await fetch("/api/user")
       let userJson = await user.json()
 
-      const url = ("/api/games/" + params.id)
+      const url = ("/api/games/" + params.id+ "/review")
 
       let text = event.target.reviewText.value
       // let name = userJson.name
@@ -118,7 +118,7 @@ function Review() {
     e.preventDefault();
     const confirmation = window.confirm("Are you sure you want to delete this game?");
     if(confirmation){
-        await fetch("/api/games/delete/"+params.id, { method: 'DELETE' })
+        await fetch("/api/games/"+params.id, { method: 'DELETE' })
         window.alert("Game deleted");
         navigate("/games")
     }
@@ -144,7 +144,7 @@ function Review() {
             description: e.target.description.value,
             handle: "gamePage" })
     };
-    await fetch("/api/games/update/" + params.id, requestOptions)
+    await fetch("/api/games/" + params.id, requestOptions)
     window.alert(requestOptions);
     setIsEdit(false)
   }

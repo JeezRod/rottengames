@@ -26,7 +26,7 @@ const UserProfile = () => {
     React.useEffect( () => {
         async function fetchUser(){
             setLoading(true)
-            let response = await fetch('/api/user/'+params.id);
+            let response = await fetch('/api/users/'+params.id);
             if (response.status === 200) {
                 let userJson = await response.json();
                 await setUser(userJson);
@@ -41,7 +41,7 @@ const UserProfile = () => {
 
     React.useEffect(() => {
         async function fetchComments(){
-            let response = await fetch('/api/user/'+user._id+"/comments");
+            let response = await fetch('/api/users/'+user._id+"/comments");
             if (response.status === 200) {
             let gamesJson = await response.json();
             
@@ -88,7 +88,7 @@ const UserProfile = () => {
                 bio: e.target.bio.value,
                 handle: "profile" })
         };
-        await fetch("/api/users/update/" + user._id, requestOptions)
+        await fetch("/api/users/" + user._id, requestOptions)
         window.alert(requestOptions);
         setIsEdit(false)
     }
