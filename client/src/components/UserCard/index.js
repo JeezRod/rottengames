@@ -65,7 +65,7 @@ function UserCard({ user }) {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ admin: choiceBox, handle: "permissions" })
         };
-        await fetch("/api/user/" + user._id, requestOptions)
+        await fetch("/api/users/" + user._id, requestOptions)
         window.alert(requestOptions);
         setEdit(false)
     }
@@ -73,7 +73,7 @@ function UserCard({ user }) {
     async function handleDelete() {
         const confirmation = window.confirm("Are you sure you want to delete the user: " + user.name);
         if (confirmation) {
-            await fetch("/api/user/" + user._id, { method: 'DELETE' })
+            await fetch("/api/users/" + user._id, { method: 'DELETE' })
             window.alert("User deleted")
         }
     }

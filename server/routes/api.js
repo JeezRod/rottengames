@@ -55,7 +55,7 @@ router.post("/fileUpload", (req,res) => {
 router.use("/v1/auth/", googleAuthRouter)
 
 //All user routes redirected to user.js
-router.use("/user", userRouter);
+router.use("/users", userRouter);
 
 //All game routes redirected to game.js
 router.use("/games", gameRouter);

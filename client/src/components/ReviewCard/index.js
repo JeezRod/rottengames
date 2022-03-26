@@ -12,7 +12,7 @@ const ReviewCard = ({ gameId, review, isAdmin }) => {
   //Fetch the profile picture for the specific email
   React.useEffect(() => {
     async function fetchData() {
-      let data = await fetch("/api/user/" + review.userId);
+      let data = await fetch("/api/users/" + review.userId);
       let dataJson = await data.json();
       setUserReview(dataJson)
     }

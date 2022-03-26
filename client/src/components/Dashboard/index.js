@@ -25,7 +25,7 @@ function Dashboard() {
     //Async function to fetch count of all games
     async function fetchData() {
       //Fetching the data
-      let data = await fetch("/api/user/count?name=" + searchTerm);
+      let data = await fetch("/api/users/count?name=" + searchTerm);
       let dataJson = await data.json();
       //Set the returned data
       await setTotalUsers(dataJson);
