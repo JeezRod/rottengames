@@ -2,12 +2,12 @@ import express from "express";
 import User from "../Models/user.js";
 import Game from "../Models/Game.js";
 
-const user = express.Router();
-user.use(express.json());
+const userRouter = express.Router();
+userRouter.use(express.json());
 
 //This route returns all the information of the current logged in user
 // email, name, profile picture and if the user is an admin
-user.get("/", async (req, res) => {
+userRouter.get("/", async (req, res) => {
   // first check if a user is currently logged in 
   if (typeof (req.session.userId) !== "undefined") {
     //fetch the user's information from the db using it's email
@@ -26,7 +26,7 @@ user.get("/", async (req, res) => {
 // them all, they can locate it. This route it is used in the dashboard
 // component
 
-user.get("/all", async (req, res) => {
+userRouter.get("/all", async (req, res) => {
   let { page, size, name } = req.query;
 
   //Set default value for page
@@ -60,7 +60,7 @@ user.get("/all", async (req, res) => {
 })
 
 //Route to get all users in the database (/api/users)
-user.get("/count", async (req, res) => {
+userRouter.get("/count", async (req, res) => {
   //Get name from query
   let { name } = req.query;
 
@@ -81,7 +81,7 @@ user.get("/count", async (req, res) => {
 });
 
 //Route to get a specific user
-user.get("/:userId", async (req, res) => {
+userRouter.get("/:userId", async (req, res) => {
   try {
     const user = await User.findOne({ _id: req.params.userId });
     res.json(user);
@@ -91,7 +91,7 @@ user.get("/:userId", async (req, res) => {
 })
 
 //Route to get a specific user
-user.get("/:userId/comments", async (req, res) => {
+userRouter.get("/:userId/comments", async (req, res) => {
   console.log("comments")
   try {
     const user = await Game.find({ "reviews.userId": req.params.userId });
@@ -102,7 +102,7 @@ user.get("/:userId/comments", async (req, res) => {
 })
 
 // This route updates the users admin permission
-user.put("/:userId", async (req, res)=>{
+userRouter.put("/:userId", async (req, res)=>{
   if(req.body.handle === "permissions"){
     await User.updateOne(
       {_id: req.params.userId},
@@ -118,9 +118,9 @@ user.put("/:userId", async (req, res)=>{
 })
 
 //Delete an user based on the user ID from the admin dashboard
-user.delete("/:userId", async (req, res) => {
+userRouter.delete("/:userId", async (req, res) => {
   await User.deleteOne({ _id: req.params.userId })
   res.end("user deleted")
 });
 
-export default user
+export default userRouter

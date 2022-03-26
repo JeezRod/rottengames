@@ -2,11 +2,11 @@ import express from "express";
 import User from "../Models/user.js";
 import Game from "../Models/Game.js";
 
-const gameRoute = express.Router();
-gameRoute.use(express.json());
+const gameRouter = express.Router();
+gameRouter.use(express.json());
 
 //Route to get all games in the database (/api/games)
-gameRoute.get("/", async (req, res) => {
+gameRouter.get("/", async (req, res) => {
 
     // get the page, size, and name from query
     let { page, size, name, platform } = req.query;
@@ -61,7 +61,7 @@ gameRoute.get("/", async (req, res) => {
   });
   
   //Route to get all games in the database (/api/games)
-  gameRoute.get("/count", async (req, res) => {
+  gameRouter.get("/count", async (req, res) => {
     //Get name from query
     let { name, platform } = req.query;
   
@@ -100,14 +100,14 @@ gameRoute.get("/", async (req, res) => {
   });
 
   //Route to get a specific game in the database (/api/games/:id)
-  gameRoute.get("/:gameId", async (req, res) => {
+  gameRouter.get("/:gameId", async (req, res) => {
     const result = await Game.findById(req.params.gameId);
     //we can use req.params.gameId to send the id to the db to find its information
     res.json(result)
   });
 
   //Inserts a new game
-  gameRoute.post("/add", async (req, res) => {
+  gameRouter.post("/add", async (req, res) => {
     // Check if the game already exists in the database 
     // const numGame = await Game.find({ /** name : req.body.name */ }).count();
     // const game = await Game.find({ /** name : game name entered on form */ })
@@ -129,7 +129,7 @@ gameRoute.get("/", async (req, res) => {
   })
 
   //This inserts an empty object for some reason
-  gameRoute.post("/:gameId/review", async (req, res) => {
+  gameRouter.post("/:gameId/review", async (req, res) => {
     //First checks if the user has already commented on the review
     const result = await Game.findById(req.params.gameId);
     const isAlreadyCommented = result.reviews.userId.includes(req.body.userId)
@@ -154,7 +154,7 @@ gameRoute.get("/", async (req, res) => {
   });
 
   // This route updates a game's page
-  gameRoute.put("/:gameId", async (req, res) => {
+  gameRouter.put("/:gameId", async (req, res) => {
     if (req.body.handle === "gamePage"){
       await Game.updateOne({_id: req.params.gameId},
         {$set: {"name": req.body.name, "description": req.body.description}})
@@ -163,12 +163,12 @@ gameRoute.get("/", async (req, res) => {
   })
 
   //Deletes chosen game when "delete game" button is clicked
-  gameRoute.delete("/:gameId", async (req, res) => {
+  gameRouter.delete("/:gameId", async (req, res) => {
     await Game.deleteOne({ _id: req.params.gameId })
     res.end("game deleted")
   })
   
-  gameRoute.delete("/:gameId/:userId", async (req, res) =>{
+  gameRouter.delete("/:gameId/:userId", async (req, res) =>{
     //Query to delete a specific review for a specific game
     await Game.updateMany(
       { "_id": req.params.gameId }, 
@@ -179,4 +179,4 @@ gameRoute.get("/", async (req, res) => {
     res.end("Review deleted")
   });
 
-export default gameRoute
+export default gameRouter

@@ -1,7 +1,7 @@
 const router = express.Router();
 
-import user from "./user.js"
-import gameRoute from "./game.js"
+import userRouter from "./user.js"
+import gameRouter from "./game.js"
 
 import session from "express-session";
 import express from "express";
@@ -109,8 +109,8 @@ router.delete("/v1/auth/logout", async (req, res) => {
   console.log("session: " + req.session)
 })
 
-router.use("/user", user);
+router.use("/user", userRouter);
 
-router.use("/games", gameRoute);
+router.use("/games", gameRouter);
 
 export default router;
