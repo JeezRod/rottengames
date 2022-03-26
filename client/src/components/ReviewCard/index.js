@@ -21,11 +21,11 @@ const ReviewCard = ({ gameId, review, isAdmin }) => {
 
   // This function fetches the delete game api when delete game is clicked.
   async function handleDelete(e){
-    const confirmation = window.confirm("Are you sure you want to this review?");
+    const confirmation = window.confirm("Are you sure you want delete to this review?");
     console.log("GameId: "+gameId);
     console.log("UserId: "+review.userId)
     if(confirmation){
-        await fetch("/api/games/delete/"+gameId+"/"+review.userId, { method: 'DELETE' })
+        await fetch("/api/games/"+gameId+"/"+review.userId, { method: 'DELETE' })
     }
   }
 

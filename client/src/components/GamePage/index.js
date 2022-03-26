@@ -118,7 +118,7 @@ function Review() {
     e.preventDefault();
     const confirmation = window.confirm("Are you sure you want to delete this game?");
     if(confirmation){
-        await fetch("/api/games/delete/"+params.id, { method: 'DELETE' })
+        await fetch("/api/games/"+params.id, { method: 'DELETE' })
         window.alert("Game deleted");
         navigate("/games")
     }

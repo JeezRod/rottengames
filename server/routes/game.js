@@ -162,4 +162,21 @@ gameRoute.get("/", async (req, res) => {
     }
   })
 
+  //Deletes chosen game when "delete game" button is clicked
+  gameRoute.delete("/:gameId", async (req, res) => {
+    await Game.deleteOne({ _id: req.params.gameId })
+    res.end("game deleted")
+  })
+  
+  gameRoute.delete("/:gameId/:userId", async (req, res) =>{
+    //Query to delete a specific review for a specific game
+    await Game.updateMany(
+      { "_id": req.params.gameId }, 
+      {"$pull": {"reviews": {"userId": req.params.userId}}},
+      {"multi": true}
+      );
+  
+    res.end("Review deleted")
+  });
+
 export default gameRoute

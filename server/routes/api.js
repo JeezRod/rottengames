@@ -113,25 +113,4 @@ router.use("/user", user);
 
 router.use("/games", gameRoute);
 
-//DELETE Routes
-
-//Deletes chosen game when "delete game" button is clicked
-router.delete("/games/delete/:gameId", async (req, res) => {
-  await Game.deleteOne({ _id: req.params.gameId })
-  // res.redirect(200, '/games');
-  res.end("game deleted")
-})
-
-router.delete("/games/delete/:gameId/:userId", async (req, res) =>{
-  //Query to delete a specific review for a specific game
-  await Game.updateMany(
-    { "_id": req.params.gameId }, 
-    {"$pull": {"reviews": {"userId": req.params.userId}}},
-    {"multi": true}
-    );
-
-  res.end("Review deleted")
-});
-
-// module.exports = router;
 export default router;
