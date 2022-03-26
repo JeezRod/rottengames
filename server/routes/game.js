@@ -1,5 +1,4 @@
 import express from "express";
-import User from "../Models/user.js";
 import Game from "../Models/Game.js";
 
 const gameRouter = express.Router();
