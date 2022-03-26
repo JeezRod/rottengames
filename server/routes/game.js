@@ -153,4 +153,13 @@ gameRoute.get("/", async (req, res) => {
     res.end("review already exists")
   });
 
+  // This route updates a game's page
+  gameRoute.put("/:gameId", async (req, res) => {
+    if (req.body.handle === "gamePage"){
+      await Game.updateOne({_id: req.params.gameId},
+        {$set: {"name": req.body.name, "description": req.body.description}})
+      res.end("game page updated")
+    }
+  })
+
 export default gameRoute

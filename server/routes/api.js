@@ -113,39 +113,6 @@ router.use("/user", user);
 
 router.use("/games", gameRoute);
 
-router.post("/games/add", async (req, res) => {
-  // Check if the game already exists in the database 
-  // const numGame = await Game.find({ /** name : req.body.name */ }).count();
-  // const game = await Game.find({ /** name : game name entered on form */ })
-  //if game's platform = platform given on form then res.end() or find by platform too
-  // If it does not exist then add it to the db
-  // if (numGame === 0) {
-    await Game.inserteOne(
-      {
-        $addToSet: {
-          reviews: {
-            $each: [req.body]
-          }
-        }
-      }
-    )
-    res.end("success")
-  // }
-  res.end("game already exists")
-})
-
-//PUT Routes
-
-// This route updates a game's page
-router.put("/games/update/:gameId", async (req, res) => {
-  if (req.body.handle === "gamePage"){
-    await Game.updateOne({_id: req.params.gameId},
-      {$set: {"name": req.body.name, "description": req.body.description}})
-    res.end("game page updated")
-    console.log("game page updated")
-  }
-})
-
 //DELETE Routes
 
 //Deletes chosen game when "delete game" button is clicked

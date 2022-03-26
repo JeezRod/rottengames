@@ -144,7 +144,7 @@ function Review() {
             description: e.target.description.value,
             handle: "gamePage" })
     };
-    await fetch("/api/games/update/" + params.id, requestOptions)
+    await fetch("/api/games/" + params.id, requestOptions)
     window.alert(requestOptions);
     setIsEdit(false)
   }
