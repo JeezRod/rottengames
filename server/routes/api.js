@@ -1,6 +1,7 @@
 const router = express.Router();
 
 import user from "./user.js"
+import gameRoute from "./game.js"
 
 import session from "express-session";
 import express from "express";
@@ -110,126 +111,7 @@ router.delete("/v1/auth/logout", async (req, res) => {
 
 router.use("/user", user);
 
-// Here you can find an incomplete list of routes that we can use to access the database.
-// The routes simply return a json with a message for now, we need to make database functions
-// and call them here.
-// Note: this list is NOT exhaustive and we need add more routes as we go
-
-//GET Routes
-
-//Route to get all games in the database (/api/games)
-router.get("/games", async (req, res) => {
-
-  // get the page, size, and name from query
-  let { page, size, name, platform } = req.query;
-
-  //Set default value for page
-  if (!page) {
-    page = 1;
-  }
-  //Set default value for games per page
-  if (!size) {
-    size = 32;
-  }
-  //Set default value for name
-  if (!name) {
-    name = "";
-  }
-  //Set default value for platform if none is checked
-  if (!platform) {
-    platform = "";
-  }
-
-  //Computes the number to skip (page number)
-  const limit = parseInt(size);
-  const skip = (page - 1) * size;
-  let result = null;
-
-  if (platform === "") {
-    result = await Game.find({
-      name: {
-        "$regex": name,
-        "$options": "i"
-      }
-    })
-      .limit(limit)
-      .skip(skip);
-  }
-  else {
-    //Gets the count of a filtered name
-    result = await Game.find({
-      name: {
-        "$regex": name,
-        "$options": "i"
-      },
-      platform: {
-        "$in": platform
-      }
-    })
-      .limit(limit)
-      .skip(skip);
-  }
-  res.json(result);
-});
-
-//Route to get all games in the database (/api/games)
-router.get("/games/count", async (req, res) => {
-  //Get name from query
-  let { name, platform } = req.query;
-
-  //Set default value for name
-  if (!name) {
-    name = "";
-  }
-
-  if (!platform) {
-    platform = "";
-  }
-
-  let result = null;
-
-  if (platform === "") {
-    result = await Game.find({
-      name: {
-        "$regex": name,
-        "$options": "i"
-      }
-    }).count();
-  }
-  else {
-    //Gets the count of a filtered name
-    result = await Game.find({
-      name: {
-        "$regex": name,
-        "$options": "i"
-      },
-      platform: {
-        "$in": platform
-      }
-    }).count();
-  }
-  res.json(result);
-});
-
-//Route to get a specific game in the database (/api/games/:id)
-router.get("/games/:gameId", async (req, res) => {
-  const result = await Game.findById(req.params.gameId);
-  //we can use req.params.gameId to send the id to the db to find its information
-  res.json(result)
-});
-
-//Route to get all reviews for a specific game in the database (/api/games:id/reviews)
-router.get("/games/:id/reviews", async (req, res) => {
-  const result = await Game.findById(req.params.gameId)
-  //we can use req.params.id to send the id to the db to get all reviews related to it
-  res.json({ message: "Getting all reviews for game with id: " + req.params.id })
-});
-
-//Route to get all reviews for a specific game in the database (/api/games:id/reviews/:id)
-router.get("/games/:gameId/reviews/:reviewId", (req, res) => {
-  //we can use req.params.gameId to send the id to the db to get the review with the id req.params.reviewId
-  res.json({ message: "Getting review with id: " + req.params.reviewId + " for game with id: " + req.params.gameId })
-});
+router.use("/games", gameRoute);
 
 //POST Routes
 //This inserts an empty object for some reason
