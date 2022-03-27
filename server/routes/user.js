@@ -400,7 +400,7 @@ userRouter.put("/:userId", async (req, res)=>{
  *              userId:
  *                type: string
  *            example:
-*               userId: 622b9b6922df51e968ee69b1
+ *                userId: 622b9b6922df51e968ee69b1
  */
 userRouter.delete("/:userId", async (req, res) => {
   await User.deleteOne({ _id: req.params.userId })

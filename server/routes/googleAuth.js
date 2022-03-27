@@ -8,7 +8,22 @@ dotenv.config();
 const googleAuthRouter = express.Router();
 googleAuthRouter.use(express.json());
 
-// This route is called when the google login button is clicked
+/**
+ * @swagger
+ * /api/v1/auth/google:
+ *  post:
+ *    summary: Login a user
+ *    requestBody:
+ *      content:
+ *        application/json: 
+ *          schema:
+ *            type: object
+ *            properties:
+ *              token:
+ *                type: string
+ *            example:
+ *               userId: googleData.tokenId
+ */
 googleAuthRouter.post("/google", async (req, res) => {
     try {
       const { token } = req.body
@@ -44,11 +59,17 @@ googleAuthRouter.post("/google", async (req, res) => {
     }
     catch(e){
       console.log("cancelled login")
+      res.end()
     }
     
   })
   
-  //This route is called when the google logout button is clicked
+  /**
+   * @swagger
+   * /api/v1/auth/logout:
+   *  delete:
+   *    summary: Login a user
+   */
   googleAuthRouter.delete("/logout", async (req, res) => {
     //destroy the session of the user
     console.log("loggin out the user here")
