@@ -68,7 +68,7 @@ googleAuthRouter.post("/google", async (req, res) => {
    * @swagger
    * /api/v1/auth/logout:
    *  delete:
-   *    summary: Login a user
+   *    summary: Logout a user
    */
   googleAuthRouter.delete("/logout", async (req, res) => {
     //destroy the session of the user
