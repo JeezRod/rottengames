@@ -340,7 +340,32 @@ userRouter.get("/:userId/reviews", async (req, res) => {
   }
 })
 
-// This route updates the users admin permission
+/**
+ * @swagger
+ * /api/users/{userId}:
+ *  parameters:
+ *    - in: path
+ *      name: userId
+ *      type: string
+ *      description: User ID of the user
+ *  put:
+ *    summary: Updates a user name bio or admin
+ *    requestBody:
+ *      content:
+ *        application/json: 
+ *          schema:
+ *            type: object
+ *            properties:
+ *              name:
+ *                type: string
+ *              bio:
+ *                type: string
+ *              admin:
+ *                type: boolean
+ *            example:
+ *              name: Asli
+ *              bio: No bio!
+ */
 userRouter.put("/:userId", async (req, res)=>{
   if(req.body.handle === "permissions"){
     await User.updateOne(
@@ -356,7 +381,27 @@ userRouter.put("/:userId", async (req, res)=>{
   }
 })
 
-//Delete an user based on the user ID from the admin dashboard
+/**
+ * @swagger
+ * /api/users/{userId}:
+ *  parameters:
+ *    - in: path
+ *      name: userId
+ *      type: string
+ *      description: User ID of the user
+ *  delete:
+ *    summary: Deletes a specified user
+ *    requestBody:
+ *      content:
+ *        application/json: 
+ *          schema:
+ *            type: object
+ *            properties:
+ *              userId:
+ *                type: string
+ *            example:
+*               userId: 622b9b6922df51e968ee69b1
+ */
 userRouter.delete("/:userId", async (req, res) => {
   await User.deleteOne({ _id: req.params.userId })
   res.end("user deleted")
