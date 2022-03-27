@@ -13,6 +13,8 @@ googleAuthRouter.use(express.json());
  * /api/v1/auth/google:
  *  post:
  *    summary: Login a user
+ *    tags: 
+ *      - Google Authentication
  *    requestBody:
  *      content:
  *        application/json: 
@@ -69,6 +71,8 @@ googleAuthRouter.post("/google", async (req, res) => {
    * /api/v1/auth/logout:
    *  delete:
    *    summary: Logout a user
+   *    tags: 
+   *      - Google Authentication
    */
   googleAuthRouter.delete("/logout", async (req, res) => {
     //destroy the session of the user

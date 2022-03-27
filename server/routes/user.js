@@ -11,6 +11,8 @@ userRouter.use(express.json());
  *  get:
  *    summary: Retrieves all information about of the currently logged in user
  *    description: Retrives the all information of the currently logged in user if there is a logged in user
+ *    tags: 
+ *      - Users
  *    responses:
  *      200:
  *        description: Object of the currently logged in user
@@ -84,6 +86,8 @@ userRouter.get("/", async (req, res) => {
  *  get:
  *    summary: Retrieves all users according to the page number and number per page
  *    description: Retrieves all users with the right number and the right number to skip for pagination
+ *    tags: 
+ *      - Users
  *    responses:
  *      200:
  *        description: Array of all users according to the page and number of user per page
@@ -163,6 +167,8 @@ userRouter.get("/all", async (req, res) => {
  *  get:
  *    summary: Retrieves the number of users depending on a filter
  *    description: Retrieves the number of users depdending on the filter for the pagination
+ *    tags: 
+ *      - Users
  *    responses:
  *      200:
  *        description: Number of users depending on the filter
@@ -205,6 +211,8 @@ userRouter.get("/count", async (req, res) => {
  *  get:
  *    summary: Retrives a specific user
  *    description: Retrives a specific user that matches the specific user
+ *    tags: 
+ *      - Users
  *    responses:
  *      200:
  *        description: A specific user
@@ -266,6 +274,8 @@ userRouter.get("/:userId", async (req, res) => {
  *  get:
  *    summary: Retrives all reviews for specific user along with the respective name
  *    description: Retrives a specific user that matches the specific user
+ *    tags: 
+ *      - Users
  *    responses:
  *      200:
  *        description: A specific user
@@ -350,6 +360,8 @@ userRouter.get("/:userId/reviews", async (req, res) => {
  *      description: User ID of the user
  *  put:
  *    summary: Updates a user name bio or admin
+ *    tags: 
+ *      - Users
  *    requestBody:
  *      content:
  *        application/json: 
@@ -391,6 +403,8 @@ userRouter.put("/:userId", async (req, res)=>{
  *      description: User ID of the user
  *  delete:
  *    summary: Deletes a specified user
+ *    tags: 
+ *      - Users
  *    requestBody:
  *      content:
  *        application/json: 
