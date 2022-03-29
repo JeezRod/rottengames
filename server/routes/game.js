@@ -6,7 +6,7 @@ gameRouter.use(express.json());
 
 /**
  * @swagger
- * /api/games/:
+ * /api/games:
  *  parameters:
  *    - in: query 
  *      name: page
@@ -283,8 +283,40 @@ gameRouter.use(express.json());
     res.json(result)
   });
 
-  //Inserts a new game
-  gameRouter.post("/add", async (req, res) => {
+  /**
+   * @swagger
+   * /api/games:
+   *  post:
+   *    summary: Adds a new game to the database
+   *    tags: 
+   *      - Games
+   *    requestBody:
+   *      content:
+   *        application/json: 
+   *          schema:
+   *            type: object
+   *            properties:
+   *              rating:
+   *                type: integer
+   *              description:
+   *                type: string
+   *              name:
+   *                type: string
+   *              platforms:
+   *                type: string
+   *              date:
+   *                type: string
+   *              reviews:
+   *                type: array
+   *            example:
+   *              rating: 5
+   *              description: This game is about Zelda
+   *              name: Zelda
+   *              platform: Wii
+   *              date: 2 November, 1999
+   *              reviews: []
+   */
+  gameRouter.post("/", async (req, res) => {
     // Check if the game already exists in the database 
     // const numGame = await Game.find({ /** name : req.body.name */ }).count();
     // const game = await Game.find({ /** name : game name entered on form */ })
@@ -305,7 +337,35 @@ gameRouter.use(express.json());
     res.end("game already exists")
   })
 
-  //This inserts an empty object for some reason
+  /**
+   * @swagger
+   * /api/games/{gameId}/review:
+   *  parameters:
+ *    - in: path
+ *      name: gameId
+ *      type: string
+ *      description: Id of game to add the review to
+   *  post:
+   *    summary: Adds a new review to a game in the database
+   *    tags: 
+   *      - Games
+   *    requestBody:
+   *      content:
+   *        application/json: 
+   *          schema:
+   *            type: object
+   *            properties:
+   *              text:
+   *                type: string
+   *              userId:
+   *                type: string
+   *              ratingStars:
+   *                type: integer
+   *            example:
+   *              text: This game is good
+   *              userId: 622b9b6922df51e968ee69b1
+   *              ratingStars: 5
+   */
   gameRouter.post("/:gameId/review", async (req, res) => {
     //First checks if the user has already commented on the review
     const result = await Game.findById(req.params.gameId);
@@ -330,7 +390,27 @@ gameRouter.use(express.json());
     res.end("review already exists")
   });
 
-  // This route updates a game's page
+  /**
+   * @swagger
+   * /api/games/{gameId}:
+   *  put:
+   *    summary: Updates a game's name and description in the database
+   *    tags: 
+   *      - Games
+   *    requestBody:
+   *      content:
+   *        application/json: 
+   *          schema:
+   *            type: object
+   *            properties:
+   *              name:
+   *                type: string
+   *              description:
+   *                type: string
+   *            example:
+   *              name: Zelda
+   *              description: This game is about Zelda
+   */
   gameRouter.put("/:gameId", async (req, res) => {
     if (req.body.handle === "gamePage"){
       await Game.updateOne({_id: req.params.gameId},
