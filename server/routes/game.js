@@ -341,10 +341,10 @@ gameRouter.use(express.json());
    * @swagger
    * /api/games/{gameId}/review:
    *  parameters:
- *    - in: path
- *      name: gameId
- *      type: string
- *      description: Id of game to add the review to
+   *    - in: path
+   *      name: gameId
+   *      type: string
+   *      description: Id of game to add the review to
    *  post:
    *    summary: Adds a new review to a game in the database
    *    tags: 
@@ -393,6 +393,11 @@ gameRouter.use(express.json());
   /**
    * @swagger
    * /api/games/{gameId}:
+   *  parameters: 
+   *    - in: path
+   *      name: gameId
+   *      type: string
+   *      description: Id of game of the review to update
    *  put:
    *    summary: Updates a game's name and description in the database
    *    tags: 
@@ -419,12 +424,64 @@ gameRouter.use(express.json());
     }
   })
 
-  //Deletes chosen game when "delete game" button is clicked
+  /**
+   * @swagger
+   * /api/games/{gameId}:
+   *  parameters:
+   *    - in: path
+   *      name: gameId
+   *      type: string
+   *      description: Id of game to delete
+   *  delete:
+   *    summary: Deletes a game from the database
+   *    tags: 
+   *      - Games
+   *    requestBody:
+   *      content:
+   *        application/json: 
+   *          schema:
+   *            type: object
+   *            properties:
+   *              gameId:
+   *                type: string
+   *            example:
+   *              gameId: 6230be41eafdb82d33d281d9
+   */
   gameRouter.delete("/:gameId", async (req, res) => {
     await Game.deleteOne({ _id: req.params.gameId })
     res.end("game deleted")
   })
   
+  /**
+   * @swagger
+   * /api/games/{gameId}/{userId}:
+   *  parameters:
+   *    - in: path
+   *      name: gameId
+   *      type: string
+   *      description: Id of game to delete
+   *    - in: path
+   *      name: userId
+   *      type: string
+   *      description: Id of the user to to delete the comment
+   *  delete:
+   *    summary: Deletes a spefific review of a game from the database
+   *    tags: 
+   *      - Games
+   *    requestBody:
+   *      content:
+   *        application/json: 
+   *          schema:
+   *            type: object
+   *            properties:
+   *              gameId:
+   *                type: string
+   *              userId:
+   *                type: string
+   *            example:
+   *              gameId: 6230be41eafdb82d33d281d9
+   *              userId: 622b9b6922df51e968ee69b1
+   */
   gameRouter.delete("/:gameId/:userId", async (req, res) =>{
     //Query to delete a specific review for a specific game
     await Game.updateMany(

@@ -10,7 +10,7 @@ userRouter.use(express.json());
  * /api/users/:
  *  get:
  *    summary: Retrieves all information about of the currently logged in user
- *    description: Retrives the all information of the currently logged in user if there is a logged in user
+ *    description: Retrieves the all information of the currently logged in user if there is a logged in user
  *    tags: 
  *      - Users
  *    responses:
