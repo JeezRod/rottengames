@@ -5,12 +5,35 @@ import router from "./routes/api.js";
 import dotenv from "dotenv";
 import session from "express-session";
 import {dirname} from "path";
-import {fileURLToPath} from "url"
+import {fileURLToPath} from "url";
+import swaggerJSDoc from "swagger-jsdoc";
+import swaggerUi from "swagger-ui-express";
 
-const __dirname = dirname(fileURLToPath(import.meta.url))
+//Swagger Docs
+const swaggerDefinition = {
+  openapi: '3.0.0',
+  info: {
+    title: 'Rotten Games',
+    version: '1.0.0',
+  },
+};
+
+const options = {
+  swaggerDefinition,
+  // Paths to files containing OpenAPI definitions
+  apis: ['./server/routes/*.js'],
+};
+
+const swaggerSpec = swaggerJSDoc(options);
+
+//Swagger Docs route
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 dotenv.config();
+const __dirname = dirname(fileURLToPath(import.meta.url))
+
 app.use(session({ secret: 'shhhhhhh' }));
+
 // Have Node serve the files for our built React app
 app.use(express.static(path.resolve(__dirname, '../client/build')));
 
@@ -23,15 +46,6 @@ app.get('*', (req, res) => {
 });
 
 app.use(express.json());
-
-/*app.delete("/api/v1/auth/logout", async (req, res) => {
-    await req.session.destroy()
-    res.status(200)
-    res.json({
-    message: "Logged out successfully"
-    })
-})*/
-
 
 // module.exports = app;
 export default app;

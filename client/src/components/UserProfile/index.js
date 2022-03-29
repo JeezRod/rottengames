@@ -41,7 +41,7 @@ const UserProfile = () => {
 
     React.useEffect(() => {
         async function fetchComments(){
-            let response = await fetch('/api/users/'+user._id+"/comments");
+            let response = await fetch('/api/users/'+user._id+"/reviews");
             if (response.status === 200) {
             let gamesJson = await response.json();
             

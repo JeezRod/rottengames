@@ -85,7 +85,7 @@ function Review() {
   async function HandleSubmit(event) {
     event.preventDefault();
     try {
-      let user = await fetch("/api/user")
+      let user = await fetch("/api/users")
       let userJson = await user.json()
 
       const url = ("/api/games/" + params.id+ "/review")
