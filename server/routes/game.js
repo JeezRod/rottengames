@@ -318,22 +318,20 @@ gameRouter.use(express.json());
    */
   gameRouter.post("/", async (req, res) => {
     // Check if the game already exists in the database 
-    // const numGame = await Game.find({ /** name : req.body.name */ }).count();
-    // const game = await Game.find({ /** name : game name entered on form */ })
-    //if game's platform = platform given on form then res.end() or find by platform too
+    const numGame = await Game.find({ name : req.body.name, platform : req.body.platform }).count();
     // If it does not exist then add it to the db
-    // if (numGame === 0) {
-      await Game.inserteOne(
-        {
-          $addToSet: {
-            reviews: {
-              $each: [req.body]
-            }
-          }
-        }
-      )
+    if (numGame === 0) {
+      // Create new Game object with input from form
+      let newGame = new Game({rating: req.body.rating, description: req.body.description, name: req.body.name, platform: req.body.platform, date: req.body.date, reviews: []})
+      console.log("works")
+      newGame.save(function(err, game) {
+        if(error) { return console.error(err); }
+      })
       res.end("success")
-    // }
+    }
+    else {
+      console.log("game already exists")
+    }
     res.end("game already exists")
   })
 
