@@ -321,12 +321,31 @@ gameRouter.use(express.json());
     const numGame = await Game.find({ name : req.body.name, platform : req.body.platform }).count();
     // If it does not exist then add it to the db
     if (numGame === 0) {
+      const review = {
+        userId: "123",
+        text: "",
+        ratingStars: 0
+      }
       // Create new Game object with input from form
-      let newGame = new Game({rating: req.body.rating, description: req.body.description, name: req.body.name, platform: req.body.platform, date: req.body.date, reviews: []})
-      console.log("works")
-      newGame.save(function(err, game) {
-        if(error) { return console.error(err); }
+      let newGame = new Game({averagerating: 0, description: req.body.description, imageurl: "", name: req.body.name, platform: req.body.platform, releasedate: req.body.date})
+        newGame.save(function(err, game) {
+        if(err) { console.error(err); }
+        else {
+          console.log("works")}
+        
       })
+      await Game.updateOne(
+        { name: req.body.name },
+        {
+          $addToSet: {
+            reviews: {
+              $each: [review]
+            }
+          }
+        }
+      )
+      await Game.updateOne({name: req.body.name, platform: req.body.platform},
+        {"$pull": {"reviews": {"userId": "123"}}})
       res.end("success")
     }
     else {

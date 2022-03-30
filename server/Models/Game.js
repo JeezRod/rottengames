@@ -6,14 +6,14 @@ const gameSchema = new Schema({
     description: String,
     imageurl: String,
     name: String,
-    platform: Array,
+    platform: String,
     releasedate: String,
     reviews: {
         userId: String,
         text: String,
         ratingStars: Number
     }
-});
+}, { versionKey: false } );
 
 const Game = mongoose.model('Game', gameSchema)
 

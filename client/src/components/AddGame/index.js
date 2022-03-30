@@ -150,7 +150,7 @@ const AddGame = () => {
         <label for="gameName">Game Name : </label>
         <input type="text" name="gameName" value={name} onChange={(e) => setName(e.target.value)} required></input>
         <label for="description">Description : </label>
-        <input type="text" className="h-12" name="description" value={description} onChange={(e) => setDescription(e.target.value)} required></input>
+        <textarea type="text" className="h-16" name="description" value={description} onChange={(e) => setDescription(e.target.value)} required></textarea>
         <label for="platform">Platform : </label>
         <Select
           name = "platform"
@@ -165,7 +165,7 @@ const AddGame = () => {
         <input type="date" id="releaseDate" name="releaseDate" value={date} onChange={(e) => setDate(e.target.value)}></input>
         <label for="lname">Image : </label>
         {/* <input type="file" id="lname" name="lname" onChange={onImageChange}></input> */}
-        <img className="gameImage h-40 w-40" src={image} alt="preview"/>
+        <img className="gameImage h-40 w-40" src={image} alt="Preview"/>
         <br></br>
         <div className="files">
         <Files
