@@ -43,10 +43,10 @@ const AddGame = () => {
     // var formData = new FormData();
     // formData.append('file', selectedFile);
     // updateImage(formData);
-    const url = ("/api/games/add")
+    const url = ("/api/games/")
     let rating = 0
     let description = e.target.description.value
-    let image = image
+    // let image = image
     let name = e.target.gameName.value
     let platform = e.target.platform.value
     let date = e.target.releaseDate.value
@@ -128,7 +128,7 @@ const AddGame = () => {
   }
 
   const onFilesError = (error, file) => {
-    // console.log('error code ' + error.code + ': ' + error.message)
+    console.log('error code ' + error.code + ': ' + error.message)
   }
 
   function updateImage(formData) {
@@ -145,7 +145,7 @@ const AddGame = () => {
   return (
     <div className="box flex justify-evenly m-0 mt-12 lg:w-4/12 h-full p-5 bg-white border-2 border-black rounded-3xl">
       {/* FUNCTION handleSubmit ON ONSUBMIT */}
-      <form className="addGameForm flex flex-col justify-evenly" onSubmit={handleSubmit}>
+      <form className="addGameForm flex flex-col justify-evenly" onSubmit={uploadFile}>
       <p className="text-2xl">Add Game Form</p>
         <label for="gameName">Game Name : </label>
         <input type="text" name="gameName" value={name} onChange={(e) => setName(e.target.value)} required></input>
