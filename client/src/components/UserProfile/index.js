@@ -99,7 +99,7 @@ const UserProfile = () => {
         e.preventDefault()
         setIsEdit(false)
     }
-
+    
     async function handleDelete(e) {
         e.preventDefault();
         const confirmation = window.confirm("Are you sure you want to delete this account: " + user.name);
@@ -107,6 +107,7 @@ const UserProfile = () => {
             await fetch("/api/users/" + user._id, { method: 'DELETE' })
             window.alert("Account deleted");
             navigate("/")
+            window.location.reload(false);
         }
     }
     //If the profile is loading show loading prompt
