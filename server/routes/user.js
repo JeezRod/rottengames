@@ -417,6 +417,13 @@ userRouter.put("/:userId", async (req, res)=>{
  *                userId: 622b9b6922df51e968ee69b1
  */
 userRouter.delete("/:userId", async (req, res) => {
+  //Deletes all the games for the user
+  await Game.updateMany(
+    { }, 
+    {"$pull": {"reviews": {"userId": req.params.userId}}},
+    {"multi": true}
+    );
+  //Deletes the user
   await User.deleteOne({ _id: req.params.userId })
   res.end("user deleted")
 });
