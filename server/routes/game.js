@@ -327,7 +327,7 @@ gameRouter.use(express.json());
         ratingStars: 0
       }
       // Create new Game object with input from form
-      let newGame = new Game({averagerating: 0, description: req.body.description, imageurl: "", name: req.body.name, platform: req.body.platform, releasedate: req.body.date})
+      let newGame = new Game({averagerating: 0, description: req.body.description, imageurl: req.body.img, name: req.body.name, platform: req.body.platform, releasedate: req.body.date})
         newGame.save(function(err, game) {
         if(err) { console.error(err); }
         else {

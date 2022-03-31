@@ -40,10 +40,14 @@ const AddGame = () => {
   // Submits the form
   const uploadFile = (e) => {
     e.preventDefault();
-    // var formData = new FormData();
-    // formData.append('file', selectedFile);
-    // updateImage(formData);
+    var formData = new FormData();
+    //console.log(selectedFile.name)
+    formData.append('file', selectedFile);
+    updateImage(formData);
+
     const url = ("/api/games/")
+    const img = "https://rottengames.blob.core.windows.net/gameimages/"+selectedFile.name;
+    //console.log(img)
     let rating = 0
     let description = e.target.description.value
     // let image = image
@@ -55,7 +59,7 @@ const AddGame = () => {
     const requestOptions = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ rating, description, name, platform, date, reviews})
+      body: JSON.stringify({ rating, description, name, platform, date, reviews, img})
     };
     fetch(url, requestOptions)
       .then(response => console.log('Submitted successfully'))
@@ -106,9 +110,12 @@ const AddGame = () => {
 
   const onFilesChange = (files) => {
 
+    const file = files[0]
+    console.log(file)
+    setSelectedFile(file);
     // const fileChangeHandler = (event) => {
     //   setSelectedFile(event.target.files[0]);
-    //   setIsSelected(true);
+    setIsSelected(true);
     //   // onImageChange()
     // }
 
@@ -117,28 +124,22 @@ const AddGame = () => {
     //    setImage(URL.createObjectURL(event.target.files[0]));
     //  }
     // }
-
-    // console.log(files)
-    try {
-      setImage(URL.createObjectURL(files[0]));
-    }
-    catch (e) {
-      console.log('error')
-    }
   }
 
   const onFilesError = (error, file) => {
     console.log('error code ' + error.code + ': ' + error.message)
   }
 
-  function updateImage(formData) {
-    // /image??
-    return fetch('/fileUpload', {
-      method : 'POST',
-      headers : {        
+  function updateImage(formData) { 
+    const requestOptions = {
+      method: 'POST',
+      headers : {
       },
-      body : formData
-    }).then(data => data.json)
+      body: formData
+    };
+    fetch('api/images/fileUpload', requestOptions)
+      .then(response => console.log('Submitted successfully'))
+      .catch(error => console.log('Form submit error', error))
   }
 
   // Creates the form for adding a game
