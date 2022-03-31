@@ -25,6 +25,15 @@ beforeEach(async () => {
   });
   await bob.save();
 
+  let carrot = new User({
+    email: "carrot@gmail.com",
+    name: "Carrot",
+    bio: "Gamer girl that loves shooting games",
+    picture: "Carrot pfp",
+    admin: true
+  });
+  await carrot.save();
+
 })
 
 afterEach(async () => await db.clearDatabase())
@@ -37,4 +46,40 @@ test('Retrieve user by email', async () => {
     email: "alice@gmail.com"
   })
   await expect(user.name).toEqual("Alice")
+})
+
+test('Retrieve user by name', async () => {
+  let user = await User.findOne({
+    name: "Alice"
+  })
+  await expect(user.name).toEqual("Alice")
+})
+
+test('Retrieve user by admin', async () => {
+  let user = await User.findOne({
+    admin: true
+  })
+  await expect(user.name).toEqual("Alice")
+})
+
+test('Retrieve user by bio', async () => {
+  let user = await User.findOne({
+    bio: "Gamer boy that loves Zelda games"
+  })
+  await expect(user.name).toEqual("Bob")
+})
+
+test('Retrieve user by picture', async () => {
+  let user = await User.findOne({
+    picture: "Bob pfp"
+  })
+  await expect(user.name).toEqual("Bob")
+})
+
+test('Retrieve multiple users by admin', async () => {
+  let user = await User.find({
+    admin: true
+  })
+  await expect(user[0].name).toEqual("Alice")
+  await expect(user[1].name).toEqual("Carrot")
 })
