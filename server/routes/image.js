@@ -30,7 +30,8 @@ imageRouter.post("/fileUpload", (req,res) => {
 
     //console.log(`https://${storageAccountName}.blob.core.windows.net/?${sasToken}`)
 
-    //console.log(req.files)
+    console.log(req.files)
+    console.log(req.files.file)
 
     const file = req.files.file;
     const path = file.name;

@@ -29,13 +29,13 @@ const AddGame = () => {
     .then((data) => setData(data.message));
   }, []);
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    onFilesChange()
-    console.log("url"+image)
-    console.log(e.target.description.value)
-    console.log(e.target.platform.value)
-  }
+  // const handleSubmit = (e) => {
+  //   e.preventDefault()
+  //   onFilesChange()
+  //   console.log("url"+image)
+  //   console.log(e.target.description.value)
+  //   console.log(e.target.platform.value)
+  // }
 
   // Submits the form
   const uploadFile = (e) => {
@@ -50,7 +50,6 @@ const AddGame = () => {
     //console.log(img)
     let rating = 0
     let description = e.target.description.value
-    // let image = image
     let name = e.target.gameName.value
     let platform = e.target.platform.value
     let date = e.target.releaseDate.value
@@ -93,22 +92,21 @@ const AddGame = () => {
   ];
 
   const onFilesChange = (files) => {
-
     const file = files[0]
     console.log(file)
     setSelectedFile(file);
     // const fileChangeHandler = (event) => {
     //   setSelectedFile(event.target.files[0]);
     setIsSelected(true);
-    //   // onImageChange()
-    // }
-
-    // const onImageChange = (event) => {
-    //  if (event.target.files && event.target.files[0]) {
-    //    setImage(URL.createObjectURL(event.target.files[0]));
-    //  }
+    onImageChange(files)
     // }
   }
+
+  const onImageChange = (event) => {
+    // if (event.target.files && event.target.files[0]) {
+      setImage(URL.createObjectURL(event[0]));
+    // }
+   }
 
   const onFilesError = (error, file) => {
     console.log('error code ' + error.code + ': ' + error.message)
