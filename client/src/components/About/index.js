@@ -2,17 +2,42 @@ import React from "react";
 //import image from "./xenia-radchenko-ezEn4jYrVYQ-unsplash.jpg"
 
 export default function About() {
+  const [selectedFile, setSelectedFile] = React.useState();
+
+  const fileChangeHandler = (event) => {
+    const file = event.target.files[0]
+    setSelectedFile(file);
+  }
+
+  const uploadFile = (e) => {
+    e.preventDefault();
+    var formData = new FormData();
+    formData.append('file', selectedFile);
+    updateImage(formData);
+  }
+
+  function updateImage(formData) { 
+    const requestOptions = {
+      method: 'POST',
+      headers : {
+      },
+      body: formData
+    };
+    fetch('api/images/fileUpload', requestOptions)
+      .then(response => console.log('Submitted successfully'))
+      .catch(error => console.log('Form submit error', error))
+  }
 
   return (
     <div className="About dark:text-white">
-      <div className="h-screen flex flex-col justify-center items-center"> 
+      <div className="h-screen flex flex-col justify-center items-center">
         <p className="font-bold text-9xl">About.</p>
       </div>
 
       <div className="h-screen flex bg-gray-200 dark:bg-gray-800" >
         <div className="flex flex-col justify-center items-center w-1/2" >
           <p className="font-bold text-8xl p-10">All Game reviews in one place.</p>
-          
+
         </div>
 
         <div className="w-1/2">
@@ -29,7 +54,7 @@ export default function About() {
 
         <div className="h-1/2 flex ">
           <div className="w-1/2 p-10">
-          <p className="text-4xl "><strong>Banatech</strong> is a dedicated software development company which strives for quality and customer satisfaction.</p>
+            <p className="text-4xl "><strong>Banatech</strong> is a dedicated software development company which strives for quality and customer satisfaction.</p>
           </div>
 
           <div className="w-1/2 p-10">
@@ -43,8 +68,12 @@ export default function About() {
 
         </div>
       </div>
-      
+
       <p></p>
+      <form onSubmit={uploadFile}>
+        <input type="file" name="file" onChange={fileChangeHandler} />
+        <button type="submit">upload image</button>
+      </form>
 
     </div>
   );
