@@ -88,22 +88,6 @@ const AddGame = () => {
     { label: "Stadia", value: "Stadia" },
   ];
 
-
-  // const itemRenderer = ({ checked, option, onClick, disabled }) => {
-  //   return (
-  //     <div>
-  //       <input
-  //         id={option.label}
-  //         type="checkbox"
-  //         onChange={onClick}
-  //         checked={checked}
-  //         disabled={disabled}
-  //       />
-  //       <label id="platforms" className="text-base italic" for={option.label}>{option.label}</label>
-  //     </div>
-  //   );
-  // };
-
   const onFilesChange = (files) => {
 
     // const fileChangeHandler = (event) => {
@@ -159,7 +143,6 @@ const AddGame = () => {
           value={selected}
           onChange={setSelected}
           labelledBy={"Select :"}
-          // ItemRenderer={itemRenderer}
         />
         <label for="releaseDate">Release Date : </label>
         <input type="date" id="releaseDate" name="releaseDate" value={date} onChange={(e) => setDate(e.target.value)}></input>
