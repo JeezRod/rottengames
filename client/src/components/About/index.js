@@ -70,11 +70,6 @@ export default function About() {
       </div>
 
       <p></p>
-      <form onSubmit={uploadFile}>
-        <input type="file" name="file" onChange={fileChangeHandler} />
-        <button type="submit">upload image</button>
-      </form>
-
     </div>
   );
 }

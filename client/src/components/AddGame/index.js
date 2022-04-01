@@ -1,11 +1,12 @@
-import React, { Component } from 'react';
 import Select from "react-select"
-import {useState} from 'react';
-import {MultiSelect} from "react-multi-select-component";
+import { useState } from 'react';
 import Files from 'react-files'
+import { useNavigate } from 'react-router';
 
 const AddGame = () => {
 
+  //To navigate
+  const navigate = useNavigate();
   // State for the game name
   const [name, setName] = useState("")
   // State for the new game's description
@@ -20,50 +21,6 @@ const AddGame = () => {
   const [isSelected, setIsSelected] = useState(false)
   // State for the game image
   const [image, setImage] = useState(null)
-
-  const [data, setData] = useState(null);
-
-  React.useEffect(() => {
-    fetch("/")
-    .then((res) => res.json())
-    .then((data) => setData(data.message));
-  }, []);
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault()
-  //   onFilesChange()
-  //   console.log("url"+image)
-  //   console.log(e.target.description.value)
-  //   console.log(e.target.platform.value)
-  // }
-
-  // Submits the form
-  const uploadFile = (e) => {
-    e.preventDefault();
-    var formData = new FormData();
-    //console.log(selectedFile.name)
-    formData.append('file', selectedFile);
-    updateImage(formData);
-
-    const url = ("/api/games/")
-    const img = "https://rottengames.blob.core.windows.net/gameimages/"+selectedFile.name;
-    //console.log(img)
-    let rating = 0
-    let description = e.target.description.value
-    let name = e.target.gameName.value
-    let platform = e.target.platform.value
-    let date = e.target.releaseDate.value
-    let reviews = []
-
-    const requestOptions = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ rating, description, name, platform, date, reviews, img})
-    };
-    fetch(url, requestOptions)
-      .then(response => console.log('Submitted successfully'))
-      .catch(error => console.log('Form submit error', error))
-  }
 
   // Stores platform options for the add game form
   const options = [
@@ -91,31 +48,64 @@ const AddGame = () => {
     { label: "Stadia", value: "Stadia" },
   ];
 
+  // Submits the form
+  const uploadFile = (e) => {
+    e.preventDefault();
+    
+    if (isSelected && selected) {
+      
+      var formData = new FormData();
+      formData.append('file', selectedFile);
+      updateImage(formData);
+
+      const url = ("/api/games/")
+      const img = "https://rottengames.blob.core.windows.net/gameimages/" + selectedFile.name;
+
+      let rating = 0
+      let description = e.target.description.value
+      let name = e.target.gameName.value
+      let platform = e.target.platform.value
+      let date = e.target.releaseDate.value
+      let reviews = []
+
+      const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ rating, description, name, platform, date, reviews, img })
+      };
+      fetch(url, requestOptions)
+        .then(response => console.log('Submitted successfully'))
+        .catch(error => console.log('Form submit error', error))
+      navigate("/games")
+    }
+    else if(!isSelected){
+      window.alert("Choose an image to add a game.");
+    }
+    else{
+      window.alert("Choose a platform to add a game.");
+    }
+  }
+
   const onFilesChange = (files) => {
     const file = files[0]
     console.log(file)
     setSelectedFile(file);
-    // const fileChangeHandler = (event) => {
-    //   setSelectedFile(event.target.files[0]);
     setIsSelected(true);
     onImageChange(files)
-    // }
   }
 
   const onImageChange = (event) => {
-    // if (event.target.files && event.target.files[0]) {
-      setImage(URL.createObjectURL(event[0]));
-    // }
-   }
+    setImage(URL.createObjectURL(event[0]));
+  }
 
   const onFilesError = (error, file) => {
     console.log('error code ' + error.code + ': ' + error.message)
   }
 
-  function updateImage(formData) { 
+  function updateImage(formData) {
     const requestOptions = {
       method: 'POST',
-      headers : {
+      headers: {
       },
       body: formData
     };
@@ -126,17 +116,17 @@ const AddGame = () => {
 
   // Creates the form for adding a game
   return (
-    <div className="box flex justify-evenly m-0 mt-12 lg:w-4/12 h-full p-5 bg-white border-2 border-black rounded-3xl">
-      {/* FUNCTION handleSubmit ON ONSUBMIT */}
+    <div className="box flex justify-evenly m-0 mt-12 lg:w-4/12 h-full p-5 bg-white border-2 border-black-700 rounded-3xl dark:bg-slate-300">
       <form className="addGameForm flex flex-col justify-evenly" onSubmit={uploadFile}>
-      <p className="text-2xl">Add Game Form</p>
+        <p className="text-2xl text-center">Add Game Form</p>
         <label for="gameName">Game Name : </label>
-        <input type="text" name="gameName" value={name} onChange={(e) => setName(e.target.value)} required></input>
+        <input className="border-solid border-2 my-2  dark:border-gray-700 dark:bg-sky-50" type="text" name="gameName" value={name} onChange={(e) => setName(e.target.value)} required></input>
         <label for="description">Description : </label>
-        <textarea type="text" className="h-16" name="description" value={description} onChange={(e) => setDescription(e.target.value)} required></textarea>
+        <textarea className="border-solid border-2 h-16 my-2 dark:border-gray-700 dark:bg-sky-50" type="text" name="description" value={description} onChange={(e) => setDescription(e.target.value)} required></textarea>
         <label for="platform">Platform : </label>
         <Select
-          name = "platform"
+          className= "my-2 dark:bg-sky-50 dark:border-gray-700"
+          name="platform"
           isClearable={true}
           options={options}
           value={selected}
@@ -144,26 +134,25 @@ const AddGame = () => {
           labelledBy={"Select :"}
         />
         <label for="releaseDate">Release Date : </label>
-        <input type="date" id="releaseDate" name="releaseDate" value={date} onChange={(e) => setDate(e.target.value)}></input>
+        <input className="border-solid border-2 my-2 dark:border-gray-700 dark:bg-sky-50 dark:text-black" type="date" id="releaseDate" name="releaseDate" value={date} onChange={(e) => setDate(e.target.value)} required></input>
         <label for="lname">Image : </label>
-        {/* <input type="file" id="lname" name="lname" onChange={onImageChange}></input> */}
-        <img className="gameImage h-40 w-40" src={image} alt="Preview"/>
-        <br></br>
         <div className="files">
-        <Files
-          className='files-dropzone'
-          onChange={onFilesChange}
-          onError={onFilesError}
-          accepts={['image/png', 'image/jpg', 'image/jpeg']}
-          multiple={false}
-          maxFileSize={10000000}
-          minFileSize={0}
-          clickable
-        >
-          Drop files here or click here to upload
-        </Files>
-      </div>
-        <button type="submit">Add Game</button>
+          <Files
+            className='files-dropzone border-solid border-2 my-2 p-2 dark:border-gray-700 dark:text-black dark:bg-sky-50'
+            onChange={onFilesChange}
+            onError={onFilesError}
+            accepts={['image/png', 'image/jpg', 'image/jpeg','image/gif']}
+            multiple={false}
+            maxFileSize={10000000}
+            minFileSize={0}
+            clickable
+          >
+            Drop files here or click here to upload
+            <img className="gameImage h-40 w-40 m-auto block my-2" src={image} alt="Preview"/>
+          </Files>
+          
+        </div>
+        <button className="text-white bg-black"type="submit">Add Game</button>
       </form>
     </div>);
 };

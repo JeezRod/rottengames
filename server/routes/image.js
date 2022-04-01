@@ -14,7 +14,6 @@ imageRouter.use(
       createParentPath: true,
     })
 );
-    
 
 const sasToken = process.env.AZURE_SAS;
 const containerName = 'gameimages';
@@ -25,13 +24,6 @@ const blobService = new BlobServiceClient(
 const containerClient = blobService.getContainerClient(containerName);
 
 imageRouter.post("/fileUpload", (req,res) => {
-
-    //console.log("this is happening")
-
-    //console.log(`https://${storageAccountName}.blob.core.windows.net/?${sasToken}`)
-
-    console.log(req.files)
-    console.log(req.files.file)
 
     const file = req.files.file;
     const path = file.name;

@@ -6,9 +6,6 @@ import imageRouter from "./image.js"
 import googleAuthRouter from "./googleAuth.js";
 
 import express from "express";
-import dotenv from 'dotenv';
-
-dotenv.config();
 
 router.use(express.json());
 
