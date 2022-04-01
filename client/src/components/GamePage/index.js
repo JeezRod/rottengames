@@ -196,7 +196,7 @@ function Review() {
 
       <form className="float-right w-48" onSubmit={handleDelete}>
           {user.admin && 
-          <button className="w-48 bg-red-600 dark:bg-rose-600">Delete Game</button>
+          <button className="w-48 bg-red-600 hover:bg-red-700 dark:bg-rose-600 dark:hover:bg-rose-700">Delete Game</button>
           }
       </form>
 
