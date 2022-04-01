@@ -1,5 +1,6 @@
 import express from "express";
 import Game from "../Models/Game.js";
+import getAll from "../utils/gameutils.js"
 
 const gameRouter = express.Router();
 gameRouter.use(express.json());
@@ -88,56 +89,10 @@ gameRouter.use(express.json());
  *                          example: 5
  */
   gameRouter.get("/", async (req, res) => {
-
     // get the page, size, and name from query
     let { page, size, name, platform } = req.query;
-  
-    //Set default value for page
-    if (!page) {
-      page = 1;
-    }
-    //Set default value for games per page
-    if (!size) {
-      size = 32;
-    }
-    //Set default value for name
-    if (!name) {
-      name = "";
-    }
-    //Set default value for platform if none is checked
-    if (!platform) {
-      platform = "";
-    }
-  
-    //Computes the number to skip (page number)
-    const limit = parseInt(size);
-    const skip = (page - 1) * size;
-    let result = null;
-  
-    if (platform === "") {
-      result = await Game.find({
-        name: {
-          "$regex": name,
-          "$options": "i"
-        }
-      })
-        .limit(limit)
-        .skip(skip);
-    }
-    else {
-      //Gets the count of a filtered name
-      result = await Game.find({
-        name: {
-          "$regex": name,
-          "$options": "i"
-        },
-        platform: {
-          "$in": platform
-        }
-      })
-        .limit(limit)
-        .skip(skip);
-    }
+    let result = await getAll(page, size, name, platform);
+    console.log(result)
     res.json(result);
   });
   

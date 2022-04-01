@@ -1,4 +1,5 @@
 import Game from '../Models/Game.js';
+import getAll from '../utils/gameutils.js'
 
 import db from './db';
 beforeAll(async () => {
@@ -152,3 +153,4 @@ test('Retrieve multiple games by userId', async () => {
   await expect(game[0].name).toEqual("Zelda")
   await expect(game[1].name).toEqual("Zelda2")
 })
+
