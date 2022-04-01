@@ -51,14 +51,13 @@ const AddGame = () => {
   // Submits the form
   const uploadFile = (e) => {
     e.preventDefault();
-    
+
     if (isSelected && selected) {
-      
+
       var formData = new FormData();
       formData.append('file', selectedFile);
       updateImage(formData);
 
-      const url = ("/api/games/")
       const img = "https://rottengames.blob.core.windows.net/gameimages/" + selectedFile.name;
 
       let rating = 0
@@ -73,15 +72,22 @@ const AddGame = () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ rating, description, name, platform, date, reviews, img })
       };
-      fetch(url, requestOptions)
-        .then(response => console.log('Submitted successfully'))
-        .catch(error => console.log('Form submit error', error))
-      navigate("/games")
+      fetch("/api/games/", requestOptions)
+        .then(response => {
+          if (response.status === 200) {
+            window.alert("Game Added to the Database");
+            navigate("/games")
+          }
+          else{
+            window.alert("Game Already Exists");
+          }
+        }
+        )
     }
-    else if(!isSelected){
+    else if (!isSelected) {
       window.alert("Choose an image to add a game.");
     }
-    else{
+    else {
       window.alert("Choose a platform to add a game.");
     }
   }
@@ -110,7 +116,7 @@ const AddGame = () => {
       body: formData
     };
     fetch('api/images/fileUpload', requestOptions)
-      .then(response => console.log('Submitted successfully'))
+      .then(response => console.log('Image Submitted successfully'))
       .catch(error => console.log('Form submit error', error))
   }
 
@@ -118,14 +124,15 @@ const AddGame = () => {
   return (
     <div className="box flex justify-evenly m-0 mt-12 lg:w-4/12 h-full p-5 bg-white border-2 border-black-700 rounded-3xl dark:bg-slate-300">
       <form className="addGameForm flex flex-col justify-evenly" onSubmit={uploadFile}>
-        <p className="text-2xl text-center">Add Game Form</p>
+        <p className="text-3xl font-semibold text-center">Add Game Form</p>
+        <br></br>
         <label for="gameName">Game Name : </label>
         <input className="border-solid border-2 my-2  dark:border-gray-700 dark:bg-sky-50" type="text" name="gameName" value={name} onChange={(e) => setName(e.target.value)} required></input>
         <label for="description">Description : </label>
-        <textarea className="border-solid border-2 h-16 my-2 dark:border-gray-700 dark:bg-sky-50" type="text" name="description" value={description} onChange={(e) => setDescription(e.target.value)} required></textarea>
+        <textarea className="border-solid border-2 h-16 my-2 dark:border-gray-700 dark:bg-sky-50 dark:text-black" type="text" name="description" value={description} onChange={(e) => setDescription(e.target.value)} required></textarea>
         <label for="platform">Platform : </label>
         <Select
-          className= "my-2 dark:bg-sky-50 dark:border-gray-700"
+          className="my-2 dark:bg-sky-50 dark:border-gray-700"
           name="platform"
           isClearable={true}
           options={options}
@@ -141,18 +148,18 @@ const AddGame = () => {
             className='files-dropzone border-solid border-2 my-2 p-2 dark:border-gray-700 dark:text-black dark:bg-sky-50'
             onChange={onFilesChange}
             onError={onFilesError}
-            accepts={['image/png', 'image/jpg', 'image/jpeg','image/gif']}
+            accepts={['image/png', 'image/jpg', 'image/jpeg', 'image/gif']}
             multiple={false}
             maxFileSize={10000000}
             minFileSize={0}
             clickable
           >
             Drop files here or click here to upload
-            <img className="gameImage h-40 w-40 m-auto block my-2" src={image} alt="Preview"/>
+            <img className="gameImage h-40 w-40 m-auto block my-2" src={image} alt="Preview" />
           </Files>
-          
+
         </div>
-        <button className="text-white bg-black"type="submit">Add Game</button>
+        <button className="text-white bg-black" type="submit">Add Game</button>
       </form>
     </div>);
 };
