@@ -122,7 +122,7 @@ const AddGame = () => {
 
   // Creates the form for adding a game
   return (
-    <div className="box flex justify-evenly m-0 mt-12 lg:w-4/12 h-full p-5 bg-white border-2 border-black-700 rounded-3xl dark:bg-slate-300">
+    <div className="box flex justify-evenly m-0 lg:w-4/12 h-full p-5 bg-white border-2 border-black-700 rounded-3xl dark:bg-slate-300">
       <form className="addGameForm flex flex-col justify-evenly" onSubmit={uploadFile}>
         <p className="text-3xl font-semibold text-center">Add Game Form</p>
         <br></br>
