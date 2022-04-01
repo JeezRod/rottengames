@@ -1,6 +1,6 @@
 import Game from "../Models/Game.js";
 
-export default async function getAll(page, size, name, platform){
+export async function getAll(page, size, name, platform){
   //Set default value for page
   if (!page) {
     page = 1;
@@ -47,5 +47,51 @@ export default async function getAll(page, size, name, platform){
       .limit(limit)
       .skip(skip);
   }
-  return result
+  return result;
 }
+
+export async function getCount(name, platform){
+  //Set default value for name
+  if (!name) {
+    name = "";
+  }
+
+  if (!platform) {
+    platform = "";
+  }
+
+  let result = null;
+
+  if (platform === "") {
+    result = await Game.find({
+      name: {
+        "$regex": name,
+        "$options": "i"
+      }
+    }).count();
+  }
+  else {
+    //Gets the count of a filtered name
+    result = await Game.find({
+      name: {
+        "$regex": name,
+        "$options": "i"
+      },
+      platform: {
+        "$in": platform
+      }
+    }).count();
+  }
+  return result;
+}
+
+//Game model does not have _id so this is not tested but its here
+// export async function getGameId(gameId){
+//   let result = await Game.findById(gameId);
+//   return result;
+// }
+
+
+// export async function insertOneGame(game){
+
+// }

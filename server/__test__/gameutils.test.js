@@ -1,5 +1,6 @@
 import Game from '../Models/Game.js';
-import getAll from '../utils/gameutils.js'
+import {getAll} from '../utils/gameutils.js'
+import {getCount} from '../utils/gameutils.js'
 
 import db from './db';
 beforeAll(async () => {
@@ -86,8 +87,8 @@ test('Test getAll', async () => {
 })
 
 test('Test getAll count', async () => {
-  let result = await getAll(1,4,"","")
-  await expect(result.length).toEqual(4)
+  let results = await getAll(1,4,"","")
+  await expect(results.length).toEqual(4)
 })
 
 test('Test getAll name', async () => {
@@ -107,3 +108,25 @@ test('Test getAll platforms', async () => {
     await expect(results[i].name).toEqual(expectedResults[i])
   }
 })
+
+test('Test getCount count', async () => {
+  let results = await getCount("","")
+  await expect(results).toEqual(4)
+})
+
+test('Test getCount name', async () => {
+  let results = await getCount("Zelda", "")
+  await expect(results).toEqual(2)
+})
+
+test('Test getCount platform', async () => {
+  let results = await getCount("", "Wii")
+  await expect(results).toEqual(2)
+})
+
+// Game model does not have _id, cannot be tested
+// test('Test getGameId', async () => {
+//   let result = await getGameId("0001")
+//   await expect(result).toEqual("Mario")
+// })
+
