@@ -77,9 +77,6 @@ function Games() {
     }
     fetchData();
     //Resets the page to 1 when a new search time is entered
-    console.log(page)
-    
-    console.log(page)
   }, [searchTerm, searchPlatform, page, perPage]);
 
   React.useEffect(()=>{

@@ -335,7 +335,7 @@ gameRouter.post("/", async (req, res) => {
 
     })
     await Game.updateOne(
-      { name: req.body.name },
+      { name: req.body.name, platform: req.body.platform },
       {
         $addToSet: {
           reviews: {
