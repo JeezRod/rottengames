@@ -4,8 +4,10 @@ import { useParams } from "react-router-dom";
 import ReactLoading from "react-loading";
 import { Link } from "react-router-dom"
 import {useUser} from "../../UserContext"
+import { useNavigate } from 'react-router';
 
 const UserProfile = () => {
+    const navigate = useNavigate();
     const params = useParams();
     //State for the user
     const [user, setUser] = React.useState({});
@@ -97,6 +99,17 @@ const UserProfile = () => {
         e.preventDefault()
         setIsEdit(false)
     }
+    
+    async function handleDelete(e) {
+        e.preventDefault();
+        const confirmation = window.confirm("Are you sure you want to delete this account: " + user.name);
+        if (confirmation) {
+            await fetch("/api/users/" + user._id, { method: 'DELETE' })
+            window.alert("Account deleted");
+            navigate("/")
+            window.location.reload(false);
+        }
+    }
     //If the profile is loading show loading prompt
     if (loading) {
         return (
@@ -137,6 +150,10 @@ const UserProfile = () => {
                         ?<div className='userSection my-8 lg:mt-16'><button>Save</button><button onClick={handleCancel}>Cancel</button></div>
                         : <div className='userSection my-8 lg:mt-16'><button onClick={handleClick}>Edit Profile</button> </div>
                     :<></>
+                    }
+                    {isSameUser || currentUser.admin ?
+                    <button onClick={handleDelete}>Delete Account</button>:
+                    <></>
                     }
                 </form>
             </aside>
