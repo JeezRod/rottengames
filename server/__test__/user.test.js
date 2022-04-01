@@ -34,6 +34,15 @@ beforeEach(async () => {
   });
   await carrot.save();
 
+  let darick = new User({
+    email: "darick@gmail.com",
+    name: "Darick",
+    bio: "Gamer boy that loves puzzle games",
+    picture: "Darick pfp",
+    admin: false
+  });
+  await darick.save();
+
 })
 
 afterEach(async () => await db.clearDatabase())
@@ -82,4 +91,12 @@ test('Retrieve multiple users by admin', async () => {
   })
   await expect(user[0].name).toEqual("Alice")
   await expect(user[1].name).toEqual("Carrot")
+})
+
+test('Retrieve multiple users by non admin', async () => {
+  let user = await User.find({
+    admin: false
+  })
+  await expect(user[0].name).toEqual("Bob")
+  await expect(user[1].name).toEqual("Darick")
 })

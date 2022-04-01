@@ -60,7 +60,7 @@ beforeEach(async () => {
     releasedate: "1986-02-21",
     reviews: {
       userId: "1842613",
-      text: "Sick puzzle game",
+      text: "Sick puzzle game also",
       ratingStars: 4.7
     }
   });
@@ -134,24 +134,21 @@ test('Retrieve multiple games by platform', async () => {
   await expect(game[1].name).toEqual("Pokemon")
 })
 
-// test('Retrieve multiple games by exact reviews', async () => {
-//   let game = await Game.find({
-//     reviews: {
-//       userId: "1842613",
-//       text: "Sick puzzle game",
-//       ratingStars: 4.7
-//     }
-//   })
-//   await expect(game[0].name).toEqual("Zelda")
-//   await expect(game[1].name).toEqual("Zelda2")
-// })
+test('Retrieve multiple games by exact reviews', async () => {
+  let game = await Game.findOne({
+    reviews: {
+      userId: "1842613",
+      text: "Sick puzzle game",
+      ratingStars: 4.7
+    }
+  })
+  await expect(game.name).toEqual("Zelda")
+})
 
-// test('Retrieve multiple games by userId', async () => {
-//   let game = await Game.find({
-//     reviews: {
-//       userId: "1842613"
-//     }
-//   })
-//   await expect(game[0].name).toEqual("Zelda")
-//   await expect(game[1].name).toEqual("Zelda2")
-// })
+test('Retrieve multiple games by userId', async () => {
+  let game = await Game.find({
+    "reviews.userId": "1842613"
+  })
+  await expect(game[0].name).toEqual("Zelda")
+  await expect(game[1].name).toEqual("Zelda2")
+})
