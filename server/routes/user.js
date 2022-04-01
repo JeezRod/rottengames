@@ -1,6 +1,7 @@
 import express from "express";
 import User from "../Models/user.js";
 import Game from "../Models/Game.js";
+import getAll, { getAllReviewsForUser, getCount, getUser } from "../utils/userutils.js";
 
 const userRouter = express.Router();
 userRouter.use(express.json());
@@ -125,34 +126,7 @@ userRouter.get("/", async (req, res) => {
  */
 userRouter.get("/all", async (req, res) => {
   let { page, size, name } = req.query;
-
-  //Set default value for page
-  if (!page) {
-    page = 1;
-  }
-  //Set default value for users per page
-  if (!size) {
-    size = 8;
-  }
-  //Set default value for name
-  if (!name) {
-    name = "";
-  }
-
-  //Computes the number to skip (page number)
-  const limit = parseInt(size);
-  const skip = (page - 1) * size;
-
-  //Get all games that match the filter
-  const result = await User.find({
-    name: {
-      "$regex": name,
-      "$options": "i"
-    }
-  })
-    .limit(limit)
-    .skip(skip);
-
+  let result = await getAll(page, size, name);
   res.json(result);
 })
 
@@ -183,20 +157,7 @@ userRouter.get("/all", async (req, res) => {
 userRouter.get("/count", async (req, res) => {
   //Get name from query
   let { name } = req.query;
-
-  //Set default value for name
-  if (!name) {
-    name = "";
-  }
-
-  //Gets the count of a filtered name
-  const result = await User.find({
-    name: {
-      "$regex": name,
-      "$options": "i"
-    }
-  }).count();
-
+  let result = await getCount(name)
   res.json(result);
 });
 
@@ -254,7 +215,7 @@ userRouter.get("/count", async (req, res) => {
  */
 userRouter.get("/:userId", async (req, res) => {
   try {
-    const user = await User.findOne({ _id: req.params.userId });
+    const user = await getUser(req.params.userId);
     res.status(200)
     res.json(user);
   } catch (e) {
@@ -343,7 +304,8 @@ userRouter.get("/:userId", async (req, res) => {
  */
 userRouter.get("/:userId/reviews", async (req, res) => {
   try {
-    const user = await Game.find({ "reviews.userId": req.params.userId });
+    const user = await getAllReviewsForUser(req.params.userId)
+    console.log(user)
     res.json(user);
   } catch (e) {
     res.status(401)
