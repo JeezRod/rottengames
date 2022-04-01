@@ -56,3 +56,26 @@ export async function getUser(userId){
 export async function getAllReviewsForUser(userId){
     return await Game.find({ "reviews.userId": userId });
 }
+
+export async function updateUserPermission(userId, isAdmin){
+    await User.updateOne(
+        {_id: userId},
+         {$set: {"admin": isAdmin}})
+}
+
+export async function updateUserProfile(userId, newName, newBio){
+    await User.updateOne(
+        {_id: userId},
+         {$set: {"name": newName, "bio": newBio}})
+}
+
+export async function deleteUser(userId){
+    //Deletes all the games for the user
+  await Game.updateMany(
+    { }, 
+    {"$pull": {"reviews": {"userId": userId}}},
+    {"multi": true}
+    );
+  //Deletes the user
+  await User.deleteOne({ _id: userId })
+}

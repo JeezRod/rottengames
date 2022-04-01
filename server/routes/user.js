@@ -1,7 +1,7 @@
 import express from "express";
 import User from "../Models/user.js";
 import Game from "../Models/Game.js";
-import getAll, { getAllReviewsForUser, getCount, getUser } from "../utils/userutils.js";
+import getAll, { deleteUser, getAllReviewsForUser, getCount, getUser, updateUserPermission, updateUserProfile } from "../utils/userutils.js";
 
 const userRouter = express.Router();
 userRouter.use(express.json());
@@ -342,15 +342,11 @@ userRouter.get("/:userId/reviews", async (req, res) => {
  */
 userRouter.put("/:userId", async (req, res)=>{
   if(req.body.handle === "permissions"){
-    await User.updateOne(
-      {_id: req.params.userId},
-       {$set: {"admin": req.body.admin}})
+    await updateUserPermission(req.params.userId, req.body.admin)
     res.end("permissions updated")
   }
   if(req.body.handle === "profile"){
-    await User.updateOne(
-      {_id: req.params.userId},
-       {$set: {"name": req.body.name, "bio": req.body.bio}})
+    await updateUserProfile(req.params.userId, req.body.name, req.body.bio)
     res.end("user updated")
   }
 })
@@ -379,14 +375,7 @@ userRouter.put("/:userId", async (req, res)=>{
  *                userId: 622b9b6922df51e968ee69b1
  */
 userRouter.delete("/:userId", async (req, res) => {
-  //Deletes all the games for the user
-  await Game.updateMany(
-    { }, 
-    {"$pull": {"reviews": {"userId": req.params.userId}}},
-    {"multi": true}
-    );
-  //Deletes the user
-  await User.deleteOne({ _id: req.params.userId })
+  await deleteUser(req.params.userId);
   res.end("user deleted")
 });
 
