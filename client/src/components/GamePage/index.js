@@ -157,31 +157,24 @@ function Review() {
 
   // Link each button to their specific pages
   return (
-    <div className="GamePage pl-28 pr-28 pt-32 pb-16">
-
-      <form className="w-1/12 float-right" onSubmit={handleDelete}>
-        <div>
-          {user.admin && 
-          <button>Delete Game</button>
-          }
-        </div>
-      </form>
+    <div className="GamePage px-4 md:px-8 lg:px-28 pt-32 pb-16">
 
       <form onSubmit={handleSave}>
-      <div className="GameInfo flex">
-          <img className="GameCover w-80 rounded-3xl" src={data.imageurl} alt={data.name}></img>
-          <div className="NameStars flex items-center pl-10">
+      <div className="GameInfo flex lg:flex-row flex-col ">
+          <img className="GameCover w-100 lg:w-80 rounded-3xl" src={data.imageurl} alt={data.name}></img>
+          <div className="NameStars flex flex-col my-auto px-5 lg:pl-10">
             {isEdit
             ?<textarea className='nameText' name="name" defaultValue={data.name}></textarea>
-            :<p className="text-5xl font-bold dark:text-white">{data.name}</p>
+            :<p className="text-5xl text-center lg:text-left font-bold dark:text-white">{data.name}</p>
             }
         
           <StarRating review={{ ratingStars: rating, userId: "1234" }} />
 
             <div>
               {isEdit
-              ?<div className='gameSection'>{user.admin && <button>Save</button>}{user.admin && <button onClick={handleCancel}>Cancel</button>}</div>
-              :<div className='gameSection'>{user.admin && <button onClick={handleClick}>Edit Page</button>} </div>
+              ?<div className='gameSection flex flex-col lg:flex-row w-48 mx-auto'>{user.admin && <button className="m-2">Save</button>}{user.admin && <button className="m-2" onClick={handleCancel}>Cancel</button>}</div>
+              :<div className='gameSection flex flex-col lg:flex-row w-48 mx-auto lg:mx-0'>{user.admin && <button onClick={handleClick}>Edit Page</button>} </div>
+                
               }
             </div>
           </div>
@@ -200,6 +193,12 @@ function Review() {
         <p className="text-3xl font-bold">Available on</p>
         <p className="text-xl">{data.platform}</p>
       </div>
+
+      <form className="float-right w-48" onSubmit={handleDelete}>
+          {user.admin && 
+          <button className="w-48 bg-red-600 hover:bg-red-700 dark:bg-rose-600 dark:hover:bg-rose-700">Delete Game</button>
+          }
+      </form>
 
       <div className="Review pt-10 dark:text-white">
         <h1 className="text-3xl font-bold">Reviews</h1>
