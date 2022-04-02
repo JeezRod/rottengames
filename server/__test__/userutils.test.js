@@ -1,5 +1,5 @@
 import User from '../Models/user.js'
-import { getAll } from '../utils/userutils.js';
+import { getAll, getCount } from '../utils/userutils.js';
 
 import db from './db';
 beforeAll(async () => {
@@ -86,6 +86,17 @@ test('Test getAll name', async () => {
     }
 })
 
+test('Test count all', async () => {
+    let results = await getCount()
+    let expectedResult = 4
+    await expect(results).toEqual(expectedResult)
+})
+
+test('Test count name', async () => {
+    let results = await getCount("car")
+    let expectedResult = 1
+    await expect(results).toEqual(expectedResult)
+})
 /**
  * The rest of the functions in user utils require the userId.
  * Since there is no _id field in the model and is automatically generated
