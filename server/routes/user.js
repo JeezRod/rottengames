@@ -1,7 +1,6 @@
 import express from "express";
 import User from "../Models/user.js";
-import Game from "../Models/Game.js";
-import getAll, { deleteUser, getAllReviewsForUser, getCount, getUser, updateUserPermission, updateUserProfile } from "../utils/userutils.js";
+import  { getAll, deleteUser, getAllReviewsForUser, getCount, getUser, updateUserPermission, updateUserProfile } from "../utils/userutils.js";
 
 const userRouter = express.Router();
 userRouter.use(express.json());

@@ -2,7 +2,7 @@ import User from "../Models/user.js";
 import Game from "../Models/Game.js";
 
 
-export default async function getAll(page, size, name){
+export async function getAll(page, size, name){
  //Set default value for page
  if (!page) {
     page = 1;
