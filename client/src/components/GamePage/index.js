@@ -91,8 +91,6 @@ function Review() {
       const url = ("/api/games/" + params.id+ "/review")
 
       let text = event.target.reviewText.value
-      // let name = userJson.name
-      // let email = userJson.email
       let userId = userJson._id
       console.log(userJson)
 

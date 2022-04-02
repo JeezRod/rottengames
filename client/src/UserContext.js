@@ -18,7 +18,6 @@ export function UserProvider({children}){
         let mounted = true;
         fetch('/api/users').then(response => {
             if (response.status === 200) {
-                console.log("response 200")
                 return response.json().then(data => setUser(
                     {
                         email: data.email, 
@@ -30,16 +29,13 @@ export function UserProvider({children}){
                     ));
             }
             else {
-            console.log("response 400")
             return response.json().then(setUser(null));
             }
         })
-        console.log("user: "+ user.admin)
         return () => mounted = false;
     }, [user.email, user.admin]);
 
-    function logoutUser(){
-     console.log("logout user context")   
+    function logoutUser(){   
     }
 
     return(

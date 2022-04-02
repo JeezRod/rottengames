@@ -2,6 +2,31 @@ import React from "react";
 //import image from "./xenia-radchenko-ezEn4jYrVYQ-unsplash.jpg"
 
 export default function About() {
+  const [selectedFile, setSelectedFile] = React.useState();
+
+  const fileChangeHandler = (event) => {
+    const file = event.target.files[0]
+    setSelectedFile(file);
+  }
+
+  const uploadFile = (e) => {
+    e.preventDefault();
+    var formData = new FormData();
+    formData.append('file', selectedFile);
+    updateImage(formData);
+  }
+
+  function updateImage(formData) { 
+    const requestOptions = {
+      method: 'POST',
+      headers : {
+      },
+      body: formData
+    };
+    fetch('api/images/fileUpload', requestOptions)
+      .then(response => console.log('Submitted successfully'))
+      .catch(error => console.log('Form submit error', error))
+  }
 
   return (
     <div className="About dark:text-white">
@@ -45,9 +70,8 @@ export default function About() {
 
         </div>
       </div>
-      
-      <p></p>
 
+      <p></p>
     </div>
   );
 }
