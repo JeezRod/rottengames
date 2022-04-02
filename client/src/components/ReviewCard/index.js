@@ -29,16 +29,12 @@ const ReviewCard = ({ gameId, review, isAdmin }) => {
     }
   }
 
-  function setPlaceHolder(e){
-    e.target.src = '/src/assets/light_grey_square.png'
-  }
-
   return (
     <div className="Rating my-4 flex items-center justify-between p-1 shadow-lg dark:bg-gray-800">
 
       <div className="CommentCard flex-row md:flex w-full justify-between leading-8 lg:p-4">
         <div className="pfp flex w-full items-start md:w-9/12 md:items-center">
-          <img src={userReview.picture} onError={setPlaceHolder} alt="" className="w-12 h-12 object-cover mr-5 rounded-full content-center bg-[url('/src/assets/light_grey_square.png')] "></img>
+          <img src={userReview.picture} alt="" className="w-12 h-12 object-cover mr-5 rounded-full content-center bg-[url('/src/assets/light_grey_square.png')] "></img>
 
           <div className="UserReview">
             <Link to={"/profile/"+userReview._id}>
