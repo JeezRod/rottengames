@@ -10,10 +10,12 @@ const StarRating = ({ review, isEditable, setRatingStars, ratingStars }) => {
     setRatingStars(score);
   };
 
+  const appClass = "App flex lg:flex-row flex-col"
+
   //If it is a new review, make the ratingStars clickable
   if (isEditable) {
     return (
-      <div className="App">
+      <div className={appClass}>
         <RatingStar
           clickable
           maxScore={5}
@@ -27,7 +29,7 @@ const StarRating = ({ review, isEditable, setRatingStars, ratingStars }) => {
   //Used for the average rating of all the reviews of the game, not editable
   return (
     
-    <div className="App">
+    <div className={appClass}>
       <RatingStar
         maxScore={5}
         id={review.userId}

@@ -46,9 +46,6 @@ const ReviewCard = ({ gameId, review, isAdmin }) => {
 
         <div className="buttonStartContainer flex flex-col items-center">
           <StarRating review={review} />
-          {user.email &&
-            <button className="UserButton  my-0.5 ">Comment</button>
-          }
           {(isAdmin || user.admin || user.id === userReview._id ) &&
           <form onSubmit={handleDelete}>
             <button className="AdminButton px-5 my-0.5 ">Delete</button>
