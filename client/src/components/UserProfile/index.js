@@ -127,7 +127,7 @@ const UserProfile = () => {
                     ? <p className="text-3xl font-bold dark:text-white">My Profile</p>
                     : <p className="text-3xl font-bold w-50 dark:text-white">{user.name}'s Profile</p>}
                     
-                    <img className='profilePicture mx-auto my-4 lg:mx-0 lg:mt-8 rounded-full w-36 h-36' src={user.picture} alt="profile"></img>
+                    <img className='profilePicture mx-auto my-4 lg:mx-0 lg:mt-8 rounded-full w-36 h-36 bg-gray-300' src={user.picture} alt="" ></img>
                     
                     <div className='userSection my-8 lg:mt-16'>
                         {isEdit

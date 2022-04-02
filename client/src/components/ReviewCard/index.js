@@ -34,7 +34,7 @@ const ReviewCard = ({ gameId, review, isAdmin }) => {
 
       <div className="CommentCard flex-row md:flex w-full justify-between leading-8 lg:p-4">
         <div className="pfp flex w-full items-start md:w-9/12 md:items-center">
-          <img src={userReview.picture} alt="pfp" className="w-12 h-12 object-cover mr-5 rounded-full content-center"></img>
+          <img src={userReview.picture} alt="" className="w-12 h-12 object-cover mr-5 rounded-full content-center bg-gray-300 "></img>
 
           <div className="UserReview">
             <Link to={"/profile/"+userReview._id}>
