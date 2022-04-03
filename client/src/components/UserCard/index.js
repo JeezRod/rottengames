@@ -1,14 +1,21 @@
 import React from "react";
 import { Link } from "react-router-dom"
 import Translate from 'react-translate-component';
+import placeHolderImage from "../../assets/light_grey_square.png"
 
 function UserCard({ user }) {
     const [edit, setEdit] = React.useState(false);
     const [choiceBox, setChoice] = React.useState(user.admin)
+
+    //Sets a placeholder image when it is unable to get the profile picture from google
+    function setPlaceHolder(e){
+        e.target.src = placeHolderImage
+    }
+
     return (
         <div className="userCard flex flex-col justify-evenly w-full h-full p-4 rounded-xl shadow-xl duration-300 hover:shadow-2xl dark:bg-gray-800">
             <div className="userPicture flex justify-center items-center">
-                <img className="w-24 h-24 rounded-full dark:text-white" src={user.picture} alt="profile-pic"></img>
+                <img className="w-24 h-24 rounded-full dark:text-white" src={user.picture} alt="" onError={setPlaceHolder}></img>
             </div>
             <div className="userInfo flex flex-col justify-center">
                 <Link to={"/profile/" + user._id}>
