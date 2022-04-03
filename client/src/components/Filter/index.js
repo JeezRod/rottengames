@@ -1,5 +1,6 @@
 import React from "react";
 import { platforms } from "./platforms";
+import Translate from 'react-translate-component';
 
 function Filter({ setSearchTerm, setSearchPlatform }) {
   
@@ -83,11 +84,11 @@ function Filter({ setSearchTerm, setSearchPlatform }) {
   return (
     <div className="Filter pt-1 mr-1 ml-1">
       <form onSubmit={HandleSubmit} className="searchContainer flex w-full justify-between lg:pt-14">
-        <input name="search" className="searchBar h-12 w-3/4 lg:w-80 sticky mt-14 lg:mt-32 mx-auto lg:ml-8 text-2xl border-b-2 w-64" type="text" placeholder="Search..." value={inputValue} onChange={handleChangeSearchBox}></input>
+      <Translate component="input" name="search" type="text" attributes={{ placeholder: "dashboard.placeHolder" }} className="searchBar h-12 w-3/4 lg:w-80 sticky mt-14 lg:mt-32 mx-auto lg:ml-8 text-2xl border-b-2 w-64" value={inputValue} onChange={handleChangeSearchBox} />
       </form>
 
       <ul className="flex flex-col mx-4 lg:mx-4 xl:mx-8">
-        <h1 className="platformTitle mt-9 ml-7 text-5xl lg:text-3xl xl:text-4xl dark:text-white">Platforms</h1>
+        <Translate content="filter.platforms" component="p" className="platformTitle mt-9 ml-7 text-5xl lg:text-3xl xl:text-4xl dark:text-white"/>
         {platforms.map(({ name }, index) => {
           return (
             <li key={index}>

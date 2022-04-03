@@ -2,6 +2,7 @@ import React from "react";
 //import "./AllUsers.css"
 import UserCard from "../UserCard"
 import ReactLoading from "react-loading";
+import Translate from 'react-translate-component';
 
 function AllUsers({ page, searchTerm, perPage }) {
   //State for users
@@ -43,7 +44,7 @@ function AllUsers({ page, searchTerm, perPage }) {
   if (error) {
     return (
       <div className='griderror'>
-        <p>An error has occured</p>
+        <Translate content="allUsers.error" component="p"/>
       </div>
     )
   }
