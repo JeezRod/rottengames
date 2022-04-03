@@ -4,8 +4,15 @@ import { slide as Menu } from 'react-burger-menu'
 import "./HamburgerMenu.css";
 import styled from 'styled-components'
 import { useUser, useUserUpdateContext } from "../../UserContext"
-import { setTheme } from "../../hooks/DarkMode";
 import DarkMode from "../../hooks/DarkMode";
+
+import counterpart from "counterpart";
+import en from "../../languages/en";
+import fr from "../../languages/fr";
+
+counterpart.registerTranslations('en', en);
+counterpart.registerTranslations('fr', fr);
+counterpart.setLocale('en');
 
 
 //Style fo NavLink
@@ -24,7 +31,13 @@ const HamburgerMenu = (props) => {
   const [colorTheme, setTheme] = DarkMode();
   const [menuOpenState, setMenuOpenState] = React.useState(false)
 
-  DarkMode();
+  const [lang, setLang] = React.useState('en');
+  
+  function onLangChange(e){
+    setLang(e.target.value);
+    counterpart.setLocale(e.target.value);
+  }
+
   return (
     <Menu isOpen={menuOpenState} onOpen={()=>setMenuOpenState(true)} onClose={()=>setMenuOpenState(false)}>
       <div className='hidden'>
@@ -52,6 +65,11 @@ const HamburgerMenu = (props) => {
             <path strokeLinecap="round" strokeLinejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
           </svg>}
       </button>
+
+      <select value={lang} onChange={onLangChange} className="text-black">
+            <option value="en">EN</option>
+            <option value="fr">FR</option>
+          </select>
 
     </Menu >
   )
