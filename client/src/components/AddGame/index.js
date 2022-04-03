@@ -96,7 +96,6 @@ const AddGame = () => {
 
   const onFilesChange = (files) => {
     const file = files[0]
-    console.log(file)
     setSelectedFile(file);
     setIsSelected(true);
     onImageChange(files)
@@ -129,7 +128,7 @@ const AddGame = () => {
         <Translate content="addGame.title" component="p" className="text-3xl font-semibold text-center"/>
         <br></br>
         <Translate content="addGame.gameName" component="label" for="gameName"/>
-        <input className="border-solid border-2 my-2  dark:border-gray-700 dark:bg-sky-50" type="text" name="gameName" value={name} onChange={(e) => setName(e.target.value)} required></input>
+        <input className="border-solid border-2 my-2 dark:text-black dark:border-gray-700 dark:bg-sky-50" type="text" name="gameName" value={name} onChange={(e) => setName(e.target.value)} required></input>
         <label for="description">Description : </label>
         <textarea className="border-solid border-2 h-16 my-2 dark:border-gray-700 dark:bg-sky-50 dark:text-black" type="text" name="description" value={description} onChange={(e) => setDescription(e.target.value)} required></textarea>
         <Translate content="addGame.platform" component="label" for="platform"/>
