@@ -1,6 +1,7 @@
 import React from "react";
 import {GoogleLogout} from 'react-google-login';
 import { useNavigate } from "react-router-dom";
+import Translate from 'react-translate-component';
 
 
 function Logout() {
@@ -20,7 +21,7 @@ function Logout() {
     <GoogleLogout
           clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
           render={renderProps => (
-            <button onClick={renderProps.onClick} className="mt-2 text-lg pr-4 pl-4">Logout</button>
+            <Translate content="logout.logout" component="button" onClick={renderProps.onClick} className="mt-2 text-lg pr-4 pl-4"/>
           )}
           buttonText="Logout"
           onLogoutSuccess={handleLogout}

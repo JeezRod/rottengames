@@ -3,6 +3,7 @@ import ReactPaginate from 'react-paginate';
 import Users from "../AllUsers";
 import AddGame from "../AddGame"
 import {useUser} from "../../UserContext"
+import Translate from 'react-translate-component';
 
 function Dashboard() {
 
@@ -45,14 +46,14 @@ function Dashboard() {
   return (
       <main className="dash flex flex-col lg:flex-row h-auto items-start pt-32">
         <div className="SidePanel flex flex-row mx-auto lg:flex-col justify-center h-auto lg:w-3/12 w-10/12">
-            <button className={buttonStyle} onClick={()=>setComponent("users")}>Users</button>
-            <button className={buttonStyle} onClick={()=>setComponent("addGame")}>Add Game</button>
+            <Translate content="dashboard.users" component="button" onClick={()=>setComponent("users")} className={buttonStyle}/>
+            <Translate content="dashboard.addGame" component="button" onClick={()=>setComponent("addGame")} className={buttonStyle}/>
         </div>
         <div className="MainPanel flex flex-col justify-center items-center h-auto lg:w-10/12 m-auto">
           {selectedComponent === "users"
           ? <div>
             <form onSubmit={HandleSubmit} className="searchContainer flex flex-row justify-center items-center mb-8">
-              <input name="search" className="searchBar mr-4 p-2" type="text" placeholder="Search"></input>
+            <Translate component="input" name="search" type="text" attributes={{ placeholder: "dashboard.placeHolder" }} className="searchBar mr-4 p-2" />
               <button>➜</button>
             </form>
           

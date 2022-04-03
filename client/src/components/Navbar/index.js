@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import Authentication from "../Authentication"
 import HamburgerMenu from '../HamburgerMenu';
 import { useUser, useUserUpdateContext } from "../../UserContext"
+import Translate from 'react-translate-component';
 
 //Style fo NavLink
 const StyledNav = styled(NavLink)`
@@ -30,9 +31,10 @@ const Navbar = () => {
       <nav className="items-center lg:inline-block md:hidden hidden
 ">
         <ul>
-          <StyledNav className="dark:text-white" to="/">Home</StyledNav>
-          <StyledNav className="dark:text-white" to="/games">Search</StyledNav>
-          <StyledNav className="dark:text-white" to="about">About </StyledNav>
+          
+          <StyledNav className="dark:text-white" to="/"><Translate content="navBar.home"></Translate></StyledNav>
+          <StyledNav className="dark:text-white" to="/games"><Translate content="navBar.search"/></StyledNav>
+          <StyledNav className="dark:text-white" to="about"><Translate content="navBar.about"/></StyledNav>
         </ul>
       </nav>
       <Authentication />
