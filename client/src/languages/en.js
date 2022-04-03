@@ -56,7 +56,7 @@ export default {
     userProfile: {
         allReviews: "All reviews",
         myProfile: "My profile",
-        othersProfile: "'s profile",
+        othersProfile: "Profile of ",
         editProfile: "Edit my profile",
         save: "Save",
         cancel: "Cancel",

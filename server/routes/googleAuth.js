@@ -78,7 +78,6 @@ googleAuthRouter.post("/google", async (req, res) => {
     //destroy the session of the user
     console.log("loggin out the user here")
     await req.session.destroy();
-    console.log("session: " + req.session)
   })
 
 export default googleAuthRouter

@@ -2,6 +2,7 @@ import Select from "react-select"
 import { useState } from 'react';
 import Files from 'react-files'
 import { useNavigate } from 'react-router';
+import placeHolderImage from "../../assets/light_grey_square.png"
 import Translate from 'react-translate-component';
 
 
@@ -121,6 +122,11 @@ const AddGame = () => {
       .catch(error => console.log('Form submit error', error))
   }
 
+  //Sets a placeholder image when it is unable to get the profile picture from google
+  function setPlaceHolder(e){
+    e.target.src = placeHolderImage
+}
+
   // Creates the form for adding a game
   return (
     <div className="box flex justify-evenly m-0 lg:w-4/12 h-full p-5 bg-white border-2 border-black-700 rounded-3xl dark:bg-slate-300">
@@ -156,7 +162,7 @@ const AddGame = () => {
             clickable
           >
             <Translate content="addGame.prompt" component="p"/>
-            <img className="gameImage h-40 w-40 m-auto block my-2" src={image} alt="Preview" />
+            <img className="gameImage h-40 w-40 m-auto block my-2" src={image} alt="" onError={setPlaceHolder} />
           </Files>
 
         </div>

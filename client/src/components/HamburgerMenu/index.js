@@ -28,9 +28,14 @@ const HamburgerMenu = (props) => {
 
   const user = useUser();
   const [colorTheme, setTheme] = DarkMode();
-  const [menuOpenState, setMenuOpenState] = React.useState(false)
+  const [menuOpenState, setMenuOpenState] = React.useState(false);
 
-  const [lang, setLang] = React.useState(localStorage.language);
+  let langLocal = "en";
+  if (localStorage.language){
+    langLocal = localStorage.language
+  }
+
+  const [lang, setLang] = React.useState(langLocal);
   localStorage.setItem('language', lang);
 
   React.useEffect(() => {
