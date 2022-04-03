@@ -25,5 +25,14 @@ export default {
         team: "Our Team.",
         banatech: "<strong>Banatech</strong> is a dedicated software development company which strives for quality and customer satisfaction.",
         developers: "Developers"
-    }    
+    },
+    
+    addGame:{
+        title: "Add Game Form",
+        gameName: "Game Name : ",
+        platform: "Platform : ",
+        releaseDate: "Release Date : ",
+        prompt: "Drop files here or click here to upload",
+        addGame: "Add Game"
+    }
 }

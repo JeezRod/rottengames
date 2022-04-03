@@ -2,6 +2,8 @@ import Select from "react-select"
 import { useState } from 'react';
 import Files from 'react-files'
 import { useNavigate } from 'react-router';
+import Translate from 'react-translate-component';
+
 
 const AddGame = () => {
 
@@ -124,13 +126,13 @@ const AddGame = () => {
   return (
     <div className="box flex justify-evenly m-0 lg:w-4/12 h-full p-5 bg-white border-2 border-black-700 rounded-3xl dark:bg-slate-300">
       <form className="addGameForm flex flex-col justify-evenly" onSubmit={uploadFile}>
-        <p className="text-3xl font-semibold text-center">Add Game Form</p>
+        <Translate content="addGame.title" component="p" className="text-3xl font-semibold text-center"/>
         <br></br>
-        <label for="gameName">Game Name : </label>
+        <Translate content="addGame.gameName" component="label" for="gameName"/>
         <input className="border-solid border-2 my-2  dark:border-gray-700 dark:bg-sky-50" type="text" name="gameName" value={name} onChange={(e) => setName(e.target.value)} required></input>
         <label for="description">Description : </label>
         <textarea className="border-solid border-2 h-16 my-2 dark:border-gray-700 dark:bg-sky-50 dark:text-black" type="text" name="description" value={description} onChange={(e) => setDescription(e.target.value)} required></textarea>
-        <label for="platform">Platform : </label>
+        <Translate content="addGame.platform" component="label" for="platform"/>
         <Select
           className="my-2 dark:bg-sky-50 dark:border-gray-700"
           name="platform"
@@ -140,7 +142,7 @@ const AddGame = () => {
           onChange={setSelected}
           labelledBy={"Select :"}
         />
-        <label for="releaseDate">Release Date : </label>
+        <Translate content="addGame.releaseDate" component="label" for="releaseDate"/>
         <input className="border-solid border-2 my-2 dark:border-gray-700 dark:bg-sky-50 dark:text-black" type="date" id="releaseDate" name="releaseDate" value={date} onChange={(e) => setDate(e.target.value)} required></input>
         <label for="lname">Image : </label>
         <div className="files">
@@ -154,12 +156,12 @@ const AddGame = () => {
             minFileSize={0}
             clickable
           >
-            Drop files here or click here to upload
+            <Translate content="addGame.prompt" component="p"/>
             <img className="gameImage h-40 w-40 m-auto block my-2" src={image} alt="Preview" />
           </Files>
 
         </div>
-        <button className="text-white bg-black" type="submit">Add Game</button>
+        <Translate content="addGame.addGame" component="button" className="text-white bg-black" type="submit"/>
       </form>
     </div>);
 };

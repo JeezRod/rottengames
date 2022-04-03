@@ -26,5 +26,14 @@ export default {
         team: "Notre équipe.",
         banatech: "<strong>Banatech</strong> est une compagnie de développement de logiciels dédiée qui vise la qualité et la satisfaction du client.",
         developers: "Développeurs"
+    },
+
+    addGame:{
+        title: "Formulaire pour ajouter un jeu",
+        gameName: "Nom du jeu : ",
+        platform: "Platforme : ",
+        releaseDate: "Date de sortie : ",
+        prompt: "Déposez les fichiers ici ou cliquez ici pour télécharger",
+        addGame: "Ajouter le jeu"
     }
 }
