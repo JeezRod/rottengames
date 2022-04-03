@@ -5,7 +5,8 @@ import { useNavigate } from 'react-router';
 import { useParams } from "react-router-dom";
 import ReactLoading from "react-loading";
 import Alert from '@mui/material/Alert';
-import {useUser} from "../../UserContext"
+import { useUser } from "../../UserContext"
+import Translate from 'react-translate-component';
 
 
 function Review() {
@@ -66,7 +67,7 @@ function Review() {
 
   //Display the buttons to add a review when input is focused
   const handleFocus = (event) => {
-    if(user.email){
+    if (user.email) {
       setNewReviewBtn(true)
     }
 
@@ -87,13 +88,9 @@ function Review() {
     try {
       let user = await fetch("/api/users")
       let userJson = await user.json()
-
-      const url = ("/api/games/" + params.id+ "/review")
-
+      const url = ("/api/games/" + params.id + "/review")
       let text = event.target.reviewText.value
       let userId = userJson._id
-      console.log(userJson)
-
       const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -105,42 +102,43 @@ function Review() {
 
       //Force change state to refresh the page
       setNewComment(true)
-
+      
     } catch (e) {
       console.log("no user")
     }
   }
 
   // This function fetches the delete game api when delete game is clicked.
-  async function handleDelete(e){
+  async function handleDelete(e) {
     e.preventDefault();
     const confirmation = window.confirm("Are you sure you want to delete this game?");
-    if(confirmation){
-        await fetch("/api/games/"+params.id, { method: 'DELETE' })
-        window.alert("Game deleted");
-        navigate("/games")
+    if (confirmation) {
+      await fetch("/api/games/" + params.id, { method: 'DELETE' })
+      window.alert("Game deleted");
+      navigate("/games")
     }
   }
 
   // Sets the isEdit constant to opposite boolean when edit game button is clicked.
-  const handleClick = (e) =>{
+  const handleClick = (e) => {
     e.preventDefault();
-    if(isEdit){
-        setIsEdit(false);
-    }else{
-        setIsEdit(true);
+    if (isEdit) {
+      setIsEdit(false);
+    } else {
+      setIsEdit(true);
     }
   }
 
   // This function fetches the edit game route api when save button is clicked.
-  async function handleSave (e){
+  async function handleSave(e) {
     const requestOptions = {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ 
-            name: e.target.name.value,
-            description: e.target.description.value,
-            handle: "gamePage" })
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: e.target.name.value,
+        description: e.target.description.value,
+        handle: "gamePage"
+      })
     };
     await fetch("/api/games/" + params.id, requestOptions)
     window.alert(requestOptions);
@@ -158,21 +156,22 @@ function Review() {
     <div className="GamePage px-4 md:px-8 lg:px-28 pt-32 pb-16">
 
       <form onSubmit={handleSave}>
-      <div className="GameInfo flex lg:flex-row flex-col ">
+        <div className="GameInfo flex lg:flex-row flex-col ">
           <img className="GameCover w-100 lg:w-80 rounded-3xl" src={data.imageurl} alt={data.name}></img>
           <div className="NameStars flex flex-col my-auto px-5 lg:pl-10">
             {isEdit
-            ?<textarea className='nameText' name="name" defaultValue={data.name}></textarea>
-            :<p className="text-5xl text-center lg:text-left font-bold dark:text-white">{data.name}</p>
+              ? <textarea className='nameText text-4xl text-center lg:text-left dark:text-white bg-gray-300' name="name" defaultValue={data.name}></textarea>
+              : <p className="text-5xl text-center lg:text-left font-bold dark:text-white">{data.name}</p>
             }
-        
-          <StarRating review={{ ratingStars: rating, userId: "1234" }} />
+
+            <StarRating review={{ ratingStars: rating, userId: "1234" }} />
 
             <div>
               {isEdit
-              ?<div className='gameSection flex flex-col lg:flex-row w-48 mx-auto'>{user.admin && <button className="m-2">Save</button>}{user.admin && <button className="m-2" onClick={handleCancel}>Cancel</button>}</div>
-              :<div className='gameSection flex flex-col lg:flex-row w-48 mx-auto lg:mx-0'>{user.admin && <button onClick={handleClick}>Edit Page</button>} </div>
-                
+                ? 
+                <div className='gameSection flex flex-col lg:flex-row w-48 mx-auto'>{user.admin && <Translate content="gamePage.save" component="button" className="m-2"/>}{user.admin && <Translate content="gamePage.cancel" component="button" className="m-2" onClick={handleCancel}/>}</div>
+                : <div className='gameSection flex flex-col lg:flex-row w-48 mx-auto lg:mx-0'>{user.admin && <Translate content="gamePage.editPage" component="button" onClick={handleClick}/>} </div>
+
               }
             </div>
           </div>
@@ -181,36 +180,37 @@ function Review() {
         <div className="Description pt-10 dark:text-white">
           <p className="text-3xl font-bold">Description</p>
           {isEdit
-          ?<textarea className='descriptionText w-3/4' name="description" defaultValue={data.description}></textarea>
-          :<p className="text-xl ">{data.description}</p>
+            ? <textarea className='descriptionText dark:text-white w-3/4 text-xl bg-gray-300' name="description" defaultValue={data.description}></textarea>
+            : <p className="text-xl">{data.description}</p>
           }
         </div>
       </form>
 
       <div className="Platform pt-10 dark:text-white">
-        <p className="text-3xl font-bold">Available on</p>
+        <Translate content="gamePage.availableOn" component="p" className="text-3xl font-bold" />
         <p className="text-xl">{data.platform}</p>
       </div>
 
       <form className="float-right w-48" onSubmit={handleDelete}>
-          {user.admin && 
-          <button className="w-48 bg-red-600 hover:bg-red-700 dark:bg-rose-600 dark:hover:bg-rose-700">Delete Game</button>
-          }
+        {user.admin &&
+        <Translate content="gamePage.deleteGame" component="button" className="w-48 bg-red-600 hover:bg-red-700 dark:bg-rose-600 dark:hover:bg-rose-700"/>
+        }
       </form>
 
       <div className="Review pt-10 dark:text-white">
-        <h1 className="text-3xl font-bold">Reviews</h1>
-        
-        {!user.email  &&
-          <Alert severity="error">You have to login to add a comment!</Alert>
+        <Translate content="gamePage.reviews" component="h1" className="text-3xl font-bold" />
+
+        {!user.email &&
+
+          <Alert severity="error"><Translate content="gamePage.loginToComment" /></Alert>
         }
         <form className="addReview flex justify-between flex-row items-center mt-10 mb-10" onSubmit={HandleSubmit}>
           {user.email &&
-          <input className="w-5/6 h-11 border-0 focus:outline-none focus:border-black focus:border-b" required name="reviewText" type="text" placeholder="Add a review" onFocus={handleFocus}></input>
+            <Translate component="input" name="reviewText" type="text" attributes={{ placeholder: "gamePage.placeHolder" }} onFocus={ handleFocus } className="w-5/6 h-11 border-0 focus:outline-none focus:border-black focus:border-b" />
           }
           {newReviewBtn === true &&
             <><StarRating review={{ ratingStars: 0, userId: "1235" }} isEditable={true} setRatingStars={setRatingStars} ratingStars={ratingStars} />
-              <button className="">Add Review</button></>
+              <Translate content="gamePage.addReview" component="button" /></>
           }
         </form>
 
@@ -220,7 +220,8 @@ function Review() {
               <ReviewCard key={review.userId} review={review} gameId={params.id} />
             )
           })
-          : <p className="text-2xl font-bold">No reviews</p>
+          : 
+          <Translate content="gamePage.noReviews" component="p" className="text-2xl font-bold"/>
         }
       </div>
 

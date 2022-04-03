@@ -1,6 +1,6 @@
 import express from "express";
 import User from "../Models/user.js";
-import Game from "../Models/Game.js";
+import  { getAll, deleteUser, getAllReviewsForUser, getCount, getUser, updateUserPermission, updateUserProfile } from "../utils/userutils.js";
 
 const userRouter = express.Router();
 userRouter.use(express.json());
@@ -125,34 +125,7 @@ userRouter.get("/", async (req, res) => {
  */
 userRouter.get("/all", async (req, res) => {
   let { page, size, name } = req.query;
-
-  //Set default value for page
-  if (!page) {
-    page = 1;
-  }
-  //Set default value for users per page
-  if (!size) {
-    size = 8;
-  }
-  //Set default value for name
-  if (!name) {
-    name = "";
-  }
-
-  //Computes the number to skip (page number)
-  const limit = parseInt(size);
-  const skip = (page - 1) * size;
-
-  //Get all games that match the filter
-  const result = await User.find({
-    name: {
-      "$regex": name,
-      "$options": "i"
-    }
-  })
-    .limit(limit)
-    .skip(skip);
-
+  let result = await getAll(page, size, name);
   res.json(result);
 })
 
@@ -183,20 +156,7 @@ userRouter.get("/all", async (req, res) => {
 userRouter.get("/count", async (req, res) => {
   //Get name from query
   let { name } = req.query;
-
-  //Set default value for name
-  if (!name) {
-    name = "";
-  }
-
-  //Gets the count of a filtered name
-  const result = await User.find({
-    name: {
-      "$regex": name,
-      "$options": "i"
-    }
-  }).count();
-
+  let result = await getCount(name)
   res.json(result);
 });
 
@@ -254,7 +214,7 @@ userRouter.get("/count", async (req, res) => {
  */
 userRouter.get("/:userId", async (req, res) => {
   try {
-    const user = await User.findOne({ _id: req.params.userId });
+    const user = await getUser(req.params.userId);
     res.status(200)
     res.json(user);
   } catch (e) {
@@ -343,7 +303,8 @@ userRouter.get("/:userId", async (req, res) => {
  */
 userRouter.get("/:userId/reviews", async (req, res) => {
   try {
-    const user = await Game.find({ "reviews.userId": req.params.userId });
+    const user = await getAllReviewsForUser(req.params.userId)
+    console.log(user)
     res.json(user);
   } catch (e) {
     res.status(401)
@@ -380,15 +341,11 @@ userRouter.get("/:userId/reviews", async (req, res) => {
  */
 userRouter.put("/:userId", async (req, res)=>{
   if(req.body.handle === "permissions"){
-    await User.updateOne(
-      {_id: req.params.userId},
-       {$set: {"admin": req.body.admin}})
+    await updateUserPermission(req.params.userId, req.body.admin)
     res.end("permissions updated")
   }
   if(req.body.handle === "profile"){
-    await User.updateOne(
-      {_id: req.params.userId},
-       {$set: {"name": req.body.name, "bio": req.body.bio}})
+    await updateUserProfile(req.params.userId, req.body.name, req.body.bio)
     res.end("user updated")
   }
 })
@@ -417,14 +374,7 @@ userRouter.put("/:userId", async (req, res)=>{
  *                userId: 622b9b6922df51e968ee69b1
  */
 userRouter.delete("/:userId", async (req, res) => {
-  //Deletes all the games for the user
-  await Game.updateMany(
-    { }, 
-    {"$pull": {"reviews": {"userId": req.params.userId}}},
-    {"multi": true}
-    );
-  //Deletes the user
-  await User.deleteOne({ _id: req.params.userId })
+  await deleteUser(req.params.userId);
   res.end("user deleted")
 });
 

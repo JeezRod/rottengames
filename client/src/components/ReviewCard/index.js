@@ -1,9 +1,9 @@
 import React from "react";
-//import "./ReviewCard.css";
 import StarRating from "../StarRating";
 import {useUser} from "../../UserContext"
 import { Link } from "react-router-dom"
 import placeHolderImage from "../../assets/light_grey_square.png"
+import Translate from 'react-translate-component';
 
 const ReviewCard = ({ gameId, review, isAdmin }) => {
 
@@ -54,7 +54,7 @@ const ReviewCard = ({ gameId, review, isAdmin }) => {
           <StarRating review={review} />
           {(isAdmin || user.admin || user.id === userReview._id ) &&
           <form onSubmit={handleDelete}>
-            <button className="AdminButton px-5 my-0.5 ">Delete</button>
+            <Translate content="reviewCard.delete" component="button" className="AdminButton px-5 my-0.5"/>
           </form>
           }
         </div>

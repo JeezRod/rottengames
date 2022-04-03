@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom"
+import Translate from 'react-translate-component';
 
 function UserCard({ user }) {
     const [edit, setEdit] = React.useState(false);
@@ -21,28 +22,28 @@ function UserCard({ user }) {
 
                 {user.admin
                     ? <select name="usertype" id="usert" defaultValue={true} disabled={!edit} onChange={handleUserType}>
-                        <option value={true}>Admin</option>
-                        <option value={false}>User</option>
+                        <Translate content="userCard.admin" component="option" value={true} />
+                        <Translate content="userCard.user" component="option" value={false} />
                     </select>
                     :
                     <select name="usertype" id="usert" defaultValue={false} disabled={!edit} onChange={handleUserType}>
-                        <option value={true}>Admin</option>
-                        <option value={false}>User</option>
+                        <Translate content="userCard.admin" component="option" value={true} />
+                        <Translate content="userCard.user" component="option" value={false} />
                     </select>
                 }
             </div>
 
             {!edit
                 ? <div className="buttons flex flex-row items-center justify-center">
-                    <button className="m-1 rounded-xl duration-200 w-20 hover:shadow-2xl" onClick={handleEdit}>Edit</button>
+                    <Translate content="userCard.edit" component="button" className="m-1 rounded-xl duration-200 hover:shadow-2xl" onClick={handleEdit}/>
                     <form onSubmit={handleDelete}>
-                        <button className="m-1 rounded-xl duration-200 w-20 hover:shadow-2xl ">Delete</button>
+                        <Translate content="userCard.delete" component="button" className="m-1 rounded-xl duration-200 hover:shadow-2xl"/>
                     </form>
                 </div>
                 :
                 <div className="buttons flex flex-row items-center justify-center">
                     <form onSubmit={handleSave} >
-                        <button className="m-1 h-10 rounded-xl duration-200 w-20 hover:bg-white hover:text-black hover:shadow-2xl">Save</button>
+                    <Translate content="userCard.save" component="button" className="m-1 h-10 rounded-xl duration-200 hover:bg-white hover:text-black hover:shadow-2xl"/>
                     </form>
                 </div>
             }

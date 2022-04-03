@@ -1,5 +1,6 @@
 import React from "react";
 import GoogleLogin from 'react-google-login';
+import Translate from 'react-translate-component';
 
 function Login() {
   
@@ -24,7 +25,7 @@ function Login() {
     <GoogleLogin 
     clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
     render={renderProps => (
-      <button onClick={renderProps.onClick} className="mt-2 text-lg pr-4 pl-4">Login</button>
+      <Translate content="login.login" component="button" onClick={renderProps.onClick} className="mt-2 text-lg pr-4 pl-4"/>
     )}
     buttonText="Login"
     onSuccess={handleLogin}
