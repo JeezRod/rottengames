@@ -160,7 +160,7 @@ function Review() {
           <img className="GameCover w-100 lg:w-80 rounded-3xl" src={data.imageurl} alt={data.name}></img>
           <div className="NameStars flex flex-col my-auto px-5 lg:pl-10">
             {isEdit
-              ? <textarea className='nameText text-5xl text-center lg:text-left dark:text-white bg-gray-300' name="name" defaultValue={data.name}></textarea>
+              ? <textarea className='nameText text-4xl text-center lg:text-left dark:text-white bg-gray-300' name="name" defaultValue={data.name}></textarea>
               : <p className="text-5xl text-center lg:text-left font-bold dark:text-white">{data.name}</p>
             }
 
