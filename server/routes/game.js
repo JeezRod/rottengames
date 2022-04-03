@@ -247,18 +247,42 @@ gameRouter.post("/", async (req, res) => {
   //if game's platform = platform given on form then res.end() or find by platform too
   // If it does not exist then add it to the db
   // if (numGame === 0) {
-  await Game.inserteOne(
-    {
-      $addToSet: {
-        reviews: {
-          $each: [req.body]
-        }
+    const numGame = await Game.find({ name: req.body.name, platform: req.body.platform }).count();
+    // If it does not exist then add it to the db
+    if (numGame === 0) {
+      const review = {
+        userId: "123",
+        text: "",
+        ratingStars: 0
       }
+      // Create new Game object with input from form
+      let newGame = new Game({ averagerating: 0, description: req.body.description, imageurl: req.body.img, name: req.body.name, platform: req.body.platform, releasedate: req.body.date })
+      newGame.save(function (err, game) {
+        if (err) {
+          console.error(err);
+        }
+  
+      })
+      await Game.updateOne(
+        { name: req.body.name, platform: req.body.platform },
+        {
+          $addToSet: {
+            reviews: {
+              $each: [review]
+            }
+          }
+        }
+      )
+      await Game.updateOne({ name: req.body.name, platform: req.body.platform },
+        { "$pull": { "reviews": { "userId": "123" } } })
+        res.status(200)
+      res.end("success")
     }
-  )
-  res.end("success")
-  // }
-  res.end("game already exists")
+    else {
+      res.status(401)
+      console.log("game already exists")
+    }
+    res.end("game already exists")  
 })
 
 /**
