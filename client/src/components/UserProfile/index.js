@@ -5,6 +5,7 @@ import ReactLoading from "react-loading";
 import { Link } from "react-router-dom"
 import {useUser} from "../../UserContext"
 import { useNavigate } from 'react-router';
+import placeHolderImage from "../../assets/light_grey_square.png"
 
 const UserProfile = () => {
     const navigate = useNavigate();
@@ -110,6 +111,12 @@ const UserProfile = () => {
             window.location.reload(false);
         }
     }
+
+    //Sets a placeholder image when it is unable to get the profile picture from google
+    function setPlaceHolder(e){
+        e.target.src = placeHolderImage
+    }
+
     //If the profile is loading show loading prompt
     if (loading) {
         return (
@@ -127,7 +134,7 @@ const UserProfile = () => {
                     ? <p className="text-3xl font-bold dark:text-white">My Profile</p>
                     : <p className="text-3xl font-bold w-50 dark:text-white">{user.name}'s Profile</p>}
                     
-                    <img className='profilePicture mx-auto my-4 lg:mx-0 lg:mt-8 rounded-full w-36 h-36 bg-gray-300' src={user.picture} alt="" ></img>
+                    <img className='profilePicture mx-auto my-4 lg:mx-0 lg:mt-8 rounded-full w-36 h-36' src={user.picture} onError={setPlaceHolder} alt="" ></img>
                     
                     <div className='userSection my-8 lg:mt-16'>
                         {isEdit
