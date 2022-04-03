@@ -304,7 +304,6 @@ userRouter.get("/:userId", async (req, res) => {
 userRouter.get("/:userId/reviews", async (req, res) => {
   try {
     const user = await getAllReviewsForUser(req.params.userId)
-    console.log(user)
     res.json(user);
   } catch (e) {
     res.status(401)
