@@ -9,9 +9,11 @@ import DarkMode from "../../hooks/DarkMode";
 import counterpart from "counterpart";
 import en from "../../languages/en";
 import fr from "../../languages/fr";
+import tr from "../../languages/tr";
 
 counterpart.registerTranslations('en', en);
 counterpart.registerTranslations('fr', fr);
+counterpart.registerTranslations('tr', tr);
 
 
 //Style fo NavLink
@@ -83,6 +85,7 @@ const HamburgerMenu = (props) => {
       <select value={lang} onChange={onLangChange} className="bg-black text-white p-2.5 font-bold hover:bg-gray-700 transition ease-in-out dark:bg-white dark:text-white dark:bg-orange-400 dark:hover:bg-orange-500 dark:hover:text-white">
         <option value="en">EN</option>
         <option value="fr">FR</option>
+        <option value="tr">TR</option>
       </select>
 
     </Menu >
