@@ -37,7 +37,7 @@ export default {
     },
 
     gamePage: {
-        availableOn: "Avaialble on",
+        availableOn: "Available on",
         reviews: "Reviews",
         loginToComment: "You have to login to add a comment!",
         addReview: "Add a review",
