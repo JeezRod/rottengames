@@ -33,7 +33,9 @@ export default {
         platform: "Platform : ",
         releaseDate: "Release Date : ",
         prompt: "Drop files here or click here to upload",
-        addGame: "Add Game"
+        addGame: "Add Game",
+        description: "Description",
+        image: "Image"
     },
 
     gamePage: {
@@ -46,7 +48,8 @@ export default {
         editPage: "Edit page",
         save: "Save",
         cancel: "Cancel",
-        deleteGame: "Delete game"
+        deleteGame: "Delete game",
+        description: "Description"
     },
 
     reviewCard: {
@@ -60,7 +63,8 @@ export default {
         editProfile: "Edit my profile",
         save: "Save",
         cancel: "Cancel",
-        deleteAccount: "Delete my account"
+        deleteAccount: "Delete my account",
+        bio: "Biography",
     },
 
     userCard:{
@@ -83,5 +87,10 @@ export default {
 
     filter:{
         platforms: "Platforms"
+    },
+
+    hamburgerMenu:{
+        dashboard: "Dashboard",
+        profile: "Profile"
     }
 }

@@ -24,7 +24,7 @@ export default {
         sources: "Kaggle'dan veri kümeleri, Google'dan atılan Oyun kapakları",
         team: "Bizim takım.",
         banatech: "<strong>Banatech</strong> kalite ve müşteri memnuniyeti için çaba gösteren özel bir yazılım geliştirme şirketidir.",
-        developers: "geliştiriciler"
+        developers: "Geliştiriciler"
     },
     
     addGame:{
@@ -33,12 +33,14 @@ export default {
         platform: "Platformu : ",
         releaseDate: "Yayın tarihi : ",
         prompt: "Dosyaları buraya bırakın veya yüklemek için buraya tıklayın",
-        addGame: "Oyun Ekle"
+        addGame: "Oyun Ekle",
+        description: "Açıklama",
+        image: "Resim"
     },
 
     gamePage: {
         availableOn: "üzerinde mevcut",
-        reviews: "incelemeler",
+        reviews: "Incelemeler",
         loginToComment: "Yorum eklemek için giriş yapmalısınız!",
         addReview: "İnceleme ekle",
         noReviews: "İnceleme yok",
@@ -46,7 +48,8 @@ export default {
         editPage: "Sayfayı düzenle",
         save: "Kayıt etmek",
         cancel: "İptal",
-        deleteGame: "Oyunu sil"
+        deleteGame: "Oyunu sil",
+        description: "tanım"
     },
 
     reviewCard: {
@@ -60,14 +63,15 @@ export default {
         editProfile: "Profilimi düzenle",
         save: "Kayıt etmek",
         cancel: "İptal",
-        deleteAccount: "sil Benim profilim"
+        deleteAccount: "Sil Benim profilim",
+        bio: "Biyografi"
     },
 
     userCard:{
-        admin: "yönetici",
-        user: "kullanıcı",
-        delete: "sil",
-        edit: "düzenle",
+        admin: "Yönetici",
+        user: "Kullanıcı",
+        delete: "Sil",
+        edit: "Düzenle",
         save: "Kayıt etmek"
     },
 
@@ -76,12 +80,17 @@ export default {
     },
 
     dashboard:{
-        users: "kullanıcılar",
-        addGame: "oyun ekle",
+        users: "Kullanıcılar",
+        addGame: "Oyun ekle",
         placeHolder: "Arama..."
     },
 
     filter:{
         platforms: "Platformlar"
+    },
+
+    hamburgerMenu:{
+        dashboard: "Gösterge Paneli",
+        profile: "Profil"
     }
 }

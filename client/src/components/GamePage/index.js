@@ -178,7 +178,7 @@ function Review() {
         </div>
 
         <div className="Description pt-10 dark:text-white">
-          <p className="text-3xl font-bold">Description</p>
+          <Translate content="gamePage.description" component="p" className="text-3xl font-bold"/>
           {isEdit
             ? <textarea className='descriptionText dark:text-white w-3/4 text-xl bg-gray-300' name="description" defaultValue={data.description}></textarea>
             : <p className="text-xl">{data.description}</p>

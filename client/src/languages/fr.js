@@ -34,7 +34,9 @@ export default {
         platform: "Platforme : ",
         releaseDate: "Date de sortie : ",
         prompt: "Déposez les fichiers ici ou cliquez ici pour télécharger",
-        addGame: "Ajouter le jeu"
+        addGame: "Ajouter le jeu",
+        description: "Description",
+        image: "Image"
     },
 
     gamePage: {
@@ -48,6 +50,7 @@ export default {
         save: "Sauvegarder",
         cancel: "Annuler",
         deleteGame: "Supprimer le jeu",
+        description: "Description"
     },
 
     reviewCard: {
@@ -61,7 +64,9 @@ export default {
         editProfile: "Modifier mon profile",
         save: "Sauvegarder",
         cancel: "Annuler",
-        deleteAccount: "Supprimer mon compte"
+        deleteAccount: "Supprimer mon compte",
+        bio: "Biographie",
+        confirmation: ""
     },
 
     userCard:{
@@ -84,5 +89,10 @@ export default {
 
     filter:{
         platforms: "Platformes"
+    },
+
+    hamburgerMenu:{
+        dashboard: "Tableau de bord",
+        profile: "Profil"
     }
 }
