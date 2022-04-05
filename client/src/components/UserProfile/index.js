@@ -154,7 +154,7 @@ const UserProfile = () => {
                         <p className="text-xl dark:text-white">{user.email}</p>
                     </div>
                     <div className='userSection my-8 lg:mt-16 dark:text-white'>
-                        <p className="text-3xl font-bold">Bio</p>
+                        <Translate content="userProfile.bio" component="p" className="text-3xl font-bold"/>
                         {isEdit
                             ? <textarea className='bioText text-xl w-96 h-8 resize-none border-2' name="bio" defaultValue={user.bio}></textarea>
                             : <p className="text-xl w-96 xl:mx-0 mx-auto">{user.bio}</p>
