@@ -20,7 +20,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@gitlab.com/leduytamly/rottengames.git"
+    "url": "git+ssh://git@github.com:JeezRod/rottengames.git"
   },
   "keywords": [],
   "author": "",
